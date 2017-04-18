@@ -119,7 +119,7 @@
 }
 
 - (IBAction)openInfoReport:(id)sender {
-    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoRViewController"];
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoReportViewController"];
     
     if(VALID(controller, UIViewController)) {
         [self.navigationController pushViewController:controller animated:YES];
@@ -547,8 +547,8 @@
 
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-        NSLog(@"ITEM COUNT: %ld", (long)index.row);
-        NSLog(@"SECTION COUNT: %ld", (long)index.section);
+        //NSLog(@"ITEM COUNT: %ld", (long)index.row);
+        //NSLog(@"SECTION COUNT: %ld", (long)index.section);
 
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setInteger:index.row forKey:@"RecordIndex"];

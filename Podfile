@@ -16,6 +16,7 @@ target 'rfj' do
   pod 'NSObject+Singleton'
   pod 'Reachability'
   pod 'SDWebImage', '~> 3.7.3'
+  pod 'SwiftLint'
 end
 
 target 'rjb' do
