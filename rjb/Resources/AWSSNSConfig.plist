@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>accountId</key>
+    <string>290512518004</string>
+    <key>identityPoolId</key>
+    <string>eu-west-1:83ce596b-987f-4687-bc4a-54cbcbe54f0c</string>
+    <key>unauthRoleArn</key>
+    <string>arn:aws:iam::290512518004:role/Cognito_BNJUnauth_DefaultRole</string>
+    <key>authRoleArn</key>
+    <string>arn:aws:iam::290512518004:role/Cognito_BNJAuth_DefaultRole</string>
+    <key>platformApplicationArn</key>
+    <string>arn:aws:sns:eu-west-1:290512518004:app/APNS/rjb.prod</string>
+  </dict>
+</plist>

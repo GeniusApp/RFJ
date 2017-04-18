@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MailKey</key>
+	<string>R4S&lt;)~dg5J.3N8j8F4&quot;IA2UhB6W4|H</string>
+	<key>SoapNamespace</key>
+	<string>http://www.rfj.ch/Services/Android</string>
+	<key>SoapURL</key>
+	<string>http://www.rfj.ch/services/android/sendmailfl.asmx</string>
+	<key>SoapMethodSendInfoRoute</key>
+	<string>sendInfoRoute</string>
+	<key>SoapMethodSendNews</key>
+	<string>sendNews</string>
+</dict>
+</plist>

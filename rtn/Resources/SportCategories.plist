@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>sport_headline</key>
+    <integer>4</integer>
+    <key>football</key>
+    <integer>9678</integer>
+    <key>hockey</key>
+    <integer>9679</integer>
+    <key>basketball</key>
+    <integer>9680</integer>
+    <key>volleyball</key>
+    <integer>9681</integer>
+    <key>cyclism</key>
+    <integer>9682</integer>
+    <key>ski</key>
+    <integer>9683</integer>
+    <key>hippism</key>
+    <integer>9684</integer>
+    <key>tennis</key>
+    <integer>9685</integer>
+    <key>other_sports</key>
+    <integer>9837</integer>
+  </dict>
+</plist>
+ 

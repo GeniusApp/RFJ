@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AdMobBottomAdId</key>
+	<string>ca-app-pub-0151441657602940/6607389639</string>
+	<key>AdMobInterstitialAdId</key>
+	<string></string>
+	<key>GoogleAnalyticsApiKey</key>
+	<string>UA-9355455-18</string>
+	<key>NetMetrixURL</key>
+	<string>http://rtn.wemfbox.ch/cgi-bin/ivw/CP/apps/rtn/ios/phone</string>
+</dict>
+</plist>

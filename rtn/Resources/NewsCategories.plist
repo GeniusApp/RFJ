@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>regional</key>
+	<integer>79</integer>
+	<key>national</key>
+	<integer>81</integer>
+	<key>international</key>
+	<integer>82</integer>
+	<key>economical</key>
+	<integer>83</integer>
+	<key>cultural</key>
+	<integer>84</integer>
+	<key>sport</key>
+	<integer>1001</integer>
+	<key>headline</key>
+	<integer>1002</integer>
+</dict>
+</plist>
