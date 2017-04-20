@@ -23,6 +23,7 @@ PODS:
   - BDGShare (0.0.11)
   - CJPAdController (1.7.1):
     - Google-Mobile-Ads-SDK (~> 7.5)
+  - CocoaZ (1.4.2)
   - DateTools (2.0.0)
   - Google-Mobile-Ads-SDK (7.19.0)
   - GoogleAnalytics (3.17.0)
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - AWSSNS
   - BDGShare
   - CJPAdController
+  - CocoaZ
   - DateTools
   - GoogleAnalytics
   - MagicalRecord
@@ -70,6 +72,7 @@ SPEC CHECKSUMS:
   AWSSNS: 3437c505bfb8d5eda6bfc497368462ae31423324
   BDGShare: 32748bcc08221d403115d68d76f9ee9ed1734883
   CJPAdController: 25d41d3d306ab55dc3ffa64174830c00f731573d
+  CocoaZ: a296b1fbea2c648daf2ccabb5403ed354569e633
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   Google-Mobile-Ads-SDK: d1bcdbd8347a105a687345b8511701172a5074e9
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
@@ -84,6 +87,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
   UIColor-HexString: fadc2e1389db19147ac99dee92222d3bd8bfec4a
 
-PODFILE CHECKSUM: fbabafb717e24d41e044d0052e5ec5c511790bab
+PODFILE CHECKSUM: c246b11be5691ecf3d2b4446e0e297416589c1c3
 
 COCOAPODS: 1.2.0

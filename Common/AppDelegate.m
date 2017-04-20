@@ -17,6 +17,7 @@
 #import "DataManager.h"
 #import "MainViewController.h"
 #import "Validation.h"
+#import "AppOwiz.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) AFSoundPlayback *player;
@@ -26,7 +27,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [self.window makeKeyAndVisible];
+    [[AppOwiz sharedInstance]
+     startWithAppToken: @"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
+    [self.window makeKeyAndVisible];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"DataModel"];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CocoaZ.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DateTools.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -122,7 +127,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3C7304593B14AF6E7F2EBF4DB24D4BA0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>417EA9844EC286C5B1B8FCB029C00130</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>47EC53EA9B248D4CEEBF48EFE0BD76AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,16 +148,6 @@
 			<true/>
 		</dict>
 		<key>83091357441BD64B3B6BA1496745EBC6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>83257F904674D7C21D41B812C5097EF7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8520C5E468548D9AE56BE422B2D48307</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,11 +173,6 @@
 			<true/>
 		</dict>
 		<key>AC59707BA3C293A51B6599E09EE07616</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B1C73AAD0F1F4F781F0F3E36600909C2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -203,6 +203,16 @@
 			<true/>
 		</dict>
 		<key>E29B8868BA38043AE72DA3FBC7AD033D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6D42610BFCB0EB999C794F784E7949C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F345C83998BA81009D490DE99C5D840E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
