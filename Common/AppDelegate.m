@@ -26,16 +26,16 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     // Override point for customization after application launch.
-    [self.window makeKeyAndVisible];
-    [[AppOwiz sharedInstance]
-     startWithAppToken: @"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
-    [self.window makeKeyAndVisible];
+    
+    
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"DataModel"];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     BOOL appInitialized = [userDefaults boolForKey:@"appInitialized"];
+    
     if (!appInitialized) {
         [userDefaults setBool:YES forKey:@"appInitialized"];
         [userDefaults setBool:YES forKey:@"playJingleAtStartup"];
@@ -48,8 +48,8 @@
         [self.player play];
     }
     
-    // Aamazon SNS
-    // Register for Push notifications
+    //Aamazon SNS
+    //Register for Push notifications
     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType: AWSRegionEUWest1 identityPoolId:[[DataManager singleton].awsSnsConfig objectForKey:@"identityPoolId"] unauthRoleArn:[[DataManager singleton].awsSnsConfig objectForKey:@"unauthRoleArn"] authRoleArn:[[DataManager singleton].awsSnsConfig objectForKey:@"authRoleArn"] identityProviderManager:nil];
     
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionEUWest1 credentialsProvider:credentialsProvider];
@@ -59,7 +59,9 @@
     application.applicationIconBadgeNumber = 0;
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     [application registerForRemoteNotifications];
-
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

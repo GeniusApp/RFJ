@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EB89C8B1EA8BFBB00DB479B /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3EB89C881EA8BFBB00DB479B /* appOwiz.bundle */; };
-		3EB89C8C1EA8BFBB00DB479B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB89C8A1EA8BFBB00DB479B /* libAppOwiz.a */; };
+		3E20C8AA1EAA05B300F2ED2C /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8A91EAA05B300F2ED2C /* appOwiz */; };
+		3E20C8AB1EAA05B300F2ED2C /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8A91EAA05B300F2ED2C /* appOwiz */; };
+		3E20C8AC1EAA05B300F2ED2C /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8A91EAA05B300F2ED2C /* appOwiz */; };
+		3E20C8B01EAA05CB00F2ED2C /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */; };
+		3E20C8B11EAA05CB00F2ED2C /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */; };
+		3E20C8B21EAA05CB00F2ED2C /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */; };
+		3E20C8B31EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
+		3E20C8B41EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
+		3E20C8B51EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
 		3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */; };
+		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
 		3EE816711EA8BD1D0020F8BF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */; };
 		3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */; };
 		3EE816751EA8BD410020F8BF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816741EA8BD410020F8BF /* CoreMedia.framework */; };
@@ -19,7 +27,6 @@
 		3EE8167D1EA8BD640020F8BF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8167C1EA8BD640020F8BF /* CoreTelephony.framework */; };
 		3EE8167F1EA8BD6F0020F8BF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8167E1EA8BD6F0020F8BF /* AVFoundation.framework */; };
 		3EE816811EA8BD7C0020F8BF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816801EA8BD7C0020F8BF /* MobileCoreServices.framework */; };
-		3EE816831EA8BD890020F8BF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816821EA8BD890020F8BF /* libsqlite3.tbd */; };
 		3EE816851EA8BD910020F8BF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816841EA8BD910020F8BF /* libz.tbd */; };
 		3EE816871EA8BD9F0020F8BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816861EA8BD9F0020F8BF /* AudioToolbox.framework */; };
 		3EE816891EA8BDAF0020F8BF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816881EA8BDAF0020F8BF /* CoreVideo.framework */; };
@@ -255,10 +262,12 @@
 /* Begin PBXFileReference section */
 		0A213650963372437387F3EE /* libPods-rjb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rjb.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C3A5238BD7DB58495F29AF9 /* Pods-rjb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rjb.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rjb/Pods-rjb.debug.xcconfig"; sourceTree = "<group>"; };
-		3EB89C881EA8BFBB00DB479B /* appOwiz.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = appOwiz.bundle; sourceTree = "<group>"; };
-		3EB89C891EA8BFBB00DB479B /* AppOwiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppOwiz.h; sourceTree = "<group>"; };
-		3EB89C8A1EA8BFBB00DB479B /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
+		3E20C8A91EAA05B300F2ED2C /* appOwiz */ = {isa = PBXFileReference; lastKnownFileType = folder; path = appOwiz; sourceTree = "<group>"; };
+		3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = appOwiz.bundle; sourceTree = "<group>"; };
+		3E20C8AE1EAA05CB00F2ED2C /* AppOwiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppOwiz.h; sourceTree = "<group>"; };
+		3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
 		3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoRViewController.swift; sourceTree = "<group>"; };
+		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EE816741EA8BD410020F8BF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -478,23 +487,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */,
+				3EE816811EA8BD7C0020F8BF /* MobileCoreServices.framework in Frameworks */,
+				3EE816771EA8BD490020F8BF /* QuartzCore.framework in Frameworks */,
+				3EE8167B1EA8BD5B0020F8BF /* UIKit.framework in Frameworks */,
+				3EE816851EA8BD910020F8BF /* libz.tbd in Frameworks */,
+				3E20C8B31EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */,
+				3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */,
+				3EE816871EA8BD9F0020F8BF /* AudioToolbox.framework in Frameworks */,
+				3EE8167F1EA8BD6F0020F8BF /* AVFoundation.framework in Frameworks */,
+				3EE816711EA8BD1D0020F8BF /* CoreFoundation.framework in Frameworks */,
+				3EE816751EA8BD410020F8BF /* CoreMedia.framework in Frameworks */,
+				3EE8167D1EA8BD640020F8BF /* CoreTelephony.framework in Frameworks */,
+				3EE816791EA8BD520020F8BF /* Foundation.framework in Frameworks */,
 				3EE8168F1EA8BDD30020F8BF /* CoreText.framework in Frameworks */,
 				3EE8168D1EA8BDC50020F8BF /* ImageIO.framework in Frameworks */,
-				3EB89C8C1EA8BFBB00DB479B /* libAppOwiz.a in Frameworks */,
 				3EE8168B1EA8BDBB0020F8BF /* Security.framework in Frameworks */,
 				3EE816891EA8BDAF0020F8BF /* CoreVideo.framework in Frameworks */,
-				3EE816871EA8BD9F0020F8BF /* AudioToolbox.framework in Frameworks */,
-				3EE816851EA8BD910020F8BF /* libz.tbd in Frameworks */,
-				3EE816831EA8BD890020F8BF /* libsqlite3.tbd in Frameworks */,
-				3EE816811EA8BD7C0020F8BF /* MobileCoreServices.framework in Frameworks */,
-				3EE8167F1EA8BD6F0020F8BF /* AVFoundation.framework in Frameworks */,
-				3EE8167D1EA8BD640020F8BF /* CoreTelephony.framework in Frameworks */,
-				3EE8167B1EA8BD5B0020F8BF /* UIKit.framework in Frameworks */,
-				3EE816791EA8BD520020F8BF /* Foundation.framework in Frameworks */,
-				3EE816771EA8BD490020F8BF /* QuartzCore.framework in Frameworks */,
-				3EE816751EA8BD410020F8BF /* CoreMedia.framework in Frameworks */,
-				3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */,
-				3EE816711EA8BD1D0020F8BF /* CoreFoundation.framework in Frameworks */,
 				767322774528C8C9396AD38C /* libPods-rfj.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +512,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E20C8B41EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */,
 				F1D2EE1AF28F3A2507636F2C /* libPods-rjb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +521,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E20C8B51EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */,
 				4FD205111D9A743D07AB9FA5 /* libPods-rtn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +532,7 @@
 		47962A9FEDFCB2DA86B81CFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */,
 				3EE8168E1EA8BDD30020F8BF /* CoreText.framework */,
 				3EE8168C1EA8BDC50020F8BF /* ImageIO.framework */,
 				3EE8168A1EA8BDBB0020F8BF /* Security.framework */,
@@ -725,6 +737,7 @@
 		E78D63151E5B4C8000191453 = {
 			isa = PBXGroup;
 			children = (
+				3E20C8A91EAA05B300F2ED2C /* appOwiz */,
 				E775F2141E93F99D00675133 /* images */,
 				E78D63821E5B509100191453 /* Common */,
 				E78D63201E5B4C8000191453 /* rfj */,
@@ -795,9 +808,9 @@
 		E78D63821E5B509100191453 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3EB89C881EA8BFBB00DB479B /* appOwiz.bundle */,
-				3EB89C891EA8BFBB00DB479B /* AppOwiz.h */,
-				3EB89C8A1EA8BFBB00DB479B /* libAppOwiz.a */,
+				3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */,
+				3E20C8AE1EAA05CB00F2ED2C /* AppOwiz.h */,
+				3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */,
 				E78D63D01E5B5EF000191453 /* DataModel */,
 				E78D63A21E5B574100191453 /* Model */,
 				E7551D001E5C4F1700A1AEF9 /* View */,
@@ -1060,7 +1073,6 @@
 				E775F2AC1E93F99E00675133 /* Volleyball2@3x.png in Resources */,
 				E775F2801E93F99E00675133 /* IronGrey@2x.png in Resources */,
 				E775F2811E93F99E00675133 /* IronGrey@3x.png in Resources */,
-				3EB89C8B1EA8BFBB00DB479B /* appOwiz.bundle in Resources */,
 				E775F2971E93F99E00675133 /* play@3x.png in Resources */,
 				E775F29D1E93F99E00675133 /* rjb_start_screen_1242x2208.png in Resources */,
 				E775F2821E93F99E00675133 /* JournauxAudio@2x.png in Resources */,
@@ -1089,6 +1101,7 @@
 				E775F28C1E93F99E00675133 /* NewsMonde@3x.png in Resources */,
 				E775F2671E93F99D00675133 /* Basketball@2x.png in Resources */,
 				E775F2951E93F99E00675133 /* pause@3x.png in Resources */,
+				3E20C8B01EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E775F26F1E93F99E00675133 /* Culture@2x.png in Resources */,
 				E775F2A01E93F99E00675133 /* Ski@3x.png in Resources */,
 				E775F2621E93F99D00675133 /* Actualite@2x.png in Resources */,
@@ -1110,6 +1123,7 @@
 				E775F2881E93F99E00675133 /* NeonCarrot@2x.png in Resources */,
 				E775F26C1E93F99D00675133 /* Cinema3@3x.png in Resources */,
 				E775F28F1E93F99E00675133 /* NewsRegio2@2x.png in Resources */,
+				3E20C8AA1EAA05B300F2ED2C /* appOwiz in Resources */,
 				E74859D81E5DB4D80030D696 /* jingle.mp3 in Resources */,
 				E756DE141E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				E775F27D1E93F99E00675133 /* Hockey@3x.png in Resources */,
@@ -1142,10 +1156,12 @@
 				E74859F11E5DB4EC0030D696 /* SoapConfig.plist in Resources */,
 				E74859F01E5DB4EC0030D696 /* rjb.plist in Resources */,
 				E78D63901E5B51A300191453 /* RJB-Images.xcassets in Resources */,
+				3E20C8AB1EAA05B300F2ED2C /* appOwiz in Resources */,
 				E75CE7881E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				E74859ED1E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E74859EE1E5DB4EC0030D696 /* NewsCategories.plist in Resources */,
 				E756DE151E89329A00E1437E /* BottomLoadingView.xib in Resources */,
+				3E20C8B11EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E74859EC1E5DB4EC0030D696 /* jingle.mp3 in Resources */,
 				E78D639A1E5B533D00191453 /* Main.storyboard in Resources */,
 				E75CE7911E5CB01C00D8E232 /* NewsItemTableViewCell.xib in Resources */,
@@ -1167,10 +1183,12 @@
 				E7485A051E5DB5090030D696 /* SoapConfig.plist in Resources */,
 				E74859FE1E5DB5090030D696 /* AWSSNSConfig.plist in Resources */,
 				E78D63921E5B51AA00191453 /* RTN-Images.xcassets in Resources */,
+				3E20C8AC1EAA05B300F2ED2C /* appOwiz in Resources */,
 				E75CE7891E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				E7485A011E5DB5090030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E7485A021E5DB5090030D696 /* NewsCategories.plist in Resources */,
 				E756DE161E89329A00E1437E /* BottomLoadingView.xib in Resources */,
+				3E20C8B21EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E7485A001E5DB5090030D696 /* jingle.mp3 in Resources */,
 				E78D639B1E5B533D00191453 /* Main.storyboard in Resources */,
 				E75CE7921E5CB01C00D8E232 /* NewsItemTableViewCell.xib in Resources */,
@@ -1579,6 +1597,10 @@
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				INFOPLIST_FILE = rjb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rjb;
 				PRODUCT_NAME = RJB;
 				SWIFT_OBJC_BRIDGING_HEADER = "rjb-Bridging-Header.h";
@@ -1598,6 +1620,10 @@
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				INFOPLIST_FILE = rjb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rjb;
 				PRODUCT_NAME = RJB;
 				SWIFT_OBJC_BRIDGING_HEADER = "rjb-Bridging-Header.h";
@@ -1616,6 +1642,10 @@
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				INFOPLIST_FILE = rtn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rtn;
 				PRODUCT_NAME = RTN;
 				SWIFT_OBJC_BRIDGING_HEADER = "rtn-Bridging-Header.h";
@@ -1635,6 +1665,10 @@
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				INFOPLIST_FILE = rtn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rtn;
 				PRODUCT_NAME = RTN;
 				SWIFT_OBJC_BRIDGING_HEADER = "rtn-Bridging-Header.h";
