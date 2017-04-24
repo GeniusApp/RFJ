@@ -15,17 +15,17 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - AFSoundManager (2.1)
-  - AWSCognito (2.5.2):
-    - AWSCore (= 2.5.2)
-  - AWSCore (2.5.2)
-  - AWSSNS (2.5.2):
-    - AWSCore (= 2.5.2)
+  - AWSCognito (2.5.5):
+    - AWSCore (= 2.5.5)
+  - AWSCore (2.5.5)
+  - AWSSNS (2.5.5):
+    - AWSCore (= 2.5.5)
   - BDGShare (0.0.11)
   - CJPAdController (1.7.1):
     - Google-Mobile-Ads-SDK (~> 7.5)
   - CocoaZ (1.4.2)
   - DateTools (2.0.0)
-  - Google-Mobile-Ads-SDK (7.19.0)
+  - Google-Mobile-Ads-SDK (7.19.1)
   - GoogleAnalytics (3.17.0)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
@@ -41,7 +41,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
-  - SwiftLint (0.16.1)
+  - SwiftLint (0.18.1)
   - TTTAttributedLabel (1.13.3)
   - UIColor-HexString (1.3.0)
 
@@ -54,6 +54,7 @@ DEPENDENCIES:
   - CJPAdController
   - CocoaZ
   - DateTools
+  - Google-Mobile-Ads-SDK (~> 7.8)
   - GoogleAnalytics
   - MagicalRecord
   - MHVideoPhotoGallery
@@ -67,14 +68,14 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AFSoundManager: 232af6154e736e6b2d8c93fafebfafd14fad7510
-  AWSCognito: a29c52e3a3d4988f01b449c8b229a51b73d1c1bf
-  AWSCore: b2fe455c2c7d6653521238c5b0b0ddb67ec4f063
-  AWSSNS: 3437c505bfb8d5eda6bfc497368462ae31423324
+  AWSCognito: 5f1dddb8669682b1224c19c214270a942e438b06
+  AWSCore: 665371d51ccdfe62430c586e3cb8e57eff8ce09d
+  AWSSNS: b1ea92510e6597b15612a9fa44c0e8fc662c8dc6
   BDGShare: 32748bcc08221d403115d68d76f9ee9ed1734883
   CJPAdController: 25d41d3d306ab55dc3ffa64174830c00f731573d
   CocoaZ: a296b1fbea2c648daf2ccabb5403ed354569e633
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  Google-Mobile-Ads-SDK: d1bcdbd8347a105a687345b8511701172a5074e9
+  Google-Mobile-Ads-SDK: 43ac87810e4961f5093024d3525bfe022f956da3
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
@@ -83,10 +84,10 @@ SPEC CHECKSUMS:
   NSObject+Singleton: 2d117af222e25a9c4acaa0e14fc0a9ff97f077a2
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  SwiftLint: b8b683208cc09640898f16318a7a452274e91f61
+  SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
   UIColor-HexString: fadc2e1389db19147ac99dee92222d3bd8bfec4a
 
-PODFILE CHECKSUM: c246b11be5691ecf3d2b4446e0e297416589c1c3
+PODFILE CHECKSUM: 7d341ce0f4f4e0a66b17a3594954ac57a6c8d18f
 
 COCOAPODS: 1.2.0
