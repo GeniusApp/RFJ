@@ -788,6 +788,9 @@
                                                     <state key="normal" title="Choisir une photo">
                                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="UploadPhoto:" destination="qck-CP-wbq" eventType="touchUpInside" id="QNp-AP-f7q"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo n'est pas sélectionnée" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwd-uv-dFG">
                                                     <rect key="frame" x="153" y="16" width="139.5" height="12"/>
@@ -844,6 +847,9 @@
                                                     <state key="normal" title="Envoyer">
                                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="sendTapped:" destination="qck-CP-wbq" eventType="touchUpInside" id="Rxv-n8-Igz"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -928,7 +934,7 @@
         <!--infoRViewController-->
         <scene sceneID="Anh-vS-vjj">
             <objects>
-                <viewController storyboardIdentifier="infoRViewController" title="infoRViewController" id="AH1-VT-umr" customClass="InfoRViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="infoRViewController" title="infoRViewController" id="AH1-VT-umr" customClass="InfoRViewController" customModule="RFJ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d3V-hg-aXV"/>
                         <viewControllerLayoutGuide type="bottom" id="sHx-Qo-tap"/>
@@ -1180,7 +1186,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="infoRTableView" destination="gfp-ok-L8y" id="zhu-lr-nwV"/>
+                        <outlet property="infoRTableView" destination="gfp-ok-L8y" id="izE-53-mk0"/>
                         <outlet property="tableView" destination="gfp-ok-L8y" id="lt0-os-a8V"/>
                     </connections>
                 </viewController>

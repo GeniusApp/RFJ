@@ -15,7 +15,7 @@
 #import "NSObject+Singleton.h"
 #import "RadioManager.h"
 
-@interface InfoReportViewController ()
+@interface InfoReportViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UITextView *textView;
@@ -102,7 +102,7 @@
     [[DataManager singleton] sendInfoReportWithTitle:self.titleTextField.text email:self.emailTextField.text description:self.descriptionTextField.text phone:self.phoneTextField.text image:imageMut successBlock:^{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Lecteur reporter"
                                                             message:@"Votre message a bien été envoyé"
-                                                           delegate:nil
+                                                           delegate:self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
         [alertView show];
@@ -116,6 +116,13 @@
     }];
 
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // the user clicked OK
+    if (buttonIndex == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)UploadPhoto:(id)sender {
