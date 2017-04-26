@@ -33,6 +33,9 @@
 		3EE8168B1EA8BDBB0020F8BF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8168A1EA8BDBB0020F8BF /* Security.framework */; };
 		3EE8168D1EA8BDC50020F8BF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8168C1EA8BDC50020F8BF /* ImageIO.framework */; };
 		3EE8168F1EA8BDD30020F8BF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8168E1EA8BDD30020F8BF /* CoreText.framework */; };
+		3EFA2B291EAF9D0D000E4882 /* CatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA2B281EAF9D0D000E4882 /* CatTableViewController.swift */; };
+		3EFA2B2A1EAF9D0D000E4882 /* CatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA2B281EAF9D0D000E4882 /* CatTableViewController.swift */; };
+		3EFA2B2B1EAF9D0D000E4882 /* CatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA2B281EAF9D0D000E4882 /* CatTableViewController.swift */; };
 		4FD205111D9A743D07AB9FA5 /* libPods-rtn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */; };
 		767322774528C8C9396AD38C /* libPods-rfj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */; };
 		E7311C831E64556C001DB24A /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C821E64556C001DB24A /* NewsDetailViewController.m */; };
@@ -284,6 +287,7 @@
 		3EE8168A1EA8BDBB0020F8BF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3EE8168C1EA8BDC50020F8BF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		3EE8168E1EA8BDD30020F8BF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3EFA2B281EAF9D0D000E4882 /* CatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatTableViewController.swift; sourceTree = "<group>"; };
 		4E99C91C7A288B7F6C9A7509 /* Pods-rtn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtn.release.xcconfig"; path = "Pods/Target Support Files/Pods-rtn/Pods-rtn.release.xcconfig"; sourceTree = "<group>"; };
 		5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rfj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rtn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -853,6 +857,7 @@
 				E77938551E9297650065483E /* InfoReportViewController.h */,
 				E77938561E9297650065483E /* InfoReportViewController.m */,
 				3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */,
+				3EFA2B281EAF9D0D000E4882 /* CatTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1362,6 +1367,7 @@
 				E78D64361E5B673300191453 /* MenuItem+CoreDataProperties.m in Sources */,
 				E78D638D1E5B519400191453 /* AppDelegate.m in Sources */,
 				E78D63AA1E5B57B100191453 /* Model.xcdatamodeld in Sources */,
+				3EFA2B291EAF9D0D000E4882 /* CatTableViewController.swift in Sources */,
 				E7AE20BB1E9B986400DA7953 /* Resources+CoreDataProperties.m in Sources */,
 				E78D64241E5B673300191453 /* NewsItem+CoreDataProperties.m in Sources */,
 				E7C9655A1E8A81BB00B176AE /* WebViewController.m in Sources */,
@@ -1380,6 +1386,7 @@
 			files = (
 				E75006AA1E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE111E89328800E1437E /* BottomLoadingView.m in Sources */,
+				3EFA2B2A1EAF9D0D000E4882 /* CatTableViewController.swift in Sources */,
 				E75006AD1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
 				E7AE20C11E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				E760123C1E5DBDBC007D809A /* DataManager.m in Sources */,
@@ -1417,6 +1424,7 @@
 			files = (
 				E75006AB1E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE121E89328800E1437E /* BottomLoadingView.m in Sources */,
+				3EFA2B2B1EAF9D0D000E4882 /* CatTableViewController.swift in Sources */,
 				E75006AE1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
 				E7AE20C21E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				E760123D1E5DBDBC007D809A /* DataManager.m in Sources */,
