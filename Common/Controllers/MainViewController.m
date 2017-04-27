@@ -58,7 +58,7 @@
     
     //ggirao stuff for container tableViewController
 
-    
+    self.contentTableView.hidden = YES;
     
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];

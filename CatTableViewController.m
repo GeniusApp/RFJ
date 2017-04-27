@@ -49,6 +49,14 @@
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor whiteColor];
+    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshTable)
+                  forControlEvents:UIControlEventValueChanged];
+    
     self.newsItems = [NewsItem MR_findAll];
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
@@ -74,6 +82,13 @@
     
         [self loadInterstitial];
 
+}
+
+- (void)refreshTable {
+    //TODO: refresh your data
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+    
 }
 
 -(NSArray<NewsItem *> *)combinedNewsItems
@@ -116,7 +131,6 @@
     
     NSDictionary *BackendURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BackendURLs" ofType:@"plist"]];
     self.interstitial = [[DFPInterstitial alloc] initWithAdUnitID:[BackendURLs objectForKey:@"DFPInterstitialLoadingLink"]];
-    self.interstitial.delegate = self;
     
     DFPRequest *request = [DFPRequest request];
     request.testDevices = @[kGADSimulatorID, @"40238db35009b7d4b7bf9ac26d418d9e"];
