@@ -64,7 +64,7 @@
     [self sortNewsItems];
 
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"NewsItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"NewsItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"newsItemCell"];
 
     
     [self loadNextPage];
@@ -131,6 +131,7 @@
     
     NSDictionary *BackendURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BackendURLs" ofType:@"plist"]];
     self.interstitial = [[DFPInterstitial alloc] initWithAdUnitID:[BackendURLs objectForKey:@"DFPInterstitialLoadingLink"]];
+   // self.interstitial.delegate = self;
     
     DFPRequest *request = [DFPRequest request];
     request.testDevices = @[kGADSimulatorID, @"40238db35009b7d4b7bf9ac26d418d9e"];
@@ -193,18 +194,18 @@
     }];
 }
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 1;
+    return [self.sortedNewsItems count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"ENTRADA 1");
 #warning Incomplete implementation, return the number of rows
     NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
-    
+    NSLog(@"ENTRADA 2");
     return [[self.sortedNewsItems objectForKey:navigationID] count];
     //return 5;
 }
@@ -218,19 +219,21 @@
         NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
         
         if(VALID_NOTEMPTY(views, NSArray)) {
+            NSLog(@"ENTRADA 3");
             actualCell = [views objectAtIndex:0];
         }
     }
     
     if(VALID(actualCell, NewsItemTableViewCell)) {
         cell = actualCell;
+        //actualCell.delegate = self;
         
         NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
         NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
         
         if(indexPath.row >= 0 && indexPath.row < [items count]) {
             NewsItem *item = [items objectAtIndex:indexPath.row];
-            
+            NSLog(@"INDEXPATH TABLEVIEWCONTROLLER: %@", item);
             actualCell.item = item;
             
         }
@@ -245,6 +248,25 @@
     return 44.0f;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return kContentCategorySeparatorHeight;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
+    
+    NewsCategorySeparatorView *headerView = nil;
+    
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsCategorySeparatorView" owner:self options:nil];
+    
+    if(VALID_NOTEMPTY(views, NSArray))
+    {
+        headerView = [views objectAtIndex:0];
+    }
+    
+    
+    return headerView;
+}
 
 /*
 // Override to support conditional editing of the table view.

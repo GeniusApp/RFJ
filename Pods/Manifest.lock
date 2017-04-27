@@ -25,8 +25,24 @@ PODS:
     - Google-Mobile-Ads-SDK (~> 7.5)
   - CocoaZ (1.4.2)
   - DateTools (2.0.0)
+  - FirebaseAnalytics (3.9.0):
+    - FirebaseCore (~> 3.6)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.6.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.10):
+    - FirebaseCore (~> 3.6)
   - Google-Mobile-Ads-SDK (7.19.1)
+  - Google/Analytics (3.0.3):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
   - GoogleAnalytics (3.17.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
@@ -55,6 +71,7 @@ DEPENDENCIES:
   - CocoaZ
   - DateTools
   - Google-Mobile-Ads-SDK (~> 7.8)
+  - Google/Analytics
   - GoogleAnalytics
   - MagicalRecord
   - MHVideoPhotoGallery
@@ -75,8 +92,13 @@ SPEC CHECKSUMS:
   CJPAdController: 25d41d3d306ab55dc3ffa64174830c00f731573d
   CocoaZ: a296b1fbea2c648daf2ccabb5403ed354569e633
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
+  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
+  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   Google-Mobile-Ads-SDK: 43ac87810e4961f5093024d3525bfe022f956da3
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MHVideoPhotoGallery: aa36cdd9b75c6d5a19b48005cddb9b730c2e27e8
@@ -88,6 +110,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
   UIColor-HexString: fadc2e1389db19147ac99dee92222d3bd8bfec4a
 
-PODFILE CHECKSUM: 7d341ce0f4f4e0a66b17a3594954ac57a6c8d18f
+PODFILE CHECKSUM: 43ae794e88af8faf1a2bc4bab27ee54c732b137c
 
 COCOAPODS: 1.2.0

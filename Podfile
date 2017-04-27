@@ -9,6 +9,7 @@ target 'rfj' do
   pod 'CJPAdController'
   pod 'DateTools'
   pod 'GoogleAnalytics'
+  pod 'Google/Analytics'
   pod 'MagicalRecord'
   pod 'MHVideoPhotoGallery'
   pod 'MMMarkdown'
