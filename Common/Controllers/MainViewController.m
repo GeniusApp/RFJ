@@ -56,6 +56,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //ggirao stuff for container tableViewController
+
+    
+    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
