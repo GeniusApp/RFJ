@@ -32,12 +32,15 @@
 
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
+@property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
+
 
 @property (assign, nonatomic) NSInteger currentPage;
 @property (assign, nonatomic) BOOL isLoading;
 
 @property (strong, nonatomic) DFPInterstitial *interstitial;
 @property (strong, nonatomic) DFPBannerView  *bannerView;
+@property (strong, nonatomic)  UIView *coverView;
 
 @end
 
@@ -57,6 +60,7 @@
                             action:@selector(refreshTable)
                   forControlEvents:UIControlEventValueChanged];
     
+    self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAll];
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
@@ -70,6 +74,13 @@
     [self loadNextPage];
     [self loadInterstitial];
     
+    
+//    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(NewsItemDidTap:)];
+//    gestureRecognizer.numberOfTapsRequired = 1;
+//    [gestureRecognizer setCancelsTouchesInView:NO];
+//
+//    [self.tableView setUserInteractionEnabled:YES];
+//    [self.tableView addGestureRecognizer:gestureRecognizer];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -186,11 +197,11 @@
         
         [self sortNewsItems];
         
-    //    [self. reloadData];
+        [self.tableView reloadData];
     } failure:^(NSError *error) {
         //[self hideLoading];
         
-        //NSLog(@"Error: %@", error);
+
     }];
 }
 
@@ -202,10 +213,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"ENTRADA 1");
 #warning Incomplete implementation, return the number of rows
     NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
-    NSLog(@"ENTRADA 2");
     return [[self.sortedNewsItems objectForKey:navigationID] count];
     //return 5;
 }
@@ -219,7 +228,6 @@
         NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
         
         if(VALID_NOTEMPTY(views, NSArray)) {
-            NSLog(@"ENTRADA 3");
             actualCell = [views objectAtIndex:0];
         }
     }
@@ -233,7 +241,6 @@
         
         if(indexPath.row >= 0 && indexPath.row < [items count]) {
             NewsItem *item = [items objectAtIndex:indexPath.row];
-            NSLog(@"INDEXPATH TABLEVIEWCONTROLLER: %@", item);
             actualCell.item = item;
             
         }
@@ -249,7 +256,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kContentCategorySeparatorHeight;
+    if(tableView == self.tableView) {
+        return kContentCategorySeparatorHeight;
+    }
+    return 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -264,52 +274,81 @@
         headerView = [views objectAtIndex:0];
     }
     
+    if(VALID(headerView, NewsCategorySeparatorView)) {
+        NSInteger categoryIndex = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            return obj.id == [navigationID intValue];
+        }];
+        
+        if(categoryIndex != NSNotFound) {
+            [headerView setName:[self.allMenuItems objectAtIndex:categoryIndex].name];
+        }
+    }
     
     return headerView;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
+    
+    NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+    
+    //    NSIndexPath *index = [self.tableView indexPathForCell:item];
+    //
+    //    if(index.row >= 0 && index.row < [self.newsItems count]) {
+    //        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+    //
+    //        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //        [defaults setInteger:index.row forKey:@"RecordIndex"];
+    //        [defaults synchronize];
+    //        if(VALID(controller, NewsGroupViewController)) {
+    //            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+    //                NewsItem *localItem = [item.item MR_inContext:localContext];
+    //
+    //                if(VALID(localItem, NewsItem)) {
+    //                    localItem.read = YES;
+    //                }
+    //            }];
+    //
+    //            [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+    //
+    //            controller.newsToDisplay = [self combinedNewsItems];
+    //            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    //                return obj == item.item;
+    //            }]);
+    //
+    //            [self.navigationController pushViewController:controller animated:YES];
+    //        }
+    //    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//-(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
+//    NSLog(@"News ITEM TAPPED");
+//    NSIndexPath *index = [self.tableView indexPathForCell:item];
+//
+//    if(index.row >= 0 && index.row < [self.newsItems count]) {
+//        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+//        
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        [defaults setInteger:index.row forKey:@"RecordIndex"];
+//        [defaults synchronize];
+//        if(VALID(controller, NewsGroupViewController)) {
+//            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+//                NewsItem *localItem = [item.item MR_inContext:localContext];
+//                
+//                if(VALID(localItem, NewsItem)) {
+//                    localItem.read = YES;
+//                }
+//            }];
+//            
+//            [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+//            
+//            controller.newsToDisplay = [self combinedNewsItems];
+//            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                return obj == item.item;
+//            }]);
+//            
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
+//    }
+//}
 @end
