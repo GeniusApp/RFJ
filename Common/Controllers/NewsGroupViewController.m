@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"NEWSGROUP");
+    //NSLog(@"NEWSGROUP");
 
     self.allMenuItems = [MenuItem sortedMenuItems];
     [self refreshMenuItems];

@@ -288,7 +288,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
+    //NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
     
     NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
     

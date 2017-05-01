@@ -107,7 +107,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     
     [self refreshCategory:[self.activeCategoryId intValue]];
-    
+    NSLog(@"O QUE SE PASSA AQUI");
 }
 
 
@@ -510,7 +510,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-    NSLog(@"News GROUP TAPPED");
+    //NSLog(@"News GROUP TAPPED");
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
