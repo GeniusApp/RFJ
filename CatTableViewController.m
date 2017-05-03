@@ -221,33 +221,48 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = nil;
-    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-    
-    if(!VALID(actualCell, NewsItemTableViewCell)) {
-        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
-        
-        if(VALID_NOTEMPTY(views, NSArray)) {
-            actualCell = [views objectAtIndex:0];
-        }
+    int rowNumber = indexPath;
+    BOOL isMultipleOfSeven = !(rowNumber % 7);
+    if (isMultipleOfSeven == TRUE) {
+        NSLog(@"ESTAREI NA POSICAO: %d", rowNumber);
     }
-    
-    if(VALID(actualCell, NewsItemTableViewCell)) {
-        cell = actualCell;
-        //actualCell.delegate = self;
+    if (rowNumber % 7 == 0 && rowNumber != 0) {
+        static NSString *CellIdentifier = @"Cell";
+        // Reuse and create cell
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.textLabel.text = @"Test Data";
+        return cell;
+    } else {
+        UITableViewCell *cell = nil;
+        NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
         
-        NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-        NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-        
-        if(indexPath.row >= 0 && indexPath.row < [items count]) {
-            NewsItem *item = [items objectAtIndex:indexPath.row];
-            actualCell.item = item;
+        if(!VALID(actualCell, NewsItemTableViewCell)) {
+            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
             
+            if(VALID_NOTEMPTY(views, NSArray)) {
+                actualCell = [views objectAtIndex:0];
+            }
         }
+        
+        if(VALID(actualCell, NewsItemTableViewCell)) {
+            cell = actualCell;
+            //actualCell.delegate = self;
+            
+            NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
+            NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
+            
+            if(indexPath.row >= 0 && indexPath.row < [items count]) {
+                NewsItem *item = [items objectAtIndex:indexPath.row];
+                actualCell.item = item;
+                
+            }
+        }
+        return cell;
     }
-    return cell;
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
