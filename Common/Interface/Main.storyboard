@@ -415,6 +415,13 @@
                                     <outlet property="delegate" destination="Cck-O3-IAj" id="ZOV-3z-Ptw"/>
                                 </connections>
                             </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LRC-bH-aJH">
+                                <rect key="frame" x="0.0" y="218" width="375" height="449"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="uJy-Dm-6OD" kind="embed" id="xGI-X3-h5x"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="205-fS-14b">
                                 <rect key="frame" x="310" y="602" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
@@ -1221,6 +1228,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzS-p9-2mp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="958" y="-447"/>
+        </scene>
+        <!--Category Table View Controller-->
+        <scene sceneID="wNf-KX-09z">
+            <objects>
+                <tableViewController id="uJy-Dm-6OD" customClass="CategoryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eS6-YO-6LJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="449"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="uJy-Dm-6OD" id="k6i-iK-b5n"/>
+                            <outlet property="delegate" destination="uJy-Dm-6OD" id="De2-gQ-JzI"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fbk-mJ-7RC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1691" y="-394"/>
         </scene>
     </scenes>
     <resources>

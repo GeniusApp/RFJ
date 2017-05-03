@@ -16,6 +16,7 @@
 		3E20C8B31EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
 		3E20C8B41EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
 		3E20C8B51EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
+		3E4089681EB9E9F2002C963F /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */; };
 		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
 		3EDE4CCD1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
@@ -269,6 +270,8 @@
 		3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = appOwiz.bundle; sourceTree = "<group>"; };
 		3E20C8AE1EAA05CB00F2ED2C /* AppOwiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppOwiz.h; sourceTree = "<group>"; };
 		3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
+		3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
+		3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
 		3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoRViewController.swift; sourceTree = "<group>"; };
 		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatTableViewController.h; sourceTree = "<group>"; };
@@ -858,6 +861,8 @@
 				E77938551E9297650065483E /* InfoReportViewController.h */,
 				E77938561E9297650065483E /* InfoReportViewController.m */,
 				3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */,
+				3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */,
+				3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */,
 				3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */,
 				3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */,
 			);
@@ -1357,6 +1362,7 @@
 				E779385C1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D61E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
 				E7D6DEE21E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
+				3E4089681EB9E9F2002C963F /* CategoryTableViewController.m in Sources */,
 				E78D642D1E5B673300191453 /* NewsDetail+CoreDataClass.m in Sources */,
 				E7551D041E5C60B400A1AEF9 /* MenuItemTableViewCell.m in Sources */,
 				E7D867411E8E8D7800C68C5B /* NewsGroupViewController.m in Sources */,
