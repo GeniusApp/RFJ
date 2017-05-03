@@ -9,6 +9,7 @@ target 'rfj' do
   pod 'CJPAdController'
   pod 'DateTools'
   pod 'GoogleAnalytics'
+  pod 'Google/Analytics'
   pod 'MagicalRecord'
   pod 'MHVideoPhotoGallery'
   pod 'MMMarkdown'
@@ -18,6 +19,7 @@ target 'rfj' do
   pod 'SDWebImage', '~> 3.7.3'
   pod 'SwiftLint'
   pod 'CocoaZ'
+  pod 'Google-Mobile-Ads-SDK', '~> 7.8'
 end
 
 target 'rjb' do
@@ -36,6 +38,7 @@ target 'rjb' do
   pod 'NSObject+Singleton'
   pod 'Reachability'
   pod 'SDWebImage', '~> 3.7.3'
+  pod 'Google-Mobile-Ads-SDK', '~> 7.8'
 end
 
 target 'rtn' do
@@ -54,4 +57,5 @@ target 'rtn' do
   pod 'NSObject+Singleton'
   pod 'Reachability'
   pod 'SDWebImage', '~> 3.7.3'
+  pod 'Google-Mobile-Ads-SDK', '~> 7.8'
 end

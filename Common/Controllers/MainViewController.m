@@ -56,6 +56,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //ggirao stuff for container tableViewController
+
+    //self.contentTableView.hidden = YES;
+    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
@@ -98,6 +102,7 @@
     
     [self loadNextPage];
     [self loadInterstitial];
+    
     [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }
 
@@ -291,7 +296,6 @@
     }
     else if(tableView == self.contentTableView) {
         NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
-        
         return [[self.sortedNewsItems objectForKey:navigationID] count];
     }
     
@@ -401,7 +405,7 @@
             
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
-                
+                //NSLog(@"INDEXPATH: %@", item);
                 actualCell.item = item;
                 
             }

@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"NEWSDETAIL");
+    //NSLog(@"NEWSDETAIL");
     self.allMenuItems = [MenuItem MR_findAll];
     
     self.newsContent.scrollView.scrollEnabled = NO;
@@ -62,6 +62,7 @@
     }
     
     [self showLoading];
+    
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {

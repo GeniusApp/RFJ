@@ -18,6 +18,9 @@
 		3E20C8B51EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
 		3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */; };
 		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
+		3EDE4CCD1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
+		3EDE4CCE1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
+		3EDE4CCF1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
 		3EE816711EA8BD1D0020F8BF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */; };
 		3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */; };
 		3EE816751EA8BD410020F8BF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816741EA8BD410020F8BF /* CoreMedia.framework */; };
@@ -268,6 +271,8 @@
 		3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
 		3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoRViewController.swift; sourceTree = "<group>"; };
 		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatTableViewController.h; sourceTree = "<group>"; };
+		3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatTableViewController.m; sourceTree = "<group>"; };
 		3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EE816741EA8BD410020F8BF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -853,6 +858,8 @@
 				E77938551E9297650065483E /* InfoReportViewController.h */,
 				E77938561E9297650065483E /* InfoReportViewController.m */,
 				3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */,
+				3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */,
+				3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1340,6 +1347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EDE4CCD1EB16D490054E62A /* CatTableViewController.m in Sources */,
 				E75006A91E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE101E89328800E1437E /* BottomLoadingView.m in Sources */,
 				E75006AC1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
@@ -1395,6 +1403,7 @@
 				E7311C8E1E6485A6001DB24A /* MenuManager.m in Sources */,
 				E7311C891E6458EB001DB24A /* RadioManager.m in Sources */,
 				E78D64311E5B673300191453 /* NewsDetail+CoreDataProperties.m in Sources */,
+				3EDE4CCE1EB16D490054E62A /* CatTableViewController.m in Sources */,
 				E78D63951E5B51B800191453 /* main.m in Sources */,
 				E78D63A01E5B535900191453 /* MainViewController.m in Sources */,
 				E78D64371E5B673300191453 /* MenuItem+CoreDataProperties.m in Sources */,
@@ -1432,6 +1441,7 @@
 				E7311C8F1E6485A6001DB24A /* MenuManager.m in Sources */,
 				E7311C8A1E6458EB001DB24A /* RadioManager.m in Sources */,
 				E78D64321E5B673300191453 /* NewsDetail+CoreDataProperties.m in Sources */,
+				3EDE4CCF1EB16D490054E62A /* CatTableViewController.m in Sources */,
 				E78D63961E5B51B800191453 /* main.m in Sources */,
 				E78D63A11E5B535900191453 /* MainViewController.m in Sources */,
 				E78D64381E5B673300191453 /* MenuItem+CoreDataProperties.m in Sources */,
@@ -1534,6 +1544,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1548,6 +1559,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = rfj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

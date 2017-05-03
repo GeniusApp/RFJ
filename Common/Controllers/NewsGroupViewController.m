@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"NEWSGROUP");
+    //NSLog(@"NEWSGROUP");
 
     self.allMenuItems = [MenuItem sortedMenuItems];
     [self refreshMenuItems];
@@ -96,10 +96,6 @@
     
     [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
     
-    //Martelada de ultimahora
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger theRecordIndex = [defaults integerForKey:@"RecordIndex"];
     
     [self.pages objectAtIndex:0].newsIndex = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];

@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MHVideoPhotoGallery.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -127,11 +132,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C7304593B14AF6E7F2EBF4DB24D4BA0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>417EA9844EC286C5B1B8FCB029C00130</key>
 		<dict>
 			<key>primary</key>
@@ -143,6 +143,11 @@
 			<true/>
 		</dict>
 		<key>498D77CF7F798AC8046897896D34EE5F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7495F78942BE0C1AAC9BD1BC07F162AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,6 +172,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A3C76786252CFEADD9FF3965A8398652</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>ABC18DA33F3F71FECBA7140F21786220</key>
 		<dict>
 			<key>primary</key>
@@ -178,6 +188,11 @@
 			<true/>
 		</dict>
 		<key>B36F6D48026E14827529F787D63D61B8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C00A5FE76D9DB84A1E7403B76D317B31</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,17 +217,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E1BBB76ADBF2EF4EF2CE5DF6BBC77296</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E29B8868BA38043AE72DA3FBC7AD033D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E6D42610BFCB0EB999C794F784E7949C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F345C83998BA81009D490DE99C5D840E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -53,6 +53,32 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+//    UITableViewController *tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+//    tableViewController.tableView = self.contentTableView;
+//    
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+//    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+//    [self.contentTableView addSubview:refreshControl];
+//
+//    
+//    if([self.contentTableView respondsToSelector:@selector(setRefreshControl:)]) {
+//        [self.contentTableView setRefreshControl:refreshControl];
+//    }
+//    else {
+//        [self.contentTableView addSubview:refreshControl];
+//    }
+//
+//    //Setting attribute Title
+//    refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Pull To Refresh"];
+//    //[self.contentTableView setContentOffset:CGPointMake(0, -refreshControl.frame.size.height) animated:YES];
+//    //[self.contentTableView setContentOffset:CGPointMake(0.0f, -0.0f)
+//    //                               animated:YES];
+//    
+//    [refreshControl beginRefreshing];
+//    [self performSelector:@selector(handleRefresh:) withObject:nil afterDelay:2];
+//    
+//    [self pullToRefresh];
+    
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAll];
     
@@ -79,8 +105,30 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     self.activeCategoryId = self.navigationId;
     
+    
     [self refreshCategory:[self.activeCategoryId intValue]];
+    NSLog(@"O QUE SE PASSA AQUI");
 }
+
+
+//- (void) pullToRefresh
+//{
+//    [self refreshCategory:[self.activeCategoryId intValue]];
+//    
+//    [self performSelector:@selector(handleRefresh:) withObject:nil afterDelay:2];
+//}
+//
+//- (void)handleRefresh:(UIRefreshControl *)refreshControl {
+//    
+//        NSLog(@"REFRESHING!");
+//    
+//        //[refreshControl beginRefreshing];
+//        //[refreshControl layoutIfNeeded];
+//        [self.contentTableView reloadData];
+//        [self.contentTableView layoutIfNeeded];
+//    
+//        [refreshControl endRefreshing];
+//}
 
 - (IBAction)openInfoReport:(id)sender {
     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoReportViewController"];
@@ -462,14 +510,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
+    //NSLog(@"News GROUP TAPPED");
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-        NSLog(@"ITEM COUNT: %ld", (long)index.row);
-        NSLog(@"SECTION COUNT: %ld", (long)index.section);
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setInteger:index.row forKey:@"RecordIndex"];
-        NSLog(@"USER DEFAULTS: %i",[[NSUserDefaults standardUserDefaults] valueForKey:@"RecordIndex"]);
         [defaults synchronize];
 
         if(VALID(controller, NewsGroupViewController)) {
