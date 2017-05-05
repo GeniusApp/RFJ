@@ -38,7 +38,7 @@
     
     if (!appInitialized) {
         [userDefaults setBool:YES forKey:@"appInitialized"];
-        [userDefaults setBool:YES forKey:@"playJingleAtStartup"];
+        // [userDefaults setBool:YES forKey:@"playJingleAtStartup"]; 
         [userDefaults synchronize];
     }
     

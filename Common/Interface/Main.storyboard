@@ -407,7 +407,7 @@
                                     <constraint firstAttribute="height" constant="30" id="HJL-iW-fJo"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jgw-2n-2VN">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jgw-2n-2VN">
                                 <rect key="frame" x="0.0" y="218" width="375" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -415,6 +415,12 @@
                                     <outlet property="delegate" destination="Cck-O3-IAj" id="ZOV-3z-Ptw"/>
                                 </connections>
                             </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRC-bH-aJH">
+                                <rect key="frame" x="0.0" y="218" width="375" height="449"/>
+                                <connections>
+                                    <segue destination="uJy-Dm-6OD" kind="embed" id="xGI-X3-h5x"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="205-fS-14b">
                                 <rect key="frame" x="310" y="602" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
@@ -436,14 +442,18 @@
                             <constraint firstAttribute="bottom" secondItem="205-fS-14b" secondAttribute="bottom" constant="15" id="7x3-tJ-KcS"/>
                             <constraint firstItem="jgw-2n-2VN" firstAttribute="top" secondItem="6C3-Ne-Pxm" secondAttribute="bottom" id="9Uv-4r-ptR"/>
                             <constraint firstAttribute="trailing" secondItem="mux-al-yyU" secondAttribute="trailing" id="Dud-8o-e1p"/>
+                            <constraint firstItem="LRC-bH-aJH" firstAttribute="top" secondItem="jgw-2n-2VN" secondAttribute="top" id="FOo-Ah-jQ8"/>
                             <constraint firstItem="6C3-Ne-Pxm" firstAttribute="leading" secondItem="6NC-rd-ePb" secondAttribute="leading" id="FVZ-sd-cRk"/>
+                            <constraint firstItem="LRC-bH-aJH" firstAttribute="trailing" secondItem="3Il-fL-ht1" secondAttribute="trailing" id="Hi6-uu-lhZ"/>
                             <constraint firstItem="mux-al-yyU" firstAttribute="leading" secondItem="6NC-rd-ePb" secondAttribute="leading" id="Lw0-Hm-2YG"/>
                             <constraint firstAttribute="trailing" secondItem="3Il-fL-ht1" secondAttribute="trailing" id="Nqb-PF-hVf"/>
                             <constraint firstItem="jgw-2n-2VN" firstAttribute="leading" secondItem="6NC-rd-ePb" secondAttribute="leading" id="QVU-Ds-nnE"/>
+                            <constraint firstItem="LRC-bH-aJH" firstAttribute="bottom" secondItem="NBM-82-z85" secondAttribute="top" id="SiK-yC-IQ9"/>
                             <constraint firstItem="trP-Ja-4wj" firstAttribute="leading" secondItem="6NC-rd-ePb" secondAttribute="leading" id="ThM-0d-FWA"/>
                             <constraint firstItem="mux-al-yyU" firstAttribute="top" secondItem="W5d-td-8j0" secondAttribute="bottom" id="Uzp-6W-saj"/>
                             <constraint firstAttribute="trailing" secondItem="jgw-2n-2VN" secondAttribute="trailing" id="Wwj-uX-Hp1"/>
                             <constraint firstItem="3Il-fL-ht1" firstAttribute="leading" secondItem="6NC-rd-ePb" secondAttribute="leading" id="YjV-L4-BQr"/>
+                            <constraint firstItem="LRC-bH-aJH" firstAttribute="leading" secondItem="6C3-Ne-Pxm" secondAttribute="leading" id="aL0-io-GjL"/>
                             <constraint firstItem="NBM-82-z85" firstAttribute="top" secondItem="3Il-fL-ht1" secondAttribute="bottom" id="cB9-7I-xSp"/>
                             <constraint firstAttribute="trailing" secondItem="6C3-Ne-Pxm" secondAttribute="trailing" id="g7n-5m-2JX"/>
                             <constraint firstItem="trP-Ja-4wj" firstAttribute="top" secondItem="mux-al-yyU" secondAttribute="bottom" id="kEd-kJ-mZV"/>
@@ -1221,6 +1231,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzS-p9-2mp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="958" y="-447"/>
+        </scene>
+        <!--Category Table View Controller-->
+        <scene sceneID="wNf-KX-09z">
+            <objects>
+                <tableViewController id="uJy-Dm-6OD" customClass="CategoryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eS6-YO-6LJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="449"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="uJy-Dm-6OD" id="k6i-iK-b5n"/>
+                            <outlet property="delegate" destination="uJy-Dm-6OD" id="De2-gQ-JzI"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fbk-mJ-7RC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1691" y="-394"/>
         </scene>
     </scenes>
     <resources>
