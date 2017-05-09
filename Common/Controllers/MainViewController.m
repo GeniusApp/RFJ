@@ -556,9 +556,7 @@
         //NSLog(@"ITEM COUNT: %ld", (long)index.row);
         //NSLog(@"SECTION COUNT: %ld", (long)index.section);
 
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setInteger:index.row forKey:@"RecordIndex"];
-        [defaults synchronize];
+
         if(VALID(controller, NewsGroupViewController)) {
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
                 NewsItem *localItem = [item.item MR_inContext:localContext];
