@@ -208,12 +208,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+
     return [self.sortedNewsItems count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+
     NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
     return [[self.sortedNewsItems objectForKey:navigationID] count];
     //return 5;
@@ -224,8 +224,9 @@
     int rowNumber = indexPath;
     BOOL isMultipleOfSeven = !(rowNumber % 7);
     if (isMultipleOfSeven == TRUE) {
-        NSLog(@"ESTAREI NA POSICAO: %d", rowNumber);
+        
     }
+    
     if (rowNumber % 7 == 0 && rowNumber != 0) {
         static NSString *CellIdentifier = @"Cell";
         // Reuse and create cell
@@ -303,67 +304,67 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
+    //NSLog(@"DID SELECT ROW AT INDEXPATH: %@", indexPath.row);
+    UITableViewCell *cell = nil;
+    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
+    cell = actualCell;
     
-    NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
+    NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
     
-    //    NSIndexPath *index = [self.tableView indexPathForCell:item];
-    //
-    //    if(index.row >= 0 && index.row < [self.newsItems count]) {
-    //        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-    //
-    //        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //        [defaults setInteger:index.row forKey:@"RecordIndex"];
-    //        [defaults synchronize];
-    //        if(VALID(controller, NewsGroupViewController)) {
-    //            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-    //                NewsItem *localItem = [item.item MR_inContext:localContext];
-    //
-    //                if(VALID(localItem, NewsItem)) {
-    //                    localItem.read = YES;
-    //                }
-    //            }];
-    //
-    //            [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
-    //
-    //            controller.newsToDisplay = [self combinedNewsItems];
-    //            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //                return obj == item.item;
-    //            }]);
-    //
-    //            [self.navigationController pushViewController:controller animated:YES];
-    //        }
-    //    }
+    if(indexPath.row >= 0 && indexPath.row < [items count]) {
+        NewsItem *item = [items objectAtIndex:indexPath.row];
+        actualCell.item = item;
+        
+        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+        if(VALID(controller, NewsGroupViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                NewsItem *localItem = [item MR_inContext:localContext];
+                
+                if(VALID(localItem, NewsItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            controller.newsToDisplay = [self combinedNewsItems];
+            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj == item;
+            }]);
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
 }
 
-//-(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-//    NSLog(@"News ITEM TAPPED");
-//    NSIndexPath *index = [self.tableView indexPathForCell:item];
-//
-//    if(index.row >= 0 && index.row < [self.newsItems count]) {
-//        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-//        
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        [defaults setInteger:index.row forKey:@"RecordIndex"];
-//        [defaults synchronize];
-//        if(VALID(controller, NewsGroupViewController)) {
-//            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-//                NewsItem *localItem = [item.item MR_inContext:localContext];
-//                
-//                if(VALID(localItem, NewsItem)) {
-//                    localItem.read = YES;
-//                }
-//            }];
-//            
-//            [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
-//            
-//            controller.newsToDisplay = [self combinedNewsItems];
-//            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                return obj == item.item;
-//            }]);
-//            
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//    }
-//}
+
+
+-(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
+    
+    NSIndexPath *index = [self.tableView indexPathForCell:item];
+
+    if(index.row >= 0 && index.row < [self.newsItems count]) {
+        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:index.row forKey:@"RecordIndex"];
+        [defaults synchronize];
+        if(VALID(controller, NewsGroupViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                NewsItem *localItem = [item.item MR_inContext:localContext];
+                
+                if(VALID(localItem, NewsItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            
+            [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+            
+            controller.newsToDisplay = [self combinedNewsItems];
+            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj == item.item;
+            }]);
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+}
 @end

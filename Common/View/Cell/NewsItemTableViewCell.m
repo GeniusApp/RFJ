@@ -30,11 +30,12 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    gestureRecognizer.numberOfTapsRequired = 1;
+    // Uncomment following lines to revert handleTap - by ggirao
+    //UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    //gestureRecognizer.numberOfTapsRequired = 1;
     
-    [self.coverView setUserInteractionEnabled:YES];
-    [self.coverView addGestureRecognizer:gestureRecognizer];
+    //[self.coverView setUserInteractionEnabled:YES];
+    //[self.coverView addGestureRecognizer:gestureRecognizer];
 }
 
 -(void)setItem:(NewsItem *)item {
