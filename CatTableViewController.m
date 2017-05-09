@@ -224,7 +224,7 @@
     int rowNumber = indexPath;
     BOOL isMultipleOfSeven = !(rowNumber % 7);
     if (isMultipleOfSeven == TRUE) {
-        NSLog(@"ESTAREI NA POSICAO: %d", rowNumber);
+        
     }
     
     if (rowNumber % 7 == 0 && rowNumber != 0) {
@@ -258,6 +258,7 @@
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
                 actualCell.item = item;
+                
             }
         }
         return cell;
@@ -337,7 +338,7 @@
 
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-    NSLog(@"News ITEM TAPPED");
+    
     NSIndexPath *index = [self.tableView indexPathForCell:item];
 
     if(index.row >= 0 && index.row < [self.newsItems count]) {

@@ -107,28 +107,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     
     [self refreshCategory:[self.activeCategoryId intValue]];
-    NSLog(@"O QUE SE PASSA AQUI");
 }
-
-
-//- (void) pullToRefresh
-//{
-//    [self refreshCategory:[self.activeCategoryId intValue]];
-//    
-//    [self performSelector:@selector(handleRefresh:) withObject:nil afterDelay:2];
-//}
-//
-//- (void)handleRefresh:(UIRefreshControl *)refreshControl {
-//    
-//        NSLog(@"REFRESHING!");
-//    
-//        //[refreshControl beginRefreshing];
-//        //[refreshControl layoutIfNeeded];
-//        [self.contentTableView reloadData];
-//        [self.contentTableView layoutIfNeeded];
-//    
-//        [refreshControl endRefreshing];
-//}
 
 - (IBAction)openInfoReport:(id)sender {
     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoReportViewController"];
@@ -514,9 +493,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setInteger:index.row forKey:@"RecordIndex"];
-        [defaults synchronize];
 
         if(VALID(controller, NewsGroupViewController)) {
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {

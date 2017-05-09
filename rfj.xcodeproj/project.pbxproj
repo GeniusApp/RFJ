@@ -17,6 +17,8 @@
 		3E20C8B41EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
 		3E20C8B51EAA05CB00F2ED2C /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */; };
 		3E4089681EB9E9F2002C963F /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
+		3E438BC11EC2845500CAB309 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
+		3E438BC21EC2845600CAB309 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */; };
 		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
 		3EDE4CCD1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
@@ -1421,6 +1423,7 @@
 				E7AE20B91E9B986400DA7953 /* Resources+CoreDataClass.m in Sources */,
 				E756DE0C1E89110E00E1437E /* CategoryViewController.m in Sources */,
 				E7E6FDEC1E65CD6D0027B719 /* NewsManager.m in Sources */,
+				3E438BC11EC2845500CAB309 /* CategoryTableViewController.m in Sources */,
 				E78D64341E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
 				E75006B21E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
 			);
@@ -1459,6 +1462,7 @@
 				E7AE20BA1E9B986400DA7953 /* Resources+CoreDataClass.m in Sources */,
 				E756DE0D1E89110E00E1437E /* CategoryViewController.m in Sources */,
 				E7E6FDED1E65CD6D0027B719 /* NewsManager.m in Sources */,
+				3E438BC21EC2845600CAB309 /* CategoryTableViewController.m in Sources */,
 				E78D64351E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
 				E75006B31E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
 			);
