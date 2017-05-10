@@ -258,8 +258,6 @@
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
                 actualCell.item = item;
-                NSLog(@"RETINA: %lld", item.id);
-                NSLog(@"RETINA: %@", item.retina1);
             }
         }
         
