@@ -60,7 +60,7 @@
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
-                                        ascending:YES];
+                                        ascending:NO];
     //self.newsItems = [NewsItem MR_findAll];
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     [self sortNewsItems];

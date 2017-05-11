@@ -42,13 +42,21 @@
     if(VALID(item, NewsItem)) {
         _item = item;
         self.titleLabel.text = item.title;
-
-        [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(VALID(image, UIImage)) {
-                [self.coverImage setImage:image];
-            }
-        }];
         
+        if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound) {
+            [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if(VALID(image, UIImage)) {
+                    UIImage *noImage = [UIImage imageNamed:@"no-image.png"];
+                    [self.coverImage setImage:noImage];
+                }
+            }];
+        } else {
+            [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if(VALID(image, UIImage)) {
+                    [self.coverImage setImage:image];
+                }
+            }];
+        }
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
         [formatter setTimeZone:[NSTimeZone localTimeZone]];
