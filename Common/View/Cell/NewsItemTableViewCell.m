@@ -43,7 +43,7 @@
         _item = item;
         self.titleLabel.text = item.title;
 
-        [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.image] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if(VALID(image, UIImage)) {
                 [self.coverImage setImage:image];
             }

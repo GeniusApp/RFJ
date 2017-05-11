@@ -59,10 +59,10 @@
                   forControlEvents:UIControlEventValueChanged];
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAll];
-    
+    self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
+                                        ascending:YES];
+    //self.newsItems = [NewsItem MR_findAll];
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
-    
     [self sortNewsItems];
     
     
@@ -180,7 +180,6 @@
             NSInteger itemIndex = [self.newsItems indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 return item.id == obj.id;
             }];
-            
             if(itemIndex == NSNotFound) {
                 self.newsItems = [self.newsItems arrayByAddingObject:item];
             }
@@ -244,11 +243,17 @@
             cell = actualCell;
             NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
             NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
+            NSLog(@"NUMBER OF ITEMS: %lu", (unsigned long)items.count);
+            NSLog(@"NUMBER OF SECTIONS: %lu", (unsigned long)self.sortedNewsItems.count);
             if(indexPath.row >= 0 && indexPath.row < [items count])
             {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
                 
                 actualCell.item = item;
+                NSLog(@"ID: %lld", item.id);
+                NSLog(@"NAV ID: %lld", item.navigationId);
+                NSLog(@"UPDATE DATE: %@", item.updateDate);
+                
                 
             }
         }

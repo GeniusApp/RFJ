@@ -359,6 +359,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
                 
                 actualCell.item = item;
+                NSLog(@"ID: %lld", item.id);
+                NSLog(@"NAV ID: %lld", item.navigationId);
+                NSLog(@"UPDATE DATE: %@", item.updateDate);
             }
         }
     }
