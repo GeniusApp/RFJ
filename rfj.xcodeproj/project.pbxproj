@@ -19,6 +19,12 @@
 		3E4089681EB9E9F2002C963F /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3E438BC11EC2845500CAB309 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3E438BC21EC2845600CAB309 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
+		3E46A5C11EC4EB87009CA191 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C01EC4EB87009CA191 /* no-image.png */; };
+		3E46A5C21EC4EB87009CA191 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C01EC4EB87009CA191 /* no-image.png */; };
+		3E46A5C31EC4EB87009CA191 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C01EC4EB87009CA191 /* no-image.png */; };
+		3E46A5C51EC4F6C5009CA191 /* no-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */; };
+		3E46A5C61EC4F6C5009CA191 /* no-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */; };
+		3E46A5C71EC4F6C5009CA191 /* no-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */; };
 		3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */; };
 		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
 		3EDE4CCD1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
@@ -274,6 +280,8 @@
 		3E20C8AF1EAA05CB00F2ED2C /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
 		3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
 		3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
+		3E46A5C01EC4EB87009CA191 /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = "<group>"; };
+		3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image@2x.png"; sourceTree = "<group>"; };
 		3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoRViewController.swift; sourceTree = "<group>"; };
 		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatTableViewController.h; sourceTree = "<group>"; };
@@ -713,6 +721,8 @@
 				E775F2441E93F99D00675133 /* NewsRegio@2x.png */,
 				E775F2451E93F99D00675133 /* NewsRegio@3x.png */,
 				E775F2461E93F99D00675133 /* no_photo.png */,
+				3E46A5C01EC4EB87009CA191 /* no-image.png */,
+				3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */,
 				E775F2471E93F99D00675133 /* pause@2x.png */,
 				E775F2481E93F99D00675133 /* pause@3x.png */,
 				E775F2491E93F99D00675133 /* play@2x.png */,
@@ -1087,10 +1097,12 @@
 				E775F2AC1E93F99E00675133 /* Volleyball2@3x.png in Resources */,
 				E775F2801E93F99E00675133 /* IronGrey@2x.png in Resources */,
 				E775F2811E93F99E00675133 /* IronGrey@3x.png in Resources */,
+				3E46A5C11EC4EB87009CA191 /* no-image.png in Resources */,
 				E775F2971E93F99E00675133 /* play@3x.png in Resources */,
 				E775F29D1E93F99E00675133 /* rjb_start_screen_1242x2208.png in Resources */,
 				E775F2821E93F99E00675133 /* JournauxAudio@2x.png in Resources */,
 				E78D633F1E5B4D2000191453 /* RFJ-Images.xcassets in Resources */,
+				3E46A5C51EC4F6C5009CA191 /* no-image@2x.png in Resources */,
 				E775F2961E93F99E00675133 /* play@2x.png in Resources */,
 				E775F2871E93F99E00675133 /* Meteo@3x.png in Resources */,
 				E775F26E1E93F99E00675133 /* Cinnabar@3x.png in Resources */,
@@ -1174,9 +1186,11 @@
 				E75CE7881E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				E74859ED1E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E74859EE1E5DB4EC0030D696 /* NewsCategories.plist in Resources */,
+				3E46A5C61EC4F6C5009CA191 /* no-image@2x.png in Resources */,
 				E756DE151E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				3E20C8B11EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E74859EC1E5DB4EC0030D696 /* jingle.mp3 in Resources */,
+				3E46A5C21EC4EB87009CA191 /* no-image.png in Resources */,
 				E78D639A1E5B533D00191453 /* Main.storyboard in Resources */,
 				E75CE7911E5CB01C00D8E232 /* NewsItemTableViewCell.xib in Resources */,
 			);
@@ -1201,9 +1215,11 @@
 				E75CE7891E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				E7485A011E5DB5090030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E7485A021E5DB5090030D696 /* NewsCategories.plist in Resources */,
+				3E46A5C71EC4F6C5009CA191 /* no-image@2x.png in Resources */,
 				E756DE161E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				3E20C8B21EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E7485A001E5DB5090030D696 /* jingle.mp3 in Resources */,
+				3E46A5C31EC4EB87009CA191 /* no-image.png in Resources */,
 				E78D639B1E5B533D00191453 /* Main.storyboard in Resources */,
 				E75CE7921E5CB01C00D8E232 /* NewsItemTableViewCell.xib in Resources */,
 			);
