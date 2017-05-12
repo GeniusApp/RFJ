@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1E8EA81EC5B61E00B76215 /* left_@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA21EC5B61E00B76215 /* left_@1x.png */; };
+		3E1E8EA91EC5B61E00B76215 /* left_@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA21EC5B61E00B76215 /* left_@1x.png */; };
+		3E1E8EAA1EC5B61E00B76215 /* left_@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA21EC5B61E00B76215 /* left_@1x.png */; };
+		3E1E8EAB1EC5B61E00B76215 /* left_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA31EC5B61E00B76215 /* left_@2x.png */; };
+		3E1E8EAC1EC5B61E00B76215 /* left_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA31EC5B61E00B76215 /* left_@2x.png */; };
+		3E1E8EAD1EC5B61E00B76215 /* left_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA31EC5B61E00B76215 /* left_@2x.png */; };
+		3E1E8EAE1EC5B61E00B76215 /* left_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA41EC5B61E00B76215 /* left_@3x.png */; };
+		3E1E8EAF1EC5B61E00B76215 /* left_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA41EC5B61E00B76215 /* left_@3x.png */; };
+		3E1E8EB01EC5B61E00B76215 /* left_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA41EC5B61E00B76215 /* left_@3x.png */; };
+		3E1E8EB11EC5B61E00B76215 /* right_@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA51EC5B61E00B76215 /* right_@1x.png */; };
+		3E1E8EB21EC5B61E00B76215 /* right_@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA51EC5B61E00B76215 /* right_@1x.png */; };
+		3E1E8EB31EC5B61E00B76215 /* right_@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA51EC5B61E00B76215 /* right_@1x.png */; };
+		3E1E8EB41EC5B61E00B76215 /* right_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA61EC5B61E00B76215 /* right_@2x.png */; };
+		3E1E8EB51EC5B61E00B76215 /* right_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA61EC5B61E00B76215 /* right_@2x.png */; };
+		3E1E8EB61EC5B61E00B76215 /* right_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA61EC5B61E00B76215 /* right_@2x.png */; };
+		3E1E8EB71EC5B61E00B76215 /* right_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA71EC5B61E00B76215 /* right_@3x.png */; };
+		3E1E8EB81EC5B61E00B76215 /* right_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA71EC5B61E00B76215 /* right_@3x.png */; };
+		3E1E8EB91EC5B61E00B76215 /* right_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EA71EC5B61E00B76215 /* right_@3x.png */; };
 		3E20C8AA1EAA05B300F2ED2C /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8A91EAA05B300F2ED2C /* appOwiz */; };
 		3E20C8AB1EAA05B300F2ED2C /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8A91EAA05B300F2ED2C /* appOwiz */; };
 		3E20C8AC1EAA05B300F2ED2C /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E20C8A91EAA05B300F2ED2C /* appOwiz */; };
@@ -274,6 +292,12 @@
 /* Begin PBXFileReference section */
 		0A213650963372437387F3EE /* libPods-rjb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rjb.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C3A5238BD7DB58495F29AF9 /* Pods-rjb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rjb.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rjb/Pods-rjb.debug.xcconfig"; sourceTree = "<group>"; };
+		3E1E8EA21EC5B61E00B76215 /* left_@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_@1x.png"; sourceTree = "<group>"; };
+		3E1E8EA31EC5B61E00B76215 /* left_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_@2x.png"; sourceTree = "<group>"; };
+		3E1E8EA41EC5B61E00B76215 /* left_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_@3x.png"; sourceTree = "<group>"; };
+		3E1E8EA51EC5B61E00B76215 /* right_@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_@1x.png"; sourceTree = "<group>"; };
+		3E1E8EA61EC5B61E00B76215 /* right_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_@2x.png"; sourceTree = "<group>"; };
+		3E1E8EA71EC5B61E00B76215 /* right_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_@3x.png"; sourceTree = "<group>"; };
 		3E20C8A91EAA05B300F2ED2C /* appOwiz */ = {isa = PBXFileReference; lastKnownFileType = folder; path = appOwiz; sourceTree = "<group>"; };
 		3E20C8AD1EAA05CB00F2ED2C /* appOwiz.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = appOwiz.bundle; sourceTree = "<group>"; };
 		3E20C8AE1EAA05CB00F2ED2C /* AppOwiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppOwiz.h; sourceTree = "<group>"; };
@@ -720,6 +744,12 @@
 				E775F2431E93F99D00675133 /* NewsRegio2@3x.png */,
 				E775F2441E93F99D00675133 /* NewsRegio@2x.png */,
 				E775F2451E93F99D00675133 /* NewsRegio@3x.png */,
+				3E1E8EA21EC5B61E00B76215 /* left_@1x.png */,
+				3E1E8EA31EC5B61E00B76215 /* left_@2x.png */,
+				3E1E8EA41EC5B61E00B76215 /* left_@3x.png */,
+				3E1E8EA51EC5B61E00B76215 /* right_@1x.png */,
+				3E1E8EA61EC5B61E00B76215 /* right_@2x.png */,
+				3E1E8EA71EC5B61E00B76215 /* right_@3x.png */,
 				E775F2461E93F99D00675133 /* no_photo.png */,
 				3E46A5C01EC4EB87009CA191 /* no-image.png */,
 				3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */,
@@ -1093,7 +1123,10 @@
 				E775F27F1E93F99E00675133 /* icon_settings.png in Resources */,
 				E74859D61E5DB4D80030D696 /* AWSSNSConfig.plist in Resources */,
 				E775F2891E93F99E00675133 /* NeonCarrot@3x.png in Resources */,
+				3E1E8EAB1EC5B61E00B76215 /* left_@2x.png in Resources */,
 				E775F2A71E93F99E00675133 /* Traffic@2x.png in Resources */,
+				3E1E8EAE1EC5B61E00B76215 /* left_@3x.png in Resources */,
+				3E1E8EB41EC5B61E00B76215 /* right_@2x.png in Resources */,
 				E775F2AC1E93F99E00675133 /* Volleyball2@3x.png in Resources */,
 				E775F2801E93F99E00675133 /* IronGrey@2x.png in Resources */,
 				E775F2811E93F99E00675133 /* IronGrey@3x.png in Resources */,
@@ -1106,6 +1139,7 @@
 				E775F2961E93F99E00675133 /* play@2x.png in Resources */,
 				E775F2871E93F99E00675133 /* Meteo@3x.png in Resources */,
 				E775F26E1E93F99E00675133 /* Cinnabar@3x.png in Resources */,
+				3E1E8EB71EC5B61E00B76215 /* right_@3x.png in Resources */,
 				E775F2831E93F99E00675133 /* JournauxAudio@3x.png in Resources */,
 				E775F2941E93F99E00675133 /* pause@2x.png in Resources */,
 				E775F2AA1E93F99E00675133 /* Video@3x.png in Resources */,
@@ -1135,6 +1169,7 @@
 				E75CE7871E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				E74859D91E5DB4D80030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E775F2A51E93F99E00675133 /* Tennis@2x.png in Resources */,
+				3E1E8EA81EC5B61E00B76215 /* left_@1x.png in Resources */,
 				E775F2651E93F99D00675133 /* Agenda@3x.png in Resources */,
 				E74859DA1E5DB4D80030D696 /* NewsCategories.plist in Resources */,
 				E775F2681E93F99D00675133 /* Basketball@3x.png in Resources */,
@@ -1157,6 +1192,7 @@
 				E775F2741E93F99E00675133 /* Fern@3x.png in Resources */,
 				E775F2691E93F99D00675133 /* Blog@2x.png in Resources */,
 				E775F2791E93F99E00675133 /* GaleriesPhotos2@2x.png in Resources */,
+				3E1E8EB11EC5B61E00B76215 /* right_@1x.png in Resources */,
 				E78D63991E5B533D00191453 /* Main.storyboard in Resources */,
 				E775F2851E93F99E00675133 /* Mariner@3x.png in Resources */,
 				E775F2841E93F99E00675133 /* Mariner@2x.png in Resources */,
@@ -1173,20 +1209,26 @@
 			files = (
 				E74859EF1E5DB4EC0030D696 /* radio_logo.png in Resources */,
 				E78B61DB1E8196F700E0DA25 /* NewsCategorySeparatorView.xib in Resources */,
+				3E1E8EA91EC5B61E00B76215 /* left_@1x.png in Resources */,
+				3E1E8EAC1EC5B61E00B76215 /* left_@2x.png in Resources */,
 				E74859E91E5DB4EC0030D696 /* AdsAndStatisticConfig.plist in Resources */,
 				E74859EB1E5DB4EC0030D696 /* BackendURLs.plist in Resources */,
 				E7551D081E5C60B400A1AEF9 /* MenuItemTableViewCell.xib in Resources */,
 				E74859EA1E5DB4EC0030D696 /* AWSSNSConfig.plist in Resources */,
 				E74859F21E5DB4EC0030D696 /* SportCategories.plist in Resources */,
 				E7D6DEE71E66DC3100E7CC46 /* NewsSeparatorViewWithBackButton.xib in Resources */,
+				3E1E8EAF1EC5B61E00B76215 /* left_@3x.png in Resources */,
 				E74859F11E5DB4EC0030D696 /* SoapConfig.plist in Resources */,
 				E74859F01E5DB4EC0030D696 /* rjb.plist in Resources */,
 				E78D63901E5B51A300191453 /* RJB-Images.xcassets in Resources */,
 				3E20C8AB1EAA05B300F2ED2C /* appOwiz in Resources */,
 				E75CE7881E5CA06B00D8E232 /* Assets.xcassets in Resources */,
+				3E1E8EB81EC5B61E00B76215 /* right_@3x.png in Resources */,
+				3E1E8EB21EC5B61E00B76215 /* right_@1x.png in Resources */,
 				E74859ED1E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E74859EE1E5DB4EC0030D696 /* NewsCategories.plist in Resources */,
 				3E46A5C61EC4F6C5009CA191 /* no-image@2x.png in Resources */,
+				3E1E8EB51EC5B61E00B76215 /* right_@2x.png in Resources */,
 				E756DE151E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				3E20C8B11EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E74859EC1E5DB4EC0030D696 /* jingle.mp3 in Resources */,
@@ -1202,20 +1244,26 @@
 			files = (
 				E7485A041E5DB5090030D696 /* rtn.plist in Resources */,
 				E78B61DC1E8196F700E0DA25 /* NewsCategorySeparatorView.xib in Resources */,
+				3E1E8EAA1EC5B61E00B76215 /* left_@1x.png in Resources */,
+				3E1E8EAD1EC5B61E00B76215 /* left_@2x.png in Resources */,
 				E7485A031E5DB5090030D696 /* radio_logo.png in Resources */,
 				E74859FD1E5DB5090030D696 /* AdsAndStatisticConfig.plist in Resources */,
 				E74859FF1E5DB5090030D696 /* BackendURLs.plist in Resources */,
 				E7551D091E5C60B400A1AEF9 /* MenuItemTableViewCell.xib in Resources */,
 				E7485A061E5DB5090030D696 /* SportCategories.plist in Resources */,
 				E7D6DEE81E66DC3100E7CC46 /* NewsSeparatorViewWithBackButton.xib in Resources */,
+				3E1E8EB01EC5B61E00B76215 /* left_@3x.png in Resources */,
 				E7485A051E5DB5090030D696 /* SoapConfig.plist in Resources */,
 				E74859FE1E5DB5090030D696 /* AWSSNSConfig.plist in Resources */,
 				E78D63921E5B51AA00191453 /* RTN-Images.xcassets in Resources */,
 				3E20C8AC1EAA05B300F2ED2C /* appOwiz in Resources */,
 				E75CE7891E5CA06B00D8E232 /* Assets.xcassets in Resources */,
+				3E1E8EB91EC5B61E00B76215 /* right_@3x.png in Resources */,
+				3E1E8EB31EC5B61E00B76215 /* right_@1x.png in Resources */,
 				E7485A011E5DB5090030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E7485A021E5DB5090030D696 /* NewsCategories.plist in Resources */,
 				3E46A5C71EC4F6C5009CA191 /* no-image@2x.png in Resources */,
+				3E1E8EB61EC5B61E00B76215 /* right_@2x.png in Resources */,
 				E756DE161E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				3E20C8B21EAA05CB00F2ED2C /* appOwiz.bundle in Resources */,
 				E7485A001E5DB5090030D696 /* jingle.mp3 in Resources */,

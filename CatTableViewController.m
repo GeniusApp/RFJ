@@ -258,6 +258,8 @@
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
                 actualCell.item = item;
+                //NSLog(@"ITEM TYPE: %hd", item.type); // check type of news
+                
             }
         }
         
