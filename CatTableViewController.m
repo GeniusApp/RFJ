@@ -215,8 +215,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
+    if ([navigationID isEqualToNumber:[NSNumber numberWithInt:9612]]) {
+        return 1;
+    } else {
     return [[self.sortedNewsItems objectForKey:navigationID] count];
     //return 5;
+    }
 }
 
 
@@ -253,6 +257,7 @@
             //actualCell.delegate = self;
             
             NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
+            NSLog(@"NavigationID TYPE: %@", navigationID);
             NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
             
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
