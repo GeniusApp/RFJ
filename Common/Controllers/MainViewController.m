@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 
+
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
@@ -102,6 +103,7 @@
     
     [self loadNextPage];
     [self loadInterstitial];
+
     
     [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }
@@ -123,6 +125,18 @@
     }
     
     return items;
+}
+- (IBAction)toggleSound:(UIButton *)sender {
+    NSLog(@"Entrei no TOGGLE");
+    if ([sender isSelected]) {
+        NSLog(@"Entrei no TOGGLE e devia ligar o SOM");
+        [sender setImage:[UIImage imageNamed:@"couper_son_.png"] forState:UIControlStateNormal];
+        [sender setSelected:NO];
+    } else {
+        NSLog(@"Entrei no TOGGLE e devia desligar o SOM");
+        [sender setImage:[UIImage imageNamed:@"ecouter"] forState:UIControlStateSelected];
+        [sender setSelected:YES];
+    }
 }
 
 - (IBAction)openInfoReport:(id)sender {

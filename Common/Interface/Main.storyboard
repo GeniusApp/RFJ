@@ -42,15 +42,16 @@
                                             <constraint firstAttribute="height" constant="35" id="qzw-Dr-4Qb"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIR-Xh-ROc">
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIR-Xh-ROc">
                                         <rect key="frame" x="287" y="9" width="78" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="ICH-gw-ypy"/>
                                             <constraint firstAttribute="height" constant="22" id="TX7-hc-WoK"/>
                                         </constraints>
-                                        <state key="normal" image="ecouter"/>
+                                        <state key="selected" image="ecouter"/>
                                         <connections>
                                             <action selector="playRadio:" destination="Mgm-SY-j4T" eventType="touchUpInside" id="e9M-Jk-rFo"/>
+                                            <action selector="toggleSound:" destination="Mgm-SY-j4T" eventType="touchUpInside" id="Jxt-8K-Dk4"/>
                                         </connections>
                                     </button>
                                 </subviews>
