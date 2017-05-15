@@ -116,6 +116,15 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         [self.navigationController pushViewController:controller animated:YES];
     }
 }
+- (IBAction)toggleSound:(UIButton *)sender {
+    if ([sender isSelected]) {
+        [sender setImage:[UIImage imageNamed:@"couper_son_.png"] forState:UIControlStateNormal];
+        [sender setSelected:NO];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"ecouter"] forState:UIControlStateSelected];
+        [sender setSelected:YES];
+    }
+}
 
 -(void)refreshCategory:(NSInteger)categoryId
 {
@@ -359,9 +368,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
                 
                 actualCell.item = item;
-                NSLog(@"ID: %lld", item.id);
-                NSLog(@"NAV ID: %lld", item.navigationId);
-                NSLog(@"UPDATE DATE: %@", item.updateDate);
+                //NSLog(@"ID: %lld", item.id);
+                //NSLog(@"NAV ID: %lld", item.navigationId);
+                //NSLog(@"UPDATE DATE: %@", item.updateDate);
             }
         }
     }

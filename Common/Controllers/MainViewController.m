@@ -127,13 +127,10 @@
     return items;
 }
 - (IBAction)toggleSound:(UIButton *)sender {
-    NSLog(@"Entrei no TOGGLE");
     if ([sender isSelected]) {
-        NSLog(@"Entrei no TOGGLE e devia ligar o SOM");
         [sender setImage:[UIImage imageNamed:@"couper_son_.png"] forState:UIControlStateNormal];
         [sender setSelected:NO];
     } else {
-        NSLog(@"Entrei no TOGGLE e devia desligar o SOM");
         [sender setImage:[UIImage imageNamed:@"ecouter"] forState:UIControlStateSelected];
         [sender setSelected:YES];
     }

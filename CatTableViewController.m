@@ -61,7 +61,9 @@
                   forControlEvents:UIControlEventValueChanged];
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAll];
+    self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
+                                        ascending:YES];
+    //self.newsItems = [NewsItem MR_findAll];
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     

@@ -62,7 +62,7 @@
     self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
                                         ascending:NO];
     //self.newsItems = [NewsItem MR_findAll];
-    NSLog(@"NEWS ITEMS: %@", self.newsItems[0]);
+    //NSLog(@"NEWS ITEMS: %@", self.newsItems[0]);
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     [self sortNewsItems];
     
@@ -244,16 +244,16 @@
             cell = actualCell;
             NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
             NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-            NSLog(@"NUMBER OF ITEMS: %lu", (unsigned long)items.count);
-            NSLog(@"NUMBER OF SECTIONS: %lu", (unsigned long)self.sortedNewsItems.count);
+            //NSLog(@"NUMBER OF ITEMS: %lu", (unsigned long)items.count);
+            //NSLog(@"NUMBER OF SECTIONS: %lu", (unsigned long)self.sortedNewsItems.count);
             if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
             {
                 NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
                 
                 actualCell.item = item;
-                NSLog(@"ID: %lld", item.id);
-                NSLog(@"NAV ID: %lld", item.navigationId);
-                NSLog(@"UPDATE DATE: %@", item.updateDate);
+                //NSLog(@"ID: %lld", item.id);
+                //NSLog(@"NAV ID: %lld", item.navigationId);
+                //NSLog(@"UPDATE DATE: %@", item.updateDate);
                 
                 
             }
