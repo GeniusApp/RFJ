@@ -32,6 +32,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
@@ -53,34 +54,10 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    UITableViewController *tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-//    tableViewController.tableView = self.contentTableView;
-//    
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-//    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
-//    [self.contentTableView addSubview:refreshControl];
-//
-//    
-//    if([self.contentTableView respondsToSelector:@selector(setRefreshControl:)]) {
-//        [self.contentTableView setRefreshControl:refreshControl];
-//    }
-//    else {
-//        [self.contentTableView addSubview:refreshControl];
-//    }
-//
-//    //Setting attribute Title
-//    refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Pull To Refresh"];
-//    //[self.contentTableView setContentOffset:CGPointMake(0, -refreshControl.frame.size.height) animated:YES];
-//    //[self.contentTableView setContentOffset:CGPointMake(0.0f, -0.0f)
-//    //                               animated:YES];
-//    
-//    [refreshControl beginRefreshing];
-//    [self performSelector:@selector(handleRefresh:) withObject:nil afterDelay:2];
-//    
-//    [self pullToRefresh];
-    
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAll];
+    self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
+                                        ascending:NO];
+    //self.newsItems = [NewsItem MR_findAll];
     
     [self refreshMenuItems];
     
@@ -104,9 +81,22 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.isLoading = NO;
     
     self.activeCategoryId = self.navigationId;
-    
+    if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:0]]) {
+        NSLog(@"NAO VOU FAZER NADA");
+        self.contentTableView.hidden = YES;
+    } else {
+        NSLog(@"AQUI TENHO QUE ESCONDER");
+        self.contentTableView.hidden = NO;
+        self.containerView.hidden = YES;
+        
+    }
+    //NSLog(@"ITEMS: %@", self.newsItems);
+    NSLog(@"NEWSGROUP CATEGORYVIEW");
+    NSLog(@"ACTIVE CAGETGORY ID: %@", self.activeCategoryId);
     
     [self refreshCategory:[self.activeCategoryId intValue]];
+
+
 }
 
 - (IBAction)openInfoReport:(id)sender {
@@ -366,11 +356,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
             if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
             {
                 NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
-                
+
                 actualCell.item = item;
                 //NSLog(@"ID: %lld", item.id);
                 //NSLog(@"NAV ID: %lld", item.navigationId);
-                //NSLog(@"UPDATE DATE: %@", item.updateDate);
+                NSLog(@"UPDATE DATE: %@", item.updateDate);
             }
         }
     }

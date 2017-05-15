@@ -449,6 +449,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9ll-p3-kjQ"/>
                     <connections>
+                        <outlet property="containerView" destination="LRC-bH-aJH" id="Kz3-sy-IUc"/>
                         <outlet property="contentTableView" destination="jgw-2n-2VN" id="EgE-T5-fNZ"/>
                         <outlet property="loadingView" destination="3Il-fL-ht1" id="dWO-Wp-zPf"/>
                         <outlet property="menuHeightConstraint" destination="DwF-wF-EGF" id="kGG-U3-qu9"/>

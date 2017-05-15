@@ -60,7 +60,7 @@
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     [application registerForRemoteNotifications];
     
-    [self.window makeKeyAndVisible];
+  //  [self.window makeKeyAndVisible];
     
     return YES;
 }

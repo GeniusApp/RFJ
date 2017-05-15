@@ -125,7 +125,7 @@
     NSURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:nil error:&urlError];
     
     __block NSArray<NewsItem *> *outItems = [NewsItem MR_findAll];
-    
+
     outItems = [outItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NewsItem *a = obj1;
         NewsItem *b = obj2;

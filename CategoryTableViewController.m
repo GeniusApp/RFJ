@@ -242,8 +242,8 @@
         if(VALID(actualCell, NewsItemTableViewCell))
         {
             cell = actualCell;
-            NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-            NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
+            //NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
+            //NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
             //NSLog(@"NUMBER OF ITEMS: %lu", (unsigned long)items.count);
             //NSLog(@"NUMBER OF SECTIONS: %lu", (unsigned long)self.sortedNewsItems.count);
             if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
