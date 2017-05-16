@@ -121,6 +121,7 @@
     NSString *url = [NSString stringWithFormat:kURLLastNewsFormat,
                      [[NSNumber numberWithInt:[[DataManager singleton] isRFJ] ? kZoneIDRFJ : [[DataManager singleton] isRJB] ? kZoneIDRJB : kZoneIDRTN] stringValue], [[NSNumber numberWithInteger:objectType] stringValue], @"0", [[NSNumber numberWithInteger:page] stringValue], [[NSNumber numberWithInteger:categoryId] stringValue]];
     
+    
     NSError *urlError = nil;
     NSURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:nil error:&urlError];
     

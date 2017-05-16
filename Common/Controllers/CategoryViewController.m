@@ -83,7 +83,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.activeCategoryId = self.navigationId;
     if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:0]]) {
         NSLog(@"NAO VOU FAZER NADA");
-        self.contentTableView.hidden = YES;
+        //self.contentTableView.hidden = YES;
     } else {
         NSLog(@"AQUI TENHO QUE ESCONDER");
         self.contentTableView.hidden = NO;
@@ -360,7 +360,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 actualCell.item = item;
                 //NSLog(@"ID: %lld", item.id);
                 //NSLog(@"NAV ID: %lld", item.navigationId);
-                NSLog(@"UPDATE DATE: %@", item.updateDate);
+                //NSLog(@"UPDATE DATE: %@", item.updateDate);
             }
         }
     }

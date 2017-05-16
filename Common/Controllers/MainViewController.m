@@ -104,7 +104,7 @@
     [self loadNextPage];
     [self loadInterstitial];
 
-    
+    NSLog(@"SHOW ME VALUES: %@", self.sortedNewsItems);
     [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }
 
@@ -413,10 +413,10 @@
 
             NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
             NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-            
+            //NSLog(@"ITEMS: %@", items);
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
-                //NSLog(@"INDEXPATH: %@", item);
+                //NSLog(@"INDEXPATH: %@", items);
                 actualCell.item = item;
                 
             }

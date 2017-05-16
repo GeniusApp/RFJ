@@ -26,6 +26,7 @@
 @dynamic retina3;
 @dynamic title;
 @dynamic type;
+@dynamic important;
 @dynamic updateDate;
 
 @end
