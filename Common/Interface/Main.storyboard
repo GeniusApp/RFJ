@@ -141,7 +141,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08N-P8-PZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959.20000000000005" y="155.17241379310346"/>
+            <point key="canvasLocation" x="687" y="97"/>
+        </scene>
+        <!--Important News Table View Controller-->
+        <scene sceneID="cMU-t8-fOl">
+            <objects>
+                <tableViewController id="evm-b5-Vtp" customClass="ImportantNewsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WMO-xh-vdL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YTJ-GF-2xw">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YTJ-GF-2xw" id="MHc-iI-ghp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="evm-b5-Vtp" id="AtI-6W-oCL"/>
+                            <outlet property="delegate" destination="evm-b5-Vtp" id="Kjt-1w-Cwo"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qvi-RV-Zds" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-510" y="-547"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Mm-8d-VJE">
@@ -459,7 +487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yjB-vf-u8z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959.20000000000005" y="155.17241379310346"/>
+            <point key="canvasLocation" x="1404" y="97"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="scT-hT-hvP">
@@ -1197,7 +1225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BF-9A-4Dj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1236" y="890"/>
+            <point key="canvasLocation" x="1292" y="902"/>
         </scene>
         <!--Cat Table View Controller-->
         <scene sceneID="nxs-KD-AfJ">
@@ -1215,7 +1243,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzS-p9-2mp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="-447"/>
+            <point key="canvasLocation" x="449" y="-572"/>
         </scene>
         <!--Category Table View Controller-->
         <scene sceneID="wNf-KX-09z">
@@ -1233,7 +1261,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbk-mJ-7RC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1691" y="-394"/>
+            <point key="canvasLocation" x="1841" y="-573"/>
         </scene>
     </scenes>
     <resources>

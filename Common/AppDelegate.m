@@ -122,7 +122,7 @@
     AWSSNS *sns = [AWSSNS defaultSNS];
     [[sns createPlatformEndpoint:endPointInput] continueWithBlock:^id _Nullable(AWSTask<AWSSNSCreateEndpointResponse *> * _Nonnull task) {
         if(task.error != nil) {
-            NSLog(@"%@", task.error);
+            //NSLog(@"%@", task.error);
         } else {
             NSLog(@"success created SNS Endpoint token!");
         }
@@ -131,13 +131,13 @@
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
-    NSLog(@"Failed to register with error : %@", error);
+    //NSLog(@"Failed to register with error : %@", error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     application.applicationIconBadgeNumber = 0;
     NSString *msg = [NSString stringWithFormat:@"%@", userInfo];
-    NSLog(@"%@",msg);
+    //NSLog(@"%@",msg);
 }
 
 @end

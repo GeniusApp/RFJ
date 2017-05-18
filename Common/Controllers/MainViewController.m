@@ -40,6 +40,7 @@
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
+@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedImportantNews;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 
@@ -104,7 +105,8 @@
     [self loadNextPage];
     [self loadInterstitial];
 
-    NSLog(@"SHOW ME VALUES: %@", self.sortedNewsItems);
+    //NSLog(@"SHOW ME VALUES: %@", self.sortedNewsItems);
+
     [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }
 
@@ -158,6 +160,22 @@
         }
         
         [self.sortedNewsItems setObject:sortedItems forKey:@(item.navigationId)];
+    }
+}
+
+-(void)sortImportantNews {
+    self.sortedImportantNews = [[NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> alloc] init];
+    
+    for(NewsItem *item in self.newsItems) {
+        NSArray *sortedItems = nil;
+        
+        if([self.sortedImportantNews objectForKey:@(item.important)] == nil) {
+            sortedItems = [NSArray arrayWithObject:item];
+        }
+        else {
+            sortedItems = [[self.sortedImportantNews objectForKey:@(item.important)] arrayByAddingObject:item];
+        }
+        
     }
 }
 
@@ -282,6 +300,7 @@
         }
 
         [self sortNewsItems];
+        [self sortImportantNews];
         
         [self.contentTableView reloadData];
     } failure:^(NSError *error) {
@@ -308,6 +327,13 @@
     else if(tableView == self.contentTableView) {
         NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
         return [[self.sortedNewsItems objectForKey:navigationID] count];
+//        if ([navigationID isEqualToNumber:[NSNumber numberWithInt:0]]) {
+//            return 0;
+//        } else if ([navigationID isEqualToNumber:[NSNumber numberWithInt:1]]) {
+//            return 3;
+//        } else {
+//            return [[self.sortedNewsItems objectForKey:navigationID] count];
+//        }
     }
     
     return 0;
@@ -317,7 +343,7 @@
     if(tableView == self.menuTableView) {
         return 1;
     }
-    
+    //NSLog(@"SECTIONS COUNT %lu", (unsigned long)self.sortedNewsItems.count);
     return [self.sortedNewsItems count];
 }
 
@@ -398,7 +424,7 @@
     }
     else if(tableView == self.contentTableView) {
         NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-        
+        //NSLog(@"SECTION: %ld", (long)indexPath.section);
         if(!VALID(actualCell, NewsItemTableViewCell)) {
             NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
             
@@ -412,8 +438,10 @@
             actualCell.delegate = self;
 
             NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
+            //NSLog(@"NavigationID TYPE: %@", navigationID);
             NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-            //NSLog(@"ITEMS: %@", items);
+
+            //NSLog(@"ITEMS: %@", self.sortedNewsItems);
             if(indexPath.row >= 0 && indexPath.row < [items count]) {
                 NewsItem *item = [items objectAtIndex:indexPath.row];
                 //NSLog(@"INDEXPATH: %@", items);

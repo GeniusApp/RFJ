@@ -82,17 +82,17 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     self.activeCategoryId = self.navigationId;
     if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:0]]) {
-        NSLog(@"NAO VOU FAZER NADA");
+        //NSLog(@"NAO VOU FAZER NADA");
         //self.contentTableView.hidden = YES;
     } else {
-        NSLog(@"AQUI TENHO QUE ESCONDER");
+        //NSLog(@"AQUI TENHO QUE ESCONDER");
         self.contentTableView.hidden = NO;
         self.containerView.hidden = YES;
         
     }
     //NSLog(@"ITEMS: %@", self.newsItems);
-    NSLog(@"NEWSGROUP CATEGORYVIEW");
-    NSLog(@"ACTIVE CAGETGORY ID: %@", self.activeCategoryId);
+    //NSLog(@"NEWSGROUP CATEGORYVIEW");
+    //NSLog(@"ACTIVE CAGETGORY ID: %@", self.activeCategoryId);
     
     [self refreshCategory:[self.activeCategoryId intValue]];
 
@@ -140,7 +140,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         [self.contentTableView reloadData];
         [self hideLoading];
     } andFailureBlock:^(NSError *error) {
-        NSLog(@"Failure getting news items: %@", error);
+        //NSLog(@"Failure getting news items: %@", error);
         
         [self.contentTableView reloadData];
         [self hideLoading];
@@ -258,7 +258,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     } failure:^(NSError *error) {
         [self hideLoading];
         
-        NSLog(@"Error: %@", error);
+        //NSLog(@"Error: %@", error);
     }];
 }
 

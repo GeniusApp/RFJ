@@ -1,11 +1,12 @@
 //
-//  CatTableViewController.m
+//  ImportantNewsTableViewController.m
 //  rfj
 //
-//  Created by Gonçalo Girão on 27/04/2017.
+//  Created by Gonçalo Girão on 17/05/2017.
 //  Copyright © 2017 Genius App Sarl. All rights reserved.
 //
 
+#import "ImportantNewsTableViewController.h"
 #import "CatTableViewController.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import <GoogleMobileAds/DFPInterstitial.h>
@@ -28,7 +29,8 @@
 #import "WebViewController.h"
 #import "AppOwiz.h"
 
-@interface CatTableViewController ()
+@interface ImportantNewsTableViewController ()
+
 
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
@@ -43,12 +45,11 @@
 @property (strong, nonatomic)  UIView *coverView;
 
 @end
-
-@implementation CatTableViewController
+@implementation ImportantNewsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
@@ -68,21 +69,21 @@
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
     [self sortNewsItems];
-
+    
     
     [self.tableView registerNib:[UINib nibWithNibName:@"NewsItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"newsItemCell"];
-
+    
     
     [self loadNextPage];
     [self loadInterstitial];
     
     
-//    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(NewsItemDidTap:)];
-//    gestureRecognizer.numberOfTapsRequired = 1;
-//    [gestureRecognizer setCancelsTouchesInView:NO];
-//
-//    [self.tableView setUserInteractionEnabled:YES];
-//    [self.tableView addGestureRecognizer:gestureRecognizer];
+    //    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(NewsItemDidTap:)];
+    //    gestureRecognizer.numberOfTapsRequired = 1;
+    //    [gestureRecognizer setCancelsTouchesInView:NO];
+    //
+    //    [self.tableView setUserInteractionEnabled:YES];
+    //    [self.tableView addGestureRecognizer:gestureRecognizer];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -93,8 +94,8 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-        [self loadInterstitial];
-
+    [self loadInterstitial];
+    
 }
 
 - (void)refreshTable {
@@ -144,7 +145,7 @@
     
     NSDictionary *BackendURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BackendURLs" ofType:@"plist"]];
     self.interstitial = [[DFPInterstitial alloc] initWithAdUnitID:[BackendURLs objectForKey:@"DFPInterstitialLoadingLink"]];
-   // self.interstitial.delegate = self;
+    // self.interstitial.delegate = self;
     
     DFPRequest *request = [DFPRequest request];
     request.testDevices = @[kGADSimulatorID, @"40238db35009b7d4b7bf9ac26d418d9e"];
@@ -203,26 +204,20 @@
     } failure:^(NSError *error) {
         //[self hideLoading];
         
-
+        
     }];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     return [self.sortedNewsItems count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
-    if ([navigationID isEqualToNumber:[NSNumber numberWithInt:9612]]) {
-        return 1;
-    } else {
-    return [[self.sortedNewsItems objectForKey:navigationID] count];
-    //return 5;
-    }
+    
+    return 3;
 }
 
 
@@ -349,7 +344,7 @@
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
     
     NSIndexPath *index = [self.tableView indexPathForCell:item];
-
+    
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
         
