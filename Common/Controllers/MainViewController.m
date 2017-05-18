@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "DataManager.h"
 #import "CategoryViewController.h"
+#import "InfoContinuViewController.h"
 #import "Validation.h"
 #import "MainViewController.h"
 #import "MenuItem+CoreDataProperties.h"
@@ -557,10 +558,11 @@
     self.menuHeightConstraint.constant = 0;
 
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
+    NSLog(@"INDEX: %@", index);
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
         MenuItem *menuItem = [self.menuItems objectAtIndex:index.row];
-        
+        NSLog(@"MENU ITEM: %lld", menuItem.id);
         if(VALID(menuItem, MenuItem)) {
             [self.expandedMenuItems removeAllObjects];
             [self refreshMenuItems];
@@ -574,11 +576,21 @@
                 }
             }
             else {
-                CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
-                
-                if(VALID(controller, CategoryViewController)) {
-                    controller.navigationId = @(menuItem.id);
-                    [self.navigationController pushViewController:controller animated:YES];
+                if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                    NSLog(@"CARREGUEI CERTO!");
+                    InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
+                    
+                    if(VALID(controller, InfoContinuViewController)) {
+                        //controller.navigationId = @(menuItem.id);
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }
+                } else {
+                    CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
+                    
+                    if(VALID(controller, CategoryViewController)) {
+                        controller.navigationId = @(menuItem.id);
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }
                 }
             }
         }

@@ -43,6 +43,9 @@
 		3E1F4E541ECA517800E89C0B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1F4E501ECA517800E89C0B /* libAppOwiz.a */; };
 		3E1F4E551ECA517800E89C0B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1F4E501ECA517800E89C0B /* libAppOwiz.a */; };
 		3E1F4E561ECA517800E89C0B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1F4E501ECA517800E89C0B /* libAppOwiz.a */; };
+		3E3CAE311ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
+		3E3CAE321ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
+		3E3CAE331ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
 		3E4089681EB9E9F2002C963F /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3E4115B01ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4115AE1ECBBEF500959D8A /* ImportantTableViewCell.m */; };
 		3E4115B11ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4115AE1ECBBEF500959D8A /* ImportantTableViewCell.m */; };
@@ -50,9 +53,6 @@
 		3E4115B31ECBBEF500959D8A /* ImportantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4115AF1ECBBEF500959D8A /* ImportantTableViewCell.xib */; };
 		3E4115B41ECBBEF500959D8A /* ImportantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4115AF1ECBBEF500959D8A /* ImportantTableViewCell.xib */; };
 		3E4115B51ECBBEF500959D8A /* ImportantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4115AF1ECBBEF500959D8A /* ImportantTableViewCell.xib */; };
-		3E4115B81ECBD3F600959D8A /* ImportantNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4115B71ECBD3F600959D8A /* ImportantNewsTableViewController.m */; };
-		3E4115B91ECBD3F600959D8A /* ImportantNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4115B71ECBD3F600959D8A /* ImportantNewsTableViewController.m */; };
-		3E4115BA1ECBD3F600959D8A /* ImportantNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4115B71ECBD3F600959D8A /* ImportantNewsTableViewController.m */; };
 		3E438BC11EC2845500CAB309 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3E438BC21EC2845600CAB309 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */; };
 		3E46A5C11EC4EB87009CA191 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C01EC4EB87009CA191 /* no-image.png */; };
@@ -61,7 +61,6 @@
 		3E46A5C51EC4F6C5009CA191 /* no-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */; };
 		3E46A5C61EC4F6C5009CA191 /* no-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */; };
 		3E46A5C71EC4F6C5009CA191 /* no-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */; };
-		3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */; };
 		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
 		3EDE4CCD1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
 		3EDE4CCE1EB16D490054E62A /* CatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */; };
@@ -323,16 +322,15 @@
 		3E1F4E4E1ECA517800E89C0B /* appOwiz.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = appOwiz.bundle; sourceTree = "<group>"; };
 		3E1F4E4F1ECA517800E89C0B /* AppOwiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppOwiz.h; sourceTree = "<group>"; };
 		3E1F4E501ECA517800E89C0B /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
+		3E3CAE2F1ECDC535001ED1F1 /* InfoContinuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoContinuViewController.h; sourceTree = "<group>"; };
+		3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoContinuViewController.m; sourceTree = "<group>"; };
 		3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
 		3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
 		3E4115AD1ECBBEF500959D8A /* ImportantTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportantTableViewCell.h; sourceTree = "<group>"; };
 		3E4115AE1ECBBEF500959D8A /* ImportantTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportantTableViewCell.m; sourceTree = "<group>"; };
 		3E4115AF1ECBBEF500959D8A /* ImportantTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportantTableViewCell.xib; sourceTree = "<group>"; };
-		3E4115B61ECBD3F600959D8A /* ImportantNewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportantNewsTableViewController.h; sourceTree = "<group>"; };
-		3E4115B71ECBD3F600959D8A /* ImportantNewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportantNewsTableViewController.m; sourceTree = "<group>"; };
 		3E46A5C01EC4EB87009CA191 /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = "<group>"; };
 		3E46A5C41EC4F6C5009CA191 /* no-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image@2x.png"; sourceTree = "<group>"; };
-		3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoRViewController.swift; sourceTree = "<group>"; };
 		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatTableViewController.h; sourceTree = "<group>"; };
 		3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatTableViewController.m; sourceTree = "<group>"; };
@@ -934,13 +932,12 @@
 				E7D867401E8E8D7800C68C5B /* NewsGroupViewController.m */,
 				E77938551E9297650065483E /* InfoReportViewController.h */,
 				E77938561E9297650065483E /* InfoReportViewController.m */,
-				3EBEDDDA1EA677F0004B8870 /* InfoRViewController.swift */,
 				3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */,
 				3E4089671EB9E9F2002C963F /* CategoryTableViewController.m */,
 				3EDE4CCB1EB16D480054E62A /* CatTableViewController.h */,
 				3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */,
-				3E4115B61ECBD3F600959D8A /* ImportantNewsTableViewController.h */,
-				3E4115B71ECBD3F600959D8A /* ImportantNewsTableViewController.m */,
+				3E3CAE2F1ECDC535001ED1F1 /* InfoContinuViewController.h */,
+				3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1471,7 +1468,6 @@
 				E7AE20C01E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				E760123B1E5DBDBC007D809A /* DataManager.m in Sources */,
 				E77938571E9297650065483E /* InfoReportViewController.m in Sources */,
-				3E4115B81ECBD3F600959D8A /* ImportantNewsTableViewController.m in Sources */,
 				E779385C1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D61E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
 				E7D6DEE21E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
@@ -1481,6 +1477,7 @@
 				E7551D041E5C60B400A1AEF9 /* MenuItemTableViewCell.m in Sources */,
 				E7D867411E8E8D7800C68C5B /* NewsGroupViewController.m in Sources */,
 				E7311C831E64556C001DB24A /* NewsDetailViewController.m in Sources */,
+				3E3CAE311ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */,
 				E75CE78D1E5CB01C00D8E232 /* NewsItemTableViewCell.m in Sources */,
 				E7311C8D1E6485A6001DB24A /* MenuManager.m in Sources */,
 				E7311C881E6458EB001DB24A /* RadioManager.m in Sources */,
@@ -1498,7 +1495,6 @@
 				E7E6FDEB1E65CD6D0027B719 /* NewsManager.m in Sources */,
 				E78D64331E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
 				E75006B11E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
-				3EBEDDDB1EA677F0004B8870 /* InfoRViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1509,6 +1505,7 @@
 				E75006AA1E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE111E89328800E1437E /* BottomLoadingView.m in Sources */,
 				E75006AD1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
+				3E3CAE321ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */,
 				E7AE20C11E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				E760123C1E5DBDBC007D809A /* DataManager.m in Sources */,
 				E77938581E9297650065483E /* InfoReportViewController.m in Sources */,
@@ -1517,7 +1514,6 @@
 				E7D6DEE31E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
 				E78D642E1E5B673300191453 /* NewsDetail+CoreDataClass.m in Sources */,
 				E7551D051E5C60B400A1AEF9 /* MenuItemTableViewCell.m in Sources */,
-				3E4115B91ECBD3F600959D8A /* ImportantNewsTableViewController.m in Sources */,
 				E7D867421E8E8D7800C68C5B /* NewsGroupViewController.m in Sources */,
 				E7311C841E64556C001DB24A /* NewsDetailViewController.m in Sources */,
 				E75CE78E1E5CB01C00D8E232 /* NewsItemTableViewCell.m in Sources */,
@@ -1550,6 +1546,7 @@
 				E75006AB1E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE121E89328800E1437E /* BottomLoadingView.m in Sources */,
 				E75006AE1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
+				3E3CAE331ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */,
 				E7AE20C21E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				E760123D1E5DBDBC007D809A /* DataManager.m in Sources */,
 				E77938591E9297650065483E /* InfoReportViewController.m in Sources */,
@@ -1558,7 +1555,6 @@
 				E7D6DEE41E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
 				E78D642F1E5B673300191453 /* NewsDetail+CoreDataClass.m in Sources */,
 				E7551D061E5C60B400A1AEF9 /* MenuItemTableViewCell.m in Sources */,
-				3E4115BA1ECBD3F600959D8A /* ImportantNewsTableViewController.m in Sources */,
 				E7D867431E8E8D7800C68C5B /* NewsGroupViewController.m in Sources */,
 				E7311C851E64556C001DB24A /* NewsDetailViewController.m in Sources */,
 				E75CE78F1E5CB01C00D8E232 /* NewsItemTableViewCell.m in Sources */,
