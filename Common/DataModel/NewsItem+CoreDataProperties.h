@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *retina3;
 @property (nullable, nonatomic, copy) NSString *title;
 @property (nonatomic) int16_t type;
+@property (nonatomic) int16_t important;
 @property (nullable, nonatomic, copy) NSDate *updateDate;
 
 @end

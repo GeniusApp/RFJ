@@ -121,11 +121,12 @@
     NSString *url = [NSString stringWithFormat:kURLLastNewsFormat,
                      [[NSNumber numberWithInt:[[DataManager singleton] isRFJ] ? kZoneIDRFJ : [[DataManager singleton] isRJB] ? kZoneIDRJB : kZoneIDRTN] stringValue], [[NSNumber numberWithInteger:objectType] stringValue], @"0", [[NSNumber numberWithInteger:page] stringValue], [[NSNumber numberWithInteger:categoryId] stringValue]];
     
+    
     NSError *urlError = nil;
     NSURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:nil error:&urlError];
     
     __block NSArray<NewsItem *> *outItems = [NewsItem MR_findAll];
-    
+
     outItems = [outItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NewsItem *a = obj1;
         NewsItem *b = obj2;

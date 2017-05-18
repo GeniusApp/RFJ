@@ -25,7 +25,6 @@
 -(void)deserialize:(NSDictionary *)dictionary {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    //dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
     
     if(VALID_NOTEMPTY(dictionary, NSDictionary)) {
         if(VALID_NOTEMPTY([dictionary objectForKey:@"CreateDate"], NSString)) {
@@ -74,6 +73,10 @@
 
         if(VALID_NOTEMPTY([dictionary objectForKey:@"UpdateDate"], NSString)) {
             self.updateDate = [dateFormatter dateFromString:[dictionary objectForKey:@"UpdateDate"]];
+        }
+        
+        if(VALID_NOTEMPTY([dictionary objectForKey:@"Important"], NSNumber)) {
+            self.important = [[dictionary objectForKey:@"Important"] integerValue];
         }
     }
 }
