@@ -28,10 +28,13 @@
 #import "WebViewController.h"
 #import "AppOwiz.h"
 
-@interface CatTableViewController ()
+@interface CatTableViewController ()<NewsItemTableViewCellDelegate>
 
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
+@property (strong, nonatomic) NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<NewsItem *> *> *>*sortedNewsItems2;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
+
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 
 
@@ -61,20 +64,18 @@
                   forControlEvents:UIControlEventValueChanged];
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
-                                        ascending:YES];
-    //self.newsItems = [NewsItem MR_findAll];
+    self.newsItems = [NewsItem MR_findAll];
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
     [self sortNewsItems];
-
+    [self sortNewsItems2];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"NewsItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"newsItemCell"];
-
-    
+    self.currentPage = 0;
+    self.isLoading = NO;
     [self loadNextPage];
-    [self loadInterstitial];
+    
     
     
 //    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(NewsItemDidTap:)];
@@ -92,8 +93,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-        [self loadInterstitial];
 
 }
 
@@ -108,9 +107,15 @@
 {
     NSMutableArray<NewsItem *> *items = [[NSMutableArray<NewsItem *> alloc] init];
     
-    for(NSNumber *navigationID in [self.sortedNewsItems allKeys]) {
-        [items addObjectsFromArray:[self.sortedNewsItems objectForKey:navigationID]];
+    for(NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content in self.sortedNewsItems2) {
+        [items addObjectsFromArray:[content objectForKey:[[content allKeys] objectAtIndex:0]]];
     }
+    
+    /*
+     for(NSNumber *navigationID in [self.sortedNewsItems allKeys]) {
+     [items addObjectsFromArray:[self.sortedNewsItems objectForKey:navigationID]];
+     }
+     */
     
     return items;
 }
@@ -134,23 +139,54 @@
         }
         
         [self.sortedNewsItems setObject:sortedItems forKey:@(item.navigationId)];
+        
     }
 }
 
-
-
--(void)loadInterstitial {
-    //self.needsToLoadInterstitial = NO;
+-(void)sortNewsItems2 {
+    self.sortedNewsItems2 = [[NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<NewsItem *> *> *> alloc] init];
+    NSArray<NSArray<NSNumber *> *> *searchNumbers =
+    @[
+      @[@(9611), @(9618)],
+      @[@(9612)],
+      @[@(9613)],
+      @[@(9614)],
+      @[@(9615)],
+      ];
     
-    NSDictionary *BackendURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BackendURLs" ofType:@"plist"]];
-    self.interstitial = [[DFPInterstitial alloc] initWithAdUnitID:[BackendURLs objectForKey:@"DFPInterstitialLoadingLink"]];
-   // self.interstitial.delegate = self;
-    
-    DFPRequest *request = [DFPRequest request];
-    request.testDevices = @[kGADSimulatorID, @"40238db35009b7d4b7bf9ac26d418d9e"];
-    
-    [self.interstitial loadRequest:request];
+    for(NSArray<NSNumber *> *searchItem in searchNumbers)
+    {
+        NSMutableArray<NewsItem *> *items = [[NSMutableArray<NewsItem *> alloc] init];
+        
+        for(NewsItem *item in self.newsItems) {
+            BOOL valid = NO;
+            
+            for(NSNumber *navigationId in searchItem)
+            {
+                if([navigationId intValue] == item.navigationId)
+                {
+                    valid = YES;
+                    
+                    break;
+                }
+            }
+            
+            if(!valid)
+            {
+                continue;
+            }
+            
+            [items addObject:item];
+        }
+        
+        [self.sortedNewsItems2 addObject:
+         @{
+           searchItem: items
+           }];
+    }
+    //NSLog(@"QUALWUER COISA: %@", self.sortedNewsItems2);
 }
+
 
 -(void)loadPageItemsForPage:(NSInteger)page count:(NSInteger)count
                     success:(void(^)(NSArray<NewsItem *> *items))successBlock
@@ -176,16 +212,25 @@
     }];
 }
 
+-(void)showLoading {
+    [self.loadingView setHidden:NO];
+}
+
+-(void)hideLoading {
+    [self.loadingView setHidden:YES];
+}
+
 -(void)loadNextPage {
     if(self.isLoading) {
         return;
     }
     
-    
+    [self showLoading];
     
     self.currentPage++;
     
     [self loadPageItemsForPage:self.currentPage count:kItemsPerPage success:^(NSArray<NewsItem *> *items) {
+        [self hideLoading];
         
         for(NewsItem *item in items) {
             NSInteger itemIndex = [self.newsItems indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -201,27 +246,26 @@
         
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-        //[self hideLoading];
+        [self hideLoading];
         
-
+        //NSLog(@"Error: %@", error);
     }];
 }
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return [self.sortedNewsItems count];
+    return [self.sortedNewsItems2 count] + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
-    if ([navigationID isEqualToNumber:[NSNumber numberWithInt:9612]]) {
-        return 1;
+    //return [[self.sortedNewsItems objectForKey:navigationID] count];
+    if (section == 0) {
+        return 3;
     } else {
-    return [[self.sortedNewsItems objectForKey:navigationID] count];
-    //return 5;
+        return section == 1 ? 7 : 1;
     }
 }
 
@@ -256,17 +300,23 @@
         
         if(VALID(actualCell, NewsItemTableViewCell)) {
             cell = actualCell;
-            //actualCell.delegate = self;
-            
-            NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-            //NSLog(@"NavigationID TYPE: %@", navigationID);
-            NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-            
-            if(indexPath.row >= 0 && indexPath.row < [items count]) {
-                NewsItem *item = [items objectAtIndex:indexPath.row];
-                actualCell.item = item;
-                //NSLog(@"ITEM TYPE: %hd", item.type); // check type of news
+            actualCell.delegate = self;
+            if(indexPath.section == 0) {
+                //TODO
+                return actualCell;
+            }
+            else {
+                NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
+                NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
                 
+                if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
+                    //NSLog(@"ITEMS: %@", self.sortedNewsItems);
+                    if(indexPath.row >= 0 && indexPath.row < [items count]) {
+                        NewsItem *item = [items objectAtIndex:indexPath.row];
+                        //NSLog(@"INDEXPATH: %@", items);
+                        actualCell.item = item;
+                    }
+                }
             }
         }
         
@@ -281,14 +331,19 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(tableView == self.tableView) {
+    if(section > 0) {
         return kContentCategorySeparatorHeight;
     }
     return 0;
 }
 
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
+    //NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section];
+    
+    if(section == 0) {
+        return nil;
+    }
     
     NewsCategorySeparatorView *headerView = nil;
     
@@ -300,54 +355,95 @@
     }
     
     if(VALID(headerView, NewsCategorySeparatorView)) {
-        NSInteger categoryIndex = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            return obj.id == [navigationID intValue];
-        }];
+        /*
+         NSInteger categoryIndex = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+         return obj.id == [navigationID intValue];
+         }];
+         
+         if(categoryIndex != NSNotFound) {
+         [headerView setName:[self.allMenuItems objectAtIndex:categoryIndex].name];
+         }
+         */
         
-        if(categoryIndex != NSNotFound) {
-            [headerView setName:[self.allMenuItems objectAtIndex:categoryIndex].name];
+        NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:section - 1];
+        NSArray<NSNumber *> *navigationIds = [[content allKeys] objectAtIndex:0];
+        
+        if(VALID_NOTEMPTY(navigationIds, NSArray<NSNumber *>)) {
+            NSString *nameString = @"";
+            
+            NSInteger categoryIndex = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj.id == [[navigationIds objectAtIndex:0] intValue];
+            }];
+            
+            if(categoryIndex != NSNotFound) {
+                nameString = [self.allMenuItems objectAtIndex:categoryIndex].name;
+            }
+            
+            for(NSInteger i = 1; i < [navigationIds count]; i++) {
+                categoryIndex = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    return obj.id == [[navigationIds objectAtIndex:i] intValue];
+                }];
+                
+                if(categoryIndex != NSNotFound) {
+                    nameString = [NSString stringWithFormat:@"%@ & %@", nameString, [self.allMenuItems objectAtIndex:categoryIndex].name];
+                }
+            }
+            
+            [headerView setName:nameString];
         }
     }
     
     return headerView;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSLog(@"DID SELECT ROW AT INDEXPATH: %@", indexPath.row);
-    UITableViewCell *cell = nil;
-    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-    cell = actualCell;
-    
-    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-    NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-    
-    if(indexPath.row >= 0 && indexPath.row < [items count]) {
-        NewsItem *item = [items objectAtIndex:indexPath.row];
-        actualCell.item = item;
-        
-        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-        if(VALID(controller, NewsGroupViewController)) {
-            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-                NewsItem *localItem = [item MR_inContext:localContext];
-                
-                if(VALID(localItem, NewsItem)) {
-                    localItem.read = YES;
-                }
-            }];
-            controller.newsToDisplay = [self combinedNewsItems];
-            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                return obj == item;
-            }]);
-            
-            [self.navigationController pushViewController:controller animated:YES];
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    UITableViewCell *cell = nil;
+//    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
+//    cell = actualCell;
+//    
+//    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
+//    NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
+//    
+//    if(indexPath.row >= 0 && indexPath.row < [items count]) {
+//        NewsItem *item = [items objectAtIndex:indexPath.row];
+//        actualCell.item = item;
+//        
+//        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+//        if(VALID(controller, NewsGroupViewController)) {
+//            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+//                NewsItem *localItem = [item MR_inContext:localContext];
+//                
+//                if(VALID(localItem, NewsItem)) {
+//                    localItem.read = YES;
+//                }
+//            }];
+//            
+//            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//            
+//            controller.newsToDisplay = [self combinedNewsItems];
+//            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                return obj == item;
+//            }]);
+//            
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
+//    }
+//}
+
+#pragma mark - UIScrollView Delegate
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(scrollView == self.tableView) {
+        if(scrollView.contentOffset.y + scrollView.frame.size.height >= scrollView.contentSize.height && !self.isLoading) {
+            //We probably don't want this
+            //[self loadNextPage];
         }
     }
 }
 
-
-
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-    
+    NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)item);
     NSIndexPath *index = [self.tableView indexPathForCell:item];
 
     if(index.row >= 0 && index.row < [self.newsItems count]) {
