@@ -37,7 +37,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 
-
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
@@ -46,6 +45,7 @@
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *joinedRegionSport;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
+
 
 @property (assign, nonatomic) NSInteger currentPage;
 @property (assign, nonatomic) BOOL isLoading;
@@ -59,6 +59,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
     
     //ggirao stuff for container tableViewController
@@ -110,11 +111,10 @@
     
     [self loadNextPage];
     [self loadInterstitial];
-
-    //NSLog(@"SHOW ME VALUES: %@", self.sortedNewsItems);
-
+    
     [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }
+
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -123,6 +123,7 @@
         [self loadInterstitial];
     }
 }
+
 
 -(NSArray<NewsItem *> *)combinedNewsItems
 {
@@ -181,7 +182,10 @@
     NSArray<NSArray<NSNumber *> *> *searchNumbers =
     @[
       @[@(9611), @(9618)],
-      @[@(9612)]
+      @[@(9612)],
+      @[@(9613)],
+      @[@(9614)],
+      @[@(9615)],
       ];
     
     for(NSArray<NSNumber *> *searchItem in searchNumbers)
@@ -214,7 +218,7 @@
            searchItem: items
            }];
     }
-    NSLog(@"QUALWUER COISA: %@", self.sortedNewsItems2);
+    //NSLog(@"QUALWUER COISA: %@", self.sortedNewsItems2);
 }
 
 -(void)sortImportantNews {
