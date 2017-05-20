@@ -78,14 +78,12 @@
                                     <outlet property="delegate" destination="Mgm-SY-j4T" id="sE9-ne-JBX"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ode-fa-Xqb">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEG-s1-7Ck">
                                 <rect key="frame" x="0.0" y="188" width="375" height="479"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="Mgm-SY-j4T" id="6ra-DK-3HY"/>
-                                    <outlet property="delegate" destination="Mgm-SY-j4T" id="PIz-ir-JNw"/>
+                                    <segue destination="1Nx-2s-W0e" kind="embed" id="t9v-ok-VjR"/>
                                 </connections>
-                            </tableView>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5k-gA-fwx">
                                 <rect key="frame" x="310" y="602" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
@@ -105,25 +103,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="01A-wf-IT3" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="3fD-6Y-K12"/>
-                            <constraint firstItem="Ode-fa-Xqb" firstAttribute="top" secondItem="01A-wf-IT3" secondAttribute="bottom" id="Cel-sM-0mD"/>
+                            <constraint firstItem="SEG-s1-7Ck" firstAttribute="leading" secondItem="lyo-0P-aSn" secondAttribute="leading" id="3r5-0p-vtw"/>
+                            <constraint firstItem="SEG-s1-7Ck" firstAttribute="trailing" secondItem="lyo-0P-aSn" secondAttribute="trailing" id="CQg-Xw-vU1"/>
+                            <constraint firstItem="SEG-s1-7Ck" firstAttribute="trailing" secondItem="lyo-0P-aSn" secondAttribute="trailing" id="F8g-wu-TgW"/>
                             <constraint firstItem="PZ7-06-HhR" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="HJj-cA-R7E"/>
                             <constraint firstItem="mh3-Te-1QY" firstAttribute="top" secondItem="lyo-0P-aSn" secondAttribute="bottom" id="JpC-vm-Wtr"/>
                             <constraint firstAttribute="trailing" secondItem="s5k-gA-fwx" secondAttribute="trailing" constant="15" id="NMU-x8-IAr"/>
+                            <constraint firstItem="SEG-s1-7Ck" firstAttribute="top" secondItem="01A-wf-IT3" secondAttribute="bottom" id="OJa-a9-NnZ"/>
                             <constraint firstAttribute="trailing" secondItem="lyo-0P-aSn" secondAttribute="trailing" id="UfM-4g-egg"/>
                             <constraint firstAttribute="trailing" secondItem="PZ7-06-HhR" secondAttribute="trailing" id="VGB-x4-kwt"/>
-                            <constraint firstItem="Ode-fa-Xqb" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="XfF-ej-Xsp"/>
                             <constraint firstAttribute="bottom" secondItem="s5k-gA-fwx" secondAttribute="bottom" constant="15" id="Xoz-LW-zv5"/>
                             <constraint firstItem="lyo-0P-aSn" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="dX2-dK-D1a"/>
+                            <constraint firstItem="SEG-s1-7Ck" firstAttribute="bottom" secondItem="lyo-0P-aSn" secondAttribute="bottom" id="ecu-Bg-D6M"/>
                             <constraint firstItem="01A-wf-IT3" firstAttribute="top" secondItem="PZ7-06-HhR" secondAttribute="bottom" id="g8V-pK-lFa"/>
+                            <constraint firstItem="lyo-0P-aSn" firstAttribute="top" secondItem="SEG-s1-7Ck" secondAttribute="bottom" constant="-75" id="hF2-o4-fex"/>
                             <constraint firstItem="PZ7-06-HhR" firstAttribute="top" secondItem="I02-XY-6wM" secondAttribute="bottom" id="hb7-MM-a31"/>
-                            <constraint firstItem="mh3-Te-1QY" firstAttribute="top" secondItem="Ode-fa-Xqb" secondAttribute="bottom" id="uh4-6l-Xvv"/>
+                            <constraint firstItem="SEG-s1-7Ck" firstAttribute="leading" secondItem="lyo-0P-aSn" secondAttribute="leading" id="hoe-tt-7cI"/>
                             <constraint firstAttribute="trailing" secondItem="01A-wf-IT3" secondAttribute="trailing" id="xcB-ix-ZBG"/>
-                            <constraint firstAttribute="trailing" secondItem="Ode-fa-Xqb" secondAttribute="trailing" id="yZ2-FV-2OR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yEK-pV-D1l"/>
                     <connections>
-                        <outlet property="contentTableView" destination="Ode-fa-Xqb" id="J5I-Bz-oan"/>
+                        <outlet property="containerView" destination="SEG-s1-7Ck" id="Zv1-D4-ZyU"/>
                         <outlet property="loadingView" destination="lyo-0P-aSn" id="dt3-Ik-CCT"/>
                         <outlet property="menuHeightConstraint" destination="BLc-g3-a05" id="Qzg-uB-Z2f"/>
                         <outlet property="menuTableView" destination="01A-wf-IT3" id="f6v-PF-uE0"/>
@@ -131,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08N-P8-PZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687" y="97"/>
+            <point key="canvasLocation" x="685.60000000000002" y="96.7016491754123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Mm-8d-VJE">
@@ -931,7 +932,7 @@
             <objects>
                 <tableViewController id="1Nx-2s-W0e" customClass="CatTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ch7-Sy-UhO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="479"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -941,6 +942,13 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzS-p9-2mp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ff7-wv-HDc" customClass="BottomLoadingView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="Fdq-Un-tzn"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="449" y="-572"/>
         </scene>
