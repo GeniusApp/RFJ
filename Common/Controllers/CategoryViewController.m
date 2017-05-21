@@ -55,10 +55,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     // Do any additional setup after loading the view.
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"updateDate"
+    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
                                         ascending:NO];
     //self.newsItems = [NewsItem MR_findAll];
-    
     [self refreshMenuItems];
     
     if([[DataManager singleton] isRFJ]) {
@@ -129,7 +128,8 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
     self.newsItems = @[];
-    
+    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
+                                        ascending:NO];
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
@@ -361,6 +361,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 //NSLog(@"ID: %lld", item.id);
                 //NSLog(@"NAV ID: %lld", item.navigationId);
                 //NSLog(@"UPDATE DATE: %@", item.updateDate);
+                NSLog(@"CREATE DATE: %@", item.createDate);
             }
         }
     }
