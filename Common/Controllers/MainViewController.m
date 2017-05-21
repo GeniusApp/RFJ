@@ -70,7 +70,8 @@
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAll];
+    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
+                                       ascending:NO];
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
@@ -238,22 +239,6 @@
     }
 }
 
-//-(void)joinRegionSport {
-//    self.joinedRegionSport = [[NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> alloc] init];
-//    
-//    for(NewsItem *item in self.newsItems) {
-//        NSArray *joinedCategories = nil;
-////        if ([item.navigationId isEqualToNumber:[NSNumber numberWithInt:9611]]) {
-////            if([self.joinedRegionSport objectForKey:@(item.navigationId)] == nil) {
-////                joinedCategories = [NSArray arrayWithObject:item];
-////            }
-////            else {
-////                joinedCategories = [[self.joinedRegionSport objectForKey:@(item.navigationId)] arrayByAddingObject:item];
-////            }
-////            [self.joinedRegionSport setObject:joinedCategories forKey:@(item.navigationId)];
-////        }
-//    }
-//}
 
 -(void)refreshMenuItems
 {
@@ -376,6 +361,7 @@
         }
 
         [self sortNewsItems];
+        [self sortNewsItems2];
         [self sortImportantNews];
         
         [self.contentTableView reloadData];
@@ -406,18 +392,7 @@
         if (section == 0) {
             return 3;
         } else {
-            /*
-            NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:section -1];
-            if ([navigationID isEqualToNumber:[NSNumber numberWithInt:9612]]) {
-                return 1;
-            } else if ([navigationID isEqualToNumber:[NSNumber numberWithInt:9613]]) {
-                return 1;
-            } else {
-                return [[self.sortedNewsItems objectForKey:navigationID] count];
-            }
-             */
-            
-            return section == 1 ? 7 : 1;
+            return section == 1 ? 8 : 1;
         }
     }
     
@@ -543,34 +518,45 @@
         }
     }
     else if(tableView == self.contentTableView) {
-        NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-        //NSLog(@"SECTION: %ld", (long)indexPath.section);
-        if(!VALID(actualCell, NewsItemTableViewCell)) {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
-            
-            if(VALID_NOTEMPTY(views, NSArray)) {
-                actualCell = [views objectAtIndex:0];
+        if (indexPath.row == 7) {
+            static NSString *CellIdentifier = @"Cell";
+            // Reuse and create cell
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-        }
-        
-        if(VALID(actualCell, NewsItemTableViewCell)) {
-            cell = actualCell;
-            actualCell.delegate = self;
-            
-            if(indexPath.section == 0) {
-                //TODO
-                return actualCell;
-            }
-            else {
-                NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
-                NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
+            cell.textLabel.text = @"Test Data";
+            return cell;
+        } else {
+            NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
+            //NSLog(@"SECTION: %ld", (long)indexPath.section);
+            if(!VALID(actualCell, NewsItemTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
                 
-                if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
-                    //NSLog(@"ITEMS: %@", self.sortedNewsItems);
-                    if(indexPath.row >= 0 && indexPath.row < [items count]) {
-                        NewsItem *item = [items objectAtIndex:indexPath.row];
-                        //NSLog(@"INDEXPATH: %@", items);
-                        actualCell.item = item;
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    actualCell = [views objectAtIndex:0];
+                }
+            }
+            
+            if(VALID(actualCell, NewsItemTableViewCell)) {
+                cell = actualCell;
+                actualCell.delegate = self;
+                
+                if(indexPath.section == 0) {
+                    //TODO
+                    return actualCell;
+                }
+                else {
+                    NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
+                    NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
+                    
+                    if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
+                        //NSLog(@"ITEMS: %@", self.sortedNewsItems);
+                        if(indexPath.row >= 0 && indexPath.row < [items count]) {
+                            NewsItem *item = [items objectAtIndex:indexPath.row];
+                            //NSLog(@"INDEXPATH: %@", items);
+                            actualCell.item = item;
+                        }
                     }
                 }
             }
