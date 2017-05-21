@@ -34,15 +34,6 @@
 		3E1E8EC31EC602F400B76215 /* couper_son_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */; };
 		3E1E8EC41EC602F400B76215 /* couper_son_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */; };
 		3E1E8EC51EC602F400B76215 /* couper_son_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */; };
-		3E1F4E4B1ECA513300E89C0B /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E1F4E4A1ECA513300E89C0B /* appOwiz */; };
-		3E1F4E4C1ECA513300E89C0B /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E1F4E4A1ECA513300E89C0B /* appOwiz */; };
-		3E1F4E4D1ECA513300E89C0B /* appOwiz in Resources */ = {isa = PBXBuildFile; fileRef = 3E1F4E4A1ECA513300E89C0B /* appOwiz */; };
-		3E1F4E511ECA517800E89C0B /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E1F4E4E1ECA517800E89C0B /* appOwiz.bundle */; };
-		3E1F4E521ECA517800E89C0B /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E1F4E4E1ECA517800E89C0B /* appOwiz.bundle */; };
-		3E1F4E531ECA517800E89C0B /* appOwiz.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E1F4E4E1ECA517800E89C0B /* appOwiz.bundle */; };
-		3E1F4E541ECA517800E89C0B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1F4E501ECA517800E89C0B /* libAppOwiz.a */; };
-		3E1F4E551ECA517800E89C0B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1F4E501ECA517800E89C0B /* libAppOwiz.a */; };
-		3E1F4E561ECA517800E89C0B /* libAppOwiz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1F4E501ECA517800E89C0B /* libAppOwiz.a */; };
 		3E3CAE311ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
 		3E3CAE321ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
 		3E3CAE331ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
@@ -318,10 +309,6 @@
 		3E1E8EBA1EC602F400B76215 /* couper_son_@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couper_son_@1x.png"; sourceTree = "<group>"; };
 		3E1E8EBB1EC602F400B76215 /* couper_son_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couper_son_@2x.png"; sourceTree = "<group>"; };
 		3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couper_son_@3x.png"; sourceTree = "<group>"; };
-		3E1F4E4A1ECA513300E89C0B /* appOwiz */ = {isa = PBXFileReference; lastKnownFileType = folder; path = appOwiz; sourceTree = "<group>"; };
-		3E1F4E4E1ECA517800E89C0B /* appOwiz.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = appOwiz.bundle; sourceTree = "<group>"; };
-		3E1F4E4F1ECA517800E89C0B /* AppOwiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppOwiz.h; sourceTree = "<group>"; };
-		3E1F4E501ECA517800E89C0B /* libAppOwiz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppOwiz.a; sourceTree = "<group>"; };
 		3E3CAE2F1ECDC535001ED1F1 /* InfoContinuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoContinuViewController.h; sourceTree = "<group>"; };
 		3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoContinuViewController.m; sourceTree = "<group>"; };
 		3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
@@ -555,7 +542,6 @@
 			files = (
 				3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */,
 				3EE816811EA8BD7C0020F8BF /* MobileCoreServices.framework in Frameworks */,
-				3E1F4E541ECA517800E89C0B /* libAppOwiz.a in Frameworks */,
 				3EE816771EA8BD490020F8BF /* QuartzCore.framework in Frameworks */,
 				3EE8167B1EA8BD5B0020F8BF /* UIKit.framework in Frameworks */,
 				3EE816851EA8BD910020F8BF /* libz.tbd in Frameworks */,
@@ -578,7 +564,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E1F4E551ECA517800E89C0B /* libAppOwiz.a in Frameworks */,
 				F1D2EE1AF28F3A2507636F2C /* libPods-rjb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,7 +572,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E1F4E561ECA517800E89C0B /* libAppOwiz.a in Frameworks */,
 				4FD205111D9A743D07AB9FA5 /* libPods-rtn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -817,7 +801,6 @@
 		E78D63151E5B4C8000191453 = {
 			isa = PBXGroup;
 			children = (
-				3E1F4E4A1ECA513300E89C0B /* appOwiz */,
 				E775F2141E93F99D00675133 /* images */,
 				E78D63821E5B509100191453 /* Common */,
 				E78D63201E5B4C8000191453 /* rfj */,
@@ -888,9 +871,6 @@
 		E78D63821E5B509100191453 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3E1F4E4E1ECA517800E89C0B /* appOwiz.bundle */,
-				3E1F4E4F1ECA517800E89C0B /* AppOwiz.h */,
-				3E1F4E501ECA517800E89C0B /* libAppOwiz.a */,
 				E78D63D01E5B5EF000191453 /* DataModel */,
 				E78D63A21E5B574100191453 /* Model */,
 				E7551D001E5C4F1700A1AEF9 /* View */,
@@ -1182,7 +1162,6 @@
 				E74859DE1E5DB4D80030D696 /* SportCategories.plist in Resources */,
 				E775F2A21E93F99E00675133 /* Sports@3x.png in Resources */,
 				E775F27B1E93F99E00675133 /* GalleryDefaultImage.png in Resources */,
-				3E1F4E511ECA517800E89C0B /* appOwiz.bundle in Resources */,
 				E775F2A81E93F99E00675133 /* Traffic@3x.png in Resources */,
 				E775F26D1E93F99D00675133 /* Cinnabar@2x.png in Resources */,
 				E7D6DEE61E66DC3100E7CC46 /* NewsSeparatorViewWithBackButton.xib in Resources */,
@@ -1200,7 +1179,6 @@
 				E775F2A11E93F99E00675133 /* Sports@2x.png in Resources */,
 				E75CE7871E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				E74859D91E5DB4D80030D696 /* navigation_bar_logo_small@2x.png in Resources */,
-				3E1F4E4B1ECA513300E89C0B /* appOwiz in Resources */,
 				E775F2A51E93F99E00675133 /* Tennis@2x.png in Resources */,
 				3E1E8EA81EC5B61E00B76215 /* left_@1x.png in Resources */,
 				E775F2651E93F99D00675133 /* Agenda@3x.png in Resources */,
@@ -1264,7 +1242,6 @@
 				3E1E8EB21EC5B61E00B76215 /* right_@1x.png in Resources */,
 				E74859ED1E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E74859EE1E5DB4EC0030D696 /* NewsCategories.plist in Resources */,
-				3E1F4E4C1ECA513300E89C0B /* appOwiz in Resources */,
 				3E46A5C61EC4F6C5009CA191 /* no-image@2x.png in Resources */,
 				3E1E8EB51EC5B61E00B76215 /* right_@2x.png in Resources */,
 				E756DE151E89329A00E1437E /* BottomLoadingView.xib in Resources */,
@@ -1272,7 +1249,6 @@
 				3E46A5C21EC4EB87009CA191 /* no-image.png in Resources */,
 				E78D639A1E5B533D00191453 /* Main.storyboard in Resources */,
 				E75CE7911E5CB01C00D8E232 /* NewsItemTableViewCell.xib in Resources */,
-				3E1F4E521ECA517800E89C0B /* appOwiz.bundle in Resources */,
 				3E1E8EC11EC602F400B76215 /* couper_son_@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1303,7 +1279,6 @@
 				3E1E8EB31EC5B61E00B76215 /* right_@1x.png in Resources */,
 				E7485A011E5DB5090030D696 /* navigation_bar_logo_small@2x.png in Resources */,
 				E7485A021E5DB5090030D696 /* NewsCategories.plist in Resources */,
-				3E1F4E4D1ECA513300E89C0B /* appOwiz in Resources */,
 				3E46A5C71EC4F6C5009CA191 /* no-image@2x.png in Resources */,
 				3E1E8EB61EC5B61E00B76215 /* right_@2x.png in Resources */,
 				E756DE161E89329A00E1437E /* BottomLoadingView.xib in Resources */,
@@ -1311,7 +1286,6 @@
 				3E46A5C31EC4EB87009CA191 /* no-image.png in Resources */,
 				E78D639B1E5B533D00191453 /* Main.storyboard in Resources */,
 				E75CE7921E5CB01C00D8E232 /* NewsItemTableViewCell.xib in Resources */,
-				3E1F4E531ECA517800E89C0B /* appOwiz.bundle in Resources */,
 				3E1E8EC21EC602F400B76215 /* couper_son_@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1710,6 +1684,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

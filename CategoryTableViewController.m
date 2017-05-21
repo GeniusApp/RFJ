@@ -26,7 +26,6 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
-#import "AppOwiz.h"
 
 @interface CategoryTableViewController ()
 

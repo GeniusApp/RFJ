@@ -26,7 +26,6 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
-#import "AppOwiz.h"
 
 @interface InfoContinuViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
@@ -60,10 +59,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
                                         ascending:NO];
-    
-    for (int i=0; i<10; i++) {
-        NSLog(@"VALORES CA PARA FORA   %d: %@", i, self.newsItems[i].createDate);
-    }
 
     
     

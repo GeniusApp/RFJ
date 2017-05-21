@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //NSLog(@"NEWSDETAIL");
+    
     self.allMenuItems = [MenuItem MR_findAll];
     
     self.newsContent.scrollView.scrollEnabled = NO;
