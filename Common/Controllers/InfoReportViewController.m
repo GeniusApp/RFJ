@@ -18,6 +18,7 @@
 @interface InfoReportViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UITextView *uploadedLabel;
 @property (nonatomic, strong) UITextField *phoneTextField;
@@ -42,7 +43,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
 }
+
 - (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)homeButtonTapped:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

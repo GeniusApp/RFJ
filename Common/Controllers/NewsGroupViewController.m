@@ -24,6 +24,7 @@
 #import "WebViewController.h"
 
 @interface NewsGroupViewController ()<UITableViewDelegate, UITableViewDataSource, MenuItemTableViewCellDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *buttonTapped;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
@@ -103,6 +104,9 @@
     [self.view bringSubviewToFront:self.loadingView];
     
     [self hideLoading];
+}
+- (IBAction)homeButtonTapped:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)openInfoReport:(id)sender {

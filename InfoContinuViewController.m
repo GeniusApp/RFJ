@@ -29,6 +29,7 @@
 
 @interface InfoContinuViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
@@ -102,6 +103,10 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)homeButtonTapped:(UIButton *)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 // Metdodo Som

@@ -27,6 +27,7 @@
 
 @interface CategoryViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
@@ -96,6 +97,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [self refreshCategory:[self.activeCategoryId intValue]];
 
 
+}
+- (IBAction)homeButtonTapped:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)openInfoReport:(id)sender {
