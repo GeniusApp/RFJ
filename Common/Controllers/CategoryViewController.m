@@ -56,8 +56,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     // Do any additional setup after loading the view.
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
-                                        ascending:NO];
+    self.newsItems = [NewsItem MR_findAll];
     
     [self refreshMenuItems];
     

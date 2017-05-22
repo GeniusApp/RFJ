@@ -41,6 +41,7 @@
 
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
+@property (strong, nonatomic) NSArray<NewsItem *> *importantItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
 @property (strong, nonatomic) NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<NewsItem *> *> *>*sortedNewsItems2;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedImportantNews;
@@ -74,6 +75,10 @@
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
                                        ascending:NO];
+    
+    NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
+    
+    self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
@@ -599,7 +604,15 @@
                 
                 if(indexPath.section == 0) {
                     //TODO
-                    return actualCell;
+                   
+                    if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
+                    {
+                        NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
+                        
+                        actualCell.item = item;
+                    }
+
+                    return cell;
                 }
                 else {
                     NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
@@ -609,7 +622,8 @@
                         //NSLog(@"ITEMS: %@", self.sortedNewsItems);
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
                             NewsItem *item = [items objectAtIndex:indexPath.row];
-                            NSLog(@"INDEXPATH: %@", item.createDate);
+                            //NSLog(@"HOW MUCH IMPORTANT ITEMS: %hd", item.important);
+                            //NSLog(@"INDEXPATH: %@", item.createDate);
                             actualCell.item = item;
                         }
                     }
@@ -742,7 +756,6 @@
             else {
                 NSLog(@"ITEM ID: %lld", menuItem.id);
                 if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                    NSLog(@"DEVIA ENTRAR NO INFO CONTINU %lld", menuItem.id);
                     InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
                     
                     if(VALID(controller, InfoContinuViewController)) {
@@ -750,7 +763,6 @@
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 } else {
-                    NSLog(@"DEVIA ENTRAR NA CATEGORY %lld", menuItem.id);
                     CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
                     
                     if(VALID(controller, CategoryViewController)) {
