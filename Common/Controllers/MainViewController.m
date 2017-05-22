@@ -26,7 +26,7 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
-
+#import "AppOwiz.h"
 
 @import GoogleMobileAds;
 
@@ -120,7 +120,7 @@
     [self loadNextPage];
     [self loadInterstitial];
     
-   // [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
+    [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }
 
 

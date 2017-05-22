@@ -24,6 +24,7 @@
 #import "NewsSeparatorViewWithBackButton.h"
 #import "RadioManager.h"
 #import "WebViewController.h"
+#import "AppOwiz.h"
 
 @interface CategoryViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
