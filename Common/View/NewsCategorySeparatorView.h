@@ -11,5 +11,4 @@
 @interface NewsCategorySeparatorView : UIView
 
 -(void)setName:(NSString *)name;
-
 @end

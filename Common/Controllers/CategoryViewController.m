@@ -33,10 +33,10 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
+@property (strong, nonatomic) NSArray<NewsItem *> *newsItemsExtracted;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 
@@ -58,7 +58,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
                                         ascending:NO];
-    //self.newsItems = [NewsItem MR_findAll];
+    
     [self refreshMenuItems];
     
     if([[DataManager singleton] isRFJ]) {
@@ -81,18 +81,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.isLoading = NO;
     
     self.activeCategoryId = self.navigationId;
-    if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:0]]) {
-        //NSLog(@"NAO VOU FAZER NADA");
-        //self.contentTableView.hidden = YES;
-    } else {
-        //NSLog(@"AQUI TENHO QUE ESCONDER");
-        self.contentTableView.hidden = NO;
-        self.containerView.hidden = YES;
-        
-    }
-    //NSLog(@"ITEMS: %@", self.newsItems);
-    //NSLog(@"NEWSGROUP CATEGORYVIEW");
-    //NSLog(@"ACTIVE CAGETGORY ID: %@", self.activeCategoryId);
+
     
     [self refreshCategory:[self.activeCategoryId intValue]];
 
@@ -132,15 +121,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
     self.newsItems = @[];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
-                                        ascending:NO];
+
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
     
     [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
         self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
-        
+        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+        NSArray *sortDescriptors = @[createDateDescriptor];
+        self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
         [self.contentTableView reloadData];
         [self hideLoading];
     } andFailureBlock:^(NSError *error) {
@@ -407,16 +397,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         {
             cell = actualCell;
             actualCell.delegate = self;
-            
             if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
             {
                 NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
 
                 actualCell.item = item;
-                //NSLog(@"ID: %lld", item.id);
-                //NSLog(@"NAV ID: %lld", item.navigationId);
-                //NSLog(@"UPDATE DATE: %@", item.updateDate);
-                NSLog(@"CREATE DATE: %@", item.createDate);
             }
         }
     }

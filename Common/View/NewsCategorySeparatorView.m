@@ -10,6 +10,8 @@
 
 @interface NewsCategorySeparatorView()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *leftArrow;
+@property (weak, nonatomic) IBOutlet UIButton *rightArrow;
 
 @end
 
@@ -17,6 +19,12 @@
 
 -(void)setName:(NSString *)name {
     self.nameLabel.text = name;
+}
+- (IBAction)leftArrowTapped:(UIButton *)sender {
+    NSLog(@"LEFT ARROW PRESSED");
+}
+- (IBAction)rightArrowTapped:(UIButton *)sender {
+    NSLog(@"RIGHT ARROW PRESSED");
 }
 
 @end

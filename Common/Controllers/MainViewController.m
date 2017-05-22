@@ -460,6 +460,8 @@
                 }
             }
             
+            if (categoryIndex == 7) {
+            }
             [headerView setName:nameString];
         }
     }
@@ -738,8 +740,9 @@
                 }
             }
             else {
+                NSLog(@"ITEM ID: %lld", menuItem.id);
                 if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                    
+                    NSLog(@"DEVIA ENTRAR NO INFO CONTINU %lld", menuItem.id);
                     InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
                     
                     if(VALID(controller, InfoContinuViewController)) {
@@ -747,6 +750,7 @@
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 } else {
+                    NSLog(@"DEVIA ENTRAR NA CATEGORY %lld", menuItem.id);
                     CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
                     
                     if(VALID(controller, CategoryViewController)) {
