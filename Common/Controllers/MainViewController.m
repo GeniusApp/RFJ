@@ -607,6 +607,9 @@
                    
                     if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
                     {
+                        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+                        NSArray *sortDescriptors = @[createDateDescriptor];
+                        self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
                         NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
                         
                         actualCell.item = item;
