@@ -10,7 +10,7 @@
 
 #import "NSObject+Singleton.h"
 #import "DataManager.h"
-
+#import "MainViewController.h"
 #import "Analytics.h"
 #import "NSObject+Singleton.h"
 #import "RadioManager.h"
@@ -48,7 +48,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)homeButtonTapped:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    NSArray *array = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
 }
 
 - (IBAction)playRadio:(id)sender {
