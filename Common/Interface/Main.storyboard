@@ -582,7 +582,7 @@
                                         </constraints>
                                         <state key="normal" image="logo"/>
                                         <connections>
-                                            <action selector="homeButtonTapped:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="fLG-Sv-MRf"/>
+                                            <action selector="homeButtonTapped:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="VoB-gv-Qep"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiP-aT-pgO">
