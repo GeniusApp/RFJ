@@ -75,6 +75,7 @@
             self.pages = [self.pages arrayByAddingObject:page];
         }
     }
+    NSLog(@"PAGES: %@", self.pages);
     
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     [self.pageController setViewControllers:@[[self.pages objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
@@ -96,8 +97,9 @@
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.pageController.view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
     
     [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
-    
-    
+//    NSLog(@"STARTINGINDEX: %@", self.startingIndex);
+//    NSLog(@"PAGES: %@", self.pages);
+//    NSLog(@"NEWS TO DISPLAY: %@", self.newsToDisplay);
     [self.pages objectAtIndex:0].newsIndex = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];

@@ -26,7 +26,7 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
-#import "AppOwiz.h"
+
 
 @interface InfoContinuViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
@@ -57,6 +57,15 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.backgroundColor = [UIColor whiteColor];
+    refreshControl.tintColor = [UIColor blackColor];
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.contentTableView;
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    tableViewController.refreshControl = refreshControl;
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
@@ -113,6 +122,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 // Metdodo Som
 
 // Metodo infoReporter
+
+- (void)refreshTable:(id)sender {
+    //TODO: refresh your data
+    
+    //[self.contentTableView reloadData];
+    [self loadNextPage];
+    [self.contentTableView.refreshControl endRefreshing];
+    
+    
+}
 
 -(void)refreshCategory:(NSInteger)categoryId
 {

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qD0-vb-W9c">
@@ -25,10 +25,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1HA-tJ-7GA">
-                        <rect key="frame" x="285" y="10" width="25" height="25"/>
+                        <rect key="frame" x="290" y="14" width="20" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="54H-B9-utd"/>
-                            <constraint firstAttribute="width" constant="25" id="nbx-bK-NxL"/>
+                            <constraint firstAttribute="height" constant="15" id="54H-B9-utd"/>
+                            <constraint firstAttribute="width" constant="20" id="nbx-bK-NxL"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -37,7 +37,7 @@
                     <constraint firstAttribute="trailing" secondItem="1HA-tJ-7GA" secondAttribute="trailing" constant="10" id="DVZ-IS-GjN"/>
                     <constraint firstItem="qD0-vb-W9c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="RxR-Xi-5ba"/>
                     <constraint firstItem="qD0-vb-W9c" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uij-hG-crM"/>
-                    <constraint firstItem="1HA-tJ-7GA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="zsl-ms-bUh"/>
+                    <constraint firstItem="1HA-tJ-7GA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="zsl-ms-bUh"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

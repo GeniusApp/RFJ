@@ -24,7 +24,6 @@
 #import "NewsSeparatorViewWithBackButton.h"
 #import "RadioManager.h"
 #import "WebViewController.h"
-#import "AppOwiz.h"
 
 
 @interface CategoryViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
@@ -57,6 +56,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.backgroundColor = [UIColor whiteColor];
+    refreshControl.tintColor = [UIColor blackColor];
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.contentTableView;
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    tableViewController.refreshControl = refreshControl;
+
+    
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAll];
     
@@ -88,6 +97,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 
 
 }
+- (void)refreshTable:(id)sender {
+    //TODO: refresh your data
+    
+    //[self.contentTableView reloadData];
+    [self loadNextPage];
+    [self.contentTableView.refreshControl endRefreshing];
+    
+    
+}
+
 - (IBAction)homeButtonTapped:(UIButton *)sender {
     NSArray *array = [self.navigationController viewControllers];
     [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];

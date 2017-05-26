@@ -26,7 +26,7 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
-#import "AppOwiz.h"
+
 
 @import GoogleMobileAds;
 
@@ -72,6 +72,16 @@
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.backgroundColor = [UIColor whiteColor];
+    refreshControl.tintColor = [UIColor blackColor];
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.contentTableView;
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    tableViewController.refreshControl = refreshControl;
+    
+    
     self.allMenuItems = [MenuItem sortedMenuItems];
    
     
@@ -114,10 +124,18 @@
     
     [self loadInterstitial];
     
-    [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
+  //  [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }  
 
+- (void)refreshTable:(id)sender {
+    //TODO: refresh your data
+    
+    //[self.contentTableView reloadData];
+    [self loadNextPage];
+    [self.contentTableView.refreshControl endRefreshing];
+ 
 
+}
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -675,7 +693,7 @@
                         NSArray *sortDescriptors = @[createDateDescriptor];
                         self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
                         NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
-                        
+                        //NSLog(@"IMPORTANT ITEMS: %@", self.importantItems);
                         actualCell.item = item;
                     }
 
@@ -690,7 +708,7 @@
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
                             NewsItem *item = [items objectAtIndex:indexPath.row];
                             //NSLog(@"HOW MUCH IMPORTANT ITEMS: %hd", item.important);
-                            NSLog(@"INDEXPATH: %@", item.retina1);
+                            //NSLog(@"INDEXPATH: %@", item.retina1);
                             actualCell.item = item;
                         }
                     }
@@ -806,6 +824,7 @@
     self.menuHeightConstraint.constant = 0;
 
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
+    NSLog(@"TOUCHED MENU ITEM: %@", item);
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
         MenuItem *menuItem = [self.menuItems objectAtIndex:index.row];
@@ -841,6 +860,7 @@
             }
         }
     }
+    
 }
 
 #pragma mark - NewsItemTableViewCell Delegate
