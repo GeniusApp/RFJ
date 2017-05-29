@@ -19,10 +19,10 @@
 
 -(void)setName:(NSString *)name {
     if ([name rangeOfString:@"Région &"].location == NSNotFound) {
-        // TODO - Esconder arrows
         self.nameLabel.text = name;
     } else {
-        NSLog(@"ENTRO NO ELSE");
+        self.leftArrow.hidden = YES;
+        self.rightArrow.hidden = YES;
         self.nameLabel.text = @"Région & Sport";
     }
 }
