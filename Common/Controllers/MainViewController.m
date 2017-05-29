@@ -72,15 +72,7 @@
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.backgroundColor = [UIColor whiteColor];
-    refreshControl.tintColor = [UIColor blackColor];
-    UITableViewController *tableViewController = [[UITableViewController alloc] init];
-    tableViewController.tableView = self.contentTableView;
-    refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
-    tableViewController.refreshControl = refreshControl;
-    
+
     
     self.allMenuItems = [MenuItem sortedMenuItems];
    
@@ -121,6 +113,15 @@
     self.isLoading = NO;
     
     [self loadNextPage];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.backgroundColor = [UIColor whiteColor];
+    refreshControl.tintColor = [UIColor blackColor];
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.contentTableView;
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    tableViewController.refreshControl = refreshControl;
     
     [self loadInterstitial];
     
@@ -201,7 +202,8 @@
     self.sortedNewsItems2 = [[NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<NewsItem *> *> *> alloc] init];
     NSArray<NSArray<NSNumber *> *> *searchNumbers =
     @[
-      @[@(9611), @(9618)],
+      @[@(9611), @(9643), @(9644), @(9645), @(9646), @(9647), @(9648), @(9649), @(9650),
+        @(9629), @(10215), @(10216)],
       @[@(9612)],
       @[@(9613)],
       @[@(9614)],

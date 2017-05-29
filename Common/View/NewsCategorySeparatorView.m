@@ -18,7 +18,13 @@
 @implementation NewsCategorySeparatorView
 
 -(void)setName:(NSString *)name {
-    self.nameLabel.text = name;
+    if ([name rangeOfString:@"Région &"].location == NSNotFound) {
+        // TODO - Esconder arrows
+        self.nameLabel.text = name;
+    } else {
+        NSLog(@"ENTRO NO ELSE");
+        self.nameLabel.text = @"Région & Sport";
+    }
 }
 - (IBAction)leftArrowTapped:(UIButton *)sender {
     NSLog(@"LEFT ARROW PRESSED");
