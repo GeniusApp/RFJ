@@ -668,6 +668,79 @@
             </objects>
             <point key="canvasLocation" x="2441" y="155"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="SpH-dU-NMH">
+            <objects>
+                <viewController storyboardIdentifier="swipeCell" id="uKX-4f-ONf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XZm-eH-4YI"/>
+                        <viewControllerLayoutGuide type="bottom" id="s5t-CT-I6c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a8z-tZ-7Yp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LO7-2L-72O">
+                                <rect key="frame" x="58" y="394" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="voile" translatesAutoresizingMaskIntoConstraints="NO" id="0xn-IN-xiz">
+                                <rect key="frame" x="10" y="10" width="752" height="404"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAD-uO-PZW">
+                                <rect key="frame" x="25" y="384" width="727" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-l3-58q">
+                                <rect key="frame" x="20" y="363" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="YxU-yY-udS"/>
+                                    <constraint firstAttribute="width" constant="20" id="cm4-de-GZc"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoI-Ag-bUp">
+                                <rect key="frame" x="35" y="386" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="5Vj-i8-vI9"/>
+                                    <constraint firstAttribute="height" constant="15" id="IKx-si-duz"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ufX-C6-fP0">
+                                <rect key="frame" x="10" y="10" width="752" height="404"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M99-F3-gU0">
+                                <rect key="frame" x="25" y="394" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cko-Av-KOc">
+                                <rect key="frame" x="10" y="10" width="752" height="403"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="M99-F3-gU0" firstAttribute="top" secondItem="rAD-uO-PZW" secondAttribute="bottom" constant="10" id="D8K-be-xpE"/>
+                            <constraint firstItem="UoI-Ag-bUp" firstAttribute="centerY" secondItem="M99-F3-gU0" secondAttribute="centerY" id="EvF-Fv-vx4"/>
+                            <constraint firstItem="LO7-2L-72O" firstAttribute="centerY" secondItem="UoI-Ag-bUp" secondAttribute="centerY" id="MOl-3w-Edp"/>
+                            <constraint firstItem="rAD-uO-PZW" firstAttribute="top" secondItem="pyN-l3-58q" secondAttribute="bottom" constant="1" id="TT3-G9-3iE"/>
+                            <constraint firstItem="LO7-2L-72O" firstAttribute="leading" secondItem="UoI-Ag-bUp" secondAttribute="trailing" constant="8" id="WxF-Qe-uta"/>
+                            <constraint firstItem="UoI-Ag-bUp" firstAttribute="leading" secondItem="M99-F3-gU0" secondAttribute="trailing" constant="10" id="Yhp-Vf-ReW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hb1-3T-nEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3234" y="-320"/>
+        </scene>
         <!--infoReportViewController-->
         <scene sceneID="hNL-Vp-fzM">
             <objects>
@@ -1128,6 +1201,7 @@
         <image name="link" width="21" height="21"/>
         <image name="logo" width="54" height="28"/>
         <image name="twitter" width="21" height="21"/>
+        <image name="voile" width="320" height="172"/>
         <image name="whatsapp" width="21" height="21"/>
     </resources>
 </document>

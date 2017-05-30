@@ -701,7 +701,21 @@
 
                     return cell;
                 }
-                else {
+                else if (indexPath.section == 1) {
+                    NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
+                    NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
+                    
+                    if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
+                        //NSLog(@"ITEMS: %@", self.sortedNewsItems);
+                        if(indexPath.row >= 0 && indexPath.row < [items count]) {
+                            NewsItem *item = [items objectAtIndex:indexPath.row];
+                            //NSLog(@"HOW MUCH IMPORTANT ITEMS: %hd", item.important);
+                            //NSLog(@"INDEXPATH: %@", item.retina1);
+                            actualCell.item = item;
+                        }
+                    }
+                } else {
+                    //TODO SWIPE
                     NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
                     NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
                     
