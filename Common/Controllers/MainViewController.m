@@ -826,7 +826,6 @@
     self.menuHeightConstraint.constant = 0;
 
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
-    NSLog(@"TOUCHED MENU ITEM: %@", item);
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
         MenuItem *menuItem = [self.menuItems objectAtIndex:index.row];

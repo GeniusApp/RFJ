@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageType;
 
 @end
 
@@ -41,8 +42,16 @@
 -(void)setItem:(NewsItem *)item {
     if(VALID(item, NewsItem)) {
         _item = item;
+        if (item.type == 1) {
+            [self.imageType setImage:[UIImage imageNamed:@"image"]];
+        }
+        if (item.type == 2) {
+            [self.imageType setImage:[UIImage imageNamed:@"sound"]];
+        }
+        if (item.type == 3) {
+            [self.imageType setImage:[UIImage imageNamed:@"play"]];
+        }
         self.titleLabel.text = item.title;
-        
         if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound && [item.retina1 rangeOfString:@"JPG"].location == NSNotFound) {
             [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if(VALID(image, UIImage)) {
@@ -57,6 +66,7 @@
                 }
             }];
         }
+        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
         [formatter setTimeZone:[NSTimeZone localTimeZone]];
