@@ -146,20 +146,231 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
-    
-    [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
-        self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
-        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
-        NSArray *sortDescriptors = @[createDateDescriptor];
-        self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
-        [self.contentTableView reloadData];
-        [self hideLoading];
-    } andFailureBlock:^(NSError *error) {
-        //NSLog(@"Failure getting news items: %@", error);
-        
-        [self.contentTableView reloadData];
-        [self hideLoading];
-    }];
+    if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9589]]) {
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9611 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9612 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9613 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9614 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9615 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+    } else if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9618]]) {
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9643 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9644 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9645 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9646 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9647 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9648 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9649 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9650 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9829 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:10215 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:10216 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+    } else {
+        [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
+            self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+            NSArray *sortDescriptors = @[createDateDescriptor];
+            self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        } andFailureBlock:^(NSError *error) {
+            //NSLog(@"Failure getting news items: %@", error);
+            
+            [self.contentTableView reloadData];
+            [self hideLoading];
+        }];
+    }
 }
 
 -(void)refreshMenuItems
