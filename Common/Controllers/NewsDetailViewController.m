@@ -112,7 +112,7 @@
         }
         
         [self.separatorView setCategoryName:categoryName];
-        
+        NSLog(@"DETALHES: %lld", self.newsDetail.navigationId);
         NSString *html = nil;
         
 #if kNewsDetailIsHTML

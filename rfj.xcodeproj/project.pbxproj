@@ -34,6 +34,9 @@
 		3E1E8EC31EC602F400B76215 /* couper_son_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */; };
 		3E1E8EC41EC602F400B76215 /* couper_son_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */; };
 		3E1E8EC51EC602F400B76215 /* couper_son_@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */; };
+		3E3092251EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3092241EDF04CA002240A4 /* NewsItemSwipeViewController.m */; };
+		3E3092261EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3092241EDF04CA002240A4 /* NewsItemSwipeViewController.m */; };
+		3E3092271EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3092241EDF04CA002240A4 /* NewsItemSwipeViewController.m */; };
 		3E3CAE311ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
 		3E3CAE321ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
 		3E3CAE331ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */; };
@@ -309,6 +312,8 @@
 		3E1E8EBA1EC602F400B76215 /* couper_son_@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couper_son_@1x.png"; sourceTree = "<group>"; };
 		3E1E8EBB1EC602F400B76215 /* couper_son_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couper_son_@2x.png"; sourceTree = "<group>"; };
 		3E1E8EBC1EC602F400B76215 /* couper_son_@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couper_son_@3x.png"; sourceTree = "<group>"; };
+		3E3092231EDF04CA002240A4 /* NewsItemSwipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsItemSwipeViewController.h; path = Common/Controllers/NewsItemSwipeViewController.h; sourceTree = "<group>"; };
+		3E3092241EDF04CA002240A4 /* NewsItemSwipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItemSwipeViewController.m; path = Common/Controllers/NewsItemSwipeViewController.m; sourceTree = "<group>"; };
 		3E3CAE2F1ECDC535001ED1F1 /* InfoContinuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoContinuViewController.h; sourceTree = "<group>"; };
 		3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoContinuViewController.m; sourceTree = "<group>"; };
 		3E4089661EB9E9F2002C963F /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
@@ -918,6 +923,8 @@
 				3EDE4CCC1EB16D480054E62A /* CatTableViewController.m */,
 				3E3CAE2F1ECDC535001ED1F1 /* InfoContinuViewController.h */,
 				3E3CAE301ECDC535001ED1F1 /* InfoContinuViewController.m */,
+				3E3092231EDF04CA002240A4 /* NewsItemSwipeViewController.h */,
+				3E3092241EDF04CA002240A4 /* NewsItemSwipeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1466,6 +1473,7 @@
 				E7C9655A1E8A81BB00B176AE /* WebViewController.m in Sources */,
 				E7AE20B81E9B986400DA7953 /* Resources+CoreDataClass.m in Sources */,
 				E756DE0B1E89110E00E1437E /* CategoryViewController.m in Sources */,
+				3E3092251EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */,
 				E7E6FDEB1E65CD6D0027B719 /* NewsManager.m in Sources */,
 				E78D64331E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
 				E75006B11E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
@@ -1507,6 +1515,7 @@
 				E756DE0C1E89110E00E1437E /* CategoryViewController.m in Sources */,
 				3E4115B11ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */,
 				E7E6FDEC1E65CD6D0027B719 /* NewsManager.m in Sources */,
+				3E3092261EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */,
 				3E438BC11EC2845500CAB309 /* CategoryTableViewController.m in Sources */,
 				E78D64341E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
 				E75006B21E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
@@ -1548,6 +1557,7 @@
 				E756DE0D1E89110E00E1437E /* CategoryViewController.m in Sources */,
 				3E4115B21ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */,
 				E7E6FDED1E65CD6D0027B719 /* NewsManager.m in Sources */,
+				3E3092271EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */,
 				3E438BC21EC2845600CAB309 /* CategoryTableViewController.m in Sources */,
 				E78D64351E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
 				E75006B31E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,

@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="752" height="404"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="752" height="404"/>
+                <rect key="frame" x="0.0" y="0.0" width="752" height="403.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4CL-kJ-kRz">
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TIE-w8-VN6">
-                        <rect key="frame" x="25" y="377" width="15" height="15"/>
+                        <rect key="frame" x="25" y="376.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="iMb-xM-T6m"/>
                             <constraint firstAttribute="height" constant="15" id="kAC-mh-rIC"/>
@@ -46,7 +46,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fP-TT-QXy">
-                        <rect key="frame" x="48" y="385" width="0.0" height="0.0"/>
+                        <rect key="frame" x="48" y="384" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
