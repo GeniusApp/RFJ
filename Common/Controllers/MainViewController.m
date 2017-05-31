@@ -164,11 +164,17 @@
 }
 - (IBAction)toggleSound:(UIButton *)sender {
     if ([sender isSelected]) {
+        
         [sender setImage:[UIImage imageNamed:@"couper_son_.png"] forState:UIControlStateNormal];
+       
         [sender setSelected:NO];
+        
     } else {
+        
         [sender setImage:[UIImage imageNamed:@"ecouter"] forState:UIControlStateSelected];
+       
         [sender setSelected:YES];
+       
     }
 }
 
@@ -315,10 +321,18 @@
 
 -(IBAction)playRadio:(id)sender {
     if([[RadioManager singleton] isPlaying]) {
+        
+        [sender setImage:[UIImage imageNamed:@"ecouter"] forState:UIControlStateSelected];
+        [sender setSelected:YES];
         [[RadioManager singleton] stop];
+        
     }
     else {
+        
+        [sender setImage:[UIImage imageNamed:@"couper_son_.png"] forState:UIControlStateNormal];
+        [sender setSelected:NO];
         [[RadioManager singleton] play];
+        
     }
 }
 
