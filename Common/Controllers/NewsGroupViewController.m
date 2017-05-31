@@ -75,7 +75,7 @@
             self.pages = [self.pages arrayByAddingObject:page];
         }
     }
-    NSLog(@"PAGES: %@", self.pages);
+    
     
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     [self.pageController setViewControllers:@[[self.pages objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];

@@ -63,6 +63,11 @@
     
     [self showLoading];
     
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    gestureRecognizer.numberOfTapsRequired = 1;
+    
+    [self.separatorView setUserInteractionEnabled:YES];
+    [self.separatorView addGestureRecognizer:gestureRecognizer];
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
@@ -170,6 +175,21 @@
         
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+{
+    //CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
+    
+    if(VALID(controller, CategoryViewController)) {
+        
+        controller.navigationId = @(self.newsDetail.navigationId);
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    //Do stuff here...
+
+
 }
 
 - (IBAction)goBack:(id)sender {
