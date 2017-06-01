@@ -211,6 +211,7 @@
       @[@(9611), @(9643), @(9644), @(9645), @(9646), @(9647), @(9648), @(9649), @(9650),
         @(9629), @(10215), @(10216)],
       @[@(9612)],
+      @[@(9622)],
       @[@(9613)],
       @[@(9614)],
       @[@(9615)],
@@ -237,8 +238,9 @@
             {
                 continue;
             }
-            
+
             [items addObject:item];
+
         }
         
         [self.sortedNewsItems2 addObject:
@@ -246,6 +248,7 @@
            searchItem: items
            }];
     }
+
     //NSLog(@"QUALWUER COISA: %@", self.sortedNewsItems2);
 }
 
@@ -509,10 +512,14 @@
                     nameString = [NSString stringWithFormat:@"%@ & %@", nameString, [self.allMenuItems objectAtIndex:categoryIndex].name];
                 }
             }
-            
+            NSLog(@"CATEGORY INDEX: %ld", (long)navigationIds);
             if (categoryIndex == 7) {
             }
+            if (categoryIndex == 9223372036854775807) {
+                [headerView setName:@"Galeries photos"];
+            } else {
             [headerView setName:nameString];
+            }
         }
     }
     
@@ -720,12 +727,12 @@
                     NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
                     
                     if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
-                        //NSLog(@"ITEMS: %@", self.sortedNewsItems);
+                        
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
+                         
                             NewsItem *item = [items objectAtIndex:indexPath.row];
-                            //NSLog(@"HOW MUCH IMPORTANT ITEMS: %hd", item.important);
-                            //NSLog(@"INDEXPATH: %@", item.retina1);
                             actualCell.item = item;
+                            
                         }
                     }
                 } else {
@@ -870,7 +877,7 @@
                 }
             }
             else {
-                NSLog(@"ITEM ID: %lld", menuItem.id);
+                
                 if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
                     InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
                     

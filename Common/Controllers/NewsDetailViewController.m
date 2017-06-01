@@ -117,7 +117,7 @@
         }
         
         [self.separatorView setCategoryName:categoryName];
-        NSLog(@"DETALHES: %lld", self.newsDetail.navigationId);
+        //NSLog(@"DETALHES: %lld", self.newsDetail.navigationId);
         NSString *html = nil;
         
 #if kNewsDetailIsHTML
@@ -134,6 +134,8 @@
         if(VALID(resources, Resources)) {
             if(VALID_NOTEMPTY(resources.htmlHeader, NSString)) {
                 header = resources.htmlHeader;
+                header = [header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"http://geniusapp.com/teste_rfj.css\" type=\"text/css\" media=\"all\" />"];
+                header = [header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" />"];
             }
 
             if(VALID_NOTEMPTY(resources.htmlFooter, NSString)) {
@@ -142,7 +144,7 @@
         }
         
         html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
-        
+        //NSLog(@"HTML: %@", html);
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         
         [self.separatorView setDate:self.newsDetail.updateDate];
