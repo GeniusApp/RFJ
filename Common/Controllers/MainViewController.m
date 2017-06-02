@@ -20,6 +20,7 @@
 #import "NewsCategorySeparatorView.h"
 #import "NewsGroupViewController.h"
 #import "NewsItem+CoreDataProperties.h"
+#import "GalerieItem+CoreDataProperties.h"
 #import "NewsItemTableViewCell.h"
 #import "NewsDetailViewController.h"
 #import "NewsManager.h"
@@ -41,9 +42,13 @@
 
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
+@property (strong, nonatomic) NSArray<GalerieItem *> *galeriePhotos;
+@property (strong, nonatomic) NSMutableArray<NewsItem *> *galerieIntoNews;
 @property (strong, nonatomic) NSArray<NewsItem *> *importantItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
+@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<GalerieItem *> *> *sortedGalerieItems;
 @property (strong, nonatomic) NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<NewsItem *> *> *>*sortedNewsItems2;
+@property (strong, nonatomic) NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<GalerieItem *> *> *>*sortedGalerieItems2;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedImportantNews;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *joinedRegionSport;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
@@ -200,6 +205,24 @@
         }
         
         [self.sortedNewsItems setObject:sortedItems forKey:@(item.navigationId)];
+        
+    }
+}
+
+-(void)sortGalerieItems {
+    self.sortedGalerieItems = [[NSMutableDictionary<NSNumber *, NSArray<GalerieItem *> *> alloc] init];
+    
+    for(GalerieItem *item in self.galeriePhotos) {
+        NSArray *sortedItems = nil;
+        
+        if([self.sortedGalerieItems objectForKey:@(item.navigationId)] == nil) {
+            sortedItems = [NSArray arrayWithObject:item];
+        }
+        else {
+            sortedItems = [[self.sortedGalerieItems objectForKey:@(item.navigationId)] arrayByAddingObject:item];
+        }
+        
+        [self.sortedGalerieItems setObject:sortedItems forKey:@(item.navigationId)];
         
     }
 }
@@ -376,6 +399,30 @@
     }];
 }
 
+-(void)loadImagesForPage:(NSInteger)page count:(NSInteger)count
+                    success:(void(^)(NSArray<GalerieItem *> *photos))successBlock
+                    failure:(void(^)(NSError *error))failureBlock {
+    self.isLoading = YES;
+    
+    [[NewsManager singleton] fetchImagesAtPage:page objectType:1 categoryId:-1 withSuccessBlock:^(NSArray<GalerieItem *> *photos) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isLoading = NO;
+            
+            if(successBlock) {
+                successBlock(photos);
+            }
+        });
+    } andFailureBlock:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isLoading = NO;
+            
+            if(failureBlock) {
+                failureBlock(error);
+            }
+        });
+    }];
+}
+
 -(void)loadNextPage {
     if(self.isLoading) {
         return;
@@ -400,12 +447,14 @@
         
         self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
                                             ascending:NO];
-        
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
         NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
         
         self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
         
         [self sortNewsItems];
+        [self sortGalerieItems];
         [self sortNewsItems2];
         [self sortImportantNews];
         
@@ -421,8 +470,49 @@
         self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
         
         [self sortNewsItems];
+        [self sortGalerieItems];
         [self sortNewsItems2];
         [self sortImportantNews];
+        //NSLog(@"Error: %@", error);
+    }];
+    [self loadImagesForPage:self.currentPage count:kItemsPerPage success:^(NSArray<GalerieItem *> *photos) {
+        [self hideLoading];
+        
+        for(GalerieItem *photo in photos) {
+            NSInteger itemIndex = [self.galeriePhotos indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return photo.id == obj.id;
+            }];
+            
+            if(itemIndex == NSNotFound) {
+                self.galeriePhotos = [self.galeriePhotos arrayByAddingObject:photo];
+            }
+        }
+        
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                            ascending:NO];
+        //NSLog(@"GALERIE: %@", self.galeriePhotos);
+//        NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
+//        
+//        self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
+//        
+//        [self sortNewsItems];
+//        [self sortNewsItems2];
+//        [self sortImportantNews];
+        
+        [self.contentTableView reloadData];
+    } failure:^(NSError *error) {
+        [self hideLoading];
+        
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                            ascending:NO];
+        
+//        NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
+//        
+//        self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
+//        
+//        [self sortNewsItems];
+//        [self sortNewsItems2];
+//        [self sortImportantNews];
         //NSLog(@"Error: %@", error);
     }];
 }
@@ -512,13 +602,12 @@
                     nameString = [NSString stringWithFormat:@"%@ & %@", nameString, [self.allMenuItems objectAtIndex:categoryIndex].name];
                 }
             }
-            NSLog(@"CATEGORY INDEX: %ld", (long)navigationIds);
             if (categoryIndex == 7) {
             }
             if (categoryIndex == 9223372036854775807) {
                 [headerView setName:@"Galeries photos"];
             } else {
-            [headerView setName:nameString];
+                [headerView setName:nameString];
             }
         }
     }
@@ -708,7 +797,6 @@
                 actualCell.delegate = self;
                 
                 if(indexPath.section == 0) {
-                    //TODO
                    
                     if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
                     {
@@ -716,6 +804,7 @@
                         NSArray *sortDescriptors = @[createDateDescriptor];
                         self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
                         NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
+                        NSLog(@"ITEAajakaM: %@", item);
                         //NSLog(@"IMPORTANT ITEMS: %@", self.importantItems);
                         actualCell.item = item;
                     }
@@ -723,20 +812,36 @@
                     return cell;
                 }
                 else if (indexPath.section == 1) {
+                    
                     NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
                     NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
                     
                     if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
                         
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
-                         
+                            
                             NewsItem *item = [items objectAtIndex:indexPath.row];
+                            NSLog(@"ITE: %@", item);
                             actualCell.item = item;
                             
                         }
                     }
+                } else if (indexPath.section == 3) {
+                    if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
+                    {
+                        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+                        NSArray *sortDescriptors = @[createDateDescriptor];
+                        self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
+                        NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
+                        NSLog(@"ITEMMM: %@", item);
+                        actualCell.item = item;
+                    }
+                    
+                    return cell;
+
                 } else {
                     //TODO SWIPE
+
                     NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
                     NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
                     
@@ -744,8 +849,6 @@
                         //NSLog(@"ITEMS: %@", self.sortedNewsItems);
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
                             NewsItem *item = [items objectAtIndex:indexPath.row];
-                            //NSLog(@"HOW MUCH IMPORTANT ITEMS: %hd", item.important);
-                            //NSLog(@"INDEXPATH: %@", item.retina1);
                             actualCell.item = item;
                         }
                     }
