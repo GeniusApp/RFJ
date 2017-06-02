@@ -65,7 +65,12 @@
                 infoEnContinuItem.id = 0;
                 infoEnContinuItem.name = @"L'info en continu";
                 
+                MenuItem *GaleriephotoItem = [MenuItem MR_createEntityInContext:localContext];
+                GaleriephotoItem.id = 9622;
+                GaleriephotoItem.name = @"Galeries photos";
+                
                 [items addObject:infoEnContinuItem];
+                [items addObject:GaleriephotoItem];
                 
                 for(NSDictionary *itemDictionary in jsonItems) {
                     if(VALID_NOTEMPTY(itemDictionary, NSDictionary)) {

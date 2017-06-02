@@ -7,13 +7,13 @@
 //
 
 #import <MagicalRecord/MagicalRecord.h>
-#import "NewsItemTableViewCell.h"
+#import "GalerieItemTableViewCell.h"
 #import "Validation.h"
 #import "Constants.h"
 #import "UIImageView+WebCache.h"
 #import "MenuItem+CoreDataProperties.h"
 
-@interface NewsItemTableViewCell()
+@interface GalerieItemTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation NewsItemTableViewCell
+@implementation GalerieItemTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -39,8 +39,8 @@
     [self.coverView addGestureRecognizer:gestureRecognizer];
 }
 
--(void)setItem:(NewsItem *)item {
-    if(VALID(item, NewsItem)) {
+-(void)setItem:(GalerieItem *)item {
+    if(VALID(item, GalerieItem)) {
         _item = item;
         self.titleLabel.text = item.title;
         if (item.type == 1) {
@@ -62,7 +62,7 @@
             [self.imageType setImage:[UIImage imageNamed:@"play"]];
         }
         
-        if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound && [item.retina1 rangeOfString:@"JPG"].location == NSNotFound && [item.retina1 rangeOfString:@"png"].location == NSNotFound && [item.retina1 rangeOfString:@"PNG"].location == NSNotFound) {
+        if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound && [item.retina1 rangeOfString:@"JPG"].location == NSNotFound) {
             [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if(VALID(image, UIImage)) {
                     UIImage *noImage = [UIImage imageNamed:@"no-image.png"];
@@ -105,8 +105,8 @@
 }
 
 -(void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(NewsItemDidTap:)]) {
-        [self.delegate NewsItemDidTap:self];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(GalerieItemDidTap:)]) {
+        [self.delegate GalerieItemDidTap:self];
     }
 }
 

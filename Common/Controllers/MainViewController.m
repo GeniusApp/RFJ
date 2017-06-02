@@ -22,6 +22,7 @@
 #import "NewsItem+CoreDataProperties.h"
 #import "GalerieItem+CoreDataProperties.h"
 #import "NewsItemTableViewCell.h"
+#import "GalerieItemTableViewCell.h"
 #import "NewsDetailViewController.h"
 #import "NewsManager.h"
 #import "RadioManager.h"
@@ -32,7 +33,7 @@
 @import GoogleMobileAds;
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
-    NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
+    NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
@@ -80,13 +81,12 @@
 
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-   
+    
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
     [self refreshMenuItems];
-    
-    //NSLog(@"IMPORTANT 1: %@", self.sortedNewsItems);
+   
     
     if([[DataManager singleton] isRFJ]) {
         self.menuTableView.backgroundColor = kBackgroundColorRFJ;
@@ -781,6 +781,32 @@
             }
             cell.textLabel.text = @"Test Data";
             return cell;
+        } else if (indexPath.section == 3) {
+            GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
+            //NSLog(@"SECTION: %ld", (long)indexPath.section);
+            if(!VALID(actualCell, NewsItemTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
+                
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    actualCell = [views objectAtIndex:0];
+                }
+            }
+            
+            if(VALID(actualCell, GalerieItemTableViewCell)) {
+                cell = actualCell;
+                actualCell.delegate = self;
+                if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
+                {
+                    NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+                    NSArray *sortDescriptors = @[createDateDescriptor];
+                    self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
+                    GalerieItem *item = [self.galeriePhotos objectAtIndex:indexPath.row];
+                    
+                    actualCell.item = item;
+                }
+                
+                return cell;
+            }
         } else {
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
             //NSLog(@"SECTION: %ld", (long)indexPath.section);
@@ -804,8 +830,8 @@
                         NSArray *sortDescriptors = @[createDateDescriptor];
                         self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
                         NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
-                        NSLog(@"ITEAajakaM: %@", item);
-                        //NSLog(@"IMPORTANT ITEMS: %@", self.importantItems);
+                        
+                        NSLog(@"IMPORTANT ITEMS: %@", item.retina1);
                         actualCell.item = item;
                     }
 
@@ -821,24 +847,11 @@
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
                             
                             NewsItem *item = [items objectAtIndex:indexPath.row];
-                            NSLog(@"ITE: %@", item);
+                            
                             actualCell.item = item;
                             
                         }
                     }
-                } else if (indexPath.section == 3) {
-                    if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
-                    {
-                        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
-                        NSArray *sortDescriptors = @[createDateDescriptor];
-                        self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
-                        NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
-                        NSLog(@"ITEMMM: %@", item);
-                        actualCell.item = item;
-                    }
-                    
-                    return cell;
-
                 } else {
                     //TODO SWIPE
 
