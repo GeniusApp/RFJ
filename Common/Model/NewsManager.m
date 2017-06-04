@@ -175,13 +175,13 @@
                 outItems = items;
             }];
             
-            NSMutableArray<NewsItem *> *items = [[NSMutableArray<NewsItem *> alloc] init];
+            NSMutableArray<GalerieItem *> *items = [[NSMutableArray<GalerieItem *> alloc] init];
             
             for(NSNumber *itemID in itemIDs)
             {
-                NewsItem *item = [NewsItem MR_findFirstByAttribute:@"id" withValue:itemID];
+                GalerieItem *item = [GalerieItem MR_findFirstByAttribute:@"id" withValue:itemID];
                 
-                if(VALID(item, NewsItem)) {
+                if(VALID(item, GalerieItem)) {
                     [items addObject:item];
                 }
             }

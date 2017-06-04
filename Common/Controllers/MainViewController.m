@@ -12,6 +12,7 @@
 #import "DataManager.h"
 #import "CategoryViewController.h"
 #import "InfoContinuViewController.h"
+#import "GalerieViewController.h"
 #import "Validation.h"
 #import "MainViewController.h"
 #import "MenuItem+CoreDataProperties.h"
@@ -490,6 +491,7 @@
         
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                             ascending:NO];
+        [self sortGalerieItems];
         //NSLog(@"GALERIE: %@", self.galeriePhotos);
 //        NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
 //        
@@ -505,7 +507,7 @@
         
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                             ascending:NO];
-        
+        [self sortGalerieItems];
 //        NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
 //        
 //        self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
@@ -783,8 +785,8 @@
             return cell;
         } else if (indexPath.section == 3) {
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
-            //NSLog(@"SECTION: %ld", (long)indexPath.section);
-            if(!VALID(actualCell, NewsItemTableViewCell)) {
+            
+            if(!VALID(actualCell, GalerieItemTableViewCell)) {
                 NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
                 
                 if(VALID_NOTEMPTY(views, NSArray)) {
@@ -801,7 +803,7 @@
                     NSArray *sortDescriptors = @[createDateDescriptor];
                     self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
                     GalerieItem *item = [self.galeriePhotos objectAtIndex:indexPath.row];
-                    
+                    NSLog(@"OBJECT ID %lld", item.navigationId);
                     actualCell.item = item;
                 }
                 
@@ -809,7 +811,7 @@
             }
         } else {
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-            //NSLog(@"SECTION: %ld", (long)indexPath.section);
+            
             if(!VALID(actualCell, NewsItemTableViewCell)) {
                 NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
                 
@@ -831,7 +833,6 @@
                         self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
                         NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
                         
-                        NSLog(@"IMPORTANT ITEMS: %@", item.retina1);
                         actualCell.item = item;
                     }
 
@@ -1001,7 +1002,17 @@
                         //controller.navigationId = @(menuItem.id);
                         [self.navigationController pushViewController:controller animated:YES];
                     }
-                } else {
+                } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
+                    
+                    GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+                    
+                    if(VALID(controller, GalerieViewController)) {
+                        //controller.navigationId = @(menuItem.id);
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }
+                }
+                
+                else {
                     CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
                     
                     if(VALID(controller, CategoryViewController)) {
