@@ -675,38 +675,32 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 //    }
 //}
 
+-(void)removeImage {
+    
+    UIImageView *imgView = (UIImageView*)[self.view viewWithTag:100];
+    [imgView removeFromSuperview];
+}
 
+-(void)addImageViewWithImage:(UIImage*)image {
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    imgView.backgroundColor = [UIColor blackColor];
+    imgView.image = image;
+    imgView.tag = 100;
+    UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeImage)];
+    dismissTap.numberOfTapsRequired = 1;
+    [imgView addGestureRecognizer:dismissTap];
+    [self.view addSubview:imgView];
+}
 #pragma mark - NewsItemTableViewCell Delegate
 
-//-(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
-//    NSLog(@"ITEM COUNT %lu", (unsigned long)self.galerieItems.count);
-//    NSLog(@"SORTED COUNT %lu", (unsigned long)self.sortedGalerieItems.count);
-//    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
-//    //NSLog(@"DID SELECT ROW AT ITEM: %ld", (long)index.row);
-//    if(index.row >= 0 && index.row < [self.galerieItems count]) {
-//        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-//        //NSLog(@"ITEM COUNT: %ld", (long)index.row);
-//        //NSLog(@"SECTION COUNT: %ld", (long)index.section);
-//        
-//        
-//        if(VALID(controller, NewsGroupViewController)) {
-//            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-//                GalerieItem *localItem = [item.item MR_inContext:localContext];
-//                
-//                if(VALID(localItem, GalerieItem)) {
-//                    localItem.read = YES;
-//                }
-//            }];
-//            
-//            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
-//            
-//            controller.newsToDisplay = [self combinedGalerieItems];
-//            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                return obj == item.item;
-//            }]);
-//            
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//    }
-//}
+-(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
+    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];
+    NSLog(@"GALERIE PHOTO TAPPED %@", photoItem.retina1);
+    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoItem.retina1]]];
+    [self addImageViewWithImage:image];
+}
 @end
