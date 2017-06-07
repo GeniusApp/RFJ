@@ -496,7 +496,7 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
            
             if(indexPath.row >= 0 && indexPath.row < [self.galerieItems count]) {
                 GalerieItem *item = [self.galerieItems objectAtIndex:indexPath.row];
-               
+                
                 actualCell.item = item;
                 
             }

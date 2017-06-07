@@ -470,4 +470,65 @@
     [dataTask resume];
 }
 
+-(void)fetchGalerieDetailForNews:(NSInteger)newsID successBlock:(void(^)(GalerieDetail *galerieDetail))successBlock andFailureBlock:(void(^)(NSError *error, GalerieDetail *oldGalerieDetail))failureBlock {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:kURLUsername password:kURLPassword];
+    
+    NSString *url = [NSString stringWithFormat:kURLNewsDetailsFormat, [[NSNumber numberWithInteger:newsID] stringValue]];
+    NSError *urlError;
+    NSURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:nil error:&urlError];
+    __block GalerieDetail *outDetail = [GalerieDetail MR_findFirstByAttribute:@"id" withValue:@(newsID)];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if(VALID(error, NSError)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(failureBlock) {
+                    failureBlock(error, outDetail);
+                }
+            });
+        }
+        else if(VALID(responseObject, NSDictionary)) {
+            NSDictionary *jsonObject = responseObject;
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                if(!VALID(outDetail, GalerieDetail)) {
+                    outDetail = [GalerieDetail MR_createEntityInContext:localContext];
+                }
+                else {
+                    outDetail = [GalerieDetail MR_findFirstByAttribute:@"id" withValue:@(newsID) inContext:localContext];
+                }
+                
+                [outDetail deserialize:jsonObject];
+            }];
+            
+            outDetail = [GalerieDetail MR_findFirstByAttribute:@"id" withValue:@(newsID)];
+            
+            if(VALID(outDetail, GalerieDetail)) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(successBlock) {
+                        successBlock(outDetail);
+                    }
+                });
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(failureBlock) {
+                        failureBlock([NSError errorWithDomain:@"internal" code:0 userInfo:nil], outDetail);
+                    }
+                });
+            }
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(failureBlock) {
+                    failureBlock([NSError errorWithDomain:@"internal" code:0 userInfo:nil], outDetail);
+                }
+            });
+        }
+    }];
+    
+    [dataTask resume];
+}
+
 @end

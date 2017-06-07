@@ -73,6 +73,12 @@
 		3E6723901EE19F5D00BC0A5B /* GalerieItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E67238C1EE19F3700BC0A5B /* GalerieItemTableViewCell.xib */; };
 		3E6723911EE19F6500BC0A5B /* GalerieItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E67238B1EE19F3700BC0A5B /* GalerieItemTableViewCell.m */; };
 		3E6723921EE19F6500BC0A5B /* GalerieItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E67238B1EE19F3700BC0A5B /* GalerieItemTableViewCell.m */; };
+		3E9CB3CA1EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9CB3C51EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m */; };
+		3E9CB3CB1EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9CB3C51EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m */; };
+		3E9CB3CC1EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9CB3C51EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m */; };
+		3E9CB3D61EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9CB3D41EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m */; };
+		3E9CB3D71EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9CB3D41EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m */; };
+		3E9CB3D81EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9CB3D41EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m */; };
 		3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */; };
 		3EE816711EA8BD1D0020F8BF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */; };
 		3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */; };
@@ -348,6 +354,10 @@
 		3E67238A1EE19F3700BC0A5B /* GalerieItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GalerieItemTableViewCell.h; path = Common/View/Cell/GalerieItemTableViewCell.h; sourceTree = "<group>"; };
 		3E67238B1EE19F3700BC0A5B /* GalerieItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GalerieItemTableViewCell.m; path = Common/View/Cell/GalerieItemTableViewCell.m; sourceTree = "<group>"; };
 		3E67238C1EE19F3700BC0A5B /* GalerieItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GalerieItemTableViewCell.xib; path = Common/View/Cell/GalerieItemTableViewCell.xib; sourceTree = "<group>"; };
+		3E9CB3C51EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GalerieDetail+CoreDataProperties.m"; path = "Common/DataModel/GalerieDetail+CoreDataProperties.m"; sourceTree = "<group>"; };
+		3E9CB3D31EE74AA000F0A048 /* GalerieDetail+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GalerieDetail+CoreDataClass.h"; path = "Common/DataModel/GalerieDetail+CoreDataClass.h"; sourceTree = "<group>"; };
+		3E9CB3D41EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GalerieDetail+CoreDataClass.m"; path = "Common/DataModel/GalerieDetail+CoreDataClass.m"; sourceTree = "<group>"; };
+		3E9CB3D51EE74AA000F0A048 /* GalerieDetail+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GalerieDetail+CoreDataProperties.h"; path = "Common/DataModel/GalerieDetail+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -720,10 +730,10 @@
 			children = (
 				E7551D011E5C60B300A1AEF9 /* MenuItemTableViewCell.h */,
 				E7551D021E5C60B300A1AEF9 /* MenuItemTableViewCell.m */,
+				E7551D031E5C60B300A1AEF9 /* MenuItemTableViewCell.xib */,
 				3E67238A1EE19F3700BC0A5B /* GalerieItemTableViewCell.h */,
 				3E67238B1EE19F3700BC0A5B /* GalerieItemTableViewCell.m */,
 				3E67238C1EE19F3700BC0A5B /* GalerieItemTableViewCell.xib */,
-				E7551D031E5C60B300A1AEF9 /* MenuItemTableViewCell.xib */,
 				E75CE78A1E5CB01C00D8E232 /* NewsItemTableViewCell.h */,
 				E75CE78B1E5CB01C00D8E232 /* NewsItemTableViewCell.m */,
 				E75CE78C1E5CB01C00D8E232 /* NewsItemTableViewCell.xib */,
@@ -991,6 +1001,10 @@
 				3E5BF6531EE0DADF00ED04A0 /* GalerieItem+CoreDataClass.m */,
 				3E5BF6571EE0DD2400ED04A0 /* GalerieItem+CoreDataProperties.h */,
 				3E5BF6581EE0DD2400ED04A0 /* GalerieItem+CoreDataProperties.m */,
+				3E9CB3C51EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m */,
+				3E9CB3D31EE74AA000F0A048 /* GalerieDetail+CoreDataClass.h */,
+				3E9CB3D41EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m */,
+				3E9CB3D51EE74AA000F0A048 /* GalerieDetail+CoreDataProperties.h */,
 				E75006B01E6844AB00B153A7 /* NewsItem+CoreDataClass.m */,
 				E78D64131E5B673300191453 /* NewsItem+CoreDataProperties.h */,
 				E78D64141E5B673300191453 /* NewsItem+CoreDataProperties.m */,
@@ -1479,6 +1493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E9CB3D61EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m in Sources */,
 				E75006A91E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				3E5BF6591EE0DD2400ED04A0 /* GalerieItem+CoreDataProperties.m in Sources */,
 				3E30922A1EDF0B3E002240A4 /* NewsItemSwipeTableViewCell.m in Sources */,
@@ -1511,6 +1526,7 @@
 				E78D64241E5B673300191453 /* NewsItem+CoreDataProperties.m in Sources */,
 				E7C9655A1E8A81BB00B176AE /* WebViewController.m in Sources */,
 				3E5BF6541EE0DADF00ED04A0 /* GalerieItem+CoreDataClass.m in Sources */,
+				3E9CB3CA1EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m in Sources */,
 				E7AE20B81E9B986400DA7953 /* Resources+CoreDataClass.m in Sources */,
 				E756DE0B1E89110E00E1437E /* CategoryViewController.m in Sources */,
 				3E3092251EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */,
@@ -1524,6 +1540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E9CB3D71EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m in Sources */,
 				E75006AA1E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE111E89328800E1437E /* BottomLoadingView.m in Sources */,
 				3E5BF65A1EE0DD2400ED04A0 /* GalerieItem+CoreDataProperties.m in Sources */,
@@ -1556,6 +1573,7 @@
 				E7C9655B1E8A81BB00B176AE /* WebViewController.m in Sources */,
 				E7AE20B91E9B986400DA7953 /* Resources+CoreDataClass.m in Sources */,
 				E756DE0C1E89110E00E1437E /* CategoryViewController.m in Sources */,
+				3E9CB3CB1EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m in Sources */,
 				3E5BF6551EE0DADF00ED04A0 /* GalerieItem+CoreDataClass.m in Sources */,
 				3E4115B11ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */,
 				E7E6FDEC1E65CD6D0027B719 /* NewsManager.m in Sources */,
@@ -1569,6 +1587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E9CB3D81EE74AA000F0A048 /* GalerieDetail+CoreDataClass.m in Sources */,
 				E75006AB1E68446300B153A7 /* NewsPhoto+CoreDataClass.m in Sources */,
 				E756DE121E89328800E1437E /* BottomLoadingView.m in Sources */,
 				3E5BF65B1EE0DD2400ED04A0 /* GalerieItem+CoreDataProperties.m in Sources */,
@@ -1601,6 +1620,7 @@
 				E7C9655C1E8A81BB00B176AE /* WebViewController.m in Sources */,
 				E7AE20BA1E9B986400DA7953 /* Resources+CoreDataClass.m in Sources */,
 				E756DE0D1E89110E00E1437E /* CategoryViewController.m in Sources */,
+				3E9CB3CC1EE7480000F0A048 /* GalerieDetail+CoreDataProperties.m in Sources */,
 				3E5BF6561EE0DADF00ED04A0 /* GalerieItem+CoreDataClass.m in Sources */,
 				3E4115B21ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */,
 				E7E6FDED1E65CD6D0027B719 /* NewsManager.m in Sources */,
