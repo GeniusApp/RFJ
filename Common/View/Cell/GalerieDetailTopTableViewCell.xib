@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="XVq-kP-O2S" customClass="GalerieDetailTopTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XVq-kP-O2S" id="kP6-iW-aHw">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7E-we-Kmz">
+                        <rect key="frame" x="8" y="8" width="33.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kip-mF-gLP">
+                        <rect key="frame" x="8" y="29" width="359" height="40"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GgX-8T-0HQ">
+                                <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pe5-0d-UkB">
+                                        <rect key="frame" x="0.0" y="0.0" width="88.5" height="40"/>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="facebook"/>
+                                        <connections>
+                                            <action selector="shareFacebook:" destination="XVq-kP-O2S" eventType="touchUpInside" id="67K-ii-Qm7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abN-zi-Bj6">
+                                        <rect key="frame" x="90.5" y="0.0" width="88" height="40"/>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.63137254899999995" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="twitter"/>
+                                        <connections>
+                                            <action selector="shareTwitter:" destination="XVq-kP-O2S" eventType="touchUpInside" id="3ej-4U-5sx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVY-r9-OF0">
+                                        <rect key="frame" x="180.5" y="0.0" width="88.5" height="40"/>
+                                        <color key="backgroundColor" red="0.1843137255" green="0.71764705880000002" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="whatsapp"/>
+                                        <connections>
+                                            <action selector="shareWhatsApp:" destination="XVq-kP-O2S" eventType="touchUpInside" id="a8k-zc-kP7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyw-Ji-z83">
+                                        <rect key="frame" x="271" y="0.0" width="88" height="40"/>
+                                        <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="link"/>
+                                        <connections>
+                                            <action selector="shareLink:" destination="XVq-kP-O2S" eventType="touchUpInside" id="BEP-82-s3i"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="SVY-r9-OF0" secondAttribute="bottom" id="0Qv-xP-rM2"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nyw-Ji-z83" secondAttribute="trailing" id="4IQ-e3-XKI"/>
+                                    <constraint firstAttribute="bottom" secondItem="pe5-0d-UkB" secondAttribute="bottom" id="9c2-yW-smG"/>
+                                    <constraint firstItem="SVY-r9-OF0" firstAttribute="width" secondItem="abN-zi-Bj6" secondAttribute="width" id="BDE-te-arN"/>
+                                    <constraint firstItem="abN-zi-Bj6" firstAttribute="width" secondItem="pe5-0d-UkB" secondAttribute="width" id="Gt0-KM-gwR"/>
+                                    <constraint firstItem="pe5-0d-UkB" firstAttribute="leading" secondItem="GgX-8T-0HQ" secondAttribute="leading" id="KT7-TB-ax3"/>
+                                    <constraint firstItem="Nyw-Ji-z83" firstAttribute="width" secondItem="SVY-r9-OF0" secondAttribute="width" id="Lwt-yb-Zkq"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nyw-Ji-z83" secondAttribute="bottom" id="Osr-GH-C68"/>
+                                    <constraint firstItem="Nyw-Ji-z83" firstAttribute="top" secondItem="GgX-8T-0HQ" secondAttribute="top" id="Q3G-du-0s3"/>
+                                    <constraint firstAttribute="height" constant="40" id="RDR-cb-yOl"/>
+                                    <constraint firstItem="SVY-r9-OF0" firstAttribute="top" secondItem="GgX-8T-0HQ" secondAttribute="top" id="Vp9-a7-mzV"/>
+                                    <constraint firstItem="abN-zi-Bj6" firstAttribute="top" secondItem="GgX-8T-0HQ" secondAttribute="top" id="Yaj-P1-0VJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="abN-zi-Bj6" secondAttribute="bottom" id="cEM-qU-Ozn"/>
+                                    <constraint firstItem="SVY-r9-OF0" firstAttribute="leading" secondItem="abN-zi-Bj6" secondAttribute="trailing" constant="2" id="epo-TC-1sJ"/>
+                                    <constraint firstItem="pe5-0d-UkB" firstAttribute="top" secondItem="GgX-8T-0HQ" secondAttribute="top" id="ou4-DD-osH"/>
+                                    <constraint firstItem="abN-zi-Bj6" firstAttribute="leading" secondItem="pe5-0d-UkB" secondAttribute="trailing" constant="2" id="srC-mQ-lGk"/>
+                                    <constraint firstItem="Nyw-Ji-z83" firstAttribute="leading" secondItem="SVY-r9-OF0" secondAttribute="trailing" constant="2" id="zKS-MM-ezQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="5xo-3M-Ycy"/>
+                            <constraint firstItem="GgX-8T-0HQ" firstAttribute="leading" secondItem="Kip-mF-gLP" secondAttribute="leading" id="7Hf-mI-tb2"/>
+                            <constraint firstAttribute="trailing" secondItem="GgX-8T-0HQ" secondAttribute="trailing" id="In7-d6-B65"/>
+                            <constraint firstItem="GgX-8T-0HQ" firstAttribute="top" secondItem="Kip-mF-gLP" secondAttribute="top" id="Xfn-31-ga8"/>
+                            <constraint firstAttribute="bottom" secondItem="GgX-8T-0HQ" secondAttribute="bottom" id="ySK-nW-Fjo"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQP-2l-dDp">
+                        <rect key="frame" x="8" y="70.5" width="359" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="LQP-2l-dDp" secondAttribute="trailing" constant="8" id="4mN-Wu-E3a"/>
+                    <constraint firstItem="V7E-we-Kmz" firstAttribute="leading" secondItem="kP6-iW-aHw" secondAttribute="leading" constant="8" id="65S-96-ofx"/>
+                    <constraint firstItem="LQP-2l-dDp" firstAttribute="leading" secondItem="kP6-iW-aHw" secondAttribute="leading" constant="8" id="OKa-gj-Abf"/>
+                    <constraint firstItem="Kip-mF-gLP" firstAttribute="top" secondItem="V7E-we-Kmz" secondAttribute="bottom" id="aMM-JZ-tHT"/>
+                    <constraint firstAttribute="bottom" secondItem="LQP-2l-dDp" secondAttribute="bottom" constant="8" id="e9g-jR-zYD"/>
+                    <constraint firstItem="Kip-mF-gLP" firstAttribute="leading" secondItem="kP6-iW-aHw" secondAttribute="leading" constant="8" id="fEB-wU-P0L"/>
+                    <constraint firstItem="V7E-we-Kmz" firstAttribute="top" secondItem="kP6-iW-aHw" secondAttribute="top" constant="8" id="gfg-8e-dDj"/>
+                    <constraint firstAttribute="trailing" secondItem="Kip-mF-gLP" secondAttribute="trailing" constant="8" id="q74-RO-JSy"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="authorLabel" destination="LQP-2l-dDp" id="ICk-Ze-gJ3"/>
+                <outlet property="titleLabel" destination="V7E-we-Kmz" id="qOv-rF-8My"/>
+            </connections>
+            <point key="canvasLocation" x="-6" y="-23"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="facebook" width="21" height="21"/>
+        <image name="link" width="21" height="21"/>
+        <image name="twitter" width="21" height="21"/>
+        <image name="whatsapp" width="21" height="21"/>
+    </resources>
+</document>

@@ -31,6 +31,7 @@
 #import "GalerieDetailViewController.h"
 #import "GalerieDetail+CoreDataProperties.h"
 #import "GalerieDetailTableViewCell.h"
+#import "GalerieDetailTopTableViewCell.h"
 
 
 @interface GalerieDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
@@ -42,7 +43,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
-@property (strong, nonatomic) NSArray<GalerieDetail *> *galerieDetails;
+@property (strong, nonatomic) NSArray<GalerieDetail *> *galerieDetail;
 //@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
@@ -74,7 +75,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     tableViewController.refreshControl = refreshControl;
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    //self.galeriesDetail.contentGallery = [GalerieDetail MR_findAll];
+    self.galerieDetail = [GalerieDetail MR_findAll];
     
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
@@ -111,8 +112,8 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.currentPage = 0;
     
     self.menuHeightConstraint.constant = 0;
-    self.isLoading = NO;
-
+    //self.isLoading = NO;
+    [self loadGalerie:self.newsID];
     
 }
 
@@ -151,20 +152,21 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
-    self.galerieDetails = @[];
-    self.galerieDetails = [GalerieDetail MR_findAll];
+    
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
     
 //    [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
     [[NewsManager singleton] fetchGalerieDetailForNews:self.newsID successBlock:^(GalerieDetail *galerieDetail) {
-        self.galerieDetails = [galerieDetail.contentGallery arrayByAddingObjectsFromArray:galerieDetail];
-        
+        self.galeriesDetail = galerieDetail;
         [self.contentTableView reloadData];
+        
         [self hideLoading];
     } andFailureBlock:^(NSError *error, GalerieDetail *oldGalerieDetail) {
+        self.galeriesDetail = oldGalerieDetail;
         [self.contentTableView reloadData];
+        
         [self hideLoading];
     }];
 }
@@ -175,13 +177,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         
         
         [[NewsManager singleton] fetchGalerieDetailForNews:[newsID integerValue] successBlock:^(GalerieDetail *galeriesDetail) {
-            self.galerieDetails = galeriesDetail.contentGallery;
-            NSLog(@"QUEREMOS FOTOS! %lu", [self.galerieDetails count]);
-            //NSLog(@"QUEREMOS FOTOS! %@", galeriesDetail.contentGallery);
+            self.galeriesDetail = galeriesDetail;
+            //NSLog(@"QUEREMOS FOTOS! %lu", [self.galerieDetails count]);
+            
            // [self refreshNews];
+            [self.contentTableView reloadData];
+            [self hideLoading];
         } andFailureBlock:^(NSError *error, GalerieDetail *oldGalerieDetail) {
             self.galeriesDetail = oldGalerieDetail;
-            
+            [self.contentTableView reloadData];
+            [self hideLoading];
         //    [self refreshNews];
         }];
     }
@@ -260,8 +265,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     }
     else if(tableView == self.contentTableView) {
         
-        NSLog(@"NUMERO DE IMAGENS: %lu", [self.galerieDetails count]);
-        return [self.galerieDetails count];
+        if (section == 1) {
+            return [self.galeriesDetail.contentGallery count];
+        } else {
+            return 1;
+        }
     }
     
     return 0;
@@ -271,16 +279,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     if(tableView == self.menuTableView) {
         return 1;
     } else {
-        return 1;
+        return 2;
     }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"WHATTTTTTT");
+    
     UITableViewCell *cell = nil;
     
     if(tableView == self.menuTableView) {
-        NSLog(@"VOU ENTRAR NO MENU");
+        
         MenuItemTableViewCell *actualCell = (MenuItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"menuItemCell"];
         
         if(!VALID(actualCell, MenuItemTableViewCell)) {
@@ -423,7 +431,26 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         }
     }
     else if(tableView == self.contentTableView) {
-        NSLog(@"VOU ENTRAR NO CONTENT %@", self.galerieDetails);
+        
+        if (indexPath.section == 0) {
+            
+            GalerieDetailTopTableViewCell *actualCell = (GalerieDetailTopTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"GalerieDetailTopTableViewCell"];
+            if(!VALID(actualCell, GalerieDetailTopTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieDetailTopTableViewCell" owner:self options:nil];
+                
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    actualCell = [views objectAtIndex:0];
+                }
+            }
+            NSString *authorHTML = @"";
+            NSArray *contentValue = [self.galerieDetail valueForKey:@"content"];
+            if(VALID_NOTEMPTY(contentValue, NSArray)) {
+                authorHTML = [contentValue objectAtIndex:0];
+            }
+            [actualCell setTitle:@"Titulo" andAuthor:authorHTML andLink:@"http://rfj.ch"];
+            cell = actualCell;
+            return cell;
+        }
         GalerieDetailTableViewCell *actualCell = (GalerieDetailTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
         if(!VALID(actualCell, GalerieDetailTableViewCell)) {
             NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieDetailTableViewCell" owner:self options:nil];
@@ -440,10 +467,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 
             
            
-            if(indexPath.row >= 0 && indexPath.row < [self.galerieDetails count]) {
-                GalerieDetail *item = [self.galerieDetails objectAtIndex:indexPath.row];
+            if(indexPath.row >= 0 && indexPath.row < [self.galeriesDetail.contentGallery count]) {
                
-                actualCell.item = item;
+                [actualCell setItem:self.galeriesDetail atIndex:indexPath.row];
                 
             }
         }
@@ -457,6 +483,10 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         return 44.0f;
     }
     else if(tableView == self.contentTableView) {
+        if (indexPath.section == 0) {
+            return 100;
+        }
+            
         return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
     }
     

@@ -17,6 +17,6 @@
 
 @interface GalerieDetailTableViewCell : UITableViewCell
 @property (assign, nonatomic) id<GalerieDetailTableViewCellDelegate> delegate;
-@property (strong, nonatomic) GalerieDetail *item;
 
+-(void) setItem:(GalerieDetail *)item atIndex:(NSInteger) itemIndex;
 @end

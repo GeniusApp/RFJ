@@ -16,7 +16,8 @@
 @interface GalerieDetailTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
-
+@property (strong, nonatomic) GalerieDetail *item;
+@property (assign, nonatomic) NSInteger itemIndex;
 
 @end
 
@@ -36,15 +37,19 @@
     [self.coverView addGestureRecognizer:gestureRecognizer];
 }
 
--(void)setItem:(GalerieDetail *)item {
+-(void)setItem:(GalerieDetail *)item atIndex:(NSInteger)itemIndex {
     if(VALID(item, GalerieDetail)) {
         _item = item;
-
-            [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        NSDictionary *ImageUrl = [item.contentGallery objectAtIndex:itemIndex];
+        NSString *imageKey = [ImageUrl objectForKey:@"ImageUrl"];
+        if (VALID(imageKey, NSString)) {
+            [self.coverImage sd_setImageWithURL:[NSURL URLWithString:imageKey] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if(VALID(image, UIImage)) {
                     [self.coverImage setImage:image];
                 }
             }];
+        }
+        
 
         
         
