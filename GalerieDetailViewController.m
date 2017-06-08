@@ -48,7 +48,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) GalerieDetail *galeriesDetail;
-
+@property (strong, nonatomic) NewsDetail *newsDetail;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (assign, nonatomic) BOOL isLoading;
 @property (strong, nonatomic) NSNumber *activeCategoryId;
@@ -188,6 +188,20 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
             [self.contentTableView reloadData];
             [self hideLoading];
         //    [self refreshNews];
+        }];
+    }
+    
+    if(VALID(newsID, NSNumber)) {
+        
+        
+        [[NewsManager singleton] fetchNewsDetailForNews:[newsID integerValue] successBlock:^(NewsDetail *newsDetail) {
+            self.newsDetail = newsDetail;
+            
+            [self.contentTableView reloadData];
+        } andFailureBlock:^(NSError *error, NewsDetail *oldNewsDetail) {
+            self.newsDetail = oldNewsDetail;
+            
+            [self.contentTableView reloadData];
         }];
     }
 }
@@ -442,12 +456,15 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                     actualCell = [views objectAtIndex:0];
                 }
             }
+            NSString *titleGalerie = self.newsDetail.title;
+            NSString *linkGalerie = self.newsDetail.link;
+            NSLog(@"LINK: %@", linkGalerie);
             NSString *authorHTML = @"";
             NSArray *contentValue = [self.galerieDetail valueForKey:@"content"];
             if(VALID_NOTEMPTY(contentValue, NSArray)) {
                 authorHTML = [contentValue objectAtIndex:0];
             }
-            [actualCell setTitle:@"Titulo" andAuthor:authorHTML andLink:@"http://rfj.ch"];
+            [actualCell setTitle:titleGalerie andAuthor:authorHTML andLink:linkGalerie];
             cell = actualCell;
             return cell;
         }
@@ -484,7 +501,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     }
     else if(tableView == self.contentTableView) {
         if (indexPath.section == 0) {
-            return 100;
+            return 150;
         }
             
         return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
