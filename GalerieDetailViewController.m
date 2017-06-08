@@ -122,8 +122,8 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)homeButtonTapped:(UIButton *)sender {
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    NSArray *array = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
 }
 
 // Metdodo Som
