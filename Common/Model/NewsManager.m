@@ -500,6 +500,7 @@
                 }
                 
                 [outDetail deserialize:jsonObject];
+                
             }];
             
             outDetail = [GalerieDetail MR_findFirstByAttribute:@"id" withValue:@(newsID)];
@@ -523,6 +524,104 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(failureBlock) {
                     failureBlock([NSError errorWithDomain:@"internal" code:0 userInfo:nil], outDetail);
+                }
+            });
+        }
+    }];
+    
+    [dataTask resume];
+}
+
+-(void)fetchImagesAtPage:(NSInteger)page newsID:(NSInteger)newsID objectType:(NSInteger)objectType categoryId:(NSInteger)categoryId withSuccessBlock:(void(^)(NSArray<GalerieItem *> *photos))successBlock andFailureBlock:(void(^)(NSError *error))failureBlock {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:kURLUsername password:kURLPassword];
+    
+    NSString *url = [NSString stringWithFormat:kURLLastNewsFormat,
+                     [[NSNumber numberWithInt:[[DataManager singleton] isRFJ] ? kZoneIDRFJ : [[DataManager singleton] isRJB] ? kZoneIDRJB : kZoneIDRTN] stringValue], [[NSNumber numberWithInteger:objectType] stringValue], @"1", [[NSNumber numberWithInteger:page] stringValue], [[NSNumber numberWithInteger:categoryId] stringValue]];
+    
+    
+    NSError *urlError = nil;
+    NSURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:url parameters:nil error:&urlError];
+    
+    __block NSArray<GalerieItem *> *outItems = [GalerieItem MR_findAll];
+    
+    outItems = [outItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        GalerieItem *a = obj1;
+        GalerieItem *b = obj2;
+        
+        return a.id < b.id ? NSOrderedAscending : a.id > b.id ? NSOrderedDescending : NSOrderedSame;
+    }];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if(VALID(error, NSError)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(failureBlock) {
+                    failureBlock(error);
+                }
+            });
+        }
+        else if(VALID(responseObject, NSArray)) {
+            NSArray *jsonItems = responseObject;
+            
+            NSMutableArray<NSNumber *> *itemIDs = [[NSMutableArray<NSNumber *> alloc] init];
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                NSMutableArray<GalerieItem *> *photos = [[NSMutableArray<GalerieItem *> alloc] init];
+                
+                for(NSDictionary *itemDictionary in jsonItems) {
+                    if(VALID_NOTEMPTY(itemDictionary, NSDictionary)) {
+                        GalerieItem *photo = nil;
+                        
+                        if(VALID_NOTEMPTY([itemDictionary objectForKey:@"Id"], NSNumber)) {
+                            NSNumber *id = [itemDictionary objectForKey:@"Id"];
+                            
+                            photo = [GalerieItem MR_findFirstByAttribute:@"id" withValue:id inContext:localContext];
+                        }
+                        
+                        if(!VALID(photo, GalerieItem)) {
+                            photo = [GalerieItem fromDictionary:itemDictionary inContext:localContext];
+                        }
+                        
+                        if(VALID(photo, GalerieItem)) {
+                            [photo deserialize:itemDictionary];
+                            [photos addObject:photo];
+                            [itemIDs addObject:@(photo.id)];
+                        }
+                    }
+                }
+            }];
+            
+            NSMutableArray<GalerieItem *> *photos = [[NSMutableArray<GalerieItem *> alloc] init];
+            
+            for(NSNumber *itemID in itemIDs)
+            {
+                GalerieItem *photo = [GalerieItem MR_findFirstByAttribute:@"id" withValue:itemID];
+                
+                if(VALID(photo, GalerieItem)) {
+                    [photos addObject:photo];
+                }
+            }
+            
+            outItems = photos;
+            
+            outItems = [outItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                GalerieItem *a = obj1;
+                GalerieItem *b = obj2;
+                
+                return a.id < b.id ? NSOrderedAscending : a.id > b.id ? NSOrderedDescending : NSOrderedSame;
+            }];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(successBlock) {
+                    successBlock(outItems);
+                }
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(failureBlock) {
+                    failureBlock([NSError errorWithDomain:@"internal" code:0 userInfo:nil]);
                 }
             });
         }

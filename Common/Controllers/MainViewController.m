@@ -803,7 +803,6 @@
                     NSArray *sortDescriptors = @[createDateDescriptor];
                     self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
                     GalerieItem *item = [self.galeriePhotos objectAtIndex:indexPath.row];
-                    NSLog(@"OBJECT ID %lld", item.navigationId);
                     actualCell.item = item;
                 }
                 
@@ -1030,7 +1029,7 @@
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
-
+    
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
         //NSLog(@"ITEM COUNT: %ld", (long)index.row);
@@ -1056,6 +1055,20 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
+}
+
+-(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    
+    if(index.row >= 0 && index.row < [self.newsItems count]) {
+        GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+        
+        if(VALID(controller, GalerieViewController)) {
+            //controller.navigationId = @(menuItem.id);
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+
 }
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Genius App Sarl. All rights reserved.
 //
 
-#import "InfoContinuViewController.h"
+#import "GalerieDetailViewController.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import <GoogleMobileAds/DFPInterstitial.h>
 #import "Constants.h"
@@ -19,6 +19,7 @@
 #import "NewsCategorySeparatorView.h"
 #import "NewsGroupViewController.h"
 #import "NewsItem+CoreDataProperties.h"
+#import "GalerieDetail+CoreDataProperties.h"
 #import "NewsItemTableViewCell.h"
 #import "NewsDetailViewController.h"
 #import "NewsManager.h"
@@ -26,9 +27,13 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
+#import "GalerieItem+CoreDataProperties.h"
+#import "GalerieDetailViewController.h"
+#import "GalerieDetail+CoreDataProperties.h"
+#import "GalerieDetailTableViewCell.h"
 
 
-@interface InfoContinuViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
+@interface GalerieDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
@@ -37,10 +42,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
-@property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
-@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
+@property (strong, nonatomic) NSArray<GalerieDetail *> *galerieDetails;
+//@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
+@property (strong, nonatomic) GalerieDetail *galeriesDetail;
 
 @property (assign, nonatomic) NSInteger currentPage;
 @property (assign, nonatomic) BOOL isLoading;
@@ -48,7 +54,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 
 @end
 
-@implementation InfoContinuViewController
+@implementation GalerieDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,14 +74,13 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     tableViewController.refreshControl = refreshControl;
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
-                                        ascending:NO];
-
+    //self.galeriesDetail.contentGallery = [GalerieDetail MR_findAll];
+    
     
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
     [self refreshMenuItems];
-    [self sortNewsItems];
+    [self loadGalerie:self.newsID];
     
     if([[DataManager singleton] isRFJ]) {
         self.menuTableView.backgroundColor = kBackgroundColorRFJ;
@@ -100,14 +105,15 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     }
     
     self.expandedMenuItems = [[NSMutableArray<NSNumber *> alloc] init];
-    self.activeCategoryId = 0;
+    self.activeCategoryId = [NSNumber numberWithInt:9622];
     //self.activeCategoryId = self.navigationId;
     [self refreshCategory:[self.activeCategoryId intValue]];
     self.currentPage = 0;
     
     self.menuHeightConstraint.constant = 0;
     self.isLoading = NO;
-    [self loadNextPage];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,7 +133,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     //TODO: refresh your data
     
     //[self.contentTableView reloadData];
-    [self loadNextPage];
+    //[self loadNextPage];
     [self.contentTableView.refreshControl endRefreshing];
     
     
@@ -145,53 +151,43 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
-    self.newsItems = @[];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
-                                        ascending:NO];
+    self.galerieDetails = @[];
+    self.galerieDetails = [GalerieDetail MR_findAll];
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
     
-    [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
-        self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+//    [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
+    [[NewsManager singleton] fetchGalerieDetailForNews:self.newsID successBlock:^(GalerieDetail *galerieDetail) {
+        self.galerieDetails = [galerieDetail.contentGallery arrayByAddingObjectsFromArray:galerieDetail];
         
         [self.contentTableView reloadData];
         [self hideLoading];
-    } andFailureBlock:^(NSError *error) {
-        //NSLog(@"Failure getting news items: %@", error);
-        
+    } andFailureBlock:^(NSError *error, GalerieDetail *oldGalerieDetail) {
         [self.contentTableView reloadData];
         [self hideLoading];
     }];
 }
 
--(NSArray<NewsItem *> *)combinedNewsItems
-{
-    NSMutableArray<NewsItem *> *items = [[NSMutableArray<NewsItem *> alloc] init];
+-(void)loadGalerie:(NSNumber *)newsID {
     
-    for(NSNumber *navigationID in [self.sortedNewsItems allKeys]) {
-        [items addObjectsFromArray:[self.sortedNewsItems objectForKey:navigationID]];
+    if(VALID(newsID, NSNumber)) {
+        
+        
+        [[NewsManager singleton] fetchGalerieDetailForNews:[newsID integerValue] successBlock:^(GalerieDetail *galeriesDetail) {
+            self.galerieDetails = galeriesDetail.contentGallery;
+            NSLog(@"QUEREMOS FOTOS! %lu", [self.galerieDetails count]);
+            //NSLog(@"QUEREMOS FOTOS! %@", galeriesDetail.contentGallery);
+           // [self refreshNews];
+        } andFailureBlock:^(NSError *error, GalerieDetail *oldGalerieDetail) {
+            self.galeriesDetail = oldGalerieDetail;
+            
+        //    [self refreshNews];
+        }];
     }
-    
-    return items;
 }
 
--(void)sortNewsItems {
-    self.sortedNewsItems = [[NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> alloc] init];
-    
-    for(NewsItem *item in self.newsItems) {
-        NSArray *sortedItems = nil;
-        
-        if([self.sortedNewsItems objectForKey:@(item.navigationId)] == nil) {
-            sortedItems = [NSArray arrayWithObject:item];
-        }
-        else {
-            sortedItems = [[self.sortedNewsItems objectForKey:@(item.navigationId)] arrayByAddingObject:item];
-        }
-        
-        [self.sortedNewsItems setObject:sortedItems forKey:@(item.navigationId)];
-    }
-}
+
 
 -(void)refreshMenuItems
 {
@@ -245,60 +241,8 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     }];
 }
 
--(void)loadPageItemsForPage:(NSInteger)page count:(NSInteger)count
-                    success:(void(^)(NSArray<NewsItem *> *items))successBlock
-                    failure:(void(^)(NSError *error))failureBlock {
-    self.isLoading = YES;
-    
-    [[NewsManager singleton] fetchNewsAtPage:page objectType:0 categoryId:-1 withSuccessBlock:^(NSArray<NewsItem *> *items) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.isLoading = NO;
-            
-            if(successBlock) {
-                successBlock(items);
-            }
-        });
-    } andFailureBlock:^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.isLoading = NO;
-            
-            if(failureBlock) {
-                failureBlock(error);
-            }
-        });
-    }];
-}
 
--(void)loadNextPage {
-    if(self.isLoading) {
-        return;
-    }
 
-    [self showLoading];
-    
-    self.currentPage++;
-    
-    [self loadPageItemsForPage:self.currentPage count:kItemsPerPage success:^(NSArray<NewsItem *> *items) {
-        [self hideLoading];
-        
-        for(NewsItem *item in items) {
-            NSInteger itemIndex = [self.newsItems indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                return item.id == obj.id;
-            }];
-            
-            if(itemIndex == NSNotFound) {
-                self.newsItems = [self.newsItems arrayByAddingObject:item];
-            }
-        }
-
-        
-        [self.contentTableView reloadData];
-    } failure:^(NSError *error) {
-        [self hideLoading];
-        
-        //NSLog(@"Error: %@", error);
-    }];
-}
 
 - (IBAction)toggleMenu:(id)sender {
     if(self.menuHeightConstraint.constant > 0) {
@@ -315,7 +259,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         return [self.menuItems count];
     }
     else if(tableView == self.contentTableView) {
-        return [self.newsItems count];
+        
+        NSLog(@"NUMERO DE IMAGENS: %lu", [self.galerieDetails count]);
+        return [self.galerieDetails count];
     }
     
     return 0;
@@ -330,9 +276,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"WHATTTTTTT");
     UITableViewCell *cell = nil;
     
     if(tableView == self.menuTableView) {
+        NSLog(@"VOU ENTRAR NO MENU");
         MenuItemTableViewCell *actualCell = (MenuItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"menuItemCell"];
         
         if(!VALID(actualCell, MenuItemTableViewCell)) {
@@ -475,25 +423,25 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         }
     }
     else if(tableView == self.contentTableView) {
-        NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-        //NSLog(@"SECTION: %ld", (long)indexPath.section);
-        if(!VALID(actualCell, NewsItemTableViewCell)) {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
+        NSLog(@"VOU ENTRAR NO CONTENT %@", self.galerieDetails);
+        GalerieDetailTableViewCell *actualCell = (GalerieDetailTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
+        if(!VALID(actualCell, GalerieDetailTableViewCell)) {
+            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieDetailTableViewCell" owner:self options:nil];
             
             if(VALID_NOTEMPTY(views, NSArray)) {
                 actualCell = [views objectAtIndex:0];
             }
         }
         
-        if(VALID(actualCell, NewsItemTableViewCell)) {
+        if(VALID(actualCell, GalerieDetailTableViewCell)) {
             cell = actualCell;
-            actualCell.delegate = self;
+            //actualCell.delegate = self;
             
 
             
            
-            if(indexPath.row >= 0 && indexPath.row < [self.newsItems count]) {
-                NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
+            if(indexPath.row >= 0 && indexPath.row < [self.galerieDetails count]) {
+                GalerieDetail *item = [self.galerieDetails objectAtIndex:indexPath.row];
                
                 actualCell.item = item;
                 
@@ -618,93 +566,60 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 }
             }
             else {
-                if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                    
-                    InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
-                    
-                    if(VALID(controller, InfoContinuViewController)) {
-                        //controller.navigationId = @(menuItem.id);
-                        [self.navigationController pushViewController:controller animated:YES];
-                    }
-                } else {
+//                if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
+//                    
+//                    InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
+//                    
+//                    if(VALID(controller, InfoContinuViewController)) {
+//                        //controller.navigationId = @(menuItem.id);
+//                        [self.navigationController pushViewController:controller animated:YES];
+//                    }
+//                } else {
                     CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
                     
                     if(VALID(controller, CategoryViewController)) {
                         controller.navigationId = @(menuItem.id);
                         [self.navigationController pushViewController:controller animated:YES];
                     }
-                }
+                //}
             }
         }
     }
 }
 
 
-//ggirao selectedRow
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
-//    UITableViewCell *cell = nil;
-//    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-//    cell = actualCell;
-//    
-//    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-//    NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-//    
-//    if(indexPath.row >= 0 && indexPath.row < [items count]) {
-//        NewsItem *item = [items objectAtIndex:indexPath.row];
-//        actualCell.item = item;
-//        
+
+#pragma mark - NewsItemTableViewCell Delegate
+
+//-(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
+//    NSLog(@"ITEM COUNT %lu", (unsigned long)self.newsItems.count);
+//    NSLog(@"SORTED COUNT %lu", (unsigned long)self.sortedNewsItems.count);
+//    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+//    //NSLog(@"DID SELECT ROW AT ITEM: %ld", (long)index.row);
+//    if(index.row >= 0 && index.row < [self.newsItems count]) {
 //        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+//        //NSLog(@"ITEM COUNT: %ld", (long)index.row);
+//        //NSLog(@"SECTION COUNT: %ld", (long)index.section);
+//        
+//        
 //        if(VALID(controller, NewsGroupViewController)) {
 //            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-//                NewsItem *localItem = [item MR_inContext:localContext];
+//                NewsItem *localItem = [item.item MR_inContext:localContext];
 //                
 //                if(VALID(localItem, NewsItem)) {
 //                    localItem.read = YES;
 //                }
 //            }];
+//            
+//            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+//            
 //            controller.newsToDisplay = [self combinedNewsItems];
 //            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                return obj == item;
+//                return obj == item.item;
 //            }]);
 //            
 //            [self.navigationController pushViewController:controller animated:YES];
 //        }
 //    }
 //}
-
-
-#pragma mark - NewsItemTableViewCell Delegate
-
--(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-    NSLog(@"ITEM COUNT %lu", (unsigned long)self.newsItems.count);
-    NSLog(@"SORTED COUNT %lu", (unsigned long)self.sortedNewsItems.count);
-    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
-    //NSLog(@"DID SELECT ROW AT ITEM: %ld", (long)index.row);
-    if(index.row >= 0 && index.row < [self.newsItems count]) {
-        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-        //NSLog(@"ITEM COUNT: %ld", (long)index.row);
-        //NSLog(@"SECTION COUNT: %ld", (long)index.section);
-        
-        
-        if(VALID(controller, NewsGroupViewController)) {
-            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-                NewsItem *localItem = [item.item MR_inContext:localContext];
-                
-                if(VALID(localItem, NewsItem)) {
-                    localItem.read = YES;
-                }
-            }];
-            
-            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
-            
-            controller.newsToDisplay = [self combinedNewsItems];
-            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                return obj == item.item;
-            }]);
-            
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-    }
-}
 @end

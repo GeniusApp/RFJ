@@ -21,7 +21,7 @@
         }
         
         if(VALID_NOTEMPTY([dictionary objectForKey:@"ContentGallery"], NSArray)) {
-            self.content = [dictionary objectForKey:@"ContentGallery"];
+            self.contentGallery = [dictionary objectForKey:@"ContentGallery"];
         }
 
         if(VALID_NOTEMPTY([dictionary objectForKey:@"CreateDate"], NSString)) {

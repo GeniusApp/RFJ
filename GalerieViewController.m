@@ -14,12 +14,13 @@
 #import "CategoryViewController.h"
 #import "Validation.h"
 #import "GalerieItem+CoreDataProperties.h"
+#import "GalerieDetail+CoreDataProperties.h"
 #import "GalerieItemTableViewCell.h"
 #import "MenuItem+CoreDataProperties.h"
 #import "MenuItemTableViewCell.h"
 #import "MenuManager.h"
 #import "NewsCategorySeparatorView.h"
-#import "NewsGroupViewController.h"
+#import "GalerieDetailViewController.h"
 #import "GalerieItem+CoreDataProperties.h"
 #import "GalerieItemTableViewCell.h"
 #import "NewsDetailViewController.h"
@@ -477,8 +478,8 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         }
     }
     else if(tableView == self.contentTableView) {
-        GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-        //NSLog(@"SECTION: %ld", (long)indexPath.section);
+        GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
+        
         if(!VALID(actualCell, GalerieItemTableViewCell)) {
             NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
             
@@ -696,11 +697,32 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+//    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+//    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
+//    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];
+//    NSLog(@"GALERIE PHOTO TAPPED %@", photoItem.retina1);
+//    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoItem.retina1]]];
+//    [self addImageViewWithImage:image];
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
-    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
-    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];
-    NSLog(@"GALERIE PHOTO TAPPED %@", photoItem.retina1);
-    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoItem.retina1]]];
-    [self addImageViewWithImage:image];
+    if(index.row >= 0 && index.row < [self.galerieItems count]) {
+        GalerieDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"galerieGroup"];
+        
+        if(VALID(controller, GalerieDetailViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                GalerieItem *localItem = [item.item MR_inContext:localContext];
+                
+                if(VALID(localItem, GalerieItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            
+            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+           
+            controller.newsID = [NSNumber numberWithInt:[self.galerieItems objectAtIndex:index.row].id];
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+
 }
 @end
