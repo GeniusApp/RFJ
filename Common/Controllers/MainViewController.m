@@ -13,6 +13,7 @@
 #import "CategoryViewController.h"
 #import "InfoContinuViewController.h"
 #import "GalerieViewController.h"
+#import "GalerieDetailViewController.h"
 #import "Validation.h"
 #import "MainViewController.h"
 #import "MenuItem+CoreDataProperties.h"
@@ -1058,18 +1059,50 @@
     }
 }
 
+//-(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+//    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+//    
+//    if(index.row >= 0 && index.row < [self.newsItems count]) {
+//        GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+//        
+//        if(VALID(controller, GalerieViewController)) {
+//            //controller.navigationId = @(menuItem.id);
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
+//    }
+//
+//}
+
+
 -(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+    //    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    //    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
+    //    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];
+    //    NSLog(@"GALERIE PHOTO TAPPED %@", photoItem.retina1);
+    //    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoItem.retina1]]];
+    //    [self addImageViewWithImage:image];
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
-    
-    if(index.row >= 0 && index.row < [self.newsItems count]) {
-        GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+    if(index.row >= 0 && index.row < [self.galeriePhotos count]) {
+        GalerieDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"galerieGroup"];
         
-        if(VALID(controller, GalerieViewController)) {
-            //controller.navigationId = @(menuItem.id);
+        if(VALID(controller, GalerieDetailViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                GalerieItem *localItem = [item.item MR_inContext:localContext];
+                
+                if(VALID(localItem, GalerieItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            
+            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+            
+            controller.newsID = [NSNumber numberWithInt:[self.galeriePhotos objectAtIndex:index.row].id];
+            
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
-
+    
 }
+
 
 @end
