@@ -643,57 +643,9 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 }
 
 
-//ggirao selectedRow
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
-//    UITableViewCell *cell = nil;
-//    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-//    cell = actualCell;
-//    
-//    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-//    NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-//    
-//    if(indexPath.row >= 0 && indexPath.row < [items count]) {
-//        NewsItem *item = [items objectAtIndex:indexPath.row];
-//        actualCell.item = item;
-//        
-//        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-//        if(VALID(controller, NewsGroupViewController)) {
-//            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-//                NewsItem *localItem = [item MR_inContext:localContext];
-//                
-//                if(VALID(localItem, NewsItem)) {
-//                    localItem.read = YES;
-//                }
-//            }];
-//            controller.newsToDisplay = [self combinedNewsItems];
-//            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                return obj == item;
-//            }]);
-//            
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//    }
-//}
 
--(void)removeImage {
-    
-    UIImageView *imgView = (UIImageView*)[self.view viewWithTag:100];
-    [imgView removeFromSuperview];
-}
 
--(void)addImageViewWithImage:(UIImage*)image {
-    
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
-    imgView.backgroundColor = [UIColor blackColor];
-    imgView.image = image;
-    imgView.tag = 100;
-    UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeImage)];
-    dismissTap.numberOfTapsRequired = 1;
-    [imgView addGestureRecognizer:dismissTap];
-    [self.view addSubview:imgView];
-}
+
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {

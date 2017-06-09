@@ -59,6 +59,13 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    gestureRecognizer.numberOfTapsRequired = 1;
+    
+    [self.contentView setUserInteractionEnabled:YES];
+    [self.contentView addGestureRecognizer:gestureRecognizer];
+    
     // Initialization code
     if([[DataManager singleton] isRFJ]) {
         self.shareBaseURL = kShareURLRFJ;
@@ -88,5 +95,11 @@
     self.link = link;
     self.titleLabel.text = title;
     self.authorLabel.attributedText = authorString;
+}
+
+-(void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(GalerieDetailDidTap:)]) {
+        [self.delegate GalerieDetailDidTap:self];
+    }
 }
 @end
