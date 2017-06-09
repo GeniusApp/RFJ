@@ -114,6 +114,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "MHVideoPhotoGallery/MHVideoPhotoGallery/MMHVideoPhotoGallery/Images/videoIcon.png"
   install_resource "MHVideoPhotoGallery/MHVideoPhotoGallery/MMHVideoPhotoGallery/Images/videoIcon@2x.png"
   install_resource "MHVideoPhotoGallery/MHVideoPhotoGallery/MMHVideoPhotoGallery/MHGallery.bundle"
+  install_resource "Vertigo/Vertigo/TGRImageViewController.xib"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "DateTools/DateTools/DateTools/DateTools.bundle"
@@ -153,6 +154,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "MHVideoPhotoGallery/MHVideoPhotoGallery/MMHVideoPhotoGallery/Images/videoIcon.png"
   install_resource "MHVideoPhotoGallery/MHVideoPhotoGallery/MMHVideoPhotoGallery/Images/videoIcon@2x.png"
   install_resource "MHVideoPhotoGallery/MHVideoPhotoGallery/MMHVideoPhotoGallery/MHGallery.bundle"
+  install_resource "Vertigo/Vertigo/TGRImageViewController.xib"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

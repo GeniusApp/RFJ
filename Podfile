@@ -20,6 +20,7 @@ target 'rfj' do
   pod 'SwiftLint'
   pod 'CocoaZ'
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
+  pod 'Vertigo'
 end
 
 target 'rjb' do

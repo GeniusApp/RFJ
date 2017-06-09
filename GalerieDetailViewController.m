@@ -32,10 +32,12 @@
 #import "GalerieDetail+CoreDataProperties.h"
 #import "GalerieDetailTableViewCell.h"
 #import "GalerieDetailTopTableViewCell.h"
+#import "TGRImageViewController.h"
+#import "TGRImageZoomAnimationController.h"
 
 
 @interface GalerieDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
-GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate>
+GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
@@ -647,11 +649,48 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate>
     NSURL *imageURL = [NSURL URLWithString:imgConvert];
     NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
     UIImage *image = [UIImage imageWithData:imageData];
-    [self addImageViewWithImage:image];
+    TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:image];
+    // Don't forget to set ourselves as the transition delegate
+    viewController.transitioningDelegate = self;
+    
+    [self presentViewController:viewController animated:YES completion:nil];
+    //[self addImageViewWithImage:image];
     if(index.row >= 0 && index.row < [self.galerieDetail count]) {
 
     }
     
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    NSString *imgConvert1 = [[self.galeriesDetail.contentGallery objectAtIndex:0] valueForKey:@"ImageUrl"];
+    NSURL *imageURL1 = [NSURL URLWithString:imgConvert1];
+    NSData *imageData1 = [NSData dataWithContentsOfURL:imageURL1];
+    UIImage *image1 = [UIImage imageWithData:imageData1];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    imgView.contentMode = UIViewContentModeScaleAspectFill;
+    imgView.backgroundColor = [UIColor blackColor];
+    imgView.image = image1;
+
+    if ([presented isKindOfClass:TGRImageViewController.class]) {
+        return [[TGRImageZoomAnimationController alloc] initWithReferenceImageView:imgView];
+    }
+    return nil;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    NSString *imgConvert1 = [[self.galeriesDetail.contentGallery objectAtIndex:0] valueForKey:@"ImageUrl"];
+    NSURL *imageURL1 = [NSURL URLWithString:imgConvert1];
+    NSData *imageData1 = [NSData dataWithContentsOfURL:imageURL1];
+    UIImage *image1 = [UIImage imageWithData:imageData1];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    imgView.contentMode = UIViewContentModeScaleAspectFill;
+    imgView.backgroundColor = [UIColor blackColor];
+    imgView.image = image1;
+
+    if ([dismissed isKindOfClass:TGRImageViewController.class]) {
+        return [[TGRImageZoomAnimationController alloc] initWithReferenceImageView:imgView];
+    }
+   return nil;
 }
 
 -(void)removeImage {
