@@ -81,7 +81,6 @@
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
-
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     
@@ -135,6 +134,7 @@
     
   //  [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }  
+
 
 - (void)refreshTable:(id)sender {
     //TODO: refresh your data

@@ -57,7 +57,6 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
@@ -677,4 +676,6 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     }
 
 }
+
+
 @end
