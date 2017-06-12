@@ -10,6 +10,7 @@
 
 @interface GalerieDetailViewController : UIViewController
 @property (strong, nonatomic) NSNumber *newsID;
+@property (strong, nonatomic) NSNumber *currentGalerie;
 
 -(void)loadGalerie:(NSNumber *)newsID;
 
