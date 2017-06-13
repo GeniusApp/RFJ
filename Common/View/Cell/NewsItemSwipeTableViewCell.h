@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewsItem+CoreDataProperties.h"
 
 @interface NewsItemSwipeTableViewCell : UITableViewCell
-
+@property (strong, nonatomic) NSArray <NewsItem *> *newsItems;
+- (void) moveLeft;
+- (void) moveRight;
+- (void) display;
 @end

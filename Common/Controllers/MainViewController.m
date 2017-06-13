@@ -31,6 +31,7 @@
 #import "ResourcesManager.h"
 #import "WebViewController.h"
 #import "Reachability.h"
+#import "NewsItemSwipeTableViewCell.h"
 
 
 @import GoogleMobileAds;
@@ -57,7 +58,6 @@
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *joinedRegionSport;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
-
 
 @property (assign, nonatomic) NSInteger currentPage;
 @property (assign, nonatomic) BOOL isLoading;
@@ -142,9 +142,9 @@
     //[self.contentTableView reloadData];
     [self loadNextPage];
     [self.contentTableView.refreshControl endRefreshing];
- 
 
 }
+
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -856,17 +856,26 @@
                     }
                 } else {
                     //TODO SWIPE
-
-                    NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
-                    NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
+                    NewsItemSwipeTableViewCell *swipeCell = (NewsItemSwipeTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemSwipeCell"];
                     
-                    if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
-                        //NSLog(@"ITEMS: %@", self.sortedNewsItems);
-                        if(indexPath.row >= 0 && indexPath.row < [items count]) {
-                            NewsItem *item = [items objectAtIndex:indexPath.row];
-                            actualCell.item = item;
+                    if(!VALID(swipeCell, NewsItemSwipeTableViewCell)) {
+                        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemSwipeTableViewCell" owner:self options:nil];
+                        
+                        if(VALID_NOTEMPTY(views, NSArray)) {
+                            swipeCell = [views objectAtIndex:0];
                         }
                     }
+                    
+                    if(VALID(swipeCell, NewsItemSwipeTableViewCell)) {
+                        NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
+                        NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
+                        
+                        if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
+                            swipeCell.newsItems = items;
+                            [swipeCell display];
+                        }
+                    }
+                    cell = swipeCell;
                 }
             }
         }
@@ -886,6 +895,13 @@
     return 44.0f;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(VALID(cell, NewsItemSwipeTableViewCell)) {
+        NewsItemSwipeTableViewCell *actualCell = (NewsItemSwipeTableViewCell *)cell;
+        
+        [actualCell display];
+    }
+}
 
 #pragma mark - UIScrollView Delegate
 
