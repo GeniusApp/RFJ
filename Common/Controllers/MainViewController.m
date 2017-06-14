@@ -37,7 +37,8 @@
 @import GoogleMobileAds;
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
-    NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableViewCellDelegate>
+    NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableViewCellDelegate, NewsItemSwipeTableViewCellDelegate,
+    NewsCategorySeparatorViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
@@ -58,6 +59,7 @@
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *joinedRegionSport;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
+@property (strong, nonatomic) NSArray<NewsItemSwipeTableViewCell *> *createdSwipeCells;
 
 @property (assign, nonatomic) NSInteger currentPage;
 @property (assign, nonatomic) BOOL isLoading;
@@ -132,12 +134,16 @@
     
     [self loadInterstitial];
     
+    self.createdSwipeCells = [NSArray array];
+    
   //  [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }  
 
 
 - (void)refreshTable:(id)sender {
     //TODO: refresh your data
+    
+    self.createdSwipeCells = [NSArray array];
     
     //[self.contentTableView reloadData];
     [self loadNextPage];
@@ -461,6 +467,7 @@
         [self sortNewsItems2];
         [self sortImportantNews];
         
+        self.createdSwipeCells = [NSArray array];
         [self.contentTableView reloadData];
     } failure:^(NSError *error) {
         [self hideLoading];
@@ -503,6 +510,7 @@
 //        [self sortNewsItems2];
 //        [self sortImportantNews];
         
+        self.createdSwipeCells = [NSArray array];
         [self.contentTableView reloadData];
     } failure:^(NSError *error) {
         [self hideLoading];
@@ -582,6 +590,9 @@
             [headerView setName:[self.allMenuItems objectAtIndex:categoryIndex].name];
         }
          */
+        
+        headerView.delegate = self;
+        headerView.tableSection = @(section);
         
         NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:section - 1];
         NSArray<NSNumber *> *navigationIds = [[content allKeys] objectAtIndex:0];
@@ -874,8 +885,11 @@
                             swipeCell.newsItems = items;
                             [swipeCell display];
                         }
+                        
+                        self.createdSwipeCells = [self.createdSwipeCells arrayByAddingObject:swipeCell];
                     }
                     cell = swipeCell;
+                    swipeCell.delegate = self;
                 }
             }
         }
@@ -1046,6 +1060,7 @@
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
+    NSLog(@"WHATTT: %@", item);
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.newsItems count]) {
@@ -1075,6 +1090,37 @@
     }
 }
 
+-(void)NewsItemSwipeDidTap:(NewsItemSwipeTableViewCell *)item withNewsItem:(NewsItem *)newsItem {
+    NSLog(@"WHATTT SWIPE: %@", item);
+    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    
+    if(index.row >= 0 && index.row < [self.newsItems count]) {
+        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
+        //NSLog(@"ITEM COUNT: %ld", (long)index.row);
+        //NSLog(@"SECTION COUNT: %ld", (long)index.section);
+        
+        
+        if(VALID(controller, NewsGroupViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                NewsItem *localItem = [newsItem MR_inContext:localContext];
+                
+                if(VALID(localItem, NewsItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            
+            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+            
+            controller.newsToDisplay = [self combinedNewsItems];
+            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj == newsItem;
+            }]);
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+}
+
 //-(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
 //    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
 //    
@@ -1091,6 +1137,7 @@
 
 
 -(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+    NSLog(@"WHATTT GALEIRE: %@", item);
     //    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     //    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
     //    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];
@@ -1112,7 +1159,7 @@
             
             [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
             
-            controller.newsID = [NSNumber numberWithInt:[self.galeriePhotos objectAtIndex:index.row].id];
+            controller.newsID = @([self.galeriePhotos objectAtIndex:index.row].id);
             
             [self.navigationController pushViewController:controller animated:YES];
         }
@@ -1120,5 +1167,24 @@
     
 }
 
+-(void)NewsCategorySeparatorViewDidClickLeft:(NewsCategorySeparatorView *)view {
+    for(NewsItemSwipeTableViewCell *cell in self.createdSwipeCells) {
+        if([self.contentTableView indexPathForCell:cell].section == [view.tableSection integerValue]) {
+            [cell moveLeft];
+            
+            break;
+        }
+    }
+}
+
+-(void)NewsCategorySeparatorViewDidClickRight:(NewsCategorySeparatorView *)view {
+    for(NewsItemSwipeTableViewCell *cell in self.createdSwipeCells) {
+        if([self.contentTableView indexPathForCell:cell].section == [view.tableSection integerValue]) {
+            [cell moveRight];
+            
+            break;
+        }
+    }
+}
 
 @end

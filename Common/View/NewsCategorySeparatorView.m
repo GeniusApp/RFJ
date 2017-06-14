@@ -27,10 +27,14 @@
     }
 }
 - (IBAction)leftArrowTapped:(UIButton *)sender {
-    NSLog(@"LEFT ARROW PRESSED");
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(NewsCategorySeparatorViewDidClickLeft:)]) {
+        [self.delegate NewsCategorySeparatorViewDidClickLeft:self];
+    }
 }
 - (IBAction)rightArrowTapped:(UIButton *)sender {
-    NSLog(@"RIGHT ARROW PRESSED");
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(NewsCategorySeparatorViewDidClickRight:)]) {
+        [self.delegate NewsCategorySeparatorViewDidClickRight:self];
+    }
 }
 
 @end
