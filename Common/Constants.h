@@ -21,7 +21,7 @@
 #define kMenuAnimationTime 0.5f
 #define kItemsPerPage 10
 #define kMenuRowHeight 44.0f
-#define kContentCategorySeparatorHeight 30.0f
+#define kContentCategorySeparatorHeight 40.0f
 
 #define kBackgroundColorRFJ [UIColor colorWithHexString:@"0099ff"]
 #define kBackgroundColorRJB [UIColor colorWithHexString:@"fb7d19"]

@@ -14,6 +14,7 @@
 #import "InfoContinuViewController.h"
 #import "GalerieViewController.h"
 #import "GalerieDetailViewController.h"
+#import "GalerieGroupViewController.h"
 #import "Validation.h"
 #import "MainViewController.h"
 #import "MenuItem+CoreDataProperties.h"
@@ -1146,9 +1147,9 @@
     //    [self addImageViewWithImage:image];
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     if(index.row >= 0 && index.row < [self.galeriePhotos count]) {
-        GalerieDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"galerieGroup"];
+        GalerieGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"galerieGroup"];
         
-        if(VALID(controller, GalerieDetailViewController)) {
+        if(VALID(controller, GalerieGroupViewController)) {
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
                 GalerieItem *localItem = [item.item MR_inContext:localContext];
                 
@@ -1159,7 +1160,10 @@
             
             [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
             
-            controller.newsID = @([self.galeriePhotos objectAtIndex:index.row].id);
+            controller.galerieToDisplay = self.galeriePhotos;
+            controller.startingIndex = @([controller.galerieToDisplay indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj == item.item;
+            }]);
             
             [self.navigationController pushViewController:controller animated:YES];
         }
