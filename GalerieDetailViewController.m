@@ -34,6 +34,7 @@
 #import "GalerieDetailTopTableViewCell.h"
 #import "TGRImageViewController.h"
 #import "TGRImageZoomAnimationController.h"
+#import "IDMPhotoBrowser/IDMPhotoBrowser.h"
 
 
 @interface GalerieDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
@@ -281,16 +282,39 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     NSString *imgConvert = [[self.galeriesDetail.contentGallery objectAtIndex:index.row] valueForKey:@"ImageUrl"];
     NSURL *imageURL = [NSURL URLWithString:imgConvert];
     NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    UIImage *image = [UIImage imageWithData:imageData];
-    TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:image];
-    // Don't forget to set ourselves as the transition delegate
-    viewController.transitioningDelegate = self;
     
-    [self presentViewController:viewController animated:YES completion:nil];
-    //[self addImageViewWithImage:image];
-    if(index.row >= 0 && index.row < [self.galerieDetail count]) {
-
+    NSMutableArray *ImageUrlArray = [[NSMutableArray alloc] initWithArray:self.galeriesDetail.contentGallery];
+    
+    NSLog(@"IMAGE URL COUNT: %lu", (unsigned long)ImageUrlArray.count);
+    
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    
+    for(NSDictionary *imageDictionary in ImageUrlArray) {
+        if(VALID_NOTEMPTY(imageDictionary, NSDictionary) && NOTEMPTY([imageDictionary objectForKey:@"ImageUrl"])) {
+            NSString *urlString = [imageDictionary objectForKey:@"ImageUrl"];
+            
+            if(VALID_NOTEMPTY(urlString, NSString)) {
+                IDMPhoto *photo = [IDMPhoto photoWithURL:[NSURL URLWithString:urlString]];
+                [photos addObject:photo];
+            }
+        }
     }
+    
+    IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos animatedFromView:item];
+    
+    [browser setInitialPageIndex:index.row];
+    
+    [self presentViewController:browser animated:YES completion:nil];
+
+//    TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:image];
+//    // Don't forget to set ourselves as the transition delegate
+//    viewController.transitioningDelegate = self;
+//    
+//    [self presentViewController:viewController animated:YES completion:nil];
+//    //[self addImageViewWithImage:image];
+//    if(index.row >= 0 && index.row < [self.galerieDetail count]) {
+//
+//    }
     
 }
 
