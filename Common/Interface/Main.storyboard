@@ -90,8 +90,13 @@
                                     <outlet property="delegate" destination="Mgm-SY-j4T" id="PIz-ir-JNw"/>
                                 </connections>
                             </tableView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ha3-x9-NVC">
+                                <rect key="frame" x="0.0" y="609" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5k-gA-fwx">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                                <rect key="frame" x="310" y="543" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="H0p-Qa-wDl"/>
@@ -116,7 +121,7 @@
                             <constraint firstAttribute="trailing" secondItem="lyo-0P-aSn" secondAttribute="trailing" id="UfM-4g-egg"/>
                             <constraint firstAttribute="trailing" secondItem="PZ7-06-HhR" secondAttribute="trailing" id="VGB-x4-kwt"/>
                             <constraint firstItem="Ode-fa-Xqb" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="XfF-ej-Xsp"/>
-                            <constraint firstAttribute="bottom" secondItem="s5k-gA-fwx" secondAttribute="bottom" constant="15" id="Xoz-LW-zv5"/>
+                            <constraint firstAttribute="bottom" secondItem="s5k-gA-fwx" secondAttribute="bottom" constant="74" id="Xoz-LW-zv5"/>
                             <constraint firstItem="lyo-0P-aSn" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="dX2-dK-D1a"/>
                             <constraint firstItem="01A-wf-IT3" firstAttribute="top" secondItem="PZ7-06-HhR" secondAttribute="bottom" constant="1" id="g8V-pK-lFa"/>
                             <constraint firstItem="PZ7-06-HhR" firstAttribute="top" secondItem="I02-XY-6wM" secondAttribute="bottom" id="hb7-MM-a31"/>
@@ -127,6 +132,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="yEK-pV-D1l"/>
                     <connections>
+                        <outlet property="bottomBanner" destination="ha3-x9-NVC" id="UgA-98-o2y"/>
                         <outlet property="contentTableView" destination="Ode-fa-Xqb" id="J5I-Bz-oan"/>
                         <outlet property="homeButton" destination="A9Y-2p-daw" id="lTH-lh-k9Y"/>
                         <outlet property="loadingView" destination="lyo-0P-aSn" id="dt3-Ik-CCT"/>

@@ -46,7 +46,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
-
+@property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
 @property (strong, nonatomic) NSArray<GalerieItem *> *galeriePhotos;
@@ -133,6 +133,9 @@
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = refreshControl;
+    
+    NSString *banner = @"<div class=\"pub\"><a href='https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101' target='_blank'><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></a></div>";
+    [self.bottomBanner loadHTMLString:banner baseURL:nil];
     
     [self loadInterstitial];
     
