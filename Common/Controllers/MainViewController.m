@@ -52,6 +52,7 @@
 @property (strong, nonatomic) NSArray<GalerieItem *> *galeriePhotos;
 @property (strong, nonatomic) NSMutableArray<NewsItem *> *galerieIntoNews;
 @property (strong, nonatomic) NSArray<NewsItem *> *importantItems;
+@property (strong, nonatomic) NSArray<NewsItem *> *type4;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<GalerieItem *> *> *sortedGalerieItems;
 @property (strong, nonatomic) NSMutableArray<NSDictionary<NSArray<NSNumber *>*, NSArray<NewsItem *> *> *>*sortedNewsItems2;
@@ -460,8 +461,10 @@
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                                    ascending:NO];
         NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
+        NSPredicate *objPredicateTwo = [NSPredicate predicateWithFormat:@"type = 4"];
         
         self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
+        self.type4 = [self.newsItems filteredArrayUsingPredicate:objPredicateTwo];
         
         [self sortNewsItems];
         [self sortGalerieItems];
@@ -477,8 +480,10 @@
                                             ascending:NO];
         
         NSPredicate *objPredicate = [NSPredicate predicateWithFormat:@"important = 1"];
-        
         self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
+        
+        NSPredicate *objPredicateTwo = [NSPredicate predicateWithFormat:@"type = 4"];
+        self.type4 = [self.newsItems filteredArrayUsingPredicate:objPredicateTwo];
         
         [self sortNewsItems];
         [self sortGalerieItems];
@@ -545,10 +550,14 @@
         return [self.menuItems count];
     }
     else if(tableView == self.contentTableView) {
-        
+        NSLog(@"TYPE4: %@", self.type4);
         //return [[self.sortedNewsItems objectForKey:navigationID] count];
         if (section == 0) {
-            return 3;
+            if (self.type4  != nil) {
+                return 4;
+            } else {
+                return 3;
+            }
         } else {
             return section == 1 ? 8 : 1;
         }
@@ -838,18 +847,22 @@
                 actualCell.delegate = self;
                 
                 if(indexPath.section == 0) {
-                   
-                    if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
-                    {
-                        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
-                        NSArray *sortDescriptors = @[createDateDescriptor];
-                        self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
-                        NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
+                        if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
+                        {
+                            
+                            if (indexPath.row == 3) {
+                                NewsItem *item = [self.type4 objectAtIndex:0];
+                                actualCell.item = item;
+                            } else {
+                            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+                            NSArray *sortDescriptors = @[createDateDescriptor];
+                            self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
+                            NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
+                            actualCell.item = item;
+                            }
+                        }
                         
-                        actualCell.item = item;
-                    }
-
-                    return cell;
+                        return cell;
                 }
                 else if (indexPath.section == 1) {
                     
