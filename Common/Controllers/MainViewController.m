@@ -133,8 +133,9 @@
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = refreshControl;
-    
-    NSString *banner = @"<div class=\"pub\"><a href='https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101' target='_blank'><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></a></div>";
+   
+    NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
+    banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     [self.bottomBanner loadHTMLString:banner baseURL:nil];
     
     [self loadInterstitial];
@@ -553,10 +554,9 @@
         return [self.menuItems count];
     }
     else if(tableView == self.contentTableView) {
-        NSLog(@"TYPE4: %@", self.type4);
         //return [[self.sortedNewsItems objectForKey:navigationID] count];
         if (section == 0) {
-            if (self.type4  != nil) {
+            if (self.type4.count) {
                 return 4;
             } else {
                 return 3;
@@ -801,13 +801,24 @@
     }
     else if(tableView == self.contentTableView) {
         if (indexPath.row == 7) {
+
+            NSString *adsSquare = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/teste_rfj.css?2\" type=\"text/css\" media=\"all\" />";
+            adsSquare = [adsSquare stringByAppendingString:@"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" />"];
+            adsSquare = [adsSquare stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
             static NSString *CellIdentifier = @"Cell";
+            
+            NSAttributedString *attrStr = [[NSAttributedString alloc] initWithData:[adsSquare dataUsingEncoding:NSUTF8StringEncoding]
+                                                                                options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                          NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                                     documentAttributes:nil error:nil];
+            
             // Reuse and create cell
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            cell.textLabel.text = @"Test Data";
+//            cell.textLabel.text = @"Test Data";
+            cell.textLabel.attributedText = attrStr;
             return cell;
         } else if (indexPath.section == 3) {
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
