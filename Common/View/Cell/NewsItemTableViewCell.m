@@ -61,7 +61,7 @@
             self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
             [self.imageType setImage:[UIImage imageNamed:@"play"]];
         }
-        NSLog(@"IMAGEM: %@", item.retina1);
+        
         if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound && [item.retina1 rangeOfString:@"JPG"].location == NSNotFound && [item.retina1 rangeOfString:@"png"].location == NSNotFound && [item.retina1 rangeOfString:@"PNG"].location == NSNotFound && [item.retina1 rangeOfString:@"jpeg"].location == NSNotFound) {
             [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if(VALID(image, UIImage)) {

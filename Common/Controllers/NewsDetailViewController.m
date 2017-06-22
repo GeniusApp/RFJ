@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIWebView *newsContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *newsContentHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
+
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
 
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
@@ -68,6 +69,7 @@
     
     [self.separatorView setUserInteractionEnabled:YES];
     [self.separatorView addGestureRecognizer:gestureRecognizer];
+
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
@@ -144,8 +146,9 @@
         }
         
         html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
-        //NSLog(@"HTML: %@", html);
+        
         NSString *ht_var = @"<script type='text/javascript'><!--//<![CDATA[var m3_u = (location.protocol=='https:'?'https://ww2.lapublicite.ch/pubserver/www/delivery/ajs.php':'http://ww2.lapublicite.ch/pubserver/www/delivery/ajs.php');var m3_r = Math.floor(Math.random()*99999999999);if (!document.MAX_used) document.MAX_used = ',';document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);document.write (\"?zoneid=20048\");document.write ('&amp;cb=' + m3_r);if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));document.write (\"&amp;loc=\" + escape(window.location));if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));if (document.context) document.write (\"&context=\" + escape(document.context));if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");document.write (\"'><\\/scr\"+\"ipt>\");//]]>--></script><noscript><a href='http://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20048&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a77eccf9' border='0' alt='' /></a></noscript>";
+
         html = [html stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
 
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];

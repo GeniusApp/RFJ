@@ -134,12 +134,12 @@
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = refreshControl;
    
+
+    
+    [self loadInterstitial];
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     [self.bottomBanner loadHTMLString:banner baseURL:nil];
-    
-    [self loadInterstitial];
-    
     self.createdSwipeCells = [NSArray array];
     
   //  [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
@@ -817,7 +817,7 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-//            cell.textLabel.text = @"Test Data";
+            
             cell.textLabel.attributedText = attrStr;
             return cell;
         } else if (indexPath.section == 3) {

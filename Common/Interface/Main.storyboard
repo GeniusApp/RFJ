@@ -91,12 +91,12 @@
                                 </connections>
                             </tableView>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ha3-x9-NVC">
-                                <rect key="frame" x="0.0" y="609" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5k-gA-fwx">
-                                <rect key="frame" x="310" y="543" width="50" height="50"/>
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="H0p-Qa-wDl"/>
@@ -121,7 +121,7 @@
                             <constraint firstAttribute="trailing" secondItem="lyo-0P-aSn" secondAttribute="trailing" id="UfM-4g-egg"/>
                             <constraint firstAttribute="trailing" secondItem="PZ7-06-HhR" secondAttribute="trailing" id="VGB-x4-kwt"/>
                             <constraint firstItem="Ode-fa-Xqb" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="XfF-ej-Xsp"/>
-                            <constraint firstAttribute="bottom" secondItem="s5k-gA-fwx" secondAttribute="bottom" constant="74" id="Xoz-LW-zv5"/>
+                            <constraint firstAttribute="bottom" secondItem="s5k-gA-fwx" secondAttribute="bottom" constant="77" id="Xoz-LW-zv5"/>
                             <constraint firstItem="lyo-0P-aSn" firstAttribute="leading" secondItem="N4Q-4T-9dk" secondAttribute="leading" id="dX2-dK-D1a"/>
                             <constraint firstItem="01A-wf-IT3" firstAttribute="top" secondItem="PZ7-06-HhR" secondAttribute="bottom" constant="1" id="g8V-pK-lFa"/>
                             <constraint firstItem="PZ7-06-HhR" firstAttribute="top" secondItem="I02-XY-6wM" secondAttribute="bottom" id="hb7-MM-a31"/>
@@ -404,8 +404,13 @@
                                     <outlet property="delegate" destination="Cck-O3-IAj" id="ZOV-3z-Ptw"/>
                                 </connections>
                             </tableView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YkB-T0-FKf">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="205-fS-14b">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="IHf-FD-PUX"/>
@@ -422,7 +427,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="205-fS-14b" secondAttribute="bottom" constant="15" id="7x3-tJ-KcS"/>
+                            <constraint firstAttribute="bottom" secondItem="205-fS-14b" secondAttribute="bottom" constant="77" id="7x3-tJ-KcS"/>
                             <constraint firstItem="jgw-2n-2VN" firstAttribute="top" secondItem="6C3-Ne-Pxm" secondAttribute="bottom" id="9Uv-4r-ptR"/>
                             <constraint firstAttribute="trailing" secondItem="mux-al-yyU" secondAttribute="trailing" id="Dud-8o-e1p"/>
                             <constraint firstItem="6C3-Ne-Pxm" firstAttribute="leading" secondItem="6NC-rd-ePb" secondAttribute="leading" id="FVZ-sd-cRk"/>
@@ -444,6 +449,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9ll-p3-kjQ"/>
                     <connections>
+                        <outlet property="bottomBanner" destination="YkB-T0-FKf" id="Y2x-Qx-0pZ"/>
                         <outlet property="contentTableView" destination="jgw-2n-2VN" id="EgE-T5-fNZ"/>
                         <outlet property="homeButton" destination="ZAg-U0-dLc" id="KjD-O2-SBc"/>
                         <outlet property="loadingView" destination="3Il-fL-ht1" id="dWO-Wp-zPf"/>
@@ -630,7 +636,7 @@
                                 <rect key="frame" x="0.0" y="196" width="375" height="473"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5OT-zg-Zwb">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="2Rm-pp-Bfs"/>
@@ -640,6 +646,11 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqi-Oq-Y1b">
+                                <rect key="frame" x="0.0" y="618" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -649,7 +660,7 @@
                             <constraint firstAttribute="trailing" secondItem="SpY-Zf-U5i" secondAttribute="trailing" id="8bV-Jl-LQv"/>
                             <constraint firstItem="SpY-Zf-U5i" firstAttribute="top" secondItem="uzA-JU-06j" secondAttribute="bottom" constant="-6" id="8iH-9j-GeN"/>
                             <constraint firstAttribute="trailing" secondItem="5OT-zg-Zwb" secondAttribute="trailing" constant="15" id="Dgp-b8-LBR"/>
-                            <constraint firstItem="O3M-kQ-MBb" firstAttribute="top" secondItem="5OT-zg-Zwb" secondAttribute="bottom" constant="15" id="Nn6-u7-0ll"/>
+                            <constraint firstItem="O3M-kQ-MBb" firstAttribute="top" secondItem="5OT-zg-Zwb" secondAttribute="bottom" constant="77" id="Nn6-u7-0ll"/>
                             <constraint firstItem="SpY-Zf-U5i" firstAttribute="leading" secondItem="Ocs-TN-pK4" secondAttribute="leading" id="eyA-IQ-ZU7"/>
                             <constraint firstItem="20r-nf-OaW" firstAttribute="top" secondItem="uzA-JU-06j" secondAttribute="bottom" constant="-13" id="jfw-iM-Hxs"/>
                             <constraint firstAttribute="trailing" secondItem="uzA-JU-06j" secondAttribute="trailing" id="rcd-UV-gAo"/>
@@ -662,6 +673,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomBanner" destination="bqi-Oq-Y1b" id="ePs-Fp-cfr"/>
                         <outlet property="buttonTapped" destination="Qpf-Vg-Dyu" id="jMB-q3-sYQ"/>
                         <outlet property="containerView" destination="S4E-F7-PQB" id="I1h-jb-SPP"/>
                         <outlet property="infoReportButton" destination="5OT-zg-Zwb" id="XtH-S5-D5D"/>
@@ -1132,8 +1144,13 @@
                                     <outlet property="delegate" destination="VNG-F0-hbx" id="0ig-hf-0A0"/>
                                 </connections>
                             </tableView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aam-lo-Hpp">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opc-kh-RCL">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="nN9-VQ-3fI" eventType="touchUpInside" id="2qJ-Fj-Kvv"/>
@@ -1167,11 +1184,12 @@
                             <constraint firstItem="Tbu-bZ-BTR" firstAttribute="top" secondItem="olj-gM-50V" secondAttribute="bottom" id="t6y-Dp-3V3"/>
                             <constraint firstItem="LJe-CH-CTA" firstAttribute="top" secondItem="qhr-38-1L8" secondAttribute="bottom" id="tyK-7A-Maw"/>
                             <constraint firstItem="Tbu-bZ-BTR" firstAttribute="leading" secondItem="0Rz-z7-Ssi" secondAttribute="leading" id="v3o-sH-Yhv"/>
-                            <constraint firstAttribute="bottom" secondItem="Opc-kh-RCL" secondAttribute="bottom" constant="15" id="yiG-9A-yJC"/>
+                            <constraint firstAttribute="bottom" secondItem="Opc-kh-RCL" secondAttribute="bottom" constant="77" id="yiG-9A-yJC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZvV-Mw-dsR"/>
                     <connections>
+                        <outlet property="bottomBanner" destination="Aam-lo-Hpp" id="MZw-l3-AMY"/>
                         <outlet property="contentTableView" destination="Nup-gM-z9N" id="Wtd-kN-1et"/>
                         <outlet property="homeButton" destination="Xnt-e8-OaU" id="bOR-xX-TyD"/>
                         <outlet property="loadingView" destination="qhr-38-1L8" id="L1w-Gq-Q8n"/>

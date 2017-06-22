@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (weak, nonatomic) IBOutlet UIButton *infoReportButton;
 
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
@@ -104,7 +105,11 @@
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];
     [self.view bringSubviewToFront:self.loadingView];
-    
+    NSLog(@"GOING TO LOAD BANNER");
+    NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
+    banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
+    [self.bottomBanner loadHTMLString:banner baseURL:nil];
+
     [self hideLoading];
 }
 - (IBAction)homeButtonTapped:(UIButton *)sender {
