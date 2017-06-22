@@ -817,7 +817,7 @@
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            
+
             cell.textLabel.attributedText = attrStr;
             return cell;
         } else if (indexPath.section == 3) {
@@ -931,7 +931,11 @@
         return 44.0f;
     }
     else if(tableView == self.contentTableView) {
-        return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
+        if (indexPath.row == 7) {
+            return 300;
+        } else {
+            return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
+        }
     }
     
     return 44.0f;
