@@ -39,6 +39,7 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<GalerieItem *> *galerieItems;
@@ -111,6 +112,9 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     self.menuHeightConstraint.constant = 0;
     self.isLoading = NO;
     [self loadNextPage];
+    NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
+    banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
+    [self.bottomBanner loadHTMLString:banner baseURL:nil];
 }
 
 - (void)didReceiveMemoryWarning {

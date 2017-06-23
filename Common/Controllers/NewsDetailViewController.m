@@ -31,8 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIWebView *newsContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *newsContentHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
-
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) NewsDetail *newsDetail;
@@ -75,6 +75,7 @@
 -(void)loadNews:(NSNumber *)newsToDisplay {
     [self showLoading];
     self.remainingLoadingElements = 2;
+    [self.scrollView setContentOffset:CGPointZero animated:NO];
     
     if(VALID(newsToDisplay, NSNumber)) {
         self.currentNews = newsToDisplay;
@@ -97,6 +98,10 @@
 
 -(void)hideLoading {
     [self.loadingView setHidden:YES];
+    [self.view setNeedsLayout];
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraints];
+    [self.view layoutIfNeeded];
 }
 
 -(void)refreshNews {
@@ -150,7 +155,10 @@
         NSString *ht_var = @"<script type='text/javascript'><!--//<![CDATA[var m3_u = (location.protocol=='https:'?'https://ww2.lapublicite.ch/pubserver/www/delivery/ajs.php':'http://ww2.lapublicite.ch/pubserver/www/delivery/ajs.php');var m3_r = Math.floor(Math.random()*99999999999);if (!document.MAX_used) document.MAX_used = ',';document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);document.write (\"?zoneid=20048\");document.write ('&amp;cb=' + m3_r);if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));document.write (\"&amp;loc=\" + escape(window.location));if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));if (document.context) document.write (\"&context=\" + escape(document.context));if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");document.write (\"'><\\/scr\"+\"ipt>\");//]]>--></script><noscript><a href='http://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20048&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a77eccf9' border='0' alt='' /></a></noscript>";
 
         html = [html stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
-        NSLog(@"HTML: %@", html);
+        
+        html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
+        
+        //NSLog(@"HTML: %@", html);
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         
         [self.separatorView setDate:self.newsDetail.updateDate];
@@ -256,17 +264,31 @@
 #pragma mark - WebView Delegate
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    //Disable selection
-    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
-    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+}
 
-    self.newsContentHeightConstraint.constant = webView.scrollView.contentSize.height;
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *url = [request URL];
     
-    self.remainingLoadingElements--;
-    
-    if(self.remainingLoadingElements == 0) {
-        [self hideLoading];
+    if([[url scheme] isEqualToString:@"ready"]) {
+        CGFloat contentHeight = [[url host] floatValue];
+        //Disable selection
+        [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+        [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+        
+        NSLog(@"ContentHeight for News %@: %lf", self.newsDetail.title, contentHeight);
+        
+        self.newsContentHeightConstraint.constant = contentHeight;
+        
+        self.remainingLoadingElements--;
+        
+        if(self.remainingLoadingElements == 0) {
+            [self hideLoading];
+        }
+        
+        return NO;
     }
+    
+    return YES;
 }
 
 @end

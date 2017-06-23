@@ -311,6 +311,7 @@
                         <outlet property="loadingView" destination="f9q-1c-NEh" id="jIh-A7-t8A"/>
                         <outlet property="newsContent" destination="dRW-yQ-U9E" id="XLG-dQ-kOf"/>
                         <outlet property="newsContentHeightConstraint" destination="rLS-l5-zNK" id="5qq-FD-PpF"/>
+                        <outlet property="scrollView" destination="KUH-wB-Evh" id="i5P-I5-cNs"/>
                         <outlet property="separatorView" destination="rY4-xG-Rkz" id="r1p-Sg-Znu"/>
                     </connections>
                 </viewController>
@@ -1291,8 +1292,13 @@
                                     <outlet property="delegate" destination="AG9-4b-8N0" id="RLm-ZJ-WMD"/>
                                 </connections>
                             </tableView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kkq-kU-QZf">
+                                <rect key="frame" x="0.0" y="618" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfZ-jv-6YQ">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="AG9-4b-8N0" eventType="touchUpInside" id="7sp-cH-hlR"/>
@@ -1325,12 +1331,13 @@
                             <constraint firstAttribute="trailing" secondItem="xu3-qJ-Nqz" secondAttribute="trailing" id="go6-IO-9Mz"/>
                             <constraint firstItem="Lbi-Mf-YOn" firstAttribute="top" secondItem="hrZ-7H-nfS" secondAttribute="bottom" constant="-9" id="pjf-YB-EX9"/>
                             <constraint firstItem="EVo-aP-QKg" firstAttribute="trailing" secondItem="Lbi-Mf-YOn" secondAttribute="trailing" id="t6S-hD-rPY"/>
-                            <constraint firstAttribute="bottom" secondItem="ZfZ-jv-6YQ" secondAttribute="bottom" constant="15" id="tqh-qn-P0P"/>
+                            <constraint firstAttribute="bottom" secondItem="ZfZ-jv-6YQ" secondAttribute="bottom" constant="77" id="tqh-qn-P0P"/>
                             <constraint firstItem="Lbi-Mf-YOn" firstAttribute="leading" secondItem="h3v-hG-Z4f" secondAttribute="leading" id="xY1-7C-6M0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8eP-zw-OuZ"/>
                     <connections>
+                        <outlet property="bottomBanner" destination="kkq-kU-QZf" id="VX9-WP-aLI"/>
                         <outlet property="contentTableView" destination="pvH-GB-eao" id="xd3-rk-4zD"/>
                         <outlet property="homeButton" destination="c68-6p-ft8" id="0gg-MC-4Nv"/>
                         <outlet property="loadingView" destination="xu3-qJ-Nqz" id="V9d-hp-Thm"/>
@@ -1369,8 +1376,13 @@
                                     <outlet property="delegate" destination="aJA-zI-FlP" id="Aum-cQ-Ars"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kN-GD-ofm">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1JF-eb-OrJ">
+                                <rect key="frame" x="0.0" y="618" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kN-GD-ofm">
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="aJA-zI-FlP" eventType="touchUpInside" id="GjV-gt-3DE"/>
@@ -1391,7 +1403,7 @@
                             <constraint firstItem="RRz-3m-DBQ" firstAttribute="leading" secondItem="SNc-2X-Sf6" secondAttribute="leading" id="QaD-Dm-zW9"/>
                             <constraint firstItem="RRz-3m-DBQ" firstAttribute="top" secondItem="KoC-83-77I" secondAttribute="bottom" id="Rht-GP-jhl"/>
                             <constraint firstAttribute="trailing" secondItem="X73-aH-a7N" secondAttribute="trailing" id="TBw-x2-JdX"/>
-                            <constraint firstAttribute="bottom" secondItem="4kN-GD-ofm" secondAttribute="bottom" constant="15" id="TCr-DK-kbC"/>
+                            <constraint firstAttribute="bottom" secondItem="4kN-GD-ofm" secondAttribute="bottom" constant="77" id="TCr-DK-kbC"/>
                             <constraint firstAttribute="trailing" secondItem="3vD-4r-YLV" secondAttribute="trailing" id="aIa-DY-FAj"/>
                             <constraint firstItem="3vD-4r-YLV" firstAttribute="top" secondItem="RRz-3m-DBQ" secondAttribute="bottom" constant="-1" id="hJs-VJ-Zb3"/>
                             <constraint firstAttribute="trailing" secondItem="RRz-3m-DBQ" secondAttribute="trailing" id="ln0-vt-vP7"/>
@@ -1403,6 +1415,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="4Ye-Z8-eAO"/>
                     <connections>
+                        <outlet property="bottomBanner" destination="1JF-eb-OrJ" id="yDh-tF-v21"/>
                         <outlet property="contentTableView" destination="3vD-4r-YLV" id="W6J-8d-Po7"/>
                         <outlet property="loadingView" destination="X73-aH-a7N" id="VzH-dM-Ln9"/>
                         <outlet property="separatorView" destination="RRz-3m-DBQ" id="DAb-Ab-WIB"/>
@@ -1487,7 +1500,7 @@
                                 <rect key="frame" x="0.0" y="192" width="375" height="479"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANa-Sc-smF">
-                                <rect key="frame" x="310" y="602" width="50" height="50"/>
+                                <rect key="frame" x="310" y="540" width="50" height="50"/>
                                 <state key="normal" image="auditeur-reporter"/>
                                 <connections>
                                     <action selector="openInfoReport:" destination="aes-om-HLq" eventType="touchUpInside" id="w09-xC-WpR"/>
@@ -1497,6 +1510,11 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVs-j3-0d2">
+                                <rect key="frame" x="0.0" y="618" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1512,13 +1530,14 @@
                             <constraint firstAttribute="trailing" secondItem="DFm-fn-IJ5" secondAttribute="trailing" id="ZIo-TF-EZR"/>
                             <constraint firstItem="ptU-U4-Mfh" firstAttribute="leading" secondItem="eGO-22-WgO" secondAttribute="leading" id="ghA-Nb-UZJ"/>
                             <constraint firstAttribute="trailing" secondItem="ANa-Sc-smF" secondAttribute="trailing" constant="15" id="i6W-yL-Mtj"/>
-                            <constraint firstItem="rmi-il-bxs" firstAttribute="top" secondItem="ANa-Sc-smF" secondAttribute="bottom" constant="15" id="iVf-9N-m7b"/>
+                            <constraint firstItem="rmi-il-bxs" firstAttribute="top" secondItem="ANa-Sc-smF" secondAttribute="bottom" constant="77" id="iVf-9N-m7b"/>
                             <constraint firstItem="rmi-il-bxs" firstAttribute="top" secondItem="DFm-fn-IJ5" secondAttribute="bottom" constant="-4" id="tcl-0G-eJl"/>
                             <constraint firstItem="ptU-U4-Mfh" firstAttribute="top" secondItem="FMp-XN-qoB" secondAttribute="bottom" constant="-9" id="yjf-NM-o9f"/>
                             <constraint firstItem="4oO-Si-vFK" firstAttribute="leading" secondItem="eGO-22-WgO" secondAttribute="leading" id="yxZ-oJ-GiK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomBanner" destination="WVs-j3-0d2" id="otL-xG-ubY"/>
                         <outlet property="buttonTapped" destination="Em8-1s-6NP" id="MOp-I9-LbH"/>
                         <outlet property="containerView" destination="DFm-fn-IJ5" id="eHQ-mf-ziN"/>
                         <outlet property="infoReportButton" destination="ANa-Sc-smF" id="ofu-0o-M6a"/>

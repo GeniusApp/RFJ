@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="424" height="167"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XVq-kP-O2S" id="kP6-iW-aHw">
-                <rect key="frame" x="0.0" y="0.0" width="424" height="166.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="424" height="167"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7E-we-Kmz">
@@ -96,7 +96,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQP-2l-dDp">
-                        <rect key="frame" x="8" y="118.5" width="408" height="20"/>
+                        <rect key="frame" x="8" y="106" width="408" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -106,9 +106,9 @@
                     <constraint firstAttribute="trailing" secondItem="LQP-2l-dDp" secondAttribute="trailing" constant="8" id="4mN-Wu-E3a"/>
                     <constraint firstAttribute="trailingMargin" secondItem="V7E-we-Kmz" secondAttribute="trailing" constant="10" id="5PG-tb-hNb"/>
                     <constraint firstItem="V7E-we-Kmz" firstAttribute="leading" secondItem="kP6-iW-aHw" secondAttribute="leading" constant="8" id="65S-96-ofx"/>
+                    <constraint firstItem="LQP-2l-dDp" firstAttribute="top" secondItem="Kip-mF-gLP" secondAttribute="bottom" constant="10" id="A8m-4I-HHH"/>
                     <constraint firstItem="LQP-2l-dDp" firstAttribute="leading" secondItem="kP6-iW-aHw" secondAttribute="leading" constant="8" id="OKa-gj-Abf"/>
                     <constraint firstItem="Kip-mF-gLP" firstAttribute="top" secondItem="V7E-we-Kmz" secondAttribute="bottom" constant="17.5" id="aMM-JZ-tHT"/>
-                    <constraint firstAttribute="bottom" secondItem="LQP-2l-dDp" secondAttribute="bottom" constant="28" id="e9g-jR-zYD"/>
                     <constraint firstItem="Kip-mF-gLP" firstAttribute="leading" secondItem="kP6-iW-aHw" secondAttribute="leading" constant="8" id="fEB-wU-P0L"/>
                     <constraint firstItem="V7E-we-Kmz" firstAttribute="top" secondItem="kP6-iW-aHw" secondAttribute="top" constant="17" id="gfg-8e-dDj"/>
                     <constraint firstAttribute="trailing" secondItem="Kip-mF-gLP" secondAttribute="trailing" constant="8" id="q74-RO-JSy"/>
