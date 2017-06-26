@@ -88,7 +88,8 @@
         
         for(NSInteger i = [controllers count] - 2; i >= 0; i--) {
             UIViewController *controller = [controllers objectAtIndex:i];
-
+            NSLog(@"CONTROLLER: %@", controller);
+            NSLog(@"NAVIGATION CONTROLLER: %@", navigationController);
             if((!wantsMainController && VALID(controller, CategoryViewController)) || VALID(controller, MainViewController)) {
                 [navigationController popToViewController:controller animated:YES];
                 

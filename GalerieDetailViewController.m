@@ -76,7 +76,7 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.galerieDetail = [GalerieDetail MR_findAll];
-    
+    NSLog(@"GALERIE DETAIL: %@", self.galeriesDetail);
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
     
     [self loadGalerie:self.newsID];
@@ -220,7 +220,7 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
             }
             NSString *titleGalerie = self.newsDetail.title;
             NSString *linkGalerie = self.newsDetail.link;
-            NSLog(@"LINK: %@", linkGalerie);
+            
             NSString *authorHTML = @"";
             NSArray *contentValue = [self.galerieDetail valueForKey:@"content"];
             if(VALID_NOTEMPTY(contentValue, NSArray)) {

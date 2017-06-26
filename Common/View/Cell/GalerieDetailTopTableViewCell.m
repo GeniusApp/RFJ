@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "BDGShare.h"
 #import "Constants.h"
+#import "Validation.h"
 
 @interface GalerieDetailTopTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -88,13 +89,16 @@
 }
 
 - (void) setTitle:(NSString *)title andAuthor:(NSString *)author andLink:(NSString *)link {
-    NSAttributedString *authorString = [[NSAttributedString alloc] initWithData:[author dataUsingEncoding:NSUTF8StringEncoding]
-                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                               NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                          documentAttributes:nil error:nil];
+    if (VALID_NOTEMPTY(author, NSString) ) {
+        NSAttributedString *authorString = [[NSAttributedString alloc] initWithData:[author dataUsingEncoding:NSUTF8StringEncoding]
+                                                                            options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                      NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                                 documentAttributes:nil error:nil];
+        
+        self.authorLabel.attributedText = authorString;
+    }
     self.link = link;
     self.titleLabel.text = title;
-    self.authorLabel.attributedText = authorString;
 }
 
 -(void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
