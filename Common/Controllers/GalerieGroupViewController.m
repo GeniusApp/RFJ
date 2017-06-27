@@ -46,7 +46,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //NSLog(@"NEWSGROUP");
 
     self.allMenuItems = [MenuItem sortedMenuItems];
     [self refreshMenuItems];
@@ -98,9 +97,6 @@
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.pageController.view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
     
     [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
-//    NSLog(@"STARTINGINDEX: %@", self.startingIndex);
-//    NSLog(@"PAGES: %@", self.pages);
-//    NSLog(@"NEWS TO DISPLAY: %@", self.newsToDisplay);
     [self.pages objectAtIndex:0].newsID = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadGalerie:@([self.galerieToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];

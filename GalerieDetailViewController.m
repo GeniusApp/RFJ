@@ -44,7 +44,6 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
 @property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
-@property (strong, nonatomic) NSArray<GalerieDetail *> *galerieDetail;
 //@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<NewsItem *> *> *sortedNewsItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) GalerieDetail *galeriesDetail;
@@ -75,11 +74,7 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     tableViewController.refreshControl = refreshControl;
     
     self.allMenuItems = [MenuItem sortedMenuItems];
-    self.galerieDetail = [GalerieDetail MR_findAll];
-    NSLog(@"GALERIE DETAIL: %@", self.galeriesDetail);
     [[ResourcesManager singleton] fetchResourcesWithSuccessBlock:nil andFailureBlock:nil];
-    
-    [self loadGalerie:self.newsID];
     
     self.activeCategoryId = [NSNumber numberWithInt:9622];
     //self.activeCategoryId = self.navigationId;
@@ -134,7 +129,7 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     [self showLoading];
     
 //    [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
-    [[NewsManager singleton] fetchGalerieDetailForNews:self.newsID successBlock:^(GalerieDetail *galerieDetail) {
+    [[NewsManager singleton] fetchGalerieDetailForNews:[self.currentGalerie integerValue] successBlock:^(GalerieDetail *galerieDetail) {
         self.galeriesDetail = galerieDetail;
         [self.contentTableView reloadData];
         
@@ -147,12 +142,11 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     }];
 }
 
--(void)loadGalerie:(NSNumber *)newsID {
+-(void)loadGalerie:(NSNumber *)galerieID {
     
-    if(VALID(newsID, NSNumber)) {
-        
-        self.currentGalerie = self.newsID;
-        [[NewsManager singleton] fetchGalerieDetailForNews:[newsID integerValue] successBlock:^(GalerieDetail *galeriesDetail) {
+    if(VALID(galerieID, NSNumber)) {
+        self.currentGalerie = galerieID;
+        [[NewsManager singleton] fetchGalerieDetailForNews:[galerieID integerValue] successBlock:^(GalerieDetail *galeriesDetail) {
             self.galeriesDetail = galeriesDetail;
             //NSLog(@"QUEREMOS FOTOS! %lu", [self.galerieDetails count]);
             
@@ -165,12 +159,8 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
             [self hideLoading];
         //    [self refreshNews];
         }];
-    }
-    
-    if(VALID(newsID, NSNumber)) {
         
-        
-        [[NewsManager singleton] fetchNewsDetailForNews:[newsID integerValue] successBlock:^(NewsDetail *newsDetail) {
+        [[NewsManager singleton] fetchNewsDetailForNews:[galerieID integerValue] successBlock:^(NewsDetail *newsDetail) {
             self.newsDetail = newsDetail;
             
             [self.contentTableView reloadData];
@@ -222,9 +212,9 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
             NSString *linkGalerie = self.newsDetail.link;
             
             NSString *authorHTML = @"";
-            NSArray *contentValue = [self.galerieDetail valueForKey:@"content"];
-            if(VALID_NOTEMPTY(contentValue, NSArray)) {
-                authorHTML = [contentValue objectAtIndex:0];
+            NSString *contentValue = [self.galeriesDetail valueForKey:@"content"];
+            if(VALID_NOTEMPTY(contentValue, NSString)) {
+                authorHTML = contentValue;
             }
             [actualCell setTitle:titleGalerie andAuthor:authorHTML andLink:linkGalerie];
             cell = actualCell;
@@ -280,15 +270,12 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
 -(void)GalerieDetailDidTap:(GalerieDetailTableViewCell *)item {
 
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
-    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
-    NSLog(@"IMAGEM: %@", [self.galeriesDetail.contentGallery objectAtIndex:index.row]);
     NSString *imgConvert = [[self.galeriesDetail.contentGallery objectAtIndex:index.row] valueForKey:@"ImageUrl"];
     NSURL *imageURL = [NSURL URLWithString:imgConvert];
     NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
     
     NSMutableArray *ImageUrlArray = [[NSMutableArray alloc] initWithArray:self.galeriesDetail.contentGallery];
     
-    NSLog(@"IMAGE URL COUNT: %lu", (unsigned long)ImageUrlArray.count);
     
     NSMutableArray *photos = [[NSMutableArray alloc] init];
     
