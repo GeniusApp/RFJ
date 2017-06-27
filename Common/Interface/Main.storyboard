@@ -1536,23 +1536,26 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVs-j3-0d2">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVs-j3-0d2">
                                 <rect key="frame" x="0.0" y="618" width="375" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WVs-j3-0d2" firstAttribute="trailing" secondItem="DFm-fn-IJ5" secondAttribute="trailing" id="6KE-3Q-tTW"/>
                             <constraint firstItem="FMp-XN-qoB" firstAttribute="leading" secondItem="eGO-22-WgO" secondAttribute="leading" id="Ahu-Sr-8Y1"/>
                             <constraint firstItem="DFm-fn-IJ5" firstAttribute="leading" secondItem="eGO-22-WgO" secondAttribute="leading" id="Cb0-Dw-dqt"/>
+                            <constraint firstItem="WVs-j3-0d2" firstAttribute="top" secondItem="ANa-Sc-smF" secondAttribute="bottom" constant="28" id="DcN-0l-Wf8"/>
                             <constraint firstItem="FMp-XN-qoB" firstAttribute="top" secondItem="XkE-3j-Ovw" secondAttribute="bottom" id="Dp5-Qi-0DU"/>
                             <constraint firstAttribute="trailing" secondItem="ptU-U4-Mfh" secondAttribute="trailing" id="Dpq-MP-you"/>
                             <constraint firstItem="DFm-fn-IJ5" firstAttribute="top" secondItem="ptU-U4-Mfh" secondAttribute="bottom" id="Hz5-hk-ruU"/>
                             <constraint firstAttribute="trailing" secondItem="4oO-Si-vFK" secondAttribute="trailing" id="K9k-QA-EOK"/>
+                            <constraint firstItem="WVs-j3-0d2" firstAttribute="leading" secondItem="DFm-fn-IJ5" secondAttribute="leading" id="LTE-wB-nae"/>
                             <constraint firstItem="4oO-Si-vFK" firstAttribute="top" secondItem="FMp-XN-qoB" secondAttribute="bottom" constant="-13" id="Ned-W8-eii"/>
                             <constraint firstItem="rmi-il-bxs" firstAttribute="top" secondItem="4oO-Si-vFK" secondAttribute="bottom" id="Sjk-jh-mja"/>
                             <constraint firstAttribute="trailing" secondItem="FMp-XN-qoB" secondAttribute="trailing" id="UeI-1N-x70"/>
+                            <constraint firstItem="rmi-il-bxs" firstAttribute="top" secondItem="WVs-j3-0d2" secondAttribute="bottom" constant="-1" id="YgL-7R-Tby"/>
                             <constraint firstAttribute="trailing" secondItem="DFm-fn-IJ5" secondAttribute="trailing" id="ZIo-TF-EZR"/>
                             <constraint firstItem="ptU-U4-Mfh" firstAttribute="leading" secondItem="eGO-22-WgO" secondAttribute="leading" id="ghA-Nb-UZJ"/>
                             <constraint firstAttribute="trailing" secondItem="ANa-Sc-smF" secondAttribute="trailing" constant="15" id="i6W-yL-Mtj"/>
