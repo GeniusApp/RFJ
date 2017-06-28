@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="752" height="404"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="752" height="403.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="752" height="404"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4CL-kJ-kRz">
@@ -57,6 +57,13 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contenu sponsorisé" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAh-xd-28k">
+                        <rect key="frame" x="28" y="31" width="176" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.25789844989776611" green="0.59488570690155029" blue="0.70382946729660034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEK-BS-mtq">
                         <rect key="frame" x="0.0" y="0.0" width="752" height="403"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -94,6 +101,7 @@
                 <outlet property="coverView" destination="hEK-BS-mtq" id="wGs-Ph-7n8"/>
                 <outlet property="dateLabel" destination="5fP-TT-QXy" id="T2V-GJ-JdG"/>
                 <outlet property="imageType" destination="L3G-zh-akb" id="HqZ-9a-xO0"/>
+                <outlet property="sponsorLabel" destination="sAh-xd-28k" id="FV3-5B-27D"/>
                 <outlet property="titleLabel" destination="VcO-Sh-HdY" id="OJg-N6-VJp"/>
             </connections>
         </tableViewCell>

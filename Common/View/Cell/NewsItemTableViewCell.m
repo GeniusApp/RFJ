@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sponsorLabel;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageType;
 
@@ -93,6 +94,7 @@
             return obj.id == item.navigationId;
         }];
         if (item.type == 4) {
+            self.sponsorLabel.hidden = NO;
             self.categoryLabel.text = @"Publireportage";
         } else {
             if(categoryIndex != NSNotFound) {
