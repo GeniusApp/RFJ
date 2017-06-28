@@ -37,6 +37,7 @@
 #import "IDMPhotoBrowser/IDMPhotoBrowser.h"
 
 
+
 @interface GalerieDetailViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
 GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
@@ -86,6 +87,8 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     [self.bottomBanner loadHTMLString:banner baseURL:nil];
+    [self.contentTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+
 }
 
 - (void)didReceiveMemoryWarning {

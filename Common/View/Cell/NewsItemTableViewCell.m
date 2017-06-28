@@ -43,6 +43,7 @@
     if(VALID(item, NewsItem)) {
         _item = item;
         self.titleLabel.text = item.title;
+        NSLog(@"TYPE: %hd", item.type);
         if (item.type == 1) {
             NSString *concat1 = self.titleLabel.text;
             NSString *concat2 = @"     ";
@@ -61,7 +62,7 @@
             self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
             [self.imageType setImage:[UIImage imageNamed:@"play"]];
         }
-        
+
         if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound && [item.retina1 rangeOfString:@"JPG"].location == NSNotFound && [item.retina1 rangeOfString:@"png"].location == NSNotFound && [item.retina1 rangeOfString:@"PNG"].location == NSNotFound && [item.retina1 rangeOfString:@"jpeg"].location == NSNotFound) {
             [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if(VALID(image, UIImage)) {
@@ -80,20 +81,26 @@
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
         [formatter setTimeZone:[NSTimeZone localTimeZone]];
-        
-        self.dateLabel.text = [formatter stringFromDate:item.updateDate];
+        if (item.type == 4) {
+            self.dateLabel.text = @"";
+        } else {
+            self.dateLabel.text = [formatter stringFromDate:item.updateDate];
+        }
         
         NSArray<MenuItem *> *allItems = [MenuItem MR_findAll];
         
         NSInteger categoryIndex = [allItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             return obj.id == item.navigationId;
         }];
-        
-        if(categoryIndex != NSNotFound) {
-            self.categoryLabel.text = [allItems objectAtIndex:categoryIndex].name;
-        }
-        else {
-            self.categoryLabel.text = @"";
+        if (item.type == 4) {
+            self.categoryLabel.text = @"Publireportage";
+        } else {
+            if(categoryIndex != NSNotFound) {
+                self.categoryLabel.text = [allItems objectAtIndex:categoryIndex].name;
+            }
+            else {
+                self.categoryLabel.text = @"";
+            }
         }
         
         if(item.read) {

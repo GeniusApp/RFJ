@@ -171,22 +171,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return 9;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row) {
         case 0:
-            return 140;
+            return 150;
             break;
         case 1:
-            return 130;
+            return 180;
             break;
         case 3:
             return 50;
             break;
         case 4:
-            return 115;
+            return 50;
             break;
         case 5:
             return 50;
@@ -198,6 +198,9 @@
             return 50;
             break;
         case 7:
+            return 50;
+            break;
+        case 8:
             return 50;
             break;
         default:
@@ -218,15 +221,15 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         self.image = (UIImageView *)[cell.contentView viewWithTag:2];
         
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == 4) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"InputCellTitle" forIndexPath:indexPath];
         self.titleTextField = (UITextField *)[cell.contentView viewWithTag:100];
-        self.titleTextField.placeholder = @"Title";
+        self.titleTextField.placeholder = @"Titre";
         self.titleTextField.keyboardType = UIKeyboardTypeAlphabet;
         self.titleTextField.returnKeyType = UIReturnKeyDone;
         self.titleTextField.delegate = self;
         
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 5) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"descri" forIndexPath:indexPath];
         self.descriptionTextField = (UITextView *)[cell.contentView viewWithTag:100];
         //self.descriptionTextField.placeholder = @"Description";
@@ -234,7 +237,7 @@
         self.descriptionTextField.returnKeyType = UIReturnKeyDone;
         self.descriptionTextField.delegate = self;
         
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 6) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"InputCell" forIndexPath:indexPath];
         self.emailTextField = (UITextField *)[cell.contentView viewWithTag:100];
         self.emailTextField.placeholder = @"Adresse e-mail";
@@ -242,7 +245,7 @@
         self.emailTextField.returnKeyType = UIReturnKeyDone;
         self.emailTextField.delegate = self;
         
-    } else if (indexPath.row == 6) {
+    } else if (indexPath.row == 7) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"InputCell" forIndexPath:indexPath];
         self.phoneTextField = (UITextField *)[cell.contentView viewWithTag:100];
         self.phoneTextField.placeholder = @"Téléphone";
@@ -250,12 +253,18 @@
         self.phoneTextField.returnKeyType = UIReturnKeyDone;
         self.phoneTextField.delegate = self;
         
-    } else if (indexPath.row == 7) {
+    } else if (indexPath.row == 8) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"envoyer" forIndexPath:indexPath];
         
     }
     else if (indexPath.row == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"PhotoCell" forIndexPath:indexPath];
+        self.uploadedLabel=(UILabel *)[cell.contentView viewWithTag:200];
+        self.textView.text=@"";
+        self.phoneTextField.delegate = self;
+    }
+    else if (indexPath.row == 3) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"VideoCell" forIndexPath:indexPath];
         self.uploadedLabel=(UILabel *)[cell.contentView viewWithTag:200];
         self.textView.text=@"";
         self.phoneTextField.delegate = self;
