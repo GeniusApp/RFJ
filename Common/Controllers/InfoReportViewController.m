@@ -329,6 +329,13 @@
         [self setViewMovedUp:YES];
     }
     
+}
+
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    // Assign new frame to your view
+    [self.view setFrame:CGRectMake(0,-110,320,460)]; //here taken -110 for example i.e. your view will be scrolled to -110. change its value according to your requirement.
     
 }
 
@@ -348,7 +355,7 @@
     NSTimeInterval duration = [[[sender userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? kbSize.height : kbSize.width;
-    height = height - 20;
+    height = height + 20;
     [UIView animateWithDuration:duration animations:^{
         UIEdgeInsets edgeInsets = [[self tableView] contentInset];
         edgeInsets.bottom = height;
@@ -380,7 +387,7 @@
 #pragma mark - UITextField delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
     return YES;
 }
 
