@@ -865,7 +865,6 @@
                         {
                             
                             if (indexPath.row == 3) {
-                                NSLog(@"BORA LA VER ISTO");
                                 NewsItem *item = [self.type4 objectAtIndex:0];
                                 NSLog(@"BORA LA VER ISTO %@", item);
                                 actualCell.item = item;

@@ -38,6 +38,10 @@
     
     self.Istextview=0;
     self.image.image=[UIImage imageNamed:@"images/GalleryDefaultImage.png"];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,6 +70,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)dismissKeyboard
+{
+    [self.titleTextField resignFirstResponder];
+    [self.descriptionTextField resignFirstResponder];
+    [self.emailTextField resignFirstResponder];
+    [self.phoneTextField resignFirstResponder];
+}
 - (void)displayError:(NSString *)error {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Formulaire incomplet"
                                                         message:error
@@ -332,11 +343,12 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)sender {
+    NSLog(@"KEYBORAD SHOW: %@", sender);
     CGSize kbSize = [[[sender userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     NSTimeInterval duration = [[[sender userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     CGFloat height = UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation]) ? kbSize.height : kbSize.width;
-    height = height + 20;
+    height = height - 20;
     [UIView animateWithDuration:duration animations:^{
         UIEdgeInsets edgeInsets = [[self tableView] contentInset];
         edgeInsets.bottom = height;

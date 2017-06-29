@@ -123,6 +123,14 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)openInfoReport:(id)sender {
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoReportViewController"];
+    
+    if(VALID(controller, UIViewController)) {
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
 // Metdodo Som
 
 // Metodo infoReporter
