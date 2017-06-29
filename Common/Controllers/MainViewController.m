@@ -133,7 +133,7 @@
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = refreshControl;
-   
+    self.contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0); // pull up to
 
     
     [self loadInterstitial];
