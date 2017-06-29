@@ -5,7 +5,7 @@
 //  Created by Nuno Silva on 06/11/14.
 //  Copyright © 2017 Genius App Sarl. All rights reserved.
 //
-#define kOFFSET_FOR_KEYBOARD 150.0
+#define kOFFSET_FOR_KEYBOARD 210.0
 #import "InfoReportViewController.h"
 
 #import "NSObject+Singleton.h"
@@ -320,6 +320,7 @@
 
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"ENTREI NO EDIT DO TEXT VIEW");
     if ([textView.text isEqualToString:@"Description"]) {
         textView.text = @"";
     }
@@ -331,14 +332,10 @@
     
 }
 
-
-- (void)keyboardDidShow:(NSNotification *)notification
-{
-    // Assign new frame to your view
-    [self.view setFrame:CGRectMake(0,-110,320,460)]; //here taken -110 for example i.e. your view will be scrolled to -110. change its value according to your requirement.
-    
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self setViewMovedUp:NO];
+    _Istextview=0;
 }
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         [textView becomeFirstResponder];
@@ -350,7 +347,6 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)sender {
-    NSLog(@"KEYBORAD SHOW: %@", sender);
     CGSize kbSize = [[[sender userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     NSTimeInterval duration = [[[sender userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
@@ -394,6 +390,7 @@
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
     //if (textField == self.emailTextField) {
     [textField resignFirstResponder];
     //}
