@@ -100,14 +100,13 @@
     [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
 //    NSLog(@"STARTINGINDEX: %@", self.startingIndex);
 //    NSLog(@"PAGES: %@", self.pages);
-    NSLog(@"NEWS TO DISPLAY: %@", self.newsToDisplay);
-    if (VALID_NOTEMPTY(self.newsToDisplay, NSArray)) {
+    
     [self.pages objectAtIndex:0].newsIndex = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];
     [self.view bringSubviewToFront:self.bottomBanner];
     [self.view bringSubviewToFront:self.loadingView];
-    }
+
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     [self.bottomBanner loadHTMLString:banner baseURL:nil];

@@ -38,6 +38,8 @@
 #define kShareURLRJB @"http://www.rjb.ch"
 #define kShareURLRTN @"http://www.rtn.ch"
 
+#define kTotalImportantItemsToDisplay 3
+
 #define kURLNavigationFormat @"http://json.rfj.ch/Services/Mobile/MobileService.svc/navigation/list/%@"
 #define kURLTemporaryNavigationFormat @"http://json.rfj.ch/Services/Mobile/MobileService.svc/navigation/temporary/%@"
 

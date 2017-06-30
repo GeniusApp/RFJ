@@ -174,6 +174,10 @@
         [items addObjectsFromArray:[content objectForKey:[[content allKeys] objectAtIndex:0]]];
     }
     
+    if(VALID_NOTEMPTY(self.importantItems, NSArray) && VALID_NOTEMPTY(self.type4, NSArray) && [self.importantItems count] == kTotalImportantItemsToDisplay + 1) {
+        [items insertObject:[self.type4 objectAtIndex:0] atIndex:kTotalImportantItemsToDisplay];
+    }
+    
     /*
     for(NSNumber *navigationID in [self.sortedNewsItems allKeys]) {
         [items addObjectsFromArray:[self.sortedNewsItems objectForKey:navigationID]];
@@ -255,8 +259,9 @@
       @[@(9615)],
       ];
     
-    for(NSArray<NSNumber *> *searchItem in searchNumbers)
+    for(NSInteger i = 0; i < [searchNumbers count]; i++)
     {
+        NSArray<NSNumber *> *searchItem = [searchNumbers objectAtIndex:i];
         NSMutableArray<NewsItem *> *items = [[NSMutableArray<NewsItem *> alloc] init];
         
         for(NewsItem *item in self.newsItems) {
@@ -470,6 +475,23 @@
         self.importantItems = [self.newsItems filteredArrayUsingPredicate:objPredicate];
         self.type4 = [self.newsItems filteredArrayUsingPredicate:objPredicateTwo];
         
+        if(VALID_NOTEMPTY(self.importantItems, NSArray))
+        {
+            if([self.importantItems count] > kTotalImportantItemsToDisplay) {
+                NSMutableArray *actualImportantItems = [[NSMutableArray alloc] init];
+                
+                for(NSInteger i = 0; i < kTotalImportantItemsToDisplay; i++) {
+                    [actualImportantItems addObject:[self.importantItems objectAtIndex:i]];
+                }
+                
+                self.importantItems = actualImportantItems;
+            }
+            
+            if(VALID_NOTEMPTY(self.type4, NSArray) && false) { //Remove false when reactivating type 4's and check valid date
+                self.importantItems = [self.importantItems arrayByAddingObject:[self.type4 objectAtIndex:0]];
+            }
+        }
+        
         [self sortNewsItems];
         [self sortGalerieItems];
         [self sortNewsItems2];
@@ -488,6 +510,21 @@
         
         NSPredicate *objPredicateTwo = [NSPredicate predicateWithFormat:@"type = 4"];
         self.type4 = [self.newsItems filteredArrayUsingPredicate:objPredicateTwo];
+        
+        if(VALID_NOTEMPTY(self.importantItems, NSArray) && [self.importantItems count] > kTotalImportantItemsToDisplay) {
+            
+            NSMutableArray *actualImportantItems = [[NSMutableArray alloc] init];
+            
+            for(NSInteger i = 0; i < kTotalImportantItemsToDisplay; i++) {
+                [actualImportantItems addObject:[self.importantItems objectAtIndex:i]];
+            }
+            
+            self.importantItems = actualImportantItems;
+            
+            if(VALID_NOTEMPTY(self.type4, NSArray)) {
+                self.importantItems = [self.importantItems arrayByAddingObject:[self.type4 objectAtIndex:0]];
+            }
+        }
         
         [self sortNewsItems];
         [self sortGalerieItems];
@@ -556,11 +593,7 @@
     else if(tableView == self.contentTableView) {
         //return [[self.sortedNewsItems objectForKey:navigationID] count];
         if (section == 0) {
-            if (self.type4.count) {
-                return 4;
-            } else {
-                return 3;
-            }
+            return [self.importantItems count];
         } else {
             return section == 1 ? 8 : 1;
         }
@@ -863,18 +896,8 @@
                 if(indexPath.section == 0) {
                         if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
                         {
-                            
-                            if (indexPath.row == 3) {
-                                NewsItem *item = [self.type4 objectAtIndex:0];
-                                NSLog(@"BORA LA VER ISTO %@", item);
-                                actualCell.item = item;
-                            } else {
-                            NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
-                            NSArray *sortDescriptors = @[createDateDescriptor];
-                            self.importantItems = [self.importantItems sortedArrayUsingDescriptors:sortDescriptors];
                             NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
                             actualCell.item = item;
-                            }
                         }
                         
                         return cell;
@@ -1093,7 +1116,7 @@
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-    NSLog(@"WHATTT: %@", item);
+    
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.newsItems count]) {
@@ -1114,17 +1137,18 @@
             [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
             
             controller.newsToDisplay = [self combinedNewsItems];
+
             controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                return obj == item.item;
+                    return obj == item.item;
             }]);
-            
+
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
 }
 
 -(void)NewsItemSwipeDidTap:(NewsItemSwipeTableViewCell *)item withNewsItem:(NewsItem *)newsItem {
-    NSLog(@"WHATTT SWIPE: %@", item);
+    
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.newsItems count]) {
@@ -1144,11 +1168,15 @@
             
             [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
             
-            controller.newsToDisplay = [self combinedNewsItems];
-            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                return obj == newsItem;
-            }]);
-            
+            if (index.section == 0 && index.row == kTotalImportantItemsToDisplay) {
+                controller.newsToDisplay = @[[self.type4 objectAtIndex:0]];
+                controller.startingIndex = @0;
+            } else {
+                controller.newsToDisplay = [self combinedNewsItems];
+                controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    return obj == newsItem;
+                }]);
+            }
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
@@ -1170,7 +1198,7 @@
 
 
 -(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
-    NSLog(@"WHATTT GALEIRE: %@", item);
+    
     //    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     //    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
     //    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];

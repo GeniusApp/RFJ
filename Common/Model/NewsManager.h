@@ -15,6 +15,7 @@
 #import "Validation.h"
 
 @class MenuItem;
+@class NewsItem;
 
 @interface NewsManager : NSObject
 -(void)fetchNewsAtPage:(NSInteger)page objectType:(NSInteger)objectType categoryId:(NSInteger)categoryId withSuccessBlock:(void(^)(NSArray<NewsItem *> *items))successBlock andFailureBlock:(void(^)(NSError *error))failureBlock;
