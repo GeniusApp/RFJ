@@ -11,26 +11,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="aPr-UV-64s" customClass="NewsItemSwipeTableViewCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Oov-VT-tJA" userLabel="Galerie Item Swipe Table View Cell" customClass="GalerieItemSwipeTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aPr-UV-64s" id="FD5-Lw-TIY">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oov-VT-tJA" id="Ppo-Xt-anO">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOB-Bp-OUO">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyd-Gi-g1i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                     </scrollView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="BOB-Bp-OUO" firstAttribute="top" secondItem="FD5-Lw-TIY" secondAttribute="top" id="SBm-jQ-Een"/>
-                    <constraint firstAttribute="bottom" secondItem="BOB-Bp-OUO" secondAttribute="bottom" id="Xco-cS-Jvz"/>
-                    <constraint firstItem="BOB-Bp-OUO" firstAttribute="leading" secondItem="FD5-Lw-TIY" secondAttribute="leading" id="Xf6-Ek-lKn"/>
-                    <constraint firstAttribute="trailing" secondItem="BOB-Bp-OUO" secondAttribute="trailing" id="sa3-UL-Wmx"/>
+                    <constraint firstItem="Kyd-Gi-g1i" firstAttribute="top" secondItem="Ppo-Xt-anO" secondAttribute="top" id="bil-mk-9mr"/>
+                    <constraint firstAttribute="bottom" secondItem="Kyd-Gi-g1i" secondAttribute="bottom" id="j8M-24-ZKm"/>
+                    <constraint firstItem="Kyd-Gi-g1i" firstAttribute="leading" secondItem="Ppo-Xt-anO" secondAttribute="leading" id="q2L-Qr-0S2"/>
+                    <constraint firstAttribute="trailing" secondItem="Kyd-Gi-g1i" secondAttribute="trailing" id="xXv-lO-Nhp"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="scrollView" destination="BOB-Bp-OUO" id="GmE-L9-1t0"/>
+                <outlet property="scrollView" destination="Kyd-Gi-g1i" id="qft-NQ-IG1"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="51"/>
         </tableViewCell>

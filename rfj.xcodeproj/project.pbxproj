@@ -122,6 +122,18 @@
 		3EE362891F0AA77A003EC0A9 /* closed_med.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE362881F0AA77A003EC0A9 /* closed_med.png */; };
 		3EE3628A1F0AA77A003EC0A9 /* closed_med.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE362881F0AA77A003EC0A9 /* closed_med.png */; };
 		3EE3628B1F0AA77A003EC0A9 /* closed_med.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE362881F0AA77A003EC0A9 /* closed_med.png */; };
+		3EE3628E1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3628D1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m */; };
+		3EE3628F1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3628D1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m */; };
+		3EE362901F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3628D1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m */; };
+		3EE362921F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */; };
+		3EE362931F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */; };
+		3EE362941F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */; };
+		3EE362971F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE362961F0AD5D8003EC0A9 /* GalerieItemView.m */; };
+		3EE362981F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE362961F0AD5D8003EC0A9 /* GalerieItemView.m */; };
+		3EE362991F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE362961F0AD5D8003EC0A9 /* GalerieItemView.m */; };
+		3EE3629B1F0ADB70003EC0A9 /* GalerieItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3629A1F0ADB70003EC0A9 /* GalerieItemView.xib */; };
+		3EE3629C1F0ADB70003EC0A9 /* GalerieItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3629A1F0ADB70003EC0A9 /* GalerieItemView.xib */; };
+		3EE3629D1F0ADB70003EC0A9 /* GalerieItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3629A1F0ADB70003EC0A9 /* GalerieItemView.xib */; };
 		3EE816711EA8BD1D0020F8BF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */; };
 		3EE816731EA8BD380020F8BF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */; };
 		3EE816751EA8BD410020F8BF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE816741EA8BD410020F8BF /* CoreMedia.framework */; };
@@ -422,6 +434,12 @@
 		3EE362801F0AA3D6003EC0A9 /* closed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed.png; sourceTree = "<group>"; };
 		3EE362841F0AA46A003EC0A9 /* closed_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed_small.png; sourceTree = "<group>"; };
 		3EE362881F0AA77A003EC0A9 /* closed_med.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed_med.png; sourceTree = "<group>"; };
+		3EE3628C1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GalerieItemSwipeTableViewCell.h; path = Common/View/Cell/GalerieItemSwipeTableViewCell.h; sourceTree = "<group>"; };
+		3EE3628D1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GalerieItemSwipeTableViewCell.m; path = Common/View/Cell/GalerieItemSwipeTableViewCell.m; sourceTree = "<group>"; };
+		3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GalerieItemSwipeTableViewCell.xib; path = Common/View/Cell/GalerieItemSwipeTableViewCell.xib; sourceTree = "<group>"; };
+		3EE362951F0AD5D8003EC0A9 /* GalerieItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GalerieItemView.h; path = Common/View/GalerieItemView.h; sourceTree = "<group>"; };
+		3EE362961F0AD5D8003EC0A9 /* GalerieItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GalerieItemView.m; path = Common/View/GalerieItemView.m; sourceTree = "<group>"; };
+		3EE3629A1F0ADB70003EC0A9 /* GalerieItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GalerieItemView.xib; path = Common/View/Cell/GalerieItemView.xib; sourceTree = "<group>"; };
 		3EE816701EA8BD1D0020F8BF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		3EE816721EA8BD380020F8BF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EE816741EA8BD410020F8BF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -784,6 +802,8 @@
 				E756DE0E1E89328800E1437E /* BottomLoadingView.h */,
 				E756DE0F1E89328800E1437E /* BottomLoadingView.m */,
 				E756DE131E89329A00E1437E /* BottomLoadingView.xib */,
+				3EE362951F0AD5D8003EC0A9 /* GalerieItemView.h */,
+				3EE362961F0AD5D8003EC0A9 /* GalerieItemView.m */,
 				3E9E69B31EF170D500064117 /* NewsItemView.h */,
 				3E9E69B41EF170D500064117 /* NewsItemView.m */,
 			);
@@ -812,12 +832,16 @@
 				3E3092281EDF0B3E002240A4 /* NewsItemSwipeTableViewCell.h */,
 				3E3092291EDF0B3E002240A4 /* NewsItemSwipeTableViewCell.m */,
 				3E30922D1EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib */,
+				3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */,
+				3EE3628C1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.h */,
+				3EE3628D1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m */,
 				3E5725FC1EE986FD0015834A /* GalerieDetailTopTableViewCell.h */,
 				3E5725FD1EE986FD0015834A /* GalerieDetailTopTableViewCell.m */,
 				3E5725F81EE9840E0015834A /* GalerieDetailTopTableViewCell.xib */,
 				3EE362771F0A8174003EC0A9 /* WebViewTableViewCell.h */,
 				3EE362781F0A8174003EC0A9 /* WebViewTableViewCell.m */,
 				3EE362791F0A8174003EC0A9 /* WebViewTableViewCell.xib */,
+				3EE3629A1F0ADB70003EC0A9 /* GalerieItemView.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1261,7 +1285,9 @@
 				E775F2761E93F99E00675133 /* Finance@3x.png in Resources */,
 				3E2430651EF08BB8009B262B /* NewsItemView.xib in Resources */,
 				E775F29F1E93F99E00675133 /* Ski@2x.png in Resources */,
+				3EE3629B1F0ADB70003EC0A9 /* GalerieItemView.xib in Resources */,
 				E775F29E1E93F99E00675133 /* rtn_start_screen_1242x2208.png in Resources */,
+				3EE362921F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */,
 				E775F2771E93F99E00675133 /* Football@2x.png in Resources */,
 				E775F2A41E93F99E00675133 /* SportsAutre2@3x.png in Resources */,
 				3E30922E1EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib in Resources */,
@@ -1365,6 +1391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE3629C1F0ADB70003EC0A9 /* GalerieItemView.xib in Resources */,
 				3E3853961EE8878C00F7FAC1 /* GalerieDetailTableViewCell.xib in Resources */,
 				3EE3627E1F0A8175003EC0A9 /* WebViewTableViewCell.xib in Resources */,
 				E74859EF1E5DB4EC0030D696 /* radio_logo.png in Resources */,
@@ -1380,6 +1407,7 @@
 				3E2430661EF08BB8009B262B /* NewsItemView.xib in Resources */,
 				3EE362821F0AA3D6003EC0A9 /* closed.png in Resources */,
 				E7551D081E5C60B400A1AEF9 /* MenuItemTableViewCell.xib in Resources */,
+				3EE362931F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */,
 				3E30922F1EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib in Resources */,
 				E74859EA1E5DB4EC0030D696 /* AWSSNSConfig.plist in Resources */,
 				E74859F21E5DB4EC0030D696 /* SportCategories.plist in Resources */,
@@ -1411,6 +1439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE3629D1F0ADB70003EC0A9 /* GalerieItemView.xib in Resources */,
 				3E3853971EE8878C00F7FAC1 /* GalerieDetailTableViewCell.xib in Resources */,
 				3EE3627F1F0A8175003EC0A9 /* WebViewTableViewCell.xib in Resources */,
 				E7485A041E5DB5090030D696 /* rtn.plist in Resources */,
@@ -1426,6 +1455,7 @@
 				3E2430671EF08BB8009B262B /* NewsItemView.xib in Resources */,
 				3EE362831F0AA3D6003EC0A9 /* closed.png in Resources */,
 				E74859FF1E5DB5090030D696 /* BackendURLs.plist in Resources */,
+				3EE362941F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */,
 				3E3092301EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib in Resources */,
 				E7551D091E5C60B400A1AEF9 /* MenuItemTableViewCell.xib in Resources */,
 				E7485A061E5DB5090030D696 /* SportCategories.plist in Resources */,
@@ -1608,9 +1638,11 @@
 				E756DE101E89328800E1437E /* BottomLoadingView.m in Sources */,
 				E75006AC1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
 				E7AE20C01E9B98A900DA7953 /* ResourcesManager.m in Sources */,
+				3EE362971F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */,
 				E760123B1E5DBDBC007D809A /* DataManager.m in Sources */,
 				3E9CB3E01EE8014500F0A048 /* GalerieDetailViewController.m in Sources */,
 				E77938571E9297650065483E /* InfoReportViewController.m in Sources */,
+				3EE3628E1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */,
 				E779385C1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D61E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
 				E7D6DEE21E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
@@ -1662,9 +1694,11 @@
 				3E6723911EE19F6500BC0A5B /* GalerieItemTableViewCell.m in Sources */,
 				E75006AD1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
 				3E3CAE321ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */,
+				3EE362981F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */,
 				E7AE20C11E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				3E9CB3E11EE8014500F0A048 /* GalerieDetailViewController.m in Sources */,
 				E760123C1E5DBDBC007D809A /* DataManager.m in Sources */,
+				3EE3628F1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */,
 				E77938581E9297650065483E /* InfoReportViewController.m in Sources */,
 				E779385D1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D71E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
@@ -1716,9 +1750,11 @@
 				3E6723921EE19F6500BC0A5B /* GalerieItemTableViewCell.m in Sources */,
 				E75006AE1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
 				3E3CAE331ECDC535001ED1F1 /* InfoContinuViewController.m in Sources */,
+				3EE362991F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */,
 				E7AE20C21E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				3E9CB3E21EE8014500F0A048 /* GalerieDetailViewController.m in Sources */,
 				E760123D1E5DBDBC007D809A /* DataManager.m in Sources */,
+				3EE362901F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */,
 				E77938591E9297650065483E /* InfoReportViewController.m in Sources */,
 				E779385E1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D81E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,

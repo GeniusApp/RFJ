@@ -879,7 +879,7 @@
         }
     }
     else if(tableView == self.contentTableView) {
-        if (indexPath.row == 7) {
+        if (indexPath.row == 7) { // Square Type ADS
 
             // Reuse and create cell
             WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
@@ -905,7 +905,7 @@
             }];
             
             return cell;
-        } else if (indexPath.section == 3) {
+        } else if (indexPath.section == 3) { // GALERIE TYPE CELL
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
             
             if(!VALID(actualCell, GalerieItemTableViewCell)) {
@@ -930,7 +930,7 @@
                 
                 return cell;
             }
-        } else {
+        } else { //CATEGORIES CELLS
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
             
             if(!VALID(actualCell, NewsItemTableViewCell)) {
