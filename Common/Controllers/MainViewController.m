@@ -33,13 +33,14 @@
 #import "WebViewController.h"
 #import "Reachability.h"
 #import "NewsItemSwipeTableViewCell.h"
+#import "WebViewTableViewCell.h"
 
 
 @import GoogleMobileAds;
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
     NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableViewCellDelegate, NewsItemSwipeTableViewCellDelegate,
-    NewsCategorySeparatorViewDelegate>
+    NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
@@ -136,14 +137,48 @@
     self.contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0); // pull up to
 
     
-    [self loadInterstitial];
+    //[self loadInterstitial];
+    
+    NSString * storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
+    [self presentViewController:vc animated:YES completion:nil];
+    
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
-    [self.bottomBanner loadHTMLString:banner baseURL:nil];
+    NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
+    [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
+        NSString *str = responseDict[@"banner"];
+        NSString *fixBanner = @"<style>img{max-width: 100%; width:auto; height: auto;}</style>";
+        str = [fixBanner stringByAppendingString:str];
+        [self.bottomBanner loadHTMLString:str baseURL:nil];
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
+
     self.createdSwipeCells = [NSArray array];
     
   //  [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }  
+-(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
+{
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    
+    // Asynchronously API is hit here
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                                NSLog(@"%@",data);
+                                                if (error)
+                                                failure(error);
+                                                else {
+                                                    NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//                                                    NSLog(@"%@",json);
+                                                    success(json);
+                                                }
+                                            }];
+    [dataTask resume];    // Executed First
+}
 
 
 - (void)refreshTable:(id)sender {
@@ -161,7 +196,7 @@
     [super viewDidAppear:animated];
     
     if(self.needsToLoadInterstitial) {
-        [self loadInterstitial];
+        //[self loadInterstitial];
     }
 }
 
@@ -385,6 +420,7 @@
 -(void)loadInterstitial {
     self.needsToLoadInterstitial = NO;
     
+    
     NSDictionary *BackendURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BackendURLs" ofType:@"plist"]];
     self.interstitial = [[DFPInterstitial alloc] initWithAdUnitID:[BackendURLs objectForKey:@"DFPInterstitialLoadingLink"]];
     self.interstitial.delegate = self;
@@ -392,7 +428,7 @@
     DFPRequest *request = [DFPRequest request];
     request.testDevices = @[kGADSimulatorID, @"40238db35009b7d4b7bf9ac26d418d9e"];
 
-    [self.interstitial loadRequest:request];
+    //[self.interstitial loadRequest:request];
 }
 
 -(void)loadPageItemsForPage:(NSInteger)page count:(NSInteger)count
@@ -486,7 +522,7 @@
                 
                 self.importantItems = actualImportantItems;
             }
-            
+
             if(VALID_NOTEMPTY(self.type4, NSArray) && false) { //Remove false when reactivating type 4's and check valid date
                 self.importantItems = [self.importantItems arrayByAddingObject:[self.type4 objectAtIndex:0]];
             }
@@ -583,6 +619,16 @@
     else {
         [self showMenu];
     }
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        UIApplication *application = [UIApplication sharedApplication];
+        [application openURL:[request URL] options:@{} completionHandler:nil];
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - UITableView Delegates
@@ -835,23 +881,29 @@
     else if(tableView == self.contentTableView) {
         if (indexPath.row == 7) {
 
-            NSString *adsSquare = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/teste_rfj.css?2\" type=\"text/css\" media=\"all\" />";
-            adsSquare = [adsSquare stringByAppendingString:@"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" />"];
-            adsSquare = [adsSquare stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
-            static NSString *CellIdentifier = @"Cell";
-            
-            NSAttributedString *attrStr = [[NSAttributedString alloc] initWithData:[adsSquare dataUsingEncoding:NSUTF8StringEncoding]
-                                                                                options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                                                                          NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                                                                     documentAttributes:nil error:nil];
-            
             // Reuse and create cell
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
+            
+            if(!VALID(cell, WebViewTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WebViewTableViewCell" owner:self options:nil];
+                
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    cell = [views objectAtIndex:0];
+                }
             }
-
-            cell.textLabel.attributedText = attrStr;
+            NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+            [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+                NSString *str = responseDict[@"banner"];
+                NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+                str = [fixSquare stringByAppendingString:str];
+                str = [str stringByAppendingString:@"</div>"];
+                NSLog(@"HTML STRING: %@", str);
+                [cell.webView loadHTMLString:str baseURL:nil];
+                cell.webView.delegate = self;
+            } failure:^(NSError *error) {
+                // error handling here ...
+            }];
+            
             return cell;
         } else if (indexPath.section == 3) {
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
