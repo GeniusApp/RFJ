@@ -149,7 +149,7 @@
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
     [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
         NSString *str = responseDict[@"banner"];
-        NSString *fixBanner = @"<style>img{max-width: 100%; width:auto; height: auto;}</style>";
+        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
         str = [fixBanner stringByAppendingString:str];
         [self.bottomBanner loadHTMLString:str baseURL:nil];
     } failure:^(NSError *error) {
@@ -316,9 +316,12 @@
             {
                 continue;
             }
-
-            [items addObject:item];
-
+            if (item.important == 1) { //Don't show Important News on categories feed
+                
+            } else {
+                [items addObject:item];
+            }
+            
         }
         
         [self.sortedNewsItems2 addObject:

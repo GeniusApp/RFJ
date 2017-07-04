@@ -109,9 +109,36 @@
 
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
-    [self.bottomBanner loadHTMLString:banner baseURL:nil];
+    NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
+    [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
+        NSString *str = responseDict[@"banner"];
+        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
+        str = [fixBanner stringByAppendingString:str];
+        [self.bottomBanner loadHTMLString:str baseURL:nil];
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
 
     [self hideLoading];
+}
+-(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
+{
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    
+    // Asynchronously API is hit here
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                //                                                NSLog(@"%@",data);
+                                                if (error)
+                                                    failure(error);
+                                                else {
+                                                    NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                    //                                                    NSLog(@"%@",json);
+                                                    success(json);
+                                                }
+                                            }];
+    [dataTask resume];    // Executed First
 }
 - (IBAction)homeButtonTapped:(UIButton *)sender {
     NSArray *array = [self.navigationController viewControllers];
