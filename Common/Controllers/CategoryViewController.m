@@ -12,6 +12,7 @@
 #import "DataManager.h"
 #import "Validation.h"
 #import "CategoryViewController.h"
+#import "GalerieViewController.h"
 #import "MenuItem+CoreDataProperties.h"
 #import "MenuItemTableViewCell.h"
 #import "MenuManager.h"
@@ -834,6 +835,14 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 
                 if(VALID(controller, WebViewController)) {
                     controller.url = menuItem.link;
+                    [self.navigationController pushViewController:controller animated:YES];
+                }
+            } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
+                
+                GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+                
+                if(VALID(controller, GalerieViewController)) {
+                    //controller.navigationId = @(menuItem.id);
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             }

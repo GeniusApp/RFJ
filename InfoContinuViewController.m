@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "DataManager.h"
 #import "CategoryViewController.h"
+#import "GalerieViewController.h"
 #import "Validation.h"
 #import "MenuItem+CoreDataProperties.h"
 #import "MenuItemTableViewCell.h"
@@ -694,6 +695,14 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                     InfoContinuViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"infoContinuViewController"];
                     
                     if(VALID(controller, InfoContinuViewController)) {
+                        //controller.navigationId = @(menuItem.id);
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }
+                } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
+                    
+                    GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+                    
+                    if(VALID(controller, GalerieViewController)) {
                         //controller.navigationId = @(menuItem.id);
                         [self.navigationController pushViewController:controller animated:YES];
                     }
