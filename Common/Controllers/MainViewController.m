@@ -316,12 +316,12 @@
             {
                 continue;
             }
-            if (item.important == 1) { //Don't show Important News on categories feed
-                
-            } else {
-                [items addObject:item];
-            }
             
+//            if (item.important == 1) {
+            
+//            } else {
+                [items addObject:item];
+//            }
         }
         
         [self.sortedNewsItems2 addObject:
@@ -329,8 +329,6 @@
            searchItem: items
            }];
     }
-
-    //NSLog(@"QUALWUER COISA: %@", self.sortedNewsItems2);
 }
 
 -(void)sortImportantNews {
@@ -900,7 +898,6 @@
                 NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
                 str = [fixSquare stringByAppendingString:str];
                 str = [str stringByAppendingString:@"</div>"];
-                NSLog(@"HTML STRING: %@", str);
                 [cell.webView loadHTMLString:str baseURL:nil];
                 cell.webView.delegate = self;
             } failure:^(NSError *error) {
@@ -952,6 +949,7 @@
                         if(indexPath.row >= 0 && indexPath.row < [self.importantItems count])
                         {
                             NewsItem *item = [self.importantItems objectAtIndex:indexPath.row];
+                            
                             actualCell.item = item;
                         }
                         
@@ -967,9 +965,7 @@
                         if(indexPath.row >= 0 && indexPath.row < [items count]) {
                             
                             NewsItem *item = [items objectAtIndex:indexPath.row];
-                            
                             actualCell.item = item;
-                            
                         }
                     }
                 } else {
@@ -1012,7 +1008,7 @@
     else if(tableView == self.contentTableView) {
         if (indexPath.row == 7) {
             return 300;
-        } else {
+        }  else {
             return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
         }
     }

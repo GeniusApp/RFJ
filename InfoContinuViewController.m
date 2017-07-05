@@ -27,10 +27,11 @@
 #import "RadioManager.h"
 #import "ResourcesManager.h"
 #import "WebViewController.h"
+#import "WebViewTableViewCell.h"
 
 
 @interface InfoContinuViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
-NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
+NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
@@ -547,33 +548,69 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         }
     }
     else if(tableView == self.contentTableView) {
-        NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-        //NSLog(@"SECTION: %ld", (long)indexPath.section);
-        if(!VALID(actualCell, NewsItemTableViewCell)) {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
+        if (indexPath.row == 7) {
+            // Reuse and create cell
+            WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
             
-            if(VALID_NOTEMPTY(views, NSArray)) {
-                actualCell = [views objectAtIndex:0];
-            }
-        }
-        
-        if(VALID(actualCell, NewsItemTableViewCell)) {
-            cell = actualCell;
-            actualCell.delegate = self;
-            
-
-            
-           
-            if(indexPath.row >= 0 && indexPath.row < [self.newsItems count]) {
-                NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
-               
-                actualCell.item = item;
+            if(!VALID(cell, WebViewTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WebViewTableViewCell" owner:self options:nil];
                 
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    cell = [views objectAtIndex:0];
+                }
+            }
+            NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+            [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+                NSString *str = responseDict[@"banner"];
+                NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+                str = [fixSquare stringByAppendingString:str];
+                str = [str stringByAppendingString:@"</div>"];
+                [cell.webView loadHTMLString:str baseURL:nil];
+                cell.webView.delegate = self;
+            } failure:^(NSError *error) {
+                // error handling here ...
+            }];
+            
+            return cell;
+        } else {
+            NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
+            //NSLog(@"SECTION: %ld", (long)indexPath.section);
+            if(!VALID(actualCell, NewsItemTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
+                
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    actualCell = [views objectAtIndex:0];
+                }
+            }
+            
+            if(VALID(actualCell, NewsItemTableViewCell)) {
+                cell = actualCell;
+                actualCell.delegate = self;
+                
+                
+                
+                
+                if(indexPath.row >= 0 && indexPath.row < [self.newsItems count]) {
+                    NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
+                    
+                    actualCell.item = item;
+                    
+                }
             }
         }
     }
-    
     return cell;
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        UIApplication *application = [UIApplication sharedApplication];
+        [application openURL:[request URL] options:@{} completionHandler:nil];
+        return NO;
+    }
+    
+    return YES;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
