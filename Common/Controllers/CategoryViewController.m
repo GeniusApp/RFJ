@@ -13,6 +13,10 @@
 #import "Validation.h"
 #import "CategoryViewController.h"
 #import "GalerieViewController.h"
+#import "GalerieDetailViewController.h"
+#import "GalerieGroupViewController.h"
+#import "GalerieItem+CoreDataProperties.h"
+#import "GalerieItemTableViewCell.h"
 #import "MenuItem+CoreDataProperties.h"
 #import "MenuItemTableViewCell.h"
 #import "MenuManager.h"
@@ -29,7 +33,7 @@
 
 
 @interface CategoryViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
-NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
+NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableViewCellDelegate, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
@@ -39,6 +43,8 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItems;
+@property (strong, nonatomic) NSArray<GalerieItem *> *galeriePhotos;
+@property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSArray<GalerieItem *> *> *sortedGalerieItems;
 @property (strong, nonatomic) NSArray<NewsItem *> *newsItemsExtracted;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
@@ -70,7 +76,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAll];
-    
+    self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                               ascending:NO];
+    [self sortGalerieItems];
     [self refreshMenuItems];
     
     if([[DataManager singleton] isRFJ]) {
@@ -86,16 +94,16 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
     }
     
     self.expandedMenuItems = [[NSMutableArray<NSNumber *> alloc] init];
-    
+    self.activeCategoryId = self.navigationId;
+    [self refreshCategory:[self.activeCategoryId intValue]];
     self.currentPage = 0;
     
     self.menuHeightConstraint.constant = 0;
     self.isLoading = NO;
     
-    self.activeCategoryId = self.navigationId;
+    
 
     
-    [self refreshCategory:[self.activeCategoryId intValue]];
 
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
@@ -138,7 +146,23 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
     
     
 }
-
+-(void)sortGalerieItems {
+    self.sortedGalerieItems = [[NSMutableDictionary<NSNumber *, NSArray<GalerieItem *> *> alloc] init];
+    
+    for(GalerieItem *item in self.galeriePhotos) {
+        NSArray *sortedItems = nil;
+        
+        if([self.sortedGalerieItems objectForKey:@(item.navigationId)] == nil) {
+            sortedItems = [NSArray arrayWithObject:item];
+        }
+        else {
+            sortedItems = [[self.sortedGalerieItems objectForKey:@(item.navigationId)] arrayByAddingObject:item];
+        }
+        
+        [self.sortedGalerieItems setObject:sortedItems forKey:@(item.navigationId)];
+        
+    }
+}
 - (IBAction)homeButtonTapped:(UIButton *)sender {
     NSArray *array = [self.navigationController viewControllers];
     [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
@@ -489,7 +513,30 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
         });
     }];
 }
-
+-(void)loadImagesForPage:(NSInteger)page count:(NSInteger)count
+                 success:(void(^)(NSArray<GalerieItem *> *photos))successBlock
+                 failure:(void(^)(NSError *error))failureBlock {
+    self.isLoading = YES;
+    NSLog(@"LOADIMAGESFORPAGE");
+    [[NewsManager singleton] fetchImagesAtPage:page objectType:1 categoryId:-1 withSuccessBlock:^(NSArray<GalerieItem *> *photos) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isLoading = NO;
+            
+            if(successBlock) {
+                successBlock(photos);
+            }
+        });
+    } andFailureBlock:^(NSError *error) {
+        NSLog(@"LOADIMAGESFORPAGEFAILURE");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isLoading = NO;
+            
+            if(failureBlock) {
+                failureBlock(error);
+            }
+        });
+    }];
+}
 -(void)loadNextPage {
     if(self.isLoading) {
         return;
@@ -511,12 +558,38 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
                 self.newsItems = [self.newsItems arrayByAddingObject:item];
             }
         }
-        
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
+        [self sortGalerieItems];
         [self.contentTableView reloadData];
     } failure:^(NSError *error) {
         [self hideLoading];
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
+        [self sortGalerieItems];
+    }];
+    [self loadImagesForPage:self.currentPage count:kItemsPerPage success:^(NSArray<GalerieItem *> *photos) {
+        [self hideLoading];
         
-        //NSLog(@"Error: %@", error);
+        for(GalerieItem *photo in photos) {
+            NSInteger itemIndex = [self.galeriePhotos indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return photo.id == obj.id;
+            }];
+            
+            if(itemIndex == NSNotFound) {
+                self.galeriePhotos = [self.galeriePhotos arrayByAddingObject:photo];
+            }
+        }
+        
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
+        [self sortGalerieItems];
+        [self.contentTableView reloadData];
+    } failure:^(NSError *error) {
+        [self hideLoading];
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
+        [self sortGalerieItems];
     }];
 }
 
@@ -722,6 +795,57 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
             }];
             
             return cell;
+        } else if (indexPath.row == 14) {
+            NSLog(@"GALERIEITEMS: %@", self.galeriePhotos);
+            GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
+            
+            if(!VALID(actualCell, GalerieItemTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
+                
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    actualCell = [views objectAtIndex:0];
+                }
+            }
+            
+            if(VALID(actualCell, GalerieItemTableViewCell)) {
+                cell = actualCell;
+                actualCell.delegate = self;
+                if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
+                {
+                    
+                    NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+                    NSArray *sortDescriptors = @[createDateDescriptor];
+                    self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
+                    GalerieItem *item = [self.galeriePhotos objectAtIndex:0];
+                    actualCell.item = item;
+                }
+                
+                return cell;
+            }
+        } else if (indexPath.row %14 == 0 && indexPath.row != 14 && indexPath.row != 0) {
+            // Reuse and create cell
+            WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
+            
+            if(!VALID(cell, WebViewTableViewCell)) {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WebViewTableViewCell" owner:self options:nil];
+                
+                if(VALID_NOTEMPTY(views, NSArray)) {
+                    cell = [views objectAtIndex:0];
+                }
+            }
+            NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+            [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+                NSString *str = responseDict[@"banner"];
+                NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+                str = [fixSquare stringByAppendingString:str];
+                str = [str stringByAppendingString:@"</div>"];
+                [cell.webView loadHTMLString:str baseURL:nil];
+                cell.webView.delegate = self;
+            } failure:^(NSError *error) {
+                // error handling here ...
+            }];
+            
+            return cell;
         } else {
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
             
@@ -764,7 +888,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, UIWebViewDelegate>
         return 44.0f;
     }
     else if(tableView == self.contentTableView) {
-        return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
+        if (indexPath.row %14 == 0 || indexPath.row == 7 || indexPath.row != 0) {
+            return 300;
+        }  else {
+            return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
+        }
     }
     
     return 44.0f;

@@ -12,7 +12,6 @@
 #import "Constants.h"
 #import "DataManager.h"
 #import "CategoryViewController.h"
-#import "GalerieViewController.h"
 #import "Validation.h"
 #import "MenuItem+CoreDataProperties.h"
 #import "MenuItemTableViewCell.h"
@@ -332,6 +331,29 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         });
     }];
 }
+-(void)loadImagesForPage:(NSInteger)page count:(NSInteger)count
+                 success:(void(^)(NSArray<GalerieItem *> *photos))successBlock
+                 failure:(void(^)(NSError *error))failureBlock {
+    self.isLoading = YES;
+    NSLog(@"LOADIMAGESFORPAGEINFO");
+    [[NewsManager singleton] fetchImagesAtPage:page objectType:1 categoryId:-1 withSuccessBlock:^(NSArray<GalerieItem *> *photos) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isLoading = NO;
+            
+            if(successBlock) {
+                successBlock(photos);
+            }
+        });
+    } andFailureBlock:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isLoading = NO;
+            
+            if(failureBlock) {
+                failureBlock(error);
+            }
+        });
+    }];
+}
 
 -(void)loadNextPage {
     if(self.isLoading) {
@@ -357,12 +379,35 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                                    ascending:NO];
         [self sortGalerieItems];
-        
         [self.contentTableView reloadData];
     } failure:^(NSError *error) {
         [self hideLoading];
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
         [self sortGalerieItems];
-        //NSLog(@"Error: %@", error);
+    }];
+    [self loadImagesForPage:self.currentPage count:kItemsPerPage success:^(NSArray<GalerieItem *> *photos) {
+        [self hideLoading];
+        
+        for(GalerieItem *photo in photos) {
+            NSInteger itemIndex = [self.galeriePhotos indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return photo.id == obj.id;
+            }];
+            
+            if(itemIndex == NSNotFound) {
+                self.galeriePhotos = [self.galeriePhotos arrayByAddingObject:photo];
+            }
+        }
+        
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
+        [self sortGalerieItems];
+        [self.contentTableView reloadData];
+    } failure:^(NSError *error) {
+        [self hideLoading];
+        self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
+                                                   ascending:NO];
+        [self sortGalerieItems];
     }];
 }
 
@@ -598,6 +643,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             
             return cell;
         } else if (indexPath.row == 14) {
+             NSLog(@"GALERIEITEMS: %@", self.galeriePhotos);
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
             
             if(!VALID(actualCell, GalerieItemTableViewCell)) {
@@ -613,10 +659,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                 actualCell.delegate = self;
                 if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
                 {
+                    
                     NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
                     NSArray *sortDescriptors = @[createDateDescriptor];
                     self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
-                    GalerieItem *item = [self.galeriePhotos objectAtIndex:indexPath.row];
+                    GalerieItem *item = [self.galeriePhotos objectAtIndex:0];
                     actualCell.item = item;
                 }
                 
@@ -648,7 +695,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             return cell;
         } else {
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-            //NSLog(@"SECTION: %ld", (long)indexPath.section);
+            
             if(!VALID(actualCell, NewsItemTableViewCell)) {
                 NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
                 
@@ -692,7 +739,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         return 44.0f;
     }
     else if(tableView == self.contentTableView) {
-        return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
+        if (indexPath.row %14 == 0 || indexPath.row == 7 || indexPath.row != 0) {
+            return 300;
+        }  else {
+            return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
+        }
     }
     
     return 44.0f;
@@ -829,40 +880,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }
     }
 }
-
-
-//ggirao selectedRow
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"DID SELECT ROW AT INDEXPATH: %ld", (long)indexPath.row);
-//    UITableViewCell *cell = nil;
-//    NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-//    cell = actualCell;
-//    
-//    NSNumber *navigationID = [[self.sortedNewsItems allKeys] objectAtIndex:indexPath.section];
-//    NSArray<NewsItem *> *items = [self.sortedNewsItems objectForKey:navigationID];
-//    
-//    if(indexPath.row >= 0 && indexPath.row < [items count]) {
-//        NewsItem *item = [items objectAtIndex:indexPath.row];
-//        actualCell.item = item;
-//        
-//        NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-//        if(VALID(controller, NewsGroupViewController)) {
-//            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
-//                NewsItem *localItem = [item MR_inContext:localContext];
-//                
-//                if(VALID(localItem, NewsItem)) {
-//                    localItem.read = YES;
-//                }
-//            }];
-//            controller.newsToDisplay = [self combinedNewsItems];
-//            controller.startingIndex = @([controller.newsToDisplay indexOfObjectPassingTest:^BOOL(NewsItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                return obj == item;
-//            }]);
-//            
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//    }
-//}
 
 
 #pragma mark - NewsItemTableViewCell Delegate

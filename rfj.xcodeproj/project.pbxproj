@@ -149,6 +149,18 @@
 		3EE8168B1EA8BDBB0020F8BF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8168A1EA8BDBB0020F8BF /* Security.framework */; };
 		3EE8168D1EA8BDC50020F8BF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8168C1EA8BDC50020F8BF /* ImageIO.framework */; };
 		3EE8168F1EA8BDD30020F8BF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE8168E1EA8BDD30020F8BF /* CoreText.framework */; };
+		3EECB9721F0E524D004D72C9 /* left2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9701F0E524D004D72C9 /* left2.png */; };
+		3EECB9731F0E524D004D72C9 /* left2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9701F0E524D004D72C9 /* left2.png */; };
+		3EECB9741F0E524D004D72C9 /* left2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9701F0E524D004D72C9 /* left2.png */; };
+		3EECB9751F0E524D004D72C9 /* left3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9711F0E524D004D72C9 /* left3.png */; };
+		3EECB9761F0E524D004D72C9 /* left3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9711F0E524D004D72C9 /* left3.png */; };
+		3EECB9771F0E524D004D72C9 /* left3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9711F0E524D004D72C9 /* left3.png */; };
+		3EECB97A1F0E52E8004D72C9 /* right2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9781F0E52E8004D72C9 /* right2.png */; };
+		3EECB97B1F0E52E8004D72C9 /* right2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9781F0E52E8004D72C9 /* right2.png */; };
+		3EECB97C1F0E52E8004D72C9 /* right2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9781F0E52E8004D72C9 /* right2.png */; };
+		3EECB97D1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
+		3EECB97E1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
+		3EECB97F1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
 		4FD205111D9A743D07AB9FA5 /* libPods-rtn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */; };
 		767322774528C8C9396AD38C /* libPods-rfj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */; };
 		E7311C831E64556C001DB24A /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C821E64556C001DB24A /* NewsDetailViewController.m */; };
@@ -456,6 +468,10 @@
 		3EE8168A1EA8BDBB0020F8BF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3EE8168C1EA8BDC50020F8BF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		3EE8168E1EA8BDD30020F8BF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3EECB9701F0E524D004D72C9 /* left2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left2.png; sourceTree = "<group>"; };
+		3EECB9711F0E524D004D72C9 /* left3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left3.png; sourceTree = "<group>"; };
+		3EECB9781F0E52E8004D72C9 /* right2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right2.png; sourceTree = "<group>"; };
+		3EECB9791F0E52E8004D72C9 /* right3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right3.png; sourceTree = "<group>"; };
 		4E99C91C7A288B7F6C9A7509 /* Pods-rtn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtn.release.xcconfig"; path = "Pods/Target Support Files/Pods-rtn/Pods-rtn.release.xcconfig"; sourceTree = "<group>"; };
 		5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rfj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rtn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -886,6 +902,10 @@
 				E775F2341E93F99D00675133 /* IronGrey@3x.png */,
 				E775F2351E93F99D00675133 /* JournauxAudio@2x.png */,
 				E775F2361E93F99D00675133 /* JournauxAudio@3x.png */,
+				3EECB9701F0E524D004D72C9 /* left2.png */,
+				3EECB9711F0E524D004D72C9 /* left3.png */,
+				3EECB9781F0E52E8004D72C9 /* right2.png */,
+				3EECB9791F0E52E8004D72C9 /* right3.png */,
 				E775F2371E93F99D00675133 /* Mariner@2x.png */,
 				E775F2381E93F99D00675133 /* Mariner@3x.png */,
 				E775F2391E93F99D00675133 /* Meteo@2x.png */,
@@ -1276,6 +1296,7 @@
 				E775F2731E93F99E00675133 /* Fern@2x.png in Resources */,
 				E74859D71E5DB4D80030D696 /* BackendURLs.plist in Resources */,
 				E775F2AD1E93F99E00675133 /* Whisteria@2x.png in Resources */,
+				3EECB97A1F0E52E8004D72C9 /* right2.png in Resources */,
 				E775F27C1E93F99E00675133 /* Hockey@2x.png in Resources */,
 				E775F2A31E93F99E00675133 /* SportsAutre2@2x.png in Resources */,
 				E775F2931E93F99E00675133 /* no_photo.png in Resources */,
@@ -1316,12 +1337,14 @@
 				3E3853951EE8878C00F7FAC1 /* GalerieDetailTableViewCell.xib in Resources */,
 				E775F26E1E93F99E00675133 /* Cinnabar@3x.png in Resources */,
 				3E1E8EB71EC5B61E00B76215 /* right_@3x.png in Resources */,
+				3EECB9751F0E524D004D72C9 /* left3.png in Resources */,
 				E775F2831E93F99E00675133 /* JournauxAudio@3x.png in Resources */,
 				E775F2941E93F99E00675133 /* pause@2x.png in Resources */,
 				E775F2AA1E93F99E00675133 /* Video@3x.png in Resources */,
 				E775F27E1E93F99E00675133 /* icon_location.png in Resources */,
 				E775F29C1E93F99E00675133 /* rfj_start_screen_1242x2208.png in Resources */,
 				E775F26B1E93F99D00675133 /* Cinema3@2x.png in Resources */,
+				3EECB97D1F0E52E8004D72C9 /* right3.png in Resources */,
 				E775F2661E93F99D00675133 /* arrow@2x.png in Resources */,
 				E775F2911E93F99E00675133 /* NewsRegio@2x.png in Resources */,
 				E74859DE1E5DB4D80030D696 /* SportCategories.plist in Resources */,
@@ -1343,6 +1366,7 @@
 				E775F2951E93F99E00675133 /* pause@3x.png in Resources */,
 				E775F26F1E93F99E00675133 /* Culture@2x.png in Resources */,
 				E775F2A01E93F99E00675133 /* Ski@3x.png in Resources */,
+				3EECB9721F0E524D004D72C9 /* left2.png in Resources */,
 				3EE362851F0AA46A003EC0A9 /* closed_small.png in Resources */,
 				E775F2621E93F99D00675133 /* Actualite@2x.png in Resources */,
 				E775F2A11E93F99E00675133 /* Sports@2x.png in Resources */,
@@ -1398,6 +1422,7 @@
 				E78B61DB1E8196F700E0DA25 /* NewsCategorySeparatorView.xib in Resources */,
 				3E5725FA1EE9840E0015834A /* GalerieDetailTopTableViewCell.xib in Resources */,
 				3E1E8EA91EC5B61E00B76215 /* left_@1x.png in Resources */,
+				3EECB9761F0E524D004D72C9 /* left3.png in Resources */,
 				3E1E8EC41EC602F400B76215 /* couper_son_@3x.png in Resources */,
 				3E1E8EAC1EC5B61E00B76215 /* left_@2x.png in Resources */,
 				3EE3628A1F0AA77A003EC0A9 /* closed_med.png in Resources */,
@@ -1409,8 +1434,10 @@
 				E7551D081E5C60B400A1AEF9 /* MenuItemTableViewCell.xib in Resources */,
 				3EE362931F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */,
 				3E30922F1EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib in Resources */,
+				3EECB97E1F0E52E8004D72C9 /* right3.png in Resources */,
 				E74859EA1E5DB4EC0030D696 /* AWSSNSConfig.plist in Resources */,
 				E74859F21E5DB4EC0030D696 /* SportCategories.plist in Resources */,
+				3EECB97B1F0E52E8004D72C9 /* right2.png in Resources */,
 				E7D6DEE71E66DC3100E7CC46 /* NewsSeparatorViewWithBackButton.xib in Resources */,
 				3E4115B41ECBBEF500959D8A /* ImportantTableViewCell.xib in Resources */,
 				3E1E8EAF1EC5B61E00B76215 /* left_@3x.png in Resources */,
@@ -1426,6 +1453,7 @@
 				3EE362861F0AA46A003EC0A9 /* closed_small.png in Resources */,
 				3E67238F1EE19F5D00BC0A5B /* GalerieItemTableViewCell.xib in Resources */,
 				3E1E8EB51EC5B61E00B76215 /* right_@2x.png in Resources */,
+				3EECB9731F0E524D004D72C9 /* left2.png in Resources */,
 				E756DE151E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				E74859EC1E5DB4EC0030D696 /* jingle.mp3 in Resources */,
 				3E46A5C21EC4EB87009CA191 /* no-image.png in Resources */,
@@ -1446,6 +1474,7 @@
 				E78B61DC1E8196F700E0DA25 /* NewsCategorySeparatorView.xib in Resources */,
 				3E5725FB1EE9840E0015834A /* GalerieDetailTopTableViewCell.xib in Resources */,
 				3E1E8EAA1EC5B61E00B76215 /* left_@1x.png in Resources */,
+				3EECB9771F0E524D004D72C9 /* left3.png in Resources */,
 				3E1E8EC51EC602F400B76215 /* couper_son_@3x.png in Resources */,
 				3E1E8EAD1EC5B61E00B76215 /* left_@2x.png in Resources */,
 				3EE3628B1F0AA77A003EC0A9 /* closed_med.png in Resources */,
@@ -1457,8 +1486,10 @@
 				E74859FF1E5DB5090030D696 /* BackendURLs.plist in Resources */,
 				3EE362941F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */,
 				3E3092301EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib in Resources */,
+				3EECB97F1F0E52E8004D72C9 /* right3.png in Resources */,
 				E7551D091E5C60B400A1AEF9 /* MenuItemTableViewCell.xib in Resources */,
 				E7485A061E5DB5090030D696 /* SportCategories.plist in Resources */,
+				3EECB97C1F0E52E8004D72C9 /* right2.png in Resources */,
 				E7D6DEE81E66DC3100E7CC46 /* NewsSeparatorViewWithBackButton.xib in Resources */,
 				3E4115B51ECBBEF500959D8A /* ImportantTableViewCell.xib in Resources */,
 				3E1E8EB01EC5B61E00B76215 /* left_@3x.png in Resources */,
@@ -1474,6 +1505,7 @@
 				3EE362871F0AA46A003EC0A9 /* closed_small.png in Resources */,
 				3E6723901EE19F5D00BC0A5B /* GalerieItemTableViewCell.xib in Resources */,
 				3E1E8EB61EC5B61E00B76215 /* right_@2x.png in Resources */,
+				3EECB9741F0E524D004D72C9 /* left2.png in Resources */,
 				E756DE161E89329A00E1437E /* BottomLoadingView.xib in Resources */,
 				E7485A001E5DB5090030D696 /* jingle.mp3 in Resources */,
 				3E46A5C31EC4EB87009CA191 /* no-image.png in Resources */,

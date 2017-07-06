@@ -22,17 +22,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-Sc-Kmt">
-                    <rect key="frame" x="323" y="10" width="20" height="20"/>
+                    <rect key="frame" x="323" y="11" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="left"/>
+                    <state key="normal" image="left3.png"/>
                     <connections>
                         <action selector="leftArrowTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5QR-qV-a6D"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dr8-m6-t14">
-                    <rect key="frame" x="344" y="10" width="20" height="20"/>
+                    <rect key="frame" x="344" y="11" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="right"/>
+                    <state key="normal" image="right3.png"/>
                     <connections>
                         <action selector="rightArrowTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="6nQ-ma-jbQ"/>
                     </connections>
@@ -53,7 +53,7 @@
         </view>
     </objects>
     <resources>
-        <image name="left" width="10" height="10"/>
-        <image name="right" width="10" height="10"/>
+        <image name="left3.png" width="40" height="40"/>
+        <image name="right3.png" width="40" height="40"/>
     </resources>
 </document>

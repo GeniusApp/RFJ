@@ -139,19 +139,37 @@
     
     //[self loadInterstitial];
     
-    NSString * storyboardName = @"Main";
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
-    [self presentViewController:vc animated:YES completion:nil];
+//    NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
+//    [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
+//        
+//        NSString *strStitial = responseDict[@"banner"];
+//        
+//        if (VALID_NOTEMPTY(strStitial, NSString)){
+            NSString * storyboardName = @"Main";
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+            UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
+            [self presentViewController:vc animated:YES completion:nil];
+//        }
+//
+//    } failure:^(NSError *error) {
+//        // error handling here ...
+//    }];
+
+    
+
     
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
-    NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
+    NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN&horizontalSize=1080&verticalSize=1920";
     [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
         NSString *str = responseDict[@"banner"];
         NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
+        if (VALID_NOTEMPTY(str, NSString)){
         str = [fixBanner stringByAppendingString:str];
         [self.bottomBanner loadHTMLString:str baseURL:nil];
+        } else {
+            self.bannerView.hidden = YES;
+        }
     } failure:^(NSError *error) {
         // error handling here ...
     }];
@@ -524,8 +542,9 @@
                 self.importantItems = actualImportantItems;
             }
 
-            if(VALID_NOTEMPTY(self.type4, NSArray) && false) { //Remove false when reactivating type 4's and check valid date
-                self.importantItems = [self.importantItems arrayByAddingObject:[self.type4 objectAtIndex:0]];
+            if(VALID_NOTEMPTY(self.type4, NSArray)) { //Remove false when reactivating type 4's and check valid date
+                NSUInteger randomIndex = arc4random() % [self.type4 count];
+                self.importantItems = [self.importantItems arrayByAddingObject:[self.type4 objectAtIndex:randomIndex]];
             }
         }
         
@@ -896,9 +915,12 @@
             [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
                 NSString *str = responseDict[@"banner"];
                 NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+                if (VALID_NOTEMPTY(str, NSString)){
                 str = [fixSquare stringByAppendingString:str];
                 str = [str stringByAppendingString:@"</div>"];
+                    NSLog(@"STRINGHOMEs: %@", str);
                 [cell.webView loadHTMLString:str baseURL:nil];
+                }
                 cell.webView.delegate = self;
             } failure:^(NSError *error) {
                 // error handling here ...
@@ -983,7 +1005,6 @@
                     if(VALID(swipeCell, NewsItemSwipeTableViewCell)) {
                         NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
                         NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
-                        
                         if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
                             swipeCell.newsItems = items;
                             [swipeCell display];
