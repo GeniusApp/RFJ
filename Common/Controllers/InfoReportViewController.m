@@ -14,6 +14,7 @@
 #import "Analytics.h"
 #import "NSObject+Singleton.h"
 #import "RadioManager.h"
+#import "MBProgressHUD.h"
 
 @interface InfoReportViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,6 +22,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UITextView *uploadedLabel;
+@property (nonatomic, strong) UITextField *prenomTextField;
+@property (nonatomic, strong) UITextField *nomTextField;
+@property (nonatomic, strong) UITextField *adresseTextField;
+@property (nonatomic, strong) UITextField *NPATextField;
+@property (nonatomic, strong) UITextField *localiteTextField;
 @property (nonatomic, strong) UITextField *phoneTextField;
 @property (nonatomic, strong) UITextField *emailTextField;
 @property (nonatomic, strong) UITextField *titleTextField;
@@ -35,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[Analytics singleton] trackScreenName:@"Reporter une info"];
+    
     
     self.Istextview=0;
     self.image.image=[UIImage imageNamed:@"images/GalleryDefaultImage.png"];
@@ -96,33 +103,40 @@
 }
 
 - (IBAction)sendTapped:(id)sender {
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading";
     NSCharacterSet *numericOnly = [NSCharacterSet decimalDigitCharacterSet];
     
     //  Validation
     if (self.descriptionTextField.text.length == 0 || [self.descriptionTextField.text isEqualToString:@"Description"]) {
         [self displayError:@"Vous devez remplir la description."];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         return;
     } else if (self.phoneTextField.text.length == 0) {
         [self displayError:@"Vous devez remplir le champ téléphone."];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         return;
     } else if (self.emailTextField.text.length == 0) {
         [self displayError:@"Vous devez remplir le champ email."];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         return;
     } else if (![self isValidEmail:self.emailTextField.text]) {
         [self displayError:@"Votre email n'est pas correct."];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         return;
     }
     
     NSData *data = UIImageJPEGRepresentation(self.image.image, 1.0);
     NSMutableData *imageMut=[data mutableCopy];
-    
-    [[DataManager singleton] sendInfoReportWithTitle:self.titleTextField.text email:self.emailTextField.text description:self.descriptionTextField.text phone:self.phoneTextField.text image:imageMut successBlock:^{
+
+    [[DataManager singleton] sendInfoReportWithTitle:self.titleTextField.text name:self.nomTextField.text firstName:self.prenomTextField.text address:self.adresseTextField.text zipCode:self.NPATextField.text city:self.localiteTextField.text email:self.emailTextField.text description:self.descriptionTextField.text phone:self.phoneTextField.text image:imageMut successBlock:^{
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Lecteur reporter"
                                                             message:@"Votre message a bien été envoyé"
                                                            delegate:self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
+        
         [alertView show];
     } andFailureBlock:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Erreur de connexion"
@@ -132,7 +146,6 @@
                                                   otherButtonTitles:nil];
         [alertView show];
     }];
-
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -182,7 +195,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return 14;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -192,6 +205,9 @@
             break;
         case 1:
             return 180;
+            break;
+        case 2:
+            return 50;
             break;
         case 3:
             return 50;
@@ -205,13 +221,28 @@
         case 6:
             return 50;
             break;
-        case 2:
-            return 50;
-            break;
         case 7:
             return 50;
             break;
         case 8:
+            return 50;
+            break;
+        case 9:
+            return 50;
+            break;
+        case 10:
+            return 50;
+            break;
+        case 11:
+            return 50;
+            break;
+        case 12:
+            return 50;
+            break;
+        case 13:
+            return 50;
+            break;
+        case 14:
             return 50;
             break;
         default:
@@ -233,30 +264,53 @@
         self.image = (UIImageView *)[cell.contentView viewWithTag:2];
         
     } else if (indexPath.row == 4) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"InputCellTitle" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"PickerCellTitle" forIndexPath:indexPath];
         self.titleTextField = (UITextField *)[cell.contentView viewWithTag:100];
         self.titleTextField.placeholder = @"Titre";
         self.titleTextField.keyboardType = UIKeyboardTypeAlphabet;
         self.titleTextField.returnKeyType = UIReturnKeyDone;
         self.titleTextField.delegate = self;
-        
     } else if (indexPath.row == 5) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"descri" forIndexPath:indexPath];
-        self.descriptionTextField = (UITextView *)[cell.contentView viewWithTag:100];
-        //self.descriptionTextField.placeholder = @"Description";
-        self.descriptionTextField.keyboardType = UIKeyboardTypeAlphabet;
-        self.descriptionTextField.returnKeyType = UIReturnKeyDone;
-        self.descriptionTextField.delegate = self;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"PrenomCellTitle" forIndexPath:indexPath];
+        self.prenomTextField = (UITextField *)[cell.contentView viewWithTag:100];
+        self.prenomTextField.placeholder = @"Prénom";
+        self.prenomTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.prenomTextField.returnKeyType = UIReturnKeyDone;
+        self.prenomTextField.delegate = self;
         
     } else if (indexPath.row == 6) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"InputCell" forIndexPath:indexPath];
-        self.emailTextField = (UITextField *)[cell.contentView viewWithTag:100];
-        self.emailTextField.placeholder = @"Adresse e-mail";
-        self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        self.emailTextField.returnKeyType = UIReturnKeyDone;
-        self.emailTextField.delegate = self;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"NomCellTitle" forIndexPath:indexPath];
+        self.nomTextField = (UITextField *)[cell.contentView viewWithTag:100];
+        self.nomTextField.placeholder = @"Nom";
+        self.nomTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.nomTextField.returnKeyType = UIReturnKeyDone;
+        self.nomTextField.delegate = self;
         
     } else if (indexPath.row == 7) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"AddressCellTitle" forIndexPath:indexPath];
+        self.adresseTextField = (UITextField *)[cell.contentView viewWithTag:100];
+        self.adresseTextField.placeholder = @"Adresse";
+        self.adresseTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.adresseTextField.returnKeyType = UIReturnKeyDone;
+        self.adresseTextField.delegate = self;
+        
+    } else if (indexPath.row == 8) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"NPACellTitle" forIndexPath:indexPath];
+        self.NPATextField = (UITextField *)[cell.contentView viewWithTag:100];
+        self.NPATextField.placeholder = @"NPA";
+        self.NPATextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.NPATextField.returnKeyType = UIReturnKeyDone;
+        self.NPATextField.delegate = self;
+        
+    } else if (indexPath.row == 9) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LocaliteCellTitle" forIndexPath:indexPath];
+        self.localiteTextField = (UITextField *)[cell.contentView viewWithTag:100];
+        self.localiteTextField.placeholder = @"Localité";
+        self.localiteTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.localiteTextField.returnKeyType = UIReturnKeyDone;
+        self.localiteTextField.delegate = self;
+        
+    } else if (indexPath.row == 10) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"InputCell" forIndexPath:indexPath];
         self.phoneTextField = (UITextField *)[cell.contentView viewWithTag:100];
         self.phoneTextField.placeholder = @"Téléphone";
@@ -264,7 +318,23 @@
         self.phoneTextField.returnKeyType = UIReturnKeyDone;
         self.phoneTextField.delegate = self;
         
-    } else if (indexPath.row == 8) {
+    } else if (indexPath.row == 11) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"InputCell" forIndexPath:indexPath];
+        self.emailTextField = (UITextField *)[cell.contentView viewWithTag:100];
+        self.emailTextField.placeholder = @"Couriel";
+        self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+        self.emailTextField.returnKeyType = UIReturnKeyDone;
+        self.emailTextField.delegate = self;
+        
+    } else if (indexPath.row == 12) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"descri" forIndexPath:indexPath];
+        self.descriptionTextField = (UITextView *)[cell.contentView viewWithTag:100];
+        //self.descriptionTextField.placeholder = @"Description";
+        self.descriptionTextField.keyboardType = UIKeyboardTypeAlphabet;
+        self.descriptionTextField.returnKeyType = UIReturnKeyDone;
+        self.descriptionTextField.delegate = self;
+        
+    } else if (indexPath.row == 13) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"envoyer" forIndexPath:indexPath];
         
     }

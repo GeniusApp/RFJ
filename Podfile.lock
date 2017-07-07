@@ -51,6 +51,7 @@ PODS:
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
+  - MBProgressHUD (1.0.0)
   - MMMarkdown (0.5.5)
   - NSObject+Singleton (1.0.0)
   - pop (1.0.9)
@@ -76,6 +77,7 @@ DEPENDENCIES:
   - GoogleAnalytics
   - IDMPhotoBrowser
   - MagicalRecord
+  - MBProgressHUD (~> 1.0.0)
   - MMMarkdown
   - NSObject+Singleton
   - Reachability
@@ -104,6 +106,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   IDMPhotoBrowser: 4bb459b1faffc228e92bccdf7c54ad6d6b7e8c37
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
   NSObject+Singleton: 2d117af222e25a9c4acaa0e14fc0a9ff97f077a2
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
@@ -113,6 +116,6 @@ SPEC CHECKSUMS:
   UIColor-HexString: fadc2e1389db19147ac99dee92222d3bd8bfec4a
   Vertigo: b971aa21e904512cfe387196ccba37df3f9a792e
 
-PODFILE CHECKSUM: b05bc7e960188f6d87367d9987746e66f8052c8f
+PODFILE CHECKSUM: 679db4488919122ed511d52f6782a1d5e5008549
 
 COCOAPODS: 1.2.0

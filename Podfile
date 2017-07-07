@@ -22,6 +22,7 @@ target 'rfj' do
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
   pod 'Vertigo'
   pod 'IDMPhotoBrowser'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end
 
 target 'rjb' do
@@ -42,6 +43,7 @@ target 'rjb' do
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
   pod 'Vertigo'
   pod 'IDMPhotoBrowser'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end
 
 target 'rtn' do
@@ -62,4 +64,5 @@ target 'rtn' do
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
   pod 'Vertigo'
   pod 'IDMPhotoBrowser'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end

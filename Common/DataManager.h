@@ -20,7 +20,7 @@
 - (BOOL)isRJB;
 - (BOOL)isRTN;
 
--(void)sendInfoReportWithTitle:(NSString *)title email:(NSString *)email description:(NSString *)description phone:(NSString *)phone image:(NSData *)image successBlock:(void(^)())successBlock
+-(void)sendInfoReportWithTitle:(NSString *)title name:(NSString *)name firstName:(NSString *)firstName address:(NSString *)address zipCode:(NSString *)zipCode city:(NSString *)city email:(NSString *)email description:(NSString *)description phone:(NSString *)phone image:(NSData *)image successBlock:(void(^)())successBlock
                andFailureBlock:(void(^)(NSError *error))failureBlock;
 
 @end
