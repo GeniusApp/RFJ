@@ -15,12 +15,14 @@
 #import "NSObject+Singleton.h"
 #import "RadioManager.h"
 #import "MBProgressHUD.h"
+#import "Validation.h"
 
 
 @interface InfoReportViewController () <UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property NSInteger toggle;
 @property (strong, nonatomic) UIPickerView *pickerView;
+@property (strong,nonatomic) NSArray *theData;
+@property (strong,nonatomic) NSString *selectedTitle;
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UITextView *uploadedLabel;
@@ -43,7 +45,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[Analytics singleton] trackScreenName:@"Reporter une info"];
-    
+    UIPickerView *picker = [[UIPickerView alloc] init];
+    picker.dataSource = self;
+    picker.delegate = self;
+    self.titleTextField.inputView = picker;
+    self.theData = @[@"Madame",@"Monsieur"];
     
     self.Istextview=0;
     self.image.image=[UIImage imageNamed:@"images/GalleryDefaultImage.png"];
@@ -131,7 +137,7 @@
     NSData *data = UIImageJPEGRepresentation(self.image.image, 1.0);
     NSMutableData *imageMut=[data mutableCopy];
 
-    [[DataManager singleton] sendInfoReportWithTitle:self.titleTextField.text name:self.nomTextField.text firstName:self.prenomTextField.text address:self.adresseTextField.text zipCode:self.NPATextField.text city:self.localiteTextField.text email:self.emailTextField.text description:self.descriptionTextField.text phone:self.phoneTextField.text image:imageMut successBlock:^{
+    [[DataManager singleton] sendInfoReportWithTitle:self.selectedTitle name:self.nomTextField.text firstName:self.prenomTextField.text address:self.adresseTextField.text zipCode:self.NPATextField.text city:self.localiteTextField.text email:self.emailTextField.text description:self.descriptionTextField.text phone:self.phoneTextField.text image:imageMut successBlock:^{
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Lecteur reporter"
                                                             message:@"Votre message a bien été envoyé"
@@ -215,7 +221,7 @@
             return 50;
             break;
         case 4:
-            return 50;
+            return 100;
             break;
         case 5:
             return 50;
@@ -267,6 +273,13 @@
         
     } else if (indexPath.row == 4) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"PickerCellTitle" forIndexPath:indexPath];
+        UIPickerView *cellPickerView = (UIPickerView *)[cell.contentView viewWithTag:200];
+        self.titleTextField.inputView = cellPickerView;
+        
+        if(VALID(cellPickerView, UIPickerView)) {
+            cellPickerView.delegate = self;
+            cellPickerView.dataSource = self;
+        }
         
 
 //        self.titleTextField = (UITextField *)[cell.contentView viewWithTag:100];
@@ -378,19 +391,6 @@
         imagePickController.allowsEditing=NO;
         
         [self presentModalViewController:imagePickController animated:YES];
-    } else if (indexPath.row == 4) {
-        if(self.toggle == 0)
-        {
-            self.toggle = 1;
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
-            [self bringUpPickerViewWithRow:indexPath];
-        }
-        else
-        {
-            self.toggle = 0;
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
-            [self hidePickerView];
-        }
     }
     
     [self.titleTextField becomeFirstResponder];
@@ -406,7 +406,7 @@
 
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    NSLog(@"ENTREI NO EDIT DO TEXT VIEW");
+
     if ([textView.text isEqualToString:@"Description"]) {
         textView.text = @"";
     }
@@ -536,26 +536,21 @@
      }];
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    self.toggle = 0;
-    [self.tableView reloadData];
-    [self hidePickerView];
-    NSLog(@"row selected:%ld", (long)row);
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.theData.count;
 }
 
-- (NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [NSString stringWithFormat:@"%d", row+1];
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return  1;
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.theData[row];
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return 10;
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.titleTextField.text = self.theData[row];
+    self.selectedTitle = [self.theData objectAtIndex:row];
+    [self.titleTextField resignFirstResponder];
 }
 @end
