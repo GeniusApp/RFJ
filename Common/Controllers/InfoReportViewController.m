@@ -16,9 +16,11 @@
 #import "RadioManager.h"
 #import "MBProgressHUD.h"
 
-@interface InfoReportViewController () <UIAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@interface InfoReportViewController () <UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSInteger toggle;
+@property (strong, nonatomic) UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UITextView *uploadedLabel;
@@ -104,7 +106,7 @@
 
 - (IBAction)sendTapped:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    hud.labelText = @"Envoi en cours...";
     NSCharacterSet *numericOnly = [NSCharacterSet decimalDigitCharacterSet];
     
     //  Validation
@@ -265,11 +267,13 @@
         
     } else if (indexPath.row == 4) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"PickerCellTitle" forIndexPath:indexPath];
-        self.titleTextField = (UITextField *)[cell.contentView viewWithTag:100];
-        self.titleTextField.placeholder = @"Titre";
-        self.titleTextField.keyboardType = UIKeyboardTypeAlphabet;
-        self.titleTextField.returnKeyType = UIReturnKeyDone;
-        self.titleTextField.delegate = self;
+        
+
+//        self.titleTextField = (UITextField *)[cell.contentView viewWithTag:100];
+//        self.titleTextField.placeholder = @"Titre";
+//        self.titleTextField.keyboardType = UIKeyboardTypeAlphabet;
+//        self.titleTextField.returnKeyType = UIReturnKeyDone;
+//        self.titleTextField.delegate = self;
     } else if (indexPath.row == 5) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"PrenomCellTitle" forIndexPath:indexPath];
         self.prenomTextField = (UITextField *)[cell.contentView viewWithTag:100];
@@ -366,8 +370,7 @@
         if ([UIImagePickerController  isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {//Check PhotoLibrary  available or not
             imagePickController.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
             imagePickController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) //Check front Camera available or not
+        } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) //Check front Camera available or not
             imagePickController.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         
         
@@ -375,6 +378,19 @@
         imagePickController.allowsEditing=NO;
         
         [self presentModalViewController:imagePickController animated:YES];
+    } else if (indexPath.row == 4) {
+        if(self.toggle == 0)
+        {
+            self.toggle = 1;
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
+            [self bringUpPickerViewWithRow:indexPath];
+        }
+        else
+        {
+            self.toggle = 0;
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
+            [self hidePickerView];
+        }
     }
     
     [self.titleTextField becomeFirstResponder];
@@ -491,6 +507,55 @@
     
     [UIView commitAnimations];
 }
+- (void)bringUpPickerViewWithRow:(NSIndexPath*)indexPath
+{
+    UITableViewCell *currentCellSelected = [self.tableView cellForRowAtIndexPath:indexPath];
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         self.pickerView.hidden = NO;
+         self.pickerView.center = (CGPoint){currentCellSelected.frame.size.width/2, self.tableView.frame.origin.y + currentCellSelected.frame.size.height*4};
+     }
+                     completion:nil];
+}
 
+- (void)hidePickerView
+{
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+     {
+         self.pickerView.center = (CGPoint){160, 800};
+     }
+                     completion:^(BOOL finished)
+     {
+         self.pickerView.hidden = YES;
+     }];
+}
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    self.toggle = 0;
+    [self.tableView reloadData];
+    [self hidePickerView];
+    NSLog(@"row selected:%ld", (long)row);
+}
+
+- (NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [NSString stringWithFormat:@"%d", row+1];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 10;
+}
 @end

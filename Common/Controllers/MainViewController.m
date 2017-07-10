@@ -34,12 +34,13 @@
 #import "Reachability.h"
 #import "NewsItemSwipeTableViewCell.h"
 #import "WebViewTableViewCell.h"
+#import "GalerieItemSwipeTableViewCell.h"
 
 
 @import GoogleMobileAds;
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, GADInterstitialDelegate,
-    NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableViewCellDelegate, NewsItemSwipeTableViewCellDelegate,
+    NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemSwipeTableViewCellDelegate, NewsItemSwipeTableViewCellDelegate,
     NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
@@ -775,7 +776,7 @@
 
                 if ([item.name  isEqual: @"Région"]) {
                     //item.name = @"   Région";
-                    [actualCell setName:item.name];
+                    
                     //actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0073bf"] CGColor];
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
@@ -783,118 +784,117 @@
                    // cell.layer.backgroundColor = [[UIColor colorWithHexString:@"#000000"] CGColor];
                 } else if ([item.name  isEqual: @"Suisse"]) {
                     //item.name = @"   Suisse";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Monde"]) {
                     //item.name = @"   Monde";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Économie"]) {
                     //item.name = @"   Économie";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Culture"]) {
                     //item.name = @"   Culture";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Football"]) {
                     //item.name = @"   Football";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Hockey"]) {
                     //item.name = @"   Hockey";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Basketball"]) {
                     //item.name = @"   Basketball";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Volleyball"]) {
                     //item.name = @"   Volleyball";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Cyclisme"]) {
                     //item.name = @"   Cyclisme";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Ski"]) {
                    // item.name = @"   Ski";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Hippisme"]) {
                    // item.name = @"   Hippisme";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Tennis"]) {
                    // item.name = @"   Tennis";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Autres sports"]) {
                     //item.name = @"   Autres sports";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Sports motorisés"]) {
                    // item.name = @"   Sports motorisés";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Inline hockey"]) {
                    // item.name = @"   Inline hockey";
-                    [actualCell setName:item.name];
+                    
                     actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else {
-                    [actualCell setName:item.name];
                     actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0099ff"] CGColor];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#2182c3"] CGColor];
                 }
-                
+                actualCell.theNameString = item.name;
             
                 BOOL shouldExpand = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     return obj.parentId == item.id;
                 }] != NSNotFound;
                 
                 UIImage *icon = nil;
+                BOOL theBoolIconInteractionEnabled = NO;
                 
                 if(shouldExpand && item.id != 0) {
                     icon = [UIImage imageNamed:@"hamburger_menu"];
+                    theBoolIconInteractionEnabled = YES;
                 }
                 else if(VALID_NOTEMPTY(item.link, NSString)) {
                     icon = [UIImage imageNamed:@"link"];
                 }
-                
-                if(VALID(icon, UIImage)) {
-                    [actualCell setImage:icon];
-                }
+                actualCell.theImage = icon;
+                actualCell.theBoolIconInteractionEnabled = theBoolIconInteractionEnabled;
             }
         }
     }
@@ -927,32 +927,35 @@
             }];
             
             return cell;
-        } else if (indexPath.section == 3) { // GALERIE TYPE CELL
-            GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
+        }
+        else if (indexPath.section == 3) { // GALERIE TYPE CELL
             
-            if(!VALID(actualCell, GalerieItemTableViewCell)) {
-                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
+            GalerieItemSwipeTableViewCell *swipeCell = (id)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([GalerieItemSwipeTableViewCell class])];
+            
+            if(!VALID(swipeCell, GalerieItemSwipeTableViewCell))
+            {
+                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemSwipeTableViewCell" owner:self options:nil];
                 
                 if(VALID_NOTEMPTY(views, NSArray)) {
-                    actualCell = [views objectAtIndex:0];
+                    swipeCell = [views objectAtIndex:0];
                 }
             }
             
-            if(VALID(actualCell, GalerieItemTableViewCell)) {
-                cell = actualCell;
-                actualCell.delegate = self;
-                if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
+            if(VALID(swipeCell, GalerieItemSwipeTableViewCell)) {
+                cell = swipeCell;
+                swipeCell.delegate = self;
+                if(indexPath.row < [self.galeriePhotos count])
                 {
                     NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
                     NSArray *sortDescriptors = @[createDateDescriptor];
                     self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
-                    GalerieItem *item = [self.galeriePhotos objectAtIndex:indexPath.row];
-                    actualCell.item = item;
+                    swipeCell.GalerieItems = self.galeriePhotos;
+                    [swipeCell display];
+                    self.createdSwipeCells = [self.createdSwipeCells arrayByAddingObject:(id)swipeCell];
                 }
-                
-                return cell;
             }
-        } else { //CATEGORIES CELLS
+        }
+        else { //CATEGORIES CELLS
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
             
             if(!VALID(actualCell, NewsItemTableViewCell)) {
@@ -981,6 +984,11 @@
                     
                     NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
                     NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
+                    {
+                        NSMutableArray *theItemsMArray = items.mutableCopy;
+                        [theItemsMArray removeObjectsInArray:self.importantItems];
+                        items = theItemsMArray;
+                    }
                     
                     if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
                         
@@ -1040,6 +1048,11 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(VALID(cell, NewsItemSwipeTableViewCell)) {
         NewsItemSwipeTableViewCell *actualCell = (NewsItemSwipeTableViewCell *)cell;
+        
+        [actualCell display];
+    }
+    if(VALID(cell, GalerieItemSwipeTableViewCell)) {
+        GalerieItemSwipeTableViewCell *actualCell = (GalerieItemSwipeTableViewCell *)cell;
         
         [actualCell display];
     }
@@ -1268,6 +1281,32 @@
 //
 //}
 
+-(void)GalerieItemSwipeDidTap:(GalerieItemSwipeTableViewCell *)item withGalerieItem:(GalerieItem *)galerieItem
+{
+    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    if(index.row >= 0 && index.row < [self.galeriePhotos count]) {
+        GalerieGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"galerieGroup"];
+        
+        if(VALID(controller, GalerieGroupViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                GalerieItem *localItem = galerieItem;//[GalerieItem MR_inContext:localContext];
+                
+                if(VALID(localItem, GalerieItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            
+            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+            
+            controller.galerieToDisplay = self.galeriePhotos;
+            controller.startingIndex = @([controller.galerieToDisplay indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj == galerieItem;
+            }]);
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+}
 
 -(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
     

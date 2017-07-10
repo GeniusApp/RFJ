@@ -11,14 +11,17 @@
 @class MenuItemTableViewCell;
 
 @protocol MenuItemTableViewCellDelegate<NSObject>
--(void)menuItemDidTap:(MenuItemTableViewCell *)item;
--(void)menuItemDidTapIcon:(MenuItemTableViewCell *)item;
+-(void)menuItemDidTap:(MenuItemTableViewCell * _Nonnull)item;
+-(void)menuItemDidTapIcon:(MenuItemTableViewCell * _Nonnull)item;
 @end
 
 @interface MenuItemTableViewCell : UITableViewCell
-@property (assign, nonatomic) id<MenuItemTableViewCellDelegate> delegate;
+@property (nonatomic, weak, nullable) id<MenuItemTableViewCellDelegate> delegate;
+@property (nonatomic, assign) BOOL theBoolIconInteractionEnabled;
+@property (nonatomic, strong, nullable) NSString *theNameString;
+@property (nonatomic, strong, nullable) UIImage *theImage;
 
--(void)setName:(NSString *)name;
--(void)setImage:(UIImage *)image;
+//-(void)setName:(NSString *)name;
+//-(void)setImage:(UIImage *)image;
 
 @end

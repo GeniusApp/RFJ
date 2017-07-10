@@ -832,9 +832,6 @@
 				E7551D011E5C60B300A1AEF9 /* MenuItemTableViewCell.h */,
 				E7551D021E5C60B300A1AEF9 /* MenuItemTableViewCell.m */,
 				E7551D031E5C60B300A1AEF9 /* MenuItemTableViewCell.xib */,
-				3E67238A1EE19F3700BC0A5B /* GalerieItemTableViewCell.h */,
-				3E67238B1EE19F3700BC0A5B /* GalerieItemTableViewCell.m */,
-				3E67238C1EE19F3700BC0A5B /* GalerieItemTableViewCell.xib */,
 				3E38538F1EE8878C00F7FAC1 /* GalerieDetailTableViewCell.h */,
 				3E3853901EE8878C00F7FAC1 /* GalerieDetailTableViewCell.m */,
 				3E3853911EE8878C00F7FAC1 /* GalerieDetailTableViewCell.xib */,
@@ -848,9 +845,12 @@
 				3E3092281EDF0B3E002240A4 /* NewsItemSwipeTableViewCell.h */,
 				3E3092291EDF0B3E002240A4 /* NewsItemSwipeTableViewCell.m */,
 				3E30922D1EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib */,
-				3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */,
+				3E67238A1EE19F3700BC0A5B /* GalerieItemTableViewCell.h */,
+				3E67238B1EE19F3700BC0A5B /* GalerieItemTableViewCell.m */,
+				3E67238C1EE19F3700BC0A5B /* GalerieItemTableViewCell.xib */,
 				3EE3628C1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.h */,
 				3EE3628D1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m */,
+				3EE362911F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib */,
 				3E5725FC1EE986FD0015834A /* GalerieDetailTopTableViewCell.h */,
 				3E5725FD1EE986FD0015834A /* GalerieDetailTopTableViewCell.m */,
 				3E5725F81EE9840E0015834A /* GalerieDetailTopTableViewCell.xib */,
@@ -1931,6 +1931,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = rfj/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1960,6 +1961,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = rfj/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
