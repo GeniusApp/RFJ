@@ -626,8 +626,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             }];
             
             return cell;
-        } else if (indexPath.row == 14) {
-             NSLog(@"GALERIEITEMS: %@", self.galeriePhotos);
+        } else if (indexPath.row %14 == 0 && indexPath.row != 0) {
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
             
             if(!VALID(actualCell, GalerieItemTableViewCell)) {
@@ -653,7 +652,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                 
                 return cell;
             }
-        } else if (indexPath.row %14 == 0 && indexPath.row != 14 && indexPath.row != 0) {
+        } else if (indexPath.row %7 == 0 && indexPath.row != 14 && indexPath.row != 0) {
             // Reuse and create cell
             WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
             
