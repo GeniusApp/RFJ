@@ -32,7 +32,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *newsContentHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property int splashTimes;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) NewsDetail *newsDetail;
 @property (assign, nonatomic) NSInteger remainingLoadingElements;
@@ -44,7 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //NSLog(@"NEWSDETAIL");
+    
     self.allMenuItems = [MenuItem MR_findAll];
     
     self.newsContent.scrollView.scrollEnabled = NO;
@@ -63,11 +64,18 @@
     
     [self showLoading];
     
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    gestureRecognizer.numberOfTapsRequired = 1;
+    
+    [self.separatorView setUserInteractionEnabled:YES];
+    [self.separatorView addGestureRecognizer:gestureRecognizer];
+
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
     [self showLoading];
     self.remainingLoadingElements = 2;
+    [self.scrollView setContentOffset:CGPointZero animated:NO];
     
     if(VALID(newsToDisplay, NSNumber)) {
         self.currentNews = newsToDisplay;
@@ -90,10 +98,38 @@
 
 -(void)hideLoading {
     [self.loadingView setHidden:YES];
+    [self.view setNeedsLayout];
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraints];
+    [self.view layoutIfNeeded];
 }
 
 -(void)refreshNews {
     if(VALID(self.newsDetail, NewsDetail)) {
+        // load Splash
+        
+        if (![[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"]) {
+            [[NSUserDefaults standardUserDefaults] setInteger:self.splashTimes forKey:@"splashTimes"];
+            self.splashTimes++;
+        }else{
+            [[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"] + 1 forKey:@"splashTimes"];
+        }
+        //self.splashTimes++;
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        int splash = [[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"];
+        splash++;
+        
+        NSLog(@"SPLASH: %d", splash);
+        NSLog(@"SPLASHTIMES: %d", self.splashTimes);
+        if (splash == 7) {
+            NSString * storyboardName = @"Main";
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+            UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"splashTimes"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self presentViewController:vc animated:YES completion:nil];
+            
+        }
         self.newsTitleLabel.text = self.newsDetail.title;
         
         self.remainingLoadingElements = 2;
@@ -113,7 +149,7 @@
         
         [self.separatorView setCategoryName:categoryName];
         
-        NSString *html = nil;
+        __block NSString *html = nil;
         
 #if kNewsDetailIsHTML
         html = self.newsDetail.content;
@@ -129,6 +165,9 @@
         if(VALID(resources, Resources)) {
             if(VALID_NOTEMPTY(resources.htmlHeader, NSString)) {
                 header = resources.htmlHeader;
+                header = [header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/app.css\" type=\"text/css\" media=\"all\" />"];
+                [header = header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />"];
+                header = [header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" />"];
             }
 
             if(VALID_NOTEMPTY(resources.htmlFooter, NSString)) {
@@ -137,6 +176,21 @@
         }
         
         html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
+        html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
+        NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+        [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+            NSLog(@"NAOENTRA");
+            NSString *str = responseDict[@"banner"];
+            NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+            if (VALID_NOTEMPTY(str, NSString)){
+                str = [fixSquare stringByAppendingString:str];
+                str = [str stringByAppendingString:@"</div>"];
+                html = [html stringByAppendingString:str];
+                NSLog(@"NAOENTRA: %@", html);
+            }
+        } failure:^(NSError *error) {
+            // error handling here ...
+        }];
         
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         
@@ -170,6 +224,40 @@
         
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+-(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
+{
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    
+    // Asynchronously API is hit here
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                //                                                NSLog(@"%@",data);
+                                                if (error)
+                                                    failure(error);
+                                                else {
+                                                    NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                    //                                                    NSLog(@"%@",json);
+                                                    success(json);
+                                                }
+                                            }];
+    [dataTask resume];    // Executed First
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+{
+    //CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    CategoryViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
+    
+    if(VALID(controller, CategoryViewController)) {
+        
+        controller.navigationId = @(self.newsDetail.navigationId);
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    //Do stuff here...
+
+
 }
 
 - (IBAction)goBack:(id)sender {
@@ -228,17 +316,29 @@
 #pragma mark - WebView Delegate
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    //Disable selection
-    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
-    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+}
 
-    self.newsContentHeightConstraint.constant = webView.scrollView.contentSize.height;
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *url = [request URL];
     
-    self.remainingLoadingElements--;
-    
-    if(self.remainingLoadingElements == 0) {
-        [self hideLoading];
+    if([[url scheme] isEqualToString:@"ready"]) {
+        CGFloat contentHeight = [[url host] floatValue];
+        //Disable selection
+        [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+        [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+        
+        self.newsContentHeightConstraint.constant = contentHeight;
+        
+        self.remainingLoadingElements--;
+        
+        if(self.remainingLoadingElements == 0) {
+            [self hideLoading];
+        }
+        
+        return NO;
     }
+    
+    return YES;
 }
 
 @end

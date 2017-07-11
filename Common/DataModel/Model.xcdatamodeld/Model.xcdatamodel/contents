@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F67a" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="GalerieDetail" representedClassName="GalerieDetail" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentGallery" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="displayDateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="displayDateStop" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="navigationId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="retina1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="retina2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="retina3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="GalerieItem" representedClassName="GalerieItem" syncable="YES">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="displayDateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="displayDateStop" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="important" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="navigationId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="retina1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="retina2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="retina3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
     <entity name="MenuItem" representedClassName="MenuItem" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,6 +84,8 @@
         <attribute name="htmlHeader" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="GalerieDetail" positionX="441" positionY="-54" width="128" height="268"/>
+        <element name="GalerieItem" positionX="-216" positionY="9" width="128" height="253"/>
         <element name="MenuItem" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="NewsDetail" positionX="268" positionY="45" width="128" height="270"/>
         <element name="NewsItem" positionX="133" positionY="-54" width="128" height="253"/>

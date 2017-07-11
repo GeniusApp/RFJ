@@ -11,6 +11,7 @@
 #import "Validation.h"
 #import "Constants.h"
 #import "CategoryViewController.h"
+#import "GalerieViewController.h"
 #import "MainViewController.h"
 
 @interface NewsSeparatorViewWithBackButton()
@@ -88,8 +89,9 @@
         
         for(NSInteger i = [controllers count] - 2; i >= 0; i--) {
             UIViewController *controller = [controllers objectAtIndex:i];
-
-            if((!wantsMainController && VALID(controller, CategoryViewController)) || VALID(controller, MainViewController)) {
+            NSLog(@"CONTROLLER: %@", controller);
+            NSLog(@"NAVIGATION CONTROLLER: %@", navigationController);
+            if((!wantsMainController && VALID(controller, CategoryViewController)) || VALID(controller, MainViewController) || VALID(controller, GalerieViewController)) {
                 [navigationController popToViewController:controller animated:YES];
                 
                 break;

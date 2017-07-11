@@ -12,6 +12,7 @@
 #import "RadioManager.h"
 
 @interface WebViewController ()<UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIButton *returnButton;
@@ -40,6 +41,9 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+- (IBAction)homeButtonTapped:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)showLoading {
