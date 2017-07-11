@@ -772,55 +772,83 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     }
     else if(tableView == self.contentTableView) {
         NSLog(@"CATEGORY NUMBER: %@", self.activeCategoryId);
-        if (indexPath.row == 14) {
-            GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
-            
-            if(!VALID(actualCell, GalerieItemTableViewCell)) {
-                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
+        if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9589]]) {
+            NSLog(@"DEVIA ENTRAR AQUI");
+            if (indexPath.row %14 == 0 && indexPath.row != 0) {
+                GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
                 
-                if(VALID_NOTEMPTY(views, NSArray)) {
-                    actualCell = [views objectAtIndex:0];
-                }
-            }
-            
-            if(VALID(actualCell, GalerieItemTableViewCell)) {
-                cell = actualCell;
-                actualCell.delegate = self;
-                if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
-                {
+                if(!VALID(actualCell, GalerieItemTableViewCell)) {
+                    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
                     
-                    NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
-                    NSArray *sortDescriptors = @[createDateDescriptor];
-                    self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
-                    GalerieItem *item = [self.galeriePhotos objectAtIndex:0];
-                    actualCell.item = item;
+                    if(VALID_NOTEMPTY(views, NSArray)) {
+                        actualCell = [views objectAtIndex:0];
+                    }
                 }
+                
+                if(VALID(actualCell, GalerieItemTableViewCell)) {
+                    cell = actualCell;
+                    actualCell.delegate = self;
+                    if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
+                    {
+                        
+                        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
+                        NSArray *sortDescriptors = @[createDateDescriptor];
+                        self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
+                        GalerieItem *item = [self.galeriePhotos objectAtIndex:0];
+                        actualCell.item = item;
+                    }
+                    
+                    return cell;
+                }
+            } else if (indexPath.row %7 == 0 && indexPath.row != 14 && indexPath.row != 0) {
+                // Reuse and create cell
+                WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
+                
+                if(!VALID(cell, WebViewTableViewCell)) {
+                    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WebViewTableViewCell" owner:self options:nil];
+                    
+                    if(VALID_NOTEMPTY(views, NSArray)) {
+                        cell = [views objectAtIndex:0];
+                    }
+                }
+                NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+                [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+                    NSString *str = responseDict[@"banner"];
+                    NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+                    str = [fixSquare stringByAppendingString:str];
+                    str = [str stringByAppendingString:@"</div>"];
+                    [cell.webView loadHTMLString:str baseURL:nil];
+                    cell.webView.delegate = self;
+                } failure:^(NSError *error) {
+                    // error handling here ...
+                }];
                 
                 return cell;
-            }
-        } else if (indexPath.row %7 == 0 && indexPath.row != 14 && indexPath.row != 0) {
-            // Reuse and create cell
-            WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
-            
-            if(!VALID(cell, WebViewTableViewCell)) {
-                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WebViewTableViewCell" owner:self options:nil];
+            } else {
+                NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
                 
-                if(VALID_NOTEMPTY(views, NSArray)) {
-                    cell = [views objectAtIndex:0];
+                if(!VALID(actualCell, NewsItemTableViewCell))
+                {
+                    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
+                    
+                    if(VALID_NOTEMPTY(views, NSArray))
+                    {
+                        actualCell = [views objectAtIndex:0];
+                    }
+                }
+                
+                if(VALID(actualCell, NewsItemTableViewCell))
+                {
+                    cell = actualCell;
+                    actualCell.delegate = self;
+                    if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
+                    {
+                        NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
+                        
+                        actualCell.item = item;
+                    }
                 }
             }
-            NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
-            [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
-                NSString *str = responseDict[@"banner"];
-                NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
-                str = [fixSquare stringByAppendingString:str];
-                str = [str stringByAppendingString:@"</div>"];
-                [cell.webView loadHTMLString:str baseURL:nil];
-                cell.webView.delegate = self;
-            } failure:^(NSError *error) {
-                // error handling here ...
-            }];
-            
             return cell;
         } else {
             NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
