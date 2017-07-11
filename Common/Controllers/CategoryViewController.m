@@ -517,7 +517,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                  success:(void(^)(NSArray<GalerieItem *> *photos))successBlock
                  failure:(void(^)(NSError *error))failureBlock {
     self.isLoading = YES;
-    NSLog(@"LOADIMAGESFORPAGE");
     [[NewsManager singleton] fetchImagesAtPage:page objectType:1 categoryId:-1 withSuccessBlock:^(NSArray<GalerieItem *> *photos) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.isLoading = NO;
@@ -527,7 +526,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             }
         });
     } andFailureBlock:^(NSError *error) {
-        NSLog(@"LOADIMAGESFORPAGEFAILURE");
         dispatch_async(dispatch_get_main_queue(), ^{
             self.isLoading = NO;
             
@@ -771,9 +769,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }
     }
     else if(tableView == self.contentTableView) {
-        NSLog(@"CATEGORY NUMBER: %@", self.activeCategoryId);
         if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9589]]) {
-            NSLog(@"DEVIA ENTRAR AQUI");
             if (indexPath.row %14 == 0 && indexPath.row != 0) {
                 GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
                 
