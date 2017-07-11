@@ -110,21 +110,24 @@
         
         if (![[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"]) {
             [[NSUserDefaults standardUserDefaults] setInteger:self.splashTimes forKey:@"splashTimes"];
+            self.splashTimes++;
         }else{
             [[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"] + 1 forKey:@"splashTimes"];
         }
-        self.splashTimes++;
+        //self.splashTimes++;
         [[NSUserDefaults standardUserDefaults] synchronize];
         int splash = [[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"];
         splash++;
         
         NSLog(@"SPLASH: %d", splash);
         NSLog(@"SPLASHTIMES: %d", self.splashTimes);
-        if (self.splashTimes == 7) {
+        if (splash == 7) {
             NSString * storyboardName = @"Main";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
             UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
+           [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"splashTimes"];
             [self presentViewController:vc animated:YES completion:nil];
+            
         }
         self.newsTitleLabel.text = self.newsDetail.title;
         
