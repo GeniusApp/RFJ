@@ -36,6 +36,7 @@
 GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
+@property (nonatomic, assign) double theFakeMenuHeightConstraintConstant;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
@@ -265,6 +266,7 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 
 -(void)showMenu {
     self.menuHeightConstraint.constant = self.menuTableView.contentSize.height;
+    [self adjustMenuHeightConstant];
     
     [UIView animateWithDuration:kMenuAnimationTime animations:^{
         [self.view layoutIfNeeded];
@@ -570,7 +572,8 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                 
                 [self.menuTableView deleteRowsAtIndexPaths:removedRows withRowAnimation:UITableViewRowAnimationTop];
                 
-                self.menuHeightConstraint.constant = self.menuHeightConstraint.constant - [removedRows count] * kMenuRowHeight;
+                self.menuHeightConstraint.constant = self.theFakeMenuHeightConstraintConstant - [removedRows count] * kMenuRowHeight;
+                [self adjustMenuHeightConstant];
                 
                 [UIView animateWithDuration:kMenuAnimationTime animations:^{
                     [self.menuTableView beginUpdates];
@@ -602,7 +605,8 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
                     
                     [self.menuTableView insertRowsAtIndexPaths:insertedRows withRowAnimation:UITableViewRowAnimationTop];
                     
-                    self.menuHeightConstraint.constant = self.menuHeightConstraint.constant + [insertedRows count] * kMenuRowHeight;
+                    self.menuHeightConstraint.constant = self.theFakeMenuHeightConstraintConstant + [insertedRows count] * kMenuRowHeight;
+                    [self adjustMenuHeightConstant];
                     
                     [UIView animateWithDuration:kMenuAnimationTime animations:^{
                         [self.menuTableView beginUpdates];
@@ -694,6 +698,21 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
         }
     }
 
+}
+
+- (void)adjustMenuHeightConstant
+{
+    self.theFakeMenuHeightConstraintConstant = self.menuHeightConstraint.constant;
+    double theProperHeightCount = 0;
+    {
+        theProperHeightCount += self.menuTableView.superview.frame.size.height;
+        theProperHeightCount -= self.bottomBanner.frame.size.height;
+        theProperHeightCount -= self.menuTableView.frame.origin.y;
+    }
+    if (self.menuHeightConstraint.constant > theProperHeightCount)
+    {
+        self.menuHeightConstraint.constant = theProperHeightCount;
+    }
 }
 
 
