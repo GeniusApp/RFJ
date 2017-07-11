@@ -602,7 +602,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }
     }
     else if(tableView == self.contentTableView) {
+        NSInteger arrayIndex = (indexPath.row / 14) - 1;
         if (indexPath.row %14 == 0 && indexPath.row != 0) {
+            
             GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
             
             if(!VALID(actualCell, GalerieItemTableViewCell)) {
@@ -616,16 +618,15 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             if(VALID(actualCell, GalerieItemTableViewCell)) {
                 cell = actualCell;
                 actualCell.delegate = self;
+                
                 if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
                 {
-                    
                     NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
                     NSArray *sortDescriptors = @[createDateDescriptor];
                     self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
-                    GalerieItem *item = [self.galeriePhotos objectAtIndex:0];
+                    GalerieItem *item = [self.galeriePhotos objectAtIndex:arrayIndex];
                     actualCell.item = item;
                 }
-                
                 return cell;
             }
         } else if (indexPath.row %7 == 0 && indexPath.row != 14 && indexPath.row != 0) {
