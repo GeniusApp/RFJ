@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet NewsSeparatorViewWithBackButton *separatorView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
+@property int splashTimes;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) NewsDetail *newsDetail;
 @property (assign, nonatomic) NSInteger remainingLoadingElements;
@@ -106,6 +106,26 @@
 
 -(void)refreshNews {
     if(VALID(self.newsDetail, NewsDetail)) {
+        // load Splash
+        
+        if (![[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"]) {
+            [[NSUserDefaults standardUserDefaults] setInteger:self.splashTimes forKey:@"splashTimes"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"] + 1 forKey:@"splashTimes"];
+        }
+        self.splashTimes++;
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        int splash = [[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"];
+        splash++;
+        
+        NSLog(@"SPLASH: %d", splash);
+        NSLog(@"SPLASHTIMES: %d", self.splashTimes);
+        if (self.splashTimes == 7) {
+            NSString * storyboardName = @"Main";
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+            UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
+            [self presentViewController:vc animated:YES completion:nil];
+        }
         self.newsTitleLabel.text = self.newsDetail.title;
         
         self.remainingLoadingElements = 2;
@@ -125,7 +145,7 @@
         
         [self.separatorView setCategoryName:categoryName];
         
-        NSString *html = nil;
+        __block NSString *html = nil;
         
 #if kNewsDetailIsHTML
         html = self.newsDetail.content;
@@ -152,11 +172,24 @@
         }
         
         html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
-        
-        NSString *ht_var = @"<script type='text/javascript'><!--//<![CDATA[var m3_u = (location.protocol=='https:'?'https://ww2.lapublicite.ch/pubserver/www/delivery/ajs.php':'http://ww2.lapublicite.ch/pubserver/www/delivery/ajs.php');var m3_r = Math.floor(Math.random()*99999999999);if (!document.MAX_used) document.MAX_used = ',';document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);document.write (\"?zoneid=20048\");document.write ('&amp;cb=' + m3_r);if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));document.write (\"&amp;loc=\" + escape(window.location));if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));if (document.context) document.write (\"&context=\" + escape(document.context));if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");document.write (\"'><\\/scr\"+\"ipt>\");//]]>--></script><noscript><a href='http://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20048&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a77eccf9' border='0' alt='' /></a></noscript>";
+//
+//        html = [html stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
+//        html = [html stringByAppendingString:@"<script src=\"http://code.jquery.com/jquery-1.11.1.min.js\"></script><script type=\"text/javascript\"> jQuery( document ).ready(function() {  var playing = false; var audioElement = document.createElement('audio'); audioElement.setAttribute(\"id\",\"audioPlayer\"); jQuery('.sound-link').click(function(event){ event.preventDefault(); event.stopPropagation(); var trackURL = jQuery(this).attr('href'); var trackTitle = jQuery(this).attr('title'); var trackCover = jQuery(this).attr('rel'); audioElement.setAttribute('src', trackURL);                audioElement.addEventListener('ended', function() { this.play(); }, false); if (playing == false) { playing = true; jQuery(this).find(\".fa-volume-up\").removeClass(\"fa-volume-up\").addClass(\"fa-pause\");audioElement.play(); } else { playing = false; jQuery(this).find(\".fa-pause\").removeClass(\"fa-pause\").addClass(\"fa-volume-up\");            audioElement.pause(); } }); }); </script>"];
 
-        html = [html stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
-        html = [html stringByAppendingString:@"<script src=\"http://code.jquery.com/jquery-1.11.1.min.js\"></script><script type=\"text/javascript\"> jQuery( document ).ready(function() {  var playing = false; var audioElement = document.createElement('audio'); audioElement.setAttribute(\"id\",\"audioPlayer\"); jQuery('.sound-link').click(function(event){ event.preventDefault(); event.stopPropagation(); var trackURL = jQuery(this).attr('href'); var trackTitle = jQuery(this).attr('title'); var trackCover = jQuery(this).attr('rel'); audioElement.setAttribute('src', trackURL);                audioElement.addEventListener('ended', function() { this.play(); }, false); if (playing == false) { playing = true; jQuery(this).find(\".fa-volume-up\").removeClass(\"fa-volume-up\").addClass(\"fa-pause\");audioElement.play(); } else { playing = false; jQuery(this).find(\".fa-pause\").removeClass(\"fa-pause\").addClass(\"fa-volume-up\");            audioElement.pause(); } }); }); </script>"];
+        html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
+        NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+        [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+            NSString *str = responseDict[@"banner"];
+            NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+            if (VALID_NOTEMPTY(str, NSString)){
+                str = [fixSquare stringByAppendingString:str];
+                str = [str stringByAppendingString:@"</div>"];
+                html = [html stringByAppendingString:str];
+                NSLog(@"STRING: %@", str);
+            }
+        } failure:^(NSError *error) {
+            // error handling here ...
+        }];
         
         html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
         
@@ -192,6 +225,25 @@
         
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+-(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
+{
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    
+    // Asynchronously API is hit here
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                //                                                NSLog(@"%@",data);
+                                                if (error)
+                                                    failure(error);
+                                                else {
+                                                    NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                    //                                                    NSLog(@"%@",json);
+                                                    success(json);
+                                                }
+                                            }];
+    [dataTask resume];    // Executed First
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
