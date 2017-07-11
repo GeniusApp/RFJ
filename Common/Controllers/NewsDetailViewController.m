@@ -160,7 +160,6 @@
         
         html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
         
-        NSLog(@"HTML: %@", html);
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         
         [self.separatorView setDate:self.newsDetail.updateDate];
@@ -276,8 +275,6 @@
         //Disable selection
         [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
         [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
-        
-        NSLog(@"ContentHeight for News %@: %lf", self.newsDetail.title, contentHeight);
         
         self.newsContentHeightConstraint.constant = contentHeight;
         

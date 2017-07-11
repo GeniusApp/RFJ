@@ -32,7 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (weak, nonatomic) IBOutlet UIButton *infoReportButton;
-
+@property (nonatomic, retain) NSNumber *orderNumber;
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
 @property (strong, nonatomic) NSMutableArray<NSNumber *> *expandedMenuItems;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
@@ -47,8 +47,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //NSLog(@"NEWSGROUP");
 
+    // load Splash
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger splashTimes = [defaults integerForKey:@"splashTimes"];
+    NSLog(@"TIMES: %ld", (long)splashTimes);
+    
     self.allMenuItems = [MenuItem sortedMenuItems];
     [self refreshMenuItems];
     

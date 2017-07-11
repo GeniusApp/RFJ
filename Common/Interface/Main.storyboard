@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="P7e-Vk-6iI">
-<<<<<<< HEAD
-=======
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,9 +23,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZ7-06-HhR">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
-=======
                                 <rect key="frame" x="0.0" y="20" width="375" height="53"/>
 >>>>>>> 1_1_ads_on_category
                                 <subviews>
@@ -48,10 +43,6 @@
                                             <constraint firstAttribute="height" constant="40" id="qzw-Dr-4Qb"/>
                                         </constraints>
                                     </imageView>
-<<<<<<< HEAD
-                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIR-Xh-ROc">
-                                        <rect key="frame" x="512" y="9" width="78" height="22"/>
-=======
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9Y-2p-daw">
                                         <rect key="frame" x="48" y="3" width="75" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -82,10 +73,6 @@
                                     <constraint firstAttribute="trailing" secondItem="cIR-Xh-ROc" secondAttribute="trailing" constant="9" id="vi4-BB-CGg"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="01A-wf-IT3">
-                                <rect key="frame" x="0.0" y="60" width="600" height="128"/>
-=======
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="01A-wf-IT3">
                                 <rect key="frame" x="0.0" y="74" width="375" height="128"/>
 >>>>>>> 1_1_ads_on_category
@@ -98,10 +85,6 @@
                                     <outlet property="delegate" destination="Mgm-SY-j4T" id="sE9-ne-JBX"/>
                                 </connections>
                             </tableView>
-<<<<<<< HEAD
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEG-s1-7Ck">
-                                <rect key="frame" x="0.0" y="188" width="600" height="412"/>
-=======
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ode-fa-Xqb">
                                 <rect key="frame" x="0.0" y="202" width="375" height="469"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -116,9 +99,6 @@
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5k-gA-fwx">
-<<<<<<< HEAD
-                                <rect key="frame" x="535" y="535" width="50" height="50"/>
-=======
                                 <rect key="frame" x="310" y="540" width="50" height="50"/>
 >>>>>>> 1_1_ads_on_category
                                 <state key="normal" image="auditeur-reporter"/>
@@ -401,9 +381,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mux-al-yyU">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
-=======
                                 <rect key="frame" x="0.0" y="20" width="375" height="53"/>
 >>>>>>> 1_1_ads_on_category
                                 <subviews>
@@ -429,9 +406,6 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQR-QN-eZc">
-<<<<<<< HEAD
-                                        <rect key="frame" x="512" y="9" width="78" height="22"/>
-=======
                                         <rect key="frame" x="280" y="11" width="85" height="28"/>
 >>>>>>> 1_1_ads_on_category
                                         <constraints>
@@ -457,10 +431,6 @@
                                     <constraint firstItem="ZAg-U0-dLc" firstAttribute="top" secondItem="mux-al-yyU" secondAttribute="top" constant="2" id="y10-nt-hek"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="trP-Ja-4wj">
-                                <rect key="frame" x="0.0" y="60" width="600" height="128"/>
-=======
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="trP-Ja-4wj">
                                 <rect key="frame" x="0.0" y="60" width="375" height="128"/>
 >>>>>>> 1_1_ads_on_category
@@ -474,19 +444,12 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6C3-Ne-Pxm" customClass="NewsSeparatorViewWithBackButton">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="188" width="600" height="30"/>
-=======
                                 <rect key="frame" x="0.0" y="192" width="375" height="30"/>
 >>>>>>> 1_1_ads_on_category
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HJL-iW-fJo"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jgw-2n-2VN">
-                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
-=======
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jgw-2n-2VN">
                                 <rect key="frame" x="0.0" y="222" width="375" height="449"/>
 >>>>>>> 1_1_ads_on_category
@@ -496,16 +459,6 @@
                                     <outlet property="delegate" destination="Cck-O3-IAj" id="ZOV-3z-Ptw"/>
                                 </connections>
                             </tableView>
-<<<<<<< HEAD
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRC-bH-aJH">
-                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
-                                <connections>
-                                    <segue destination="uJy-Dm-6OD" kind="embed" id="xGI-X3-h5x"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="205-fS-14b">
-                                <rect key="frame" x="535" y="535" width="50" height="50"/>
-=======
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkB-T0-FKf">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -593,10 +546,6 @@
                                             <action selector="goBack:" destination="58B-lZ-nVa" eventType="touchUpInside" id="O39-Xy-WMc"/>
                                         </connections>
                                     </button>
-<<<<<<< HEAD
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Gi1-Ry-t0D">
-                                        <rect key="frame" x="266.5" y="3" width="67" height="35"/>
-=======
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdZ-iM-r6g">
                                         <rect key="frame" x="154" y="2.5" width="67" height="35"/>
 >>>>>>> 1_1_ads_on_category
@@ -685,9 +634,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzA-JU-06j">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
-=======
                                 <rect key="frame" x="0.0" y="20" width="375" height="53"/>
 >>>>>>> 1_1_ads_on_category
                                 <subviews>
@@ -713,9 +659,6 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiP-aT-pgO">
-<<<<<<< HEAD
-                                        <rect key="frame" x="512" y="9" width="78" height="22"/>
-=======
                                         <rect key="frame" x="287" y="15" width="78" height="22"/>
 >>>>>>> 1_1_ads_on_category
                                         <constraints>
@@ -741,9 +684,6 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SpY-Zf-U5i">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="60" width="600" height="128"/>
-=======
                                 <rect key="frame" x="0.0" y="67" width="375" height="128"/>
 >>>>>>> 1_1_ads_on_category
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -756,12 +696,6 @@
                                 </connections>
                             </tableView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4E-F7-PQB">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="188" width="600" height="412"/>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5OT-zg-Zwb">
-                                <rect key="frame" x="535" y="535" width="50" height="50"/>
-=======
                                 <rect key="frame" x="0.0" y="196" width="375" height="473"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5OT-zg-Zwb">
@@ -923,13 +857,6 @@
                         <viewControllerLayoutGuide type="bottom" id="zL9-ju-0DD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lmn-ES-aRe">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ahf-xP-OwQ">
-                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
-=======
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -940,17 +867,6 @@
                                 <color key="sectionIndexBackgroundColor" red="0.99573501279999999" green="0.99573501279999999" blue="0.99573501279999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.99573501279999999" green="0.99573501279999999" blue="0.99573501279999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-<<<<<<< HEAD
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstCell" rowHeight="111" id="1G8-iw-CEM">
-                                        <rect key="frame" x="0.0" y="22" width="600" height="111"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1G8-iw-CEM" id="sqM-w3-sNk">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="111"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rui-S8-MJq">
-                                                    <rect key="frame" x="8" y="32" width="584" height="50"/>
-=======
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FirstCell" rowHeight="150" id="1G8-iw-CEM">
                                         <rect key="frame" x="0.0" y="22" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -995,17 +911,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-<<<<<<< HEAD
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" id="tJW-8d-J7n">
-                                        <rect key="frame" x="0.0" y="133" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tJW-8d-J7n" id="Gj7-F3-Ur3">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GalleryDefaultImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dxu-ve-bXr">
-                                                    <rect key="frame" x="79" y="-6" width="442" height="55"/>
-=======
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" rowHeight="170" id="tJW-8d-J7n">
                                         <rect key="frame" x="0.0" y="172" width="375" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1047,23 +952,16 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-<<<<<<< HEAD
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InputCellTitle" id="qK9-Hc-sRo">
-                                        <rect key="frame" x="0.0" y="177" width="600" height="44"/>
-=======
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PrenomCellTitle" id="qK9-Hc-sRo">
                                         <rect key="frame" x="0.0" y="386" width="375" height="44"/>
->>>>>>> 1_1_ads_on_category
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qK9-Hc-sRo" id="jAA-5t-Lf4">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WIQ-yc-IpK">
-<<<<<<< HEAD
                                                     <rect key="frame" x="8" y="12" width="584" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-=======
                                                     <rect key="frame" x="8" y="12" width="359" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
 >>>>>>> 1_1_ads_on_category
@@ -1178,9 +1076,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InputCell" id="3ms-3c-7fS">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="221" width="600" height="44"/>
-=======
                                         <rect key="frame" x="0.0" y="650" width="375" height="44"/>
 >>>>>>> 1_1_ads_on_category
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1202,9 +1097,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" id="eOT-hW-PmV">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="265" width="600" height="44"/>
-=======
                                         <rect key="frame" x="0.0" y="694" width="375" height="44"/>
 >>>>>>> 1_1_ads_on_category
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1252,9 +1144,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="descri" id="ugV-IO-QHZ">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="309" width="600" height="44"/>
-=======
                                         <rect key="frame" x="0.0" y="782" width="375" height="44"/>
 >>>>>>> 1_1_ads_on_category
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1281,9 +1170,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="envoyer" id="UqO-xF-s5o">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="353" width="600" height="44"/>
-=======
                                         <rect key="frame" x="0.0" y="826" width="375" height="44"/>
 >>>>>>> 1_1_ads_on_category
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1330,10 +1216,6 @@
                                             <action selector="goBack:" destination="58B-lZ-nVa" eventType="touchUpInside" id="VE9-L4-7DV"/>
                                         </connections>
                                     </button>
-<<<<<<< HEAD
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="u0Y-VI-Lz7">
-                                        <rect key="frame" x="266.5" y="3" width="67" height="35"/>
-=======
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="522-Tk-fZ8">
                                         <rect key="frame" x="154" y="2" width="67" height="35"/>
 >>>>>>> 1_1_ads_on_category
@@ -1408,9 +1290,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbu-bZ-BTR">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
-=======
                                 <rect key="frame" x="0.0" y="20" width="375" height="53"/>
 >>>>>>> 1_1_ads_on_category
                                 <subviews>
@@ -1430,11 +1309,6 @@
                                             <constraint firstAttribute="height" constant="40" id="ERZ-Ge-a5j"/>
                                             <constraint firstAttribute="width" constant="70" id="RmE-0d-8K8"/>
                                         </constraints>
-<<<<<<< HEAD
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcc-VI-1tn">
-                                        <rect key="frame" x="512" y="9" width="78" height="22"/>
-=======
                                         <state key="normal" backgroundImage="logo"/>
                                         <connections>
                                             <action selector="homeButtonTapped:" destination="VNG-F0-hbx" eventType="touchUpInside" id="5ud-yO-ldy"/>
@@ -1467,10 +1341,6 @@
                                     <constraint firstItem="Xnt-e8-OaU" firstAttribute="leading" secondItem="Tti-Ud-fhU" secondAttribute="trailing" constant="5" id="rkU-Bh-OXo"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8jY-Uq-IRX">
-                                <rect key="frame" x="0.0" y="60" width="600" height="128"/>
-=======
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8jY-Uq-IRX">
                                 <rect key="frame" x="0.0" y="64" width="375" height="128"/>
 >>>>>>> 1_1_ads_on_category
@@ -1484,19 +1354,12 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b3u-qw-o6p" userLabel="Separator View" customClass="NewsSeparatorViewWithBackButton">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="188" width="600" height="30"/>
-=======
                                 <rect key="frame" x="0.0" y="192" width="375" height="30"/>
 >>>>>>> 1_1_ads_on_category
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="mwc-Cn-9IU"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nup-gM-z9N">
-                                <rect key="frame" x="0.0" y="217" width="600" height="383"/>
-=======
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nup-gM-z9N">
                                 <rect key="frame" x="0.0" y="222" width="375" height="445"/>
 >>>>>>> 1_1_ads_on_category
@@ -1514,9 +1377,6 @@
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opc-kh-RCL">
-<<<<<<< HEAD
-                                <rect key="frame" x="535" y="535" width="50" height="50"/>
-=======
                                 <rect key="frame" x="310" y="540" width="50" height="50"/>
 >>>>>>> 1_1_ads_on_category
                                 <state key="normal" image="auditeur-reporter"/>
