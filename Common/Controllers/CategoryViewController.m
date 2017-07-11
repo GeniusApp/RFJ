@@ -1049,5 +1049,37 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }
     }
 }
-
+-(void)GalerieItemDidTap:(GalerieItemTableViewCell *)item {
+    
+    //    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    //    NSLog(@"GALERIE PHOTO TAPPED %ld", (long)index.row);
+    //    GalerieItem *photoItem = [self.galerieItems objectAtIndex:index.row];
+    //    NSLog(@"GALERIE PHOTO TAPPED %@", photoItem.retina1);
+    //    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoItem.retina1]]];
+    //    [self addImageViewWithImage:image];
+    NSIndexPath *index = [self.contentTableView indexPathForCell:item];
+    if(index.row >= 0 && index.row < [self.galeriePhotos count]) {
+        GalerieGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"galerieGroup"];
+        
+        if(VALID(controller, GalerieGroupViewController)) {
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
+                GalerieItem *localItem = [item.item MR_inContext:localContext];
+                
+                if(VALID(localItem, GalerieItem)) {
+                    localItem.read = YES;
+                }
+            }];
+            
+            [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+            
+            controller.galerieToDisplay = self.galeriePhotos;
+            controller.startingIndex = @([controller.galerieToDisplay indexOfObjectPassingTest:^BOOL(GalerieItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return obj == item.item;
+            }]);
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+    
+}
 @end
