@@ -125,7 +125,8 @@
             NSString * storyboardName = @"Main";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
             UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
-           [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"splashTimes"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"splashTimes"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self presentViewController:vc animated:YES completion:nil];
             
         }
@@ -175,26 +176,21 @@
         }
         
         html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
-//
-//        html = [html stringByAppendingString:@"<div class=\"pub\"><a href=\"https://ww2.lapublicite.ch/pubserver/www/delivery/ck.php?n=a77eccf9&amp;cb=101\" target=\"_blank\"><img src=\"https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20093&amp;cb=101&amp;n=a77eccf9\" border=\"0\" alt=\"\">             </a></div>"];
-//        html = [html stringByAppendingString:@"<script src=\"http://code.jquery.com/jquery-1.11.1.min.js\"></script><script type=\"text/javascript\"> jQuery( document ).ready(function() {  var playing = false; var audioElement = document.createElement('audio'); audioElement.setAttribute(\"id\",\"audioPlayer\"); jQuery('.sound-link').click(function(event){ event.preventDefault(); event.stopPropagation(); var trackURL = jQuery(this).attr('href'); var trackTitle = jQuery(this).attr('title'); var trackCover = jQuery(this).attr('rel'); audioElement.setAttribute('src', trackURL);                audioElement.addEventListener('ended', function() { this.play(); }, false); if (playing == false) { playing = true; jQuery(this).find(\".fa-volume-up\").removeClass(\"fa-volume-up\").addClass(\"fa-pause\");audioElement.play(); } else { playing = false; jQuery(this).find(\".fa-pause\").removeClass(\"fa-pause\").addClass(\"fa-volume-up\");            audioElement.pause(); } }); }); </script>"];
-
         html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
         NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
         [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+            NSLog(@"NAOENTRA");
             NSString *str = responseDict[@"banner"];
             NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
             if (VALID_NOTEMPTY(str, NSString)){
                 str = [fixSquare stringByAppendingString:str];
                 str = [str stringByAppendingString:@"</div>"];
                 html = [html stringByAppendingString:str];
-                NSLog(@"STRING: %@", str);
+                NSLog(@"NAOENTRA: %@", html);
             }
         } failure:^(NSError *error) {
             // error handling here ...
         }];
-        
-        html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
         
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         
