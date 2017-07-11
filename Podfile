@@ -1,5 +1,6 @@
 platform :ios, '9.0'
 
+
 target 'rfj' do
   pod 'AFNetworking'
   pod 'AFSoundManager'
@@ -11,15 +12,17 @@ target 'rfj' do
   pod 'GoogleAnalytics'
   pod 'Google/Analytics'
   pod 'MagicalRecord'
-  pod 'MHVideoPhotoGallery'
   pod 'MMMarkdown'
   pod 'UIColor-HexString'
   pod 'NSObject+Singleton'
   pod 'Reachability'
-  pod 'SDWebImage', '~> 3.7.3'
+  pod 'SDWebImage', '~> 4.0'
   pod 'SwiftLint'
   pod 'CocoaZ'
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
+  pod 'Vertigo'
+  pod 'IDMPhotoBrowser'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end
 
 target 'rjb' do
@@ -32,13 +35,15 @@ target 'rjb' do
   pod 'DateTools'
   pod 'GoogleAnalytics'
   pod 'MagicalRecord'
-  pod 'MHVideoPhotoGallery'
   pod 'MMMarkdown'
   pod 'UIColor-HexString'
   pod 'NSObject+Singleton'
   pod 'Reachability'
-  pod 'SDWebImage', '~> 3.7.3'
+  pod 'SDWebImage', '~> 4.0'
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
+  pod 'Vertigo'
+  pod 'IDMPhotoBrowser'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end
 
 target 'rtn' do
@@ -51,11 +56,13 @@ target 'rtn' do
   pod 'DateTools'
   pod 'GoogleAnalytics'
   pod 'MagicalRecord'
-  pod 'MHVideoPhotoGallery'
   pod 'MMMarkdown'
   pod 'UIColor-HexString'
   pod 'NSObject+Singleton'
   pod 'Reachability'
-  pod 'SDWebImage', '~> 3.7.3'
+  pod 'SDWebImage', '~> 4.0'
   pod 'Google-Mobile-Ads-SDK', '~> 7.8'
+  pod 'Vertigo'
+  pod 'IDMPhotoBrowser'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end

@@ -58,7 +58,7 @@
         else {
             self.categoryLabel.text = @"";
         }
-        
+
         if(item.read) {
             self.dateLabel.textColor = kNewsReadColor;
             self.titleLabel.textColor = kNewsReadColor;

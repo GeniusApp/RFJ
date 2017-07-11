@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "NewsGroupViewController.h"
 #import "NewsDetailViewController.h"
+#import "GalerieViewController.h"
 #import "MenuItem+CoreDataProperties.h"
 #import "MenuItemTableViewCell.h"
 #import "NewsManager.h"
@@ -24,10 +25,12 @@
 #import "WebViewController.h"
 
 @interface NewsGroupViewController ()<UITableViewDelegate, UITableViewDataSource, MenuItemTableViewCellDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *buttonTapped;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIWebView *bottomBanner;
 @property (weak, nonatomic) IBOutlet UIButton *infoReportButton;
 
 @property (strong, nonatomic) NSMutableArray<MenuItem *> *menuItems;
@@ -75,6 +78,7 @@
         }
     }
     
+    
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     [self.pageController setViewControllers:@[[self.pages objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     self.pageController.delegate = self;
@@ -95,14 +99,51 @@
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.pageController.view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
     
     [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
-    
+//    NSLog(@"STARTINGINDEX: %@", self.startingIndex);
+//    NSLog(@"PAGES: %@", self.pages);
     
     [self.pages objectAtIndex:0].newsIndex = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];
+    [self.view bringSubviewToFront:self.bottomBanner];
     [self.view bringSubviewToFront:self.loadingView];
-    
+
+    NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
+    banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
+    NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
+    [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
+        NSString *str = responseDict[@"banner"];
+        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
+        str = [fixBanner stringByAppendingString:str];
+        [self.bottomBanner loadHTMLString:str baseURL:nil];
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
+
     [self hideLoading];
+}
+-(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
+{
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    
+    // Asynchronously API is hit here
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                //                                                NSLog(@"%@",data);
+                                                if (error)
+                                                    failure(error);
+                                                else {
+                                                    NSDictionary *json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                    //                                                    NSLog(@"%@",json);
+                                                    success(json);
+                                                }
+                                            }];
+    [dataTask resume];    // Executed First
+}
+- (IBAction)homeButtonTapped:(UIButton *)sender {
+    NSArray *array = [self.navigationController viewControllers];
+    [self.navigationController popToViewController:[array objectAtIndex:0] animated:YES];
 }
 
 - (IBAction)openInfoReport:(id)sender {
@@ -215,24 +256,111 @@
                 
                 actualCell.delegate = self;
                 
-                [actualCell setName:item.name];
+                if ([item.name  isEqual: @"Région"]) {
+                    //item.name = @"   Région";
+                    //actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0073bf"] CGColor];
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                    // cell.layer.backgroundColor = [[UIColor colorWithHexString:@"#000000"] CGColor];
+                } else if ([item.name  isEqual: @"Suisse"]) {
+                    //item.name = @"   Suisse";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Monde"]) {
+                    //item.name = @"   Monde";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Économie"]) {
+                    //item.name = @"   Économie";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Culture"]) {
+                    //item.name = @"   Culture";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Football"]) {
+                    //item.name = @"   Football";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Hockey"]) {
+                    //item.name = @"   Hockey";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Basketball"]) {
+                    //item.name = @"   Basketball";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Volleyball"]) {
+                    //item.name = @"   Volleyball";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Cyclisme"]) {
+                    //item.name = @"   Cyclisme";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Ski"]) {
+                    // item.name = @"   Ski";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Hippisme"]) {
+                    // item.name = @"   Hippisme";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Tennis"]) {
+                    // item.name = @"   Tennis";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Autres sports"]) {
+                    //item.name = @"   Autres sports";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Sports motorisés"]) {
+                    // item.name = @"   Sports motorisés";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else if ([item.name  isEqual: @"Inline hockey"]) {
+                    // item.name = @"   Inline hockey";
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
+                } else {
+                    actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0099ff"] CGColor];
+                    actualCell.layer.borderWidth = 1;
+                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#2182c3"] CGColor];
+                }
+                actualCell.theNameString = item.name;
                 
                 BOOL shouldExpand = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     return obj.parentId == item.id;
                 }] != NSNotFound;
                 
                 UIImage *icon = nil;
+                BOOL theBoolIconInteractionEnabled = NO;
                 
                 if(shouldExpand && item.id != 0) {
                     icon = [UIImage imageNamed:@"hamburger_menu"];
+                    theBoolIconInteractionEnabled = YES;
                 }
                 else if(VALID_NOTEMPTY(item.link, NSString)) {
                     icon = [UIImage imageNamed:@"link"];
                 }
-                
-                if(VALID(icon, UIImage)) {
-                    [actualCell setImage:icon];
-                }
+                actualCell.theImage = icon;
+                actualCell.theBoolIconInteractionEnabled = theBoolIconInteractionEnabled;
             }
         }
     }
@@ -329,6 +457,14 @@
                 
                 if(VALID(controller, WebViewController)) {
                     controller.url = menuItem.link;
+                    [self.navigationController pushViewController:controller animated:YES];
+                }
+            } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
+                
+                GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];
+                
+                if(VALID(controller, GalerieViewController)) {
+                    //controller.navigationId = @(menuItem.id);
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             }
