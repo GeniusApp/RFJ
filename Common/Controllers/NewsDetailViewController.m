@@ -38,6 +38,7 @@
 @property (strong, nonatomic) NewsDetail *newsDetail;
 @property (assign, nonatomic) NSInteger remainingLoadingElements;
 @property (strong, nonatomic) NSString *shareBaseURL;
+@property (nonatomic, strong) NSString *str;
 
 @end
 
@@ -69,6 +70,18 @@
     
     [self.separatorView setUserInteractionEnabled:YES];
     [self.separatorView addGestureRecognizer:gestureRecognizer];
+    
+    NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+    [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+        self.str = responseDict[@"banner"];
+        NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+        if (VALID_NOTEMPTY(self.str, NSString)){
+            self.str = [fixSquare stringByAppendingString:self.str];
+            self.str = [self.str stringByAppendingString:@"</div>"];
+        }
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
 
 }
 
@@ -119,8 +132,6 @@
         int splash = [[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"];
         splash++;
         
-        NSLog(@"SPLASH: %d", splash);
-        NSLog(@"SPLASHTIMES: %d", self.splashTimes);
         if (splash == 7) {
             NSString * storyboardName = @"Main";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
@@ -149,7 +160,7 @@
         
         [self.separatorView setCategoryName:categoryName];
         
-        __block NSString *html = nil;
+        NSString *html = nil;
         
 #if kNewsDetailIsHTML
         html = self.newsDetail.content;
@@ -177,21 +188,10 @@
         
         html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
         html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
-        NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
-        [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
-            NSLog(@"NAOENTRA");
-            NSString *str = responseDict[@"banner"];
-            NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
-            if (VALID_NOTEMPTY(str, NSString)){
-                str = [fixSquare stringByAppendingString:str];
-                str = [str stringByAppendingString:@"</div>"];
-                html = [html stringByAppendingString:str];
-                NSLog(@"NAOENTRA: %@", html);
-            }
-        } failure:^(NSError *error) {
-            // error handling here ...
-        }];
-        
+
+        if VALID_NOTEMPTY(self.str, NSString){
+            html = [html stringByAppendingString:self.str];
+        }
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         
         [self.separatorView setDate:self.newsDetail.updateDate];
@@ -244,7 +244,6 @@
                                             }];
     [dataTask resume];    // Executed First
 }
-
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
     //CGPoint location = [recognizer locationInView:[recognizer.view superview]];
