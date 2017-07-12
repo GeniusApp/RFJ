@@ -24,10 +24,10 @@
         
         NSString *str = responseDict[@"banner"];
         NSString *header = @"<style>img{max-width: 100%; width:auto; height: auto;}</style><link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" /><link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/app.css\" type=\"text/css\" media=\"all\" /><link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
-//        if (VALID_NOTEMPTY(str, NSString)){
+        if (VALID_NOTEMPTY(str, NSString)){
         str = [header stringByAppendingString:str];
         [self.splashWebView loadHTMLString:str baseURL:nil];
-//        }
+        }
     } failure:^(NSError *error) {
         // error handling here ...
     }];
