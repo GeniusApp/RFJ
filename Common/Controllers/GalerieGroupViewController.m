@@ -63,6 +63,7 @@
         self.menuTableView.backgroundColor = kBackgroundColorRTN;
     }
     
+    self.expandedMenuItems = [[NSMutableArray<NSNumber *> alloc] init];
     self.menuHeightConstraint.constant = 0;
     self.isLoading = YES;
     self.remainingLoadingElements = 1;
