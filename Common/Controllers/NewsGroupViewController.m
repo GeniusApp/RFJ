@@ -62,7 +62,7 @@
     if([[DataManager singleton] isRTN]) {
         self.menuTableView.backgroundColor = kBackgroundColorRTN;
     }
-    
+    self.expandedMenuItems = [[NSMutableArray<NSNumber *> alloc] init];
     self.menuHeightConstraint.constant = 0;
     self.isLoading = YES;
     self.remainingLoadingElements = 1;
@@ -97,10 +97,7 @@
     
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.pageController.view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
     
-    [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
-//    NSLog(@"STARTINGINDEX: %@", self.startingIndex);
-//    NSLog(@"PAGES: %@", self.pages);
-    
+    [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];    
     [self.pages objectAtIndex:0].newsIndex = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];
@@ -249,93 +246,107 @@
         
         if(VALID(actualCell, MenuItemTableViewCell)) {
             cell = actualCell;
-            actualCell.tag = indexPath.row;
             
             if(indexPath.row >= 0 && indexPath.row < [self.menuItems count]) {
                 MenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
-                
                 actualCell.delegate = self;
                 
                 if ([item.name  isEqual: @"Région"]) {
                     //item.name = @"   Région";
+                    
                     //actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0073bf"] CGColor];
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                     // cell.layer.backgroundColor = [[UIColor colorWithHexString:@"#000000"] CGColor];
                 } else if ([item.name  isEqual: @"Suisse"]) {
                     //item.name = @"   Suisse";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Monde"]) {
                     //item.name = @"   Monde";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Économie"]) {
                     //item.name = @"   Économie";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Culture"]) {
                     //item.name = @"   Culture";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Football"]) {
                     //item.name = @"   Football";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Hockey"]) {
                     //item.name = @"   Hockey";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Basketball"]) {
                     //item.name = @"   Basketball";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Volleyball"]) {
                     //item.name = @"   Volleyball";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Cyclisme"]) {
                     //item.name = @"   Cyclisme";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Ski"]) {
                     // item.name = @"   Ski";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Hippisme"]) {
                     // item.name = @"   Hippisme";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Tennis"]) {
                     // item.name = @"   Tennis";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Autres sports"]) {
                     //item.name = @"   Autres sports";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Sports motorisés"]) {
                     // item.name = @"   Sports motorisés";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else if ([item.name  isEqual: @"Inline hockey"]) {
                     // item.name = @"   Inline hockey";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
+                    
+                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
                     actualCell.layer.borderWidth = 1;
                     actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
                 } else {
@@ -455,12 +466,7 @@
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
-                WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
-                
-                if(VALID(controller, WebViewController)) {
-                    controller.url = menuItem.link;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
+                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
                 
                 GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];

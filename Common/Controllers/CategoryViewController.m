@@ -1002,12 +1002,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             [self refreshMenuItems];
 
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
-                WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
-                
-                if(VALID(controller, WebViewController)) {
-                    controller.url = menuItem.link;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
                 
                 GalerieViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GalerieViewController"];

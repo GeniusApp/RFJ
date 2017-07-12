@@ -920,7 +920,7 @@
                 if (VALID_NOTEMPTY(str, NSString)){
                 str = [fixSquare stringByAppendingString:str];
                 str = [str stringByAppendingString:@"</div>"];
-                    NSLog(@"STRINGHOMEs: %@", str);
+                    
                 [cell.webView loadHTMLString:str baseURL:nil];
                 }
                 cell.webView.delegate = self;
@@ -1152,7 +1152,6 @@
 
 -(void)menuItemDidTap:(MenuItemTableViewCell *)item {
     self.menuHeightConstraint.constant = 0;
-    NSLog(@"ACTION:");
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
