@@ -141,21 +141,21 @@
     
     //[self loadInterstitial];
     
-//    NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
-//    [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
-//        
-//        NSString *strStitial = responseDict[@"banner"];
-//        
-//        if (VALID_NOTEMPTY(strStitial, NSString)){
+    NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
+    [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
+        
+        NSString *strStitial = responseDict[@"banner"];
+        
+        if (VALID_NOTEMPTY(strStitial, NSString)){
             NSString * storyboardName = @"Main";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
             UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"];
             [self presentViewController:vc animated:YES completion:nil];
-//        }
-//
-//    } failure:^(NSError *error) {
-//        // error handling here ...
-//    }];
+        }
+
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
 
     
 
