@@ -209,7 +209,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row) {
         case 0:
-            return 150;
+            return 250;
             break;
         case 1:
             return 180;
