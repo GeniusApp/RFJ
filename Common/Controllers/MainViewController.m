@@ -165,7 +165,7 @@
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN&horizontalSize=1080&verticalSize=1920";
     [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
         NSString *str = responseDict[@"banner"];
-        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
+        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/openURLew.css\" type=\"text/css\" media=\"all\" />";
         if (VALID_NOTEMPTY(str, NSString)){
         str = [fixBanner stringByAppendingString:str];
         [self.bottomBanner loadHTMLString:str baseURL:nil];
@@ -1152,7 +1152,7 @@
 
 -(void)menuItemDidTap:(MenuItemTableViewCell *)item {
     self.menuHeightConstraint.constant = 0;
-
+    NSLog(@"ACTION:");
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
@@ -1162,12 +1162,7 @@
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
-                WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
-                
-                if(VALID(controller, WebViewController)) {
-                    controller.url = menuItem.link;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             }
             else {
                 
