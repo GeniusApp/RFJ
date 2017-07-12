@@ -62,7 +62,7 @@
     if([[DataManager singleton] isRTN]) {
         self.menuTableView.backgroundColor = kBackgroundColorRTN;
     }
-    
+    self.expandedMenuItems = [[NSMutableArray<NSNumber *> alloc] init];
     self.menuHeightConstraint.constant = 0;
     self.isLoading = YES;
     self.remainingLoadingElements = 1;
@@ -97,10 +97,7 @@
     
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.pageController.view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
     
-    [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];
-//    NSLog(@"STARTINGINDEX: %@", self.startingIndex);
-//    NSLog(@"PAGES: %@", self.pages);
-    
+    [self.view addConstraints:@[topConstraint, bottomConstraint, leftConstraint, rightConstraint]];    
     [self.pages objectAtIndex:0].newsIndex = @([self.startingIndex integerValue]);
     [[self.pages objectAtIndex:0] loadNews:@([self.newsToDisplay objectAtIndex:[self.startingIndex integerValue]].id)];
     [self.view bringSubviewToFront:self.infoReportButton];
