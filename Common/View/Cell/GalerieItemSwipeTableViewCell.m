@@ -1,5 +1,5 @@
 //
-//  NewsItemSwipeTableViewCell.m
+//  GalerieItemSwipeTableViewCell.m
 //  rfj
 //
 //  Created by Gonçalo Girão on 31/05/2017.
@@ -10,115 +10,69 @@
 #import "Constants.h"
 #import "Validation.h"
 #import "GalerieItemView.h"
+#import "SwipeView.h"
 
-@interface GalerieItemSwipeTableViewCell()<UIScrollViewDelegate, GalerieItemViewDelegate>
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) NSArray<GalerieItemView *> *allGaleriesViews;
-@property (assign) NSInteger currentPage;
+@interface GalerieItemSwipeTableViewCell()<SwipeViewDataSource,SwipeViewDelegate>
+@property (weak, nonatomic) IBOutlet SwipeView *swipeView;
 @end
 
-@implementation GalerieItemSwipeTableViewCell
+@implementation GalerieItemSwipeTableViewCell {
+    UINib * subviewNib;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    [self.scrollView setPagingEnabled:YES];
-    self.scrollView.delegate = self;
-    [self.scrollView setShowsHorizontalScrollIndicator:NO];
-    self.allGaleriesViews = [NSArray array];
+    self.swipeView.pagingEnabled = YES;
+    self.swipeView.delegate = self;
+    self.swipeView.dataSource = self;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    subviewNib = [UINib nibWithNibName:@"GalerieItemView" bundle:nil];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
--(void)updateCurrentPage {
-    CGFloat width = self.scrollView.frame.size.width;
-    CGFloat activePage = floor((self.scrollView.contentOffset.x - width / 2) / width)+1;
-    
-    if(self.currentPage != (NSInteger)activePage) {
-        self.currentPage = (NSInteger)activePage;
-        
-        [self loadGalerieAtIndex:self.currentPage + 1];
+- (void) setGalerieItems:(NSArray<GalerieItem *> *)galerieItems {
+    if(_galerieItems != galerieItems) {
+        _galerieItems = galerieItems;
+        [self.swipeView reloadData];
     }
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self updateCurrentPage];
+#pragma mark - SwipeViewDataSource SwipeViewDelegate
+
+
+- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView {
+    return _galerieItems?_galerieItems.count:0;
 }
 
--(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [self updateCurrentPage];
-}
-
-- (void) display {
-    if(VALID_NOTEMPTY(self.GalerieItems, NSArray<GalerieItem *>) && ISEMPTY(self.allGaleriesViews)) {
-        [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width * [self.GalerieItems count], self.scrollView.frame.size.height)];
-
-        for(NSInteger i = 0; i < [self.GalerieItems count]; i++) {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemView" owner:self options:nil];
-            
-            if(VALID_NOTEMPTY(views, NSArray)) {
-                GalerieItemView *contentView = (GalerieItemView *)[views objectAtIndex:0];
-                contentView.frame = CGRectMake(i * self.scrollView.frame.size.width, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
-                contentView.delegate = self;
-                
-                [self.scrollView addSubview:contentView];
-                
-                self.allGaleriesViews = [self.allGaleriesViews arrayByAddingObject:contentView];
-                
-                //Load the first and the next news if possible
-                if(i == 0 || i == 1) {
-                    [self loadGalerieAtIndex:i];
-                }
-            }
-        }
+- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(GalerieItemView *)view {
+    if(_galerieItems==nil) { return [UIView new]; }
+    if(view==nil) {
+        view = (id)[subviewNib instantiateWithOwner:self options:nil][0];
     }
-    
-    [self.contentView setNeedsLayout];
-    [self.contentView setNeedsUpdateConstraints];
-    [self.contentView updateConstraints];
-    [self.contentView layoutIfNeeded];
-    
-    for(NSInteger i = 0; i < [self.allGaleriesViews count]; i++) {
-        GalerieItemView *contentView = [self.allGaleriesViews objectAtIndex:i];
-        
-        contentView.frame = CGRectMake(i * self.scrollView.frame.size.width, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    [view setItem:_galerieItems[index]];
+    return view;
+}
+
+- (CGSize)swipeViewItemSize:(SwipeView *)swipeView {
+    return self.swipeView.bounds.size;
+}
+
+- (void) swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index {
+    if(_galerieItems==nil) return;
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(GalerieItemSwipeDidTap:withGalerieItem:)]) {
+        [self.delegate GalerieItemSwipeDidTap:self withGalerieItem:_galerieItems[index]];
     }
 }
 
--(void)loadGalerieAtIndex:(NSInteger)index {
-    if (VALID_NOTEMPTY(self.GalerieItems, NSArray<GalerieItem *> ) && VALID_NOTEMPTY(self.allGaleriesViews, NSArray<GalerieItemView *>) && index >= 0 && index < [self.GalerieItems count]) {
-        GalerieItem *currentItem = [self.GalerieItems objectAtIndex:index];
-        GalerieItemView *contentView = [self.allGaleriesViews objectAtIndex:index];
-        
-        [contentView setItem:currentItem];
-    }
-}
+#pragma mark -
 
 - (void) moveRight {
-    if(self.currentPage + 1 < [self.GalerieItems count]) {
-        CGFloat nextX = (self.currentPage + 1) * self.scrollView.frame.size.width;
-        
-        [self.scrollView scrollRectToVisible:CGRectMake(nextX, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-    }
+    if(_galerieItems==nil) return;
+    [self.swipeView scrollByNumberOfItems:1 duration:.5];
 }
 
 - (void) moveLeft {
-    if(self.currentPage - 1 >= 0) {
-        CGFloat nextX = (self.currentPage - 1) * self.scrollView.frame.size.width;
-        
-        [self.scrollView scrollRectToVisible:CGRectMake(nextX, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-    }
-}
-
--(void)GalerieItemDidTap:(GalerieItemView *)item {
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(GalerieItemSwipeDidTap:withGalerieItem:)]) {
-        [self.delegate GalerieItemSwipeDidTap:self withGalerieItem:item.item];
-    }
+    if(_galerieItems==nil) return;
+    [self.swipeView scrollByNumberOfItems:-1 duration:.5];
 }
 
 @end

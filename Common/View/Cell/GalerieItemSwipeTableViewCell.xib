@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,22 +14,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oov-VT-tJA" id="Ppo-Xt-anO">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyd-Gi-g1i">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzf-I6-UHR" customClass="SwipeView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
-                    </scrollView>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Kyd-Gi-g1i" firstAttribute="top" secondItem="Ppo-Xt-anO" secondAttribute="top" id="bil-mk-9mr"/>
-                    <constraint firstAttribute="bottom" secondItem="Kyd-Gi-g1i" secondAttribute="bottom" id="j8M-24-ZKm"/>
-                    <constraint firstItem="Kyd-Gi-g1i" firstAttribute="leading" secondItem="Ppo-Xt-anO" secondAttribute="leading" id="q2L-Qr-0S2"/>
-                    <constraint firstAttribute="trailing" secondItem="Kyd-Gi-g1i" secondAttribute="trailing" id="xXv-lO-Nhp"/>
+                    <constraint firstItem="lzf-I6-UHR" firstAttribute="top" secondItem="Ppo-Xt-anO" secondAttribute="top" id="ELu-6l-vVZ"/>
+                    <constraint firstAttribute="trailing" secondItem="lzf-I6-UHR" secondAttribute="trailing" id="Szn-PJ-K63"/>
+                    <constraint firstAttribute="bottom" secondItem="lzf-I6-UHR" secondAttribute="bottom" id="guv-IO-W9k"/>
+                    <constraint firstItem="lzf-I6-UHR" firstAttribute="leading" secondItem="Ppo-Xt-anO" secondAttribute="leading" id="vWS-uM-0Y7"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="scrollView" destination="Kyd-Gi-g1i" id="qft-NQ-IG1"/>
+                <outlet property="swipeView" destination="lzf-I6-UHR" id="5F4-Jd-Z0c"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="51"/>
         </tableViewCell>

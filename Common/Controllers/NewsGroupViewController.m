@@ -47,6 +47,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // tableView
+    [self.menuTableView registerNib:[UINib nibWithNibName:@"MenuItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"MenuItemTableViewCell"];
+    
+    self.expandedMenuItems = [[NSMutableArray<NSNumber *> alloc] init];
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     [self refreshMenuItems];
@@ -107,6 +111,7 @@
     [self.view bringSubviewToFront:self.bottomBanner];
     [self.view bringSubviewToFront:self.loadingView];
     [self.menuTableView.superview bringSubviewToFront:self.menuTableView];
+#if !(TARGET_IPHONE_SIMULATOR)
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
@@ -118,7 +123,7 @@
     } failure:^(NSError *error) {
         // error handling here ...
     }];
-
+#endif
     [self hideLoading];
 }
 -(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
@@ -234,138 +239,53 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = nil;
-    
     if(tableView == self.menuTableView) {
-        MenuItemTableViewCell *actualCell = (MenuItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"menuItemCell"];
-        
-        if(!VALID(actualCell, MenuItemTableViewCell)) {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"MenuItemTableViewCell" owner:self options:nil];
-            
-            if(VALID_NOTEMPTY(views, NSArray)) {
-                actualCell = [views objectAtIndex:0];
-            }
+        static NSString * cellId = @"MenuItemTableViewCell";
+        MenuItemTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+        MenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
+        cell.delegate = self;
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0099ff"];
+        cell.contentView.layer.borderWidth = 1;
+        cell.contentView.layer.borderColor = [[UIColor colorWithHexString:@"#2182c3"] CGColor];
+        // TODO AN Refactor. Create .json or .plist instead. DO NOT use isEqual. Use id comparision
+        if(
+           [item.name  isEqual: @"Région"]              ||
+           [item.name  isEqual: @"Suisse"]              ||
+           [item.name  isEqual: @"Monde"]               ||
+           [item.name  isEqual: @"Économie"]            ||
+           [item.name  isEqual: @"Culture"]             ||
+           [item.name  isEqual: @"Football"]            ||
+           [item.name  isEqual: @"Hockey"]              ||
+           [item.name  isEqual: @"Basketball"]          ||
+           [item.name  isEqual: @"Volleyball"]          ||
+           [item.name  isEqual: @"Cyclisme"]            ||
+           [item.name  isEqual: @"Ski"]                 ||
+           [item.name  isEqual: @"Hippisme"]            ||
+           [item.name  isEqual: @"Tennis"]              ||
+           [item.name  isEqual: @"Autres sports"]       ||
+           [item.name  isEqual: @"Sports motorisés"]    ||
+           [item.name  isEqual: @"Inline hockey"] ) {
+            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
+            cell.contentView.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
         }
+        cell.theNameString = item.name;
+        BOOL shouldExpand = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            return obj.parentId == item.id;
+        }] != NSNotFound;
         
-        if(VALID(actualCell, MenuItemTableViewCell)) {
-            cell = actualCell;
-            actualCell.tag = indexPath.row;
-            
-            if(indexPath.row >= 0 && indexPath.row < [self.menuItems count]) {
-                MenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
-                
-                actualCell.delegate = self;
-                
-                if ([item.name  isEqual: @"Région"]) {
-                    //item.name = @"   Région";
-                    //actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0073bf"] CGColor];
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                    // cell.layer.backgroundColor = [[UIColor colorWithHexString:@"#000000"] CGColor];
-                } else if ([item.name  isEqual: @"Suisse"]) {
-                    //item.name = @"   Suisse";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Monde"]) {
-                    //item.name = @"   Monde";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Économie"]) {
-                    //item.name = @"   Économie";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Culture"]) {
-                    //item.name = @"   Culture";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Football"]) {
-                    //item.name = @"   Football";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Hockey"]) {
-                    //item.name = @"   Hockey";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Basketball"]) {
-                    //item.name = @"   Basketball";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Volleyball"]) {
-                    //item.name = @"   Volleyball";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Cyclisme"]) {
-                    //item.name = @"   Cyclisme";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Ski"]) {
-                    // item.name = @"   Ski";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Hippisme"]) {
-                    // item.name = @"   Hippisme";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Tennis"]) {
-                    // item.name = @"   Tennis";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Autres sports"]) {
-                    //item.name = @"   Autres sports";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Sports motorisés"]) {
-                    // item.name = @"   Sports motorisés";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Inline hockey"]) {
-                    // item.name = @"   Inline hockey";
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else {
-                    actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0099ff"] CGColor];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#2182c3"] CGColor];
-                }
-                actualCell.theNameString = item.name;
-                
-                BOOL shouldExpand = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    return obj.parentId == item.id;
-                }] != NSNotFound;
-                
-                UIImage *icon = nil;
-                BOOL theBoolIconInteractionEnabled = NO;
-                
-                if(shouldExpand && item.id != 0) {
-                    icon = [UIImage imageNamed:@"hamburger_menu"];
-                    theBoolIconInteractionEnabled = YES;
-                }
-                else if(VALID_NOTEMPTY(item.link, NSString)) {
-                    icon = [UIImage imageNamed:@"link"];
-                }
-                actualCell.theImage = icon;
-                actualCell.theBoolIconInteractionEnabled = theBoolIconInteractionEnabled;
-            }
+        if(shouldExpand && item.id != 0) {
+            cell.theImage = [UIImage imageNamed:@"hamburger_menu"];
+            cell.theBoolIconInteractionEnabled = YES;
+        } else if(VALID_NOTEMPTY(item.link, NSString)) {
+            cell.theImage = [UIImage imageNamed:@"link"];
+            cell.theBoolIconInteractionEnabled = NO;
+        } else {
+            cell.theImage = nil;
+            cell.theBoolIconInteractionEnabled = NO;
         }
+        return cell;
     }
-    
-    return cell;
+    return nil;
 }
 
 #pragma mark - Menu Item Delegate

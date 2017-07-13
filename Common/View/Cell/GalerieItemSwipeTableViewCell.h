@@ -1,5 +1,5 @@
 //
-//  NewsItemSwipeTableViewCell.h
+//  GalerieItemSwipeTableViewCell.h
 //  rfj
 //
 //  Created by Gonçalo Girão on 31/05/2017.
@@ -17,8 +17,7 @@
 
 @interface GalerieItemSwipeTableViewCell : UITableViewCell
 @property (assign, nonatomic) id<GalerieItemSwipeTableViewCellDelegate> delegate;
-@property (strong, nonatomic) NSArray <GalerieItem *> *GalerieItems;
+@property (weak, nonatomic) NSArray <GalerieItem *> *galerieItems;
 - (void) moveLeft;
 - (void) moveRight;
-- (void) display;
 @end

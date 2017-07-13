@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -53,16 +52,11 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6LH-5D-Sr8">
-                    <rect key="frame" x="0.0" y="0.0" width="752" height="404"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="hPA-Gr-AMb" firstAttribute="leading" secondItem="pWN-8p-JcC" secondAttribute="trailing" constant="8" id="3H9-eL-RjQ"/>
                 <constraint firstItem="fEq-VZ-pKe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Alc-qE-VGP"/>
-                <constraint firstItem="6LH-5D-Sr8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CBd-Sn-eE6"/>
                 <constraint firstItem="AWt-QL-tpD" firstAttribute="top" secondItem="Pss-HR-a0w" secondAttribute="bottom" constant="-20" id="D2I-fc-jYb"/>
                 <constraint firstAttribute="trailing" secondItem="AWt-QL-tpD" secondAttribute="trailing" constant="10" id="EKS-pE-u9d"/>
                 <constraint firstAttribute="bottom" secondItem="xjJ-Tx-1ce" secondAttribute="bottom" id="GWO-70-u0v"/>
@@ -73,9 +67,6 @@
                 <constraint firstItem="pWN-8p-JcC" firstAttribute="leading" secondItem="Psu-nK-Sad" secondAttribute="trailing" constant="10" id="aNI-mr-t4d"/>
                 <constraint firstAttribute="bottom" secondItem="fEq-VZ-pKe" secondAttribute="bottom" id="ab8-FA-MEQ"/>
                 <constraint firstAttribute="trailing" secondItem="fEq-VZ-pKe" secondAttribute="trailing" id="auY-wL-nF8"/>
-                <constraint firstAttribute="bottom" secondItem="6LH-5D-Sr8" secondAttribute="bottom" id="b3l-zT-bf0"/>
-                <constraint firstAttribute="trailing" secondItem="6LH-5D-Sr8" secondAttribute="trailing" id="e05-nR-aqN"/>
-                <constraint firstItem="6LH-5D-Sr8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fRI-8F-Oc3"/>
                 <constraint firstItem="pWN-8p-JcC" firstAttribute="centerY" secondItem="Psu-nK-Sad" secondAttribute="centerY" id="fjC-kF-zF0"/>
                 <constraint firstItem="xjJ-Tx-1ce" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gLv-8r-ruz"/>
                 <constraint firstItem="Psu-nK-Sad" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="gWV-rU-BUA"/>
@@ -88,7 +79,6 @@
             <connections>
                 <outlet property="categoryLabel" destination="Psu-nK-Sad" id="rYY-2R-BiU"/>
                 <outlet property="coverImage" destination="xjJ-Tx-1ce" id="FNy-bg-DhZ"/>
-                <outlet property="coverView" destination="6LH-5D-Sr8" id="K8i-TX-7IK"/>
                 <outlet property="dateLabel" destination="hPA-Gr-AMb" id="iVa-CC-pN9"/>
                 <outlet property="imageType" destination="Pss-HR-a0w" id="yRK-Bf-VxT"/>
                 <outlet property="titleLabel" destination="AWt-QL-tpD" id="aQY-5d-pac"/>
