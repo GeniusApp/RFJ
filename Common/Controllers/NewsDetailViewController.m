@@ -25,9 +25,6 @@
 
 @interface NewsDetailViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *newsTitleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
-@property (weak, nonatomic) IBOutlet UILabel *coverImageDescription;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *coverImageHeight;
 @property (weak, nonatomic) IBOutlet UIWebView *newsContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *newsContentHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
@@ -36,7 +33,6 @@
 @property int splashTimes;
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) NewsDetail *newsDetail;
-@property (assign, nonatomic) NSInteger remainingLoadingElements;
 @property (strong, nonatomic) NSString *shareBaseURL;
 
 @end
@@ -69,12 +65,11 @@
     
     [self.separatorView setUserInteractionEnabled:YES];
     [self.separatorView addGestureRecognizer:gestureRecognizer];
-
+    
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
     [self showLoading];
-    self.remainingLoadingElements = 2;
     [self.scrollView setContentOffset:CGPointZero animated:NO];
     
     if(VALID(newsToDisplay, NSNumber)) {
@@ -132,10 +127,7 @@
         }
         self.newsTitleLabel.text = self.newsDetail.title;
         
-        self.remainingLoadingElements = 2;
         [self showLoading];
-
-        self.coverImageDescription.text = @"";
         
         NSString *categoryName = @"";
         
@@ -169,14 +161,28 @@
                 [header = header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />"];
                 header = [header stringByAppendingString:@"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" />"];
             }
-
+            
             if(VALID_NOTEMPTY(resources.htmlFooter, NSString)) {
                 footer = resources.htmlFooter;
             }
         }
+        // IMPORTANT Fix is here. Looks like valid HTML was required
+        html = [NSString stringWithFormat:
+                @"<!DOCTYPE html>"
+                "<html>"
+                "<head>"
+                "%@"
+                "</head>"
+                "<body>"
+                "<div>"
+                "%@"
+                "</div>"
+                "%@"
+                "</body>"
+                "</html>",header,html,footer];
+        [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
+        [self.separatorView setDate:self.newsDetail.updateDate];
         
-        html = [NSString stringWithFormat:@"%@\n%@\n%@", header, html, footer];
-        html = [html stringByAppendingString:@"<script type=\"text/javascript\">window.onload = function(){window.location.href = \"ready://\" + document.body.offsetHeight;}</script>"];
         NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
         [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
             NSLog(@"NAOENTRA");
@@ -191,29 +197,6 @@
         } failure:^(NSError *error) {
             // error handling here ...
         }];
-        
-        [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
-        
-        [self.separatorView setDate:self.newsDetail.updateDate];
-        
-        [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:self.newsDetail.image] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(!VALID(error, NSError) && VALID(image, UIImage)) {
-                self.coverImageView.image = image;
-                
-                self.coverImageHeight.constant = self.coverImageView.frame.size.width / (float)image.size.width * image.size.height;
-            }
-            else {
-                self.coverImageHeight.constant = 0;
-                self.coverImageDescription.text = @"";
-            }
-
-            self.remainingLoadingElements--;
-            
-            if(self.remainingLoadingElements == 0) {
-                [self hideLoading];
-            }
-        }];
-        //NSLog(@"HTML: %@", self.newsDetail);
     }
     else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Failed to load the news article" preferredStyle:UIAlertControllerStyleAlert];
@@ -256,8 +239,8 @@
         [self.navigationController pushViewController:controller animated:YES];
     }
     //Do stuff here...
-
-
+    
+    
 }
 
 - (IBAction)goBack:(id)sender {
@@ -270,7 +253,7 @@
     }
     
     NSString *url = [NSString stringWithFormat:@"%@%@", self.shareBaseURL, self.newsDetail.link];
-
+    
     [BDGSharing shareFacebook:self.newsDetail.title urlStr:url image:nil completion:nil];
 }
 
@@ -292,7 +275,7 @@
     NSString *url = [NSString stringWithFormat:@"%@%@", self.shareBaseURL, self.newsDetail.link];
     
     NSURL *whatsAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"whatsapp://send?text=%@", [[NSString stringWithFormat:@"%@ %@", self.newsDetail.title, url] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
-
+    
     if ([[UIApplication sharedApplication] canOpenURL:whatsAppUrl]) {
         if([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
             [[UIApplication sharedApplication] openURL:whatsAppUrl options:@{} completionHandler:nil];
@@ -316,28 +299,21 @@
 #pragma mark - WebView Delegate
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+    [webView stringByEvaluatingJavaScriptFromString:
+    @"(function(){"
+    "   document.documentElement.style.webkitUserSelect='none';"
+    "   document.documentElement.style.webkitTouchCallout='none';"
+    "   window.location.href='x-app://'+document.body.offsetHeight;"
+    "})();"];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *url = [request URL];
-    
-    if([[url scheme] isEqualToString:@"ready"]) {
-        CGFloat contentHeight = [[url host] floatValue];
-        //Disable selection
-        [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
-        [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
-        
-        self.newsContentHeightConstraint.constant = contentHeight;
-        
-        self.remainingLoadingElements--;
-        
-        if(self.remainingLoadingElements == 0) {
-            [self hideLoading];
-        }
-        
+    if([url.scheme isEqual:@"x-app"]) {
+        self.newsContentHeightConstraint.constant = url.host.floatValue;
+        [self hideLoading];
         return NO;
     }
-    
     return YES;
 }
 
