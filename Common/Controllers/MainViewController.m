@@ -989,7 +989,7 @@
                     {
                         NSMutableArray *theItemsMArray = items.mutableCopy;
                         [theItemsMArray removeObjectsInArray:self.importantItems];
-                        items = theItemsMArray.copy;
+                        items = theItemsMArray;
                     }
                     
                     if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
@@ -1015,11 +1015,6 @@
                     if(VALID(swipeCell, NewsItemSwipeTableViewCell)) {
                         NSDictionary<NSArray<NSNumber *> *, NSArray<NewsItem *> *> *content = [self.sortedNewsItems2 objectAtIndex:indexPath.section - 1];
                         NSArray<NewsItem *> *items = [content objectForKey:[[content allKeys] objectAtIndex:0]];
-                        {
-                            NSMutableArray *theItemsMArray = items.mutableCopy;
-                            [theItemsMArray removeObjectsInArray:self.importantItems];
-                            items = theItemsMArray.copy;
-                        }
                         if(VALID_NOTEMPTY(items, NSArray<NewsItem *>)) {
                             swipeCell.newsItems = items;
                             [swipeCell display];
