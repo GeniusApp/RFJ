@@ -23,7 +23,7 @@
 #import "CategoryViewController.h"
 #import "WebViewController.h"
 
-@interface NewsDetailViewController ()<UIWebViewDelegate>
+@interface NewsDetailViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *newsTitleLabel;
 @property (weak, nonatomic) IBOutlet UIWebView *newsContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *newsContentHeightConstraint;
@@ -34,7 +34,6 @@
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) NewsDetail *newsDetail;
 @property (strong, nonatomic) NSString *shareBaseURL;
-@property (nonatomic, strong) NSString *str;
 
 @end
 
@@ -66,20 +65,6 @@
     
     [self.separatorView setUserInteractionEnabled:YES];
     [self.separatorView addGestureRecognizer:gestureRecognizer];
-    
-
-    NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
-    [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
-        self.str = responseDict[@"banner"];
-        NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
-        if (VALID_NOTEMPTY(self.str, NSString)){
-            self.str = [fixSquare stringByAppendingString:self.str];
-            self.str = [self.str stringByAppendingString:@"</div>"];
-        }
-    } failure:^(NSError *error) {
-        // error handling here ...
-    }];
-
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
@@ -178,9 +163,6 @@
                 footer = resources.htmlFooter;
             }
         }
-        if VALID_NOTEMPTY(self.str, NSString){
-            html = [html stringByAppendingString:self.str];
-        }
         // IMPORTANT Fix is here. Looks like valid HTML was required
         html = [NSString stringWithFormat:
                 @"<!DOCTYPE html>"
@@ -192,6 +174,35 @@
                 "<div>"
                 "%@"
                 "</div>"
+                "<div id='ad_container' style='text-align:center;'></div>"
+                "<script>"
+                "   function fetch_json(path, callback) {"
+                "       var req = new XMLHttpRequest();"
+                "       req.open('GET', path, true);"
+                "       req.onreadystatechange = function() {"
+                "           if ((req.readyState === 4 && req.status === 200) ||"
+                "               (req.readyState === 3 && req.status === 200 && req.responseText[req.responseText.length] === '}') ) {"
+                "               try {"
+                "                   callback(JSON.parse(req.responseText));"
+                "               } catch (e) { }"
+                "           } else { }"
+                "       };"
+                "       req.send(null);"
+                "   }"
+                "   fetch_json('https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE',function(json){"
+                "       if(!json.banner) {return;}\n"
+                "       // Weird workaround. Trim out JS and create own <iframe>\n"
+                "       var uri_b = json.banner.indexOf('var uri = ')+11,\n"
+                "           uri_e = json.banner.indexOf(' ',uri_b),\n"
+                "           uri   = json.banner.substr(uri_b,uri_e-uri_b-1)+new String(Math.random()).substring(2, 11);\n"
+                "       var script_b = json.banner.indexOf('<script'),\n"
+                "           script_e = json.banner.indexOf('script>')+7;\n"
+                "       json.banner = json.banner.substr(0,script_b) + json.banner.substr(script_e);\n"
+                "       json.banner = json.banner.substr(0,script_b) + '<iframe width=300 height=250 src=\"'+ uri +'\"></iframe>' + json.banner.substr(script_b);\n"
+                "       document.getElementById('ad_container').innerHTML = json.banner;\n"
+                "       window.location.href='x-app://'+document.body.offsetHeight;\n"
+                "   });"
+                "</script>"
                 "%@"
                 "</body>"
                 "</html>",header,html,footer];
@@ -298,15 +309,20 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [webView stringByEvaluatingJavaScriptFromString:
-    @"(function(){"
-    "   document.documentElement.style.webkitUserSelect='none';"
-    "   document.documentElement.style.webkitTouchCallout='none';"
-    "   window.location.href='x-app://'+document.body.offsetHeight;"
-    "})();"];
+     @"(function(){"
+     "   document.documentElement.style.webkitUserSelect='none';"
+     "   document.documentElement.style.webkitTouchCallout='none';"
+     "   window.location.href='x-app://'+document.body.offsetHeight;"
+     "})();"];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *url = [request URL];
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        UIApplication *application = [UIApplication sharedApplication];
+        [application openURL:url options:@{} completionHandler:nil];
+        return NO;
+    }
     if([url.scheme isEqual:@"x-app"]) {
         self.newsContentHeightConstraint.constant = url.host.floatValue;
         [self hideLoading];
