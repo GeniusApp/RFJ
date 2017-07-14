@@ -161,6 +161,7 @@
 		3EECB97D1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
 		3EECB97E1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
 		3EECB97F1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
+		3EF279021F16D2F600B4538B /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF279011F16D2F600B4538B /* WindowsAzureMessaging.framework */; };
 		4FD205111D9A743D07AB9FA5 /* libPods-rtn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */; };
 		718BE3781F163A6C00D52CFC /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 718BE3771F163A6C00D52CFC /* SwipeView.m */; };
 		718BE37C1F16540200D52CFC /* NSDateFormatterInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 718BE37B1F16540200D52CFC /* NSDateFormatterInstance.m */; };
@@ -475,6 +476,8 @@
 		3EECB9711F0E524D004D72C9 /* left3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left3.png; sourceTree = "<group>"; };
 		3EECB9781F0E52E8004D72C9 /* right2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right2.png; sourceTree = "<group>"; };
 		3EECB9791F0E52E8004D72C9 /* right3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right3.png; sourceTree = "<group>"; };
+		3EF279011F16D2F600B4538B /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
+		3EF279031F16D38D00B4538B /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		4E99C91C7A288B7F6C9A7509 /* Pods-rtn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtn.release.xcconfig"; path = "Pods/Target Support Files/Pods-rtn/Pods-rtn.release.xcconfig"; sourceTree = "<group>"; };
 		5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rfj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		718BE3761F163A6C00D52CFC /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
@@ -688,6 +691,7 @@
 				3EE816771EA8BD490020F8BF /* QuartzCore.framework in Frameworks */,
 				3EE8167B1EA8BD5B0020F8BF /* UIKit.framework in Frameworks */,
 				3EE816851EA8BD910020F8BF /* libz.tbd in Frameworks */,
+				3EF279021F16D2F600B4538B /* WindowsAzureMessaging.framework in Frameworks */,
 				3ECF9D6F1EA8F595006279CB /* libsqlite3.0.tbd in Frameworks */,
 				3EE816871EA8BD9F0020F8BF /* AudioToolbox.framework in Frameworks */,
 				3EE8167F1EA8BD6F0020F8BF /* AVFoundation.framework in Frameworks */,
@@ -725,6 +729,7 @@
 		47962A9FEDFCB2DA86B81CFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3EF279011F16D2F600B4538B /* WindowsAzureMessaging.framework */,
 				3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */,
 				3EE8168E1EA8BDD30020F8BF /* CoreText.framework */,
 				3EE8168C1EA8BDC50020F8BF /* ImageIO.framework */,
@@ -1089,6 +1094,7 @@
 				E7311C861E6458EB001DB24A /* RadioManager.h */,
 				E7311C871E6458EB001DB24A /* RadioManager.m */,
 				E7551D0B1E5C72FA00A1AEF9 /* Validation.h */,
+				3EF279031F16D38D00B4538B /* HubInfo.h */,
 				E78D63211E5B4C8000191453 /* Supporting Files */,
 			);
 			name = Common;
@@ -1966,6 +1972,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1996,6 +2003,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
+				CODE_SIGN_IDENTITY = "";
 				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (

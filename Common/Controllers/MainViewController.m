@@ -140,7 +140,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     // Splash && Banner
 #if !(TARGET_IPHONE_SIMULATOR)
     [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
-    
+
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN&horizontalSize=1080&verticalSize=1920";
@@ -785,7 +785,6 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
                 if (VALID_NOTEMPTY(str, NSString)){
                     str = [fixSquare stringByAppendingString:str];
                     str = [str stringByAppendingString:@"</div>"];
-                    NSLog(@"STRINGHOMEs: %@", str);
                     [cell.webView loadHTMLString:str baseURL:nil];
                 }
                 cell.webView.delegate = self;
@@ -937,7 +936,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
 
 -(void)menuItemDidTap:(MenuItemTableViewCell *)item {
     self.menuHeightConstraint.constant = 0;
-    
+
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
@@ -947,12 +946,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
-                WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
-                
-                if(VALID(controller, WebViewController)) {
-                    controller.url = menuItem.link;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             }
             else {
                 

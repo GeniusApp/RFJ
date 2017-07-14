@@ -680,12 +680,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
-                WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
-                
-                if(VALID(controller, WebViewController)) {
-                    controller.url = menuItem.link;
-                    [self.navigationController pushViewController:controller animated:YES];
-                }
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             }
             else {
                 if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:0]]) {
@@ -721,8 +716,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
 #pragma mark - NewsItemTableViewCell Delegate
 
 -(void)NewsItemDidTap:(NewsItemTableViewCell *)item {
-    NSLog(@"ITEM COUNT %lu", (unsigned long)self.newsItems.count);
-    NSLog(@"SORTED COUNT %lu", (unsigned long)self.sortedNewsItems.count);
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     //NSLog(@"DID SELECT ROW AT ITEM: %ld", (long)index.row);
     if(index.row >= 0 && index.row < [self.newsItems count]) {

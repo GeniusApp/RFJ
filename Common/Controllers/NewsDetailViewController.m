@@ -34,6 +34,7 @@
 @property (strong, nonatomic) NSArray<MenuItem *> *allMenuItems;
 @property (strong, nonatomic) NewsDetail *newsDetail;
 @property (strong, nonatomic) NSString *shareBaseURL;
+@property (nonatomic, strong) NSString *str;
 
 @end
 
@@ -66,6 +67,19 @@
     [self.separatorView setUserInteractionEnabled:YES];
     [self.separatorView addGestureRecognizer:gestureRecognizer];
     
+
+    NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+    [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+        self.str = responseDict[@"banner"];
+        NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+        if (VALID_NOTEMPTY(self.str, NSString)){
+            self.str = [fixSquare stringByAppendingString:self.str];
+            self.str = [self.str stringByAppendingString:@"</div>"];
+        }
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
+
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
@@ -114,8 +128,6 @@
         int splash = [[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"];
         splash++;
         
-        NSLog(@"SPLASH: %d", splash);
-        NSLog(@"SPLASHTIMES: %d", self.splashTimes);
         if (splash == 7) {
             NSString * storyboardName = @"Main";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
@@ -141,7 +153,7 @@
         
         [self.separatorView setCategoryName:categoryName];
         
-        __block NSString *html = nil;
+        NSString *html = nil;
         
 #if kNewsDetailIsHTML
         html = self.newsDetail.content;
@@ -227,7 +239,6 @@
                                             }];
     [dataTask resume];    // Executed First
 }
-
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
     //CGPoint location = [recognizer locationInView:[recognizer.view superview]];
