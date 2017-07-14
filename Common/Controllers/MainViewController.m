@@ -140,12 +140,12 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     // Splash && Banner
 #if !(TARGET_IPHONE_SIMULATOR)
     NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
+    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
     [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
         
         NSString *strStitial = responseDict[@"banner"];
-        
         if (VALID_NOTEMPTY(strStitial, NSString)){
-            [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
+            //[self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
         }
         
     } failure:^(NSError *error) {
@@ -158,10 +158,13 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN&horizontalSize=1080&verticalSize=1920";
     [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
         NSString *str = responseDict[@"banner"];
-        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />";
+        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" /><link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/app.css\" type=\"text/css\" media=\"all\" />";
+        fixBanner = [fixBanner stringByAppendingString:@"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />"];
+        fixBanner = [fixBanner stringByAppendingString:@"<style>img{max-width: 100%; width:auto; height: auto;}</style>"];
         if (VALID_NOTEMPTY(str, NSString)){
             str = [fixBanner stringByAppendingString:str];
             [self.bottomBanner loadHTMLString:str baseURL:nil];
+            self.bottomBanner.delegate = self;
         } else {
             self.bannerView.hidden = YES;
         }
@@ -193,7 +196,15 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     [dataTask resume];    // Executed First
 }
 
-
+- (BOOL)bottomBanner:(UIWebView *)bottomBanner shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        UIApplication *application = [UIApplication sharedApplication];
+        [application openURL:[request URL] options:@{} completionHandler:nil];
+        return NO;
+    }
+    
+    return YES;
+}
 - (void)refreshTable:(id)sender {
     //[self.contentTableView reloadData];
     [self loadNextPage];
