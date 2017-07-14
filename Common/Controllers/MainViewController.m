@@ -139,7 +139,19 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     
     // Splash && Banner
 #if !(TARGET_IPHONE_SIMULATOR)
-    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
+    NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
+    [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
+        
+        NSString *strStitial = responseDict[@"banner"];
+        
+        if (VALID_NOTEMPTY(strStitial, NSString)){
+            [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
+        }
+        
+    } failure:^(NSError *error) {
+        // error handling here ...
+    }];
+    
 
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
@@ -156,6 +168,8 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     } failure:^(NSError *error) {
         // error handling here ...
     }];
+    
+    
 #endif
     //  [[AppOwiz sharedInstance] startWithAppToken:@"58f732549e6a8" withCrashReporting:YES withFeedback:YES];
 }

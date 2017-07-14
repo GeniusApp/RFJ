@@ -442,6 +442,7 @@
 		3E9E69B31EF170D500064117 /* NewsItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsItemView.h; path = Common/View/NewsItemView.h; sourceTree = "<group>"; };
 		3E9E69B41EF170D500064117 /* NewsItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItemView.m; path = Common/View/NewsItemView.m; sourceTree = "<group>"; };
 		3ECF9D6E1EA8F595006279CB /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		3EDE9EB01F18B14500385993 /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HubInfo.h; path = Common/HubInfo.h; sourceTree = "<group>"; };
 		3EE362721F0A5EFC003EC0A9 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = Common/Controllers/SplashViewController.h; sourceTree = "<group>"; };
 		3EE362731F0A5EFC003EC0A9 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashViewController.m; path = Common/Controllers/SplashViewController.m; sourceTree = "<group>"; };
 		3EE362771F0A8174003EC0A9 /* WebViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewTableViewCell.h; path = Common/View/Cell/WebViewTableViewCell.h; sourceTree = "<group>"; };
@@ -477,7 +478,6 @@
 		3EECB9781F0E52E8004D72C9 /* right2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right2.png; sourceTree = "<group>"; };
 		3EECB9791F0E52E8004D72C9 /* right3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right3.png; sourceTree = "<group>"; };
 		3EF279011F16D2F600B4538B /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
-		3EF279031F16D38D00B4538B /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		4E99C91C7A288B7F6C9A7509 /* Pods-rtn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtn.release.xcconfig"; path = "Pods/Target Support Files/Pods-rtn/Pods-rtn.release.xcconfig"; sourceTree = "<group>"; };
 		5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rfj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		718BE3761F163A6C00D52CFC /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
@@ -1094,7 +1094,7 @@
 				E7311C861E6458EB001DB24A /* RadioManager.h */,
 				E7311C871E6458EB001DB24A /* RadioManager.m */,
 				E7551D0B1E5C72FA00A1AEF9 /* Validation.h */,
-				3EF279031F16D38D00B4538B /* HubInfo.h */,
+				3EDE9EB01F18B14500385993 /* HubInfo.h */,
 				E78D63211E5B4C8000191453 /* Supporting Files */,
 			);
 			name = Common;
