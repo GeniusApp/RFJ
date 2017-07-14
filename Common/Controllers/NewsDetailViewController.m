@@ -194,23 +194,7 @@
                 "</html>",header,html,footer];
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         [self.separatorView setDate:self.newsDetail.updateDate];
-        
-        NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
-        [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
-            NSLog(@"NAOENTRA");
-            NSString *str = responseDict[@"banner"];
-            NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
-            if (VALID_NOTEMPTY(str, NSString)){
-                str = [fixSquare stringByAppendingString:str];
-                str = [str stringByAppendingString:@"</div>"];
-                html = [html stringByAppendingString:str];
-                NSLog(@"NAOENTRA: %@", html);
-            }
-        } failure:^(NSError *error) {
-            // error handling here ...
-        }];
-    }
-    else {
+    } else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Failed to load the news article" preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"Go Back" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
