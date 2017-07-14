@@ -178,6 +178,9 @@
                 footer = resources.htmlFooter;
             }
         }
+        if VALID_NOTEMPTY(self.str, NSString){
+            html = [html stringByAppendingString:self.str];
+        }
         // IMPORTANT Fix is here. Looks like valid HTML was required
         html = [NSString stringWithFormat:
                 @"<!DOCTYPE html>"
