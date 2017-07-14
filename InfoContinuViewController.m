@@ -525,14 +525,29 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }
         return cell;
     } else if(tableView == self.contentTableView) {
-        NSInteger arrayIndex = (indexPath.row / 14) - 1;
-        if (indexPath.row %14 == 0 && indexPath.row != 0) {
+        NSInteger arrayIndex = (indexPath.row / 16) - 1;
+        if (indexPath.row %16 == 0 && indexPath.row != 0) {
             static NSString * cellId = @"GalerieItemTableViewCell";
             GalerieItemTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
             cell.delegate = self;
             cell.item = self.galeriePhotos[arrayIndex];
             return cell;
-        } else if (indexPath.row %7 == 0 && indexPath.row != 14 && indexPath.row != 0) {
+        } else if (indexPath.row == 7) {
+            static NSString * cellId = @"WebViewTableViewCell";
+            WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+            NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
+            [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
+                NSString *str = responseDict[@"banner"];
+                NSString *fixSquare = @"<div class=\"pub\" id=\"beacon_6b7b3f991\">";
+                str = [fixSquare stringByAppendingString:str];
+                str = [str stringByAppendingString:@"</div>"];
+                [cell.webView loadHTMLString:str baseURL:nil];
+                cell.webView.delegate = self;
+            } failure:^(NSError *error) {
+                // error handling here ...
+            }];
+            return cell;
+        } else if (indexPath.row %8 == 0 && indexPath.row != 16 && indexPath.row != 0 && indexPath.row != 8) {
             static NSString * cellId = @"WebViewTableViewCell";
             WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
             NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
@@ -573,7 +588,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         return 44.0f;
     }
     else if(tableView == self.contentTableView) {
-        if (indexPath.row %14 == 0 || indexPath.row == 7 || indexPath.row != 0) {
+        if (indexPath.row %16 == 0 || indexPath.row == 8 || indexPath.row != 0) {
             return 300;
         }  else {
             return ceilf([UIScreen mainScreen].bounds.size.width * 0.6372340425531915);
