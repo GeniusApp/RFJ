@@ -140,11 +140,12 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     // Splash && Banner
 #if !(TARGET_IPHONE_SIMULATOR)
     NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
+    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
     [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
         
         NSString *strStitial = responseDict[@"banner"];
         if (VALID_NOTEMPTY(strStitial, NSString)){
-            [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
+            //[self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
         }
         
     } failure:^(NSError *error) {
