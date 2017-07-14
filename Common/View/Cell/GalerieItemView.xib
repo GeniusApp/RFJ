@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -53,10 +52,6 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24s-Te-g2C">
-                    <rect key="frame" x="0.0" y="0.0" width="752" height="404"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -66,17 +61,13 @@
                 <constraint firstItem="XNr-62-87A" firstAttribute="top" secondItem="BfV-71-YRd" secondAttribute="bottom" constant="-20" id="HuT-Ed-CCQ"/>
                 <constraint firstItem="49h-F9-kh5" firstAttribute="top" secondItem="NGq-s1-ODB" secondAttribute="top" id="Jp1-SE-evd"/>
                 <constraint firstAttribute="trailing" secondItem="49h-F9-kh5" secondAttribute="trailing" id="Kat-z2-H6k"/>
-                <constraint firstAttribute="bottom" secondItem="24s-Te-g2C" secondAttribute="bottom" id="KdA-i4-mGQ"/>
-                <constraint firstAttribute="trailing" secondItem="24s-Te-g2C" secondAttribute="trailing" id="LWk-2H-YzS"/>
                 <constraint firstItem="49h-F9-kh5" firstAttribute="leading" secondItem="NGq-s1-ODB" secondAttribute="leading" id="WV6-Nd-rHB"/>
                 <constraint firstAttribute="bottom" secondItem="49h-F9-kh5" secondAttribute="bottom" id="YOS-BL-AvV"/>
                 <constraint firstItem="DeO-40-UNB" firstAttribute="leading" secondItem="NGq-s1-ODB" secondAttribute="leading" constant="15" id="YZz-IW-Dia"/>
                 <constraint firstItem="QpB-Tf-U8T" firstAttribute="leading" secondItem="DeO-40-UNB" secondAttribute="trailing" constant="10" id="bUm-ik-q5o"/>
                 <constraint firstItem="3Vb-OZ-wY7" firstAttribute="top" secondItem="NGq-s1-ODB" secondAttribute="top" id="cUk-ua-ckK"/>
-                <constraint firstItem="24s-Te-g2C" firstAttribute="leading" secondItem="NGq-s1-ODB" secondAttribute="leading" id="e1f-GB-0v0"/>
                 <constraint firstItem="3Vb-OZ-wY7" firstAttribute="leading" secondItem="NGq-s1-ODB" secondAttribute="leading" id="ngD-Jv-VpC"/>
                 <constraint firstAttribute="bottom" secondItem="DeO-40-UNB" secondAttribute="bottom" constant="20" id="sE2-ah-NT2"/>
-                <constraint firstItem="24s-Te-g2C" firstAttribute="top" secondItem="NGq-s1-ODB" secondAttribute="top" id="tEP-z3-gev"/>
                 <constraint firstItem="QJM-LY-f3x" firstAttribute="leading" secondItem="QpB-Tf-U8T" secondAttribute="trailing" constant="8" id="tXs-iG-hkg"/>
                 <constraint firstItem="QJM-LY-f3x" firstAttribute="centerY" secondItem="QpB-Tf-U8T" secondAttribute="centerY" id="uBk-C1-FT0"/>
                 <constraint firstItem="DeO-40-UNB" firstAttribute="top" secondItem="XNr-62-87A" secondAttribute="bottom" constant="10" id="uk3-Xw-3hD"/>
@@ -88,7 +79,6 @@
             <connections>
                 <outlet property="categoryLabel" destination="DeO-40-UNB" id="eFi-Ps-o72"/>
                 <outlet property="coverImage" destination="3Vb-OZ-wY7" id="uev-tf-rdY"/>
-                <outlet property="coverView" destination="24s-Te-g2C" id="eFg-Tw-Wbb"/>
                 <outlet property="dateLabel" destination="QJM-LY-f3x" id="btY-wU-NM3"/>
                 <outlet property="imageType" destination="BfV-71-YRd" id="u4q-6E-9lA"/>
                 <outlet property="titleLabel" destination="XNr-62-87A" id="MZR-5z-8Gr"/>

@@ -59,9 +59,9 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"GalerieDetailTableViewCell" bundle:nil] forCellReuseIdentifier:@"GalerieDetailTableViewCell"];
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"GalerieDetailTopTableViewCell" bundle:nil] forCellReuseIdentifier:@"GalerieDetailTopTableViewCell"];
+
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     
@@ -225,53 +225,26 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        const NSString * cellId = @"GalerieDetailTopTableViewCell";
+        GalerieDetailTopTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     
-    UITableViewCell *cell = nil;
-        if (indexPath.section == 0) {
-            
-            GalerieDetailTopTableViewCell *actualCell = (GalerieDetailTopTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"GalerieDetailTopTableViewCell"];
-            if(!VALID(actualCell, GalerieDetailTopTableViewCell)) {
-                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieDetailTopTableViewCell" owner:self options:nil];
-                
-                if(VALID_NOTEMPTY(views, NSArray)) {
-                    actualCell = [views objectAtIndex:0];
-                }
-            }
-            NSString *titleGalerie = self.newsDetail.title;
-            NSString *linkGalerie = self.newsDetail.link;
-            
-            NSString *authorHTML = @"";
-            NSString *contentValue = [self.galeriesDetail valueForKey:@"content"];
-            if(VALID_NOTEMPTY(contentValue, NSString)) {
-                authorHTML = contentValue;
-            }
-            [actualCell setTitle:titleGalerie andAuthor:authorHTML andLink:linkGalerie];
-            cell = actualCell;
-            return cell;
-        }
-        GalerieDetailTableViewCell *actualCell = (GalerieDetailTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-        if(!VALID(actualCell, GalerieDetailTableViewCell)) {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieDetailTableViewCell" owner:self options:nil];
-            
-            if(VALID_NOTEMPTY(views, NSArray)) {
-                actualCell = [views objectAtIndex:0];
-            }
-        }
+        NSString *titleGalerie = self.newsDetail.title;
+        NSString *linkGalerie = self.newsDetail.link;
         
-        if(VALID(actualCell, GalerieDetailTableViewCell)) {
-            cell = actualCell;
-            actualCell.delegate = self;
-            
-
-            
-           
-            if(indexPath.row >= 0 && indexPath.row < [self.galeriesDetail.contentGallery count]) {
-               
-                [actualCell setItem:self.galeriesDetail atIndex:indexPath.row];
-                
-            }
+        NSString *authorHTML = @"";
+        NSString *contentValue = [self.galeriesDetail valueForKey:@"content"];
+        if(VALID_NOTEMPTY(contentValue, NSString)) {
+            authorHTML = contentValue;
         }
-    
+        [cell setTitle:titleGalerie andAuthor:authorHTML andLink:linkGalerie];
+        return cell;
+    }
+    // else
+    const NSString * cellId = @"GalerieDetailTableViewCell";
+    GalerieDetailTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+    cell.delegate = self;
+    [cell setItem:self.galeriesDetail atIndex:indexPath.row];
     return cell;
 }
 

@@ -12,13 +12,13 @@
 #import "Constants.h"
 #import "UIImageView+WebCache.h"
 #import "MenuItem+CoreDataProperties.h"
+#import "NSDateFormatterInstance.h"
 
 @interface GalerieItemView()
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageType;
 
 @end
@@ -27,17 +27,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-    
-    // Uncomment following lines to revert handleTap - by ggirao
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    gestureRecognizer.numberOfTapsRequired = 1;
-    
-    [self.coverView setUserInteractionEnabled:YES];
-    [self.coverView addGestureRecognizer:gestureRecognizer];
 }
 
 -(void)setItem:(GalerieItem *)item {
+    if(_item == item)
+        return;
     if(VALID(item, GalerieItem)) {
         _item = item;
         self.titleLabel.text = item.title;
@@ -75,11 +69,7 @@
             }];
         }
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
-        [formatter setTimeZone:[NSTimeZone localTimeZone]];
-        
-        self.dateLabel.text = [formatter stringFromDate:item.updateDate];
+        self.dateLabel.text = [NSDateFormatterInstance formatFull:item.updateDate];
         
         NSArray<MenuItem *> *allItems = [MenuItem MR_findAll];
         
@@ -99,12 +89,6 @@
             self.titleLabel.textColor = kNewsReadColor;
             self.categoryLabel.textColor = kNewsReadColor;
         }
-    }
-}
-
--(void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(GalerieItemDidTap:)]) {
-        [self.delegate GalerieItemDidTap:self];
     }
 }
 

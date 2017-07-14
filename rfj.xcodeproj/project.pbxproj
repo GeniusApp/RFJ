@@ -163,6 +163,9 @@
 		3EECB97F1F0E52E8004D72C9 /* right3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB9791F0E52E8004D72C9 /* right3.png */; };
 		3EF279021F16D2F600B4538B /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF279011F16D2F600B4538B /* WindowsAzureMessaging.framework */; };
 		4FD205111D9A743D07AB9FA5 /* libPods-rtn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */; };
+		718BE3781F163A6C00D52CFC /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 718BE3771F163A6C00D52CFC /* SwipeView.m */; };
+		718BE37C1F16540200D52CFC /* NSDateFormatterInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 718BE37B1F16540200D52CFC /* NSDateFormatterInstance.m */; };
+		718BE37E1F166FB900D52CFC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 718BE37D1F166FB900D52CFC /* .gitignore */; };
 		767322774528C8C9396AD38C /* libPods-rfj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */; };
 		E7311C831E64556C001DB24A /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C821E64556C001DB24A /* NewsDetailViewController.m */; };
 		E7311C841E64556C001DB24A /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C821E64556C001DB24A /* NewsDetailViewController.m */; };
@@ -477,6 +480,11 @@
 		3EF279031F16D38D00B4538B /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		4E99C91C7A288B7F6C9A7509 /* Pods-rtn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rtn.release.xcconfig"; path = "Pods/Target Support Files/Pods-rtn/Pods-rtn.release.xcconfig"; sourceTree = "<group>"; };
 		5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rfj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		718BE3761F163A6C00D52CFC /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
+		718BE3771F163A6C00D52CFC /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeView.m; sourceTree = "<group>"; };
+		718BE37A1F16540200D52CFC /* NSDateFormatterInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateFormatterInstance.h; sourceTree = "<group>"; };
+		718BE37B1F16540200D52CFC /* NSDateFormatterInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateFormatterInstance.m; sourceTree = "<group>"; };
+		718BE37D1F166FB900D52CFC /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rtn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9DA7B4282B326F1908E6C14 /* Pods-rjb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rjb.release.xcconfig"; path = "Pods/Target Support Files/Pods-rjb/Pods-rjb.release.xcconfig"; sourceTree = "<group>"; };
 		D4C720200EF37CA738799116 /* Pods-rfj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rfj.release.xcconfig"; path = "Pods/Target Support Files/Pods-rfj/Pods-rfj.release.xcconfig"; sourceTree = "<group>"; };
@@ -759,6 +767,34 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		718BE3741F163A6C00D52CFC /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				718BE3751F163A6C00D52CFC /* SwipeView */,
+			);
+			name = Thirdparty;
+			path = Common/Thirdparty;
+			sourceTree = "<group>";
+		};
+		718BE3751F163A6C00D52CFC /* SwipeView */ = {
+			isa = PBXGroup;
+			children = (
+				718BE3761F163A6C00D52CFC /* SwipeView.h */,
+				718BE3771F163A6C00D52CFC /* SwipeView.m */,
+			);
+			path = SwipeView;
+			sourceTree = "<group>";
+		};
+		718BE3791F1653E400D52CFC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				718BE37A1F16540200D52CFC /* NSDateFormatterInstance.h */,
+				718BE37B1F16540200D52CFC /* NSDateFormatterInstance.m */,
+			);
+			name = Utils;
+			path = Common/Utils;
+			sourceTree = "<group>";
+		};
 		E74859C81E5DB45C0030D696 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -972,6 +1008,7 @@
 		E78D63151E5B4C8000191453 = {
 			isa = PBXGroup;
 			children = (
+				718BE37D1F166FB900D52CFC /* .gitignore */,
 				E775F2141E93F99D00675133 /* images */,
 				E78D63821E5B509100191453 /* Common */,
 				E78D63201E5B4C8000191453 /* rfj */,
@@ -1042,6 +1079,8 @@
 		E78D63821E5B509100191453 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				718BE3791F1653E400D52CFC /* Utils */,
+				718BE3741F163A6C00D52CFC /* Thirdparty */,
 				E78D63D01E5B5EF000191453 /* DataModel */,
 				E78D63A21E5B574100191453 /* Model */,
 				E7551D001E5C4F1700A1AEF9 /* View */,
@@ -1344,6 +1383,7 @@
 				E775F26E1E93F99E00675133 /* Cinnabar@3x.png in Resources */,
 				3E1E8EB71EC5B61E00B76215 /* right_@3x.png in Resources */,
 				3EECB9751F0E524D004D72C9 /* left3.png in Resources */,
+				718BE37E1F166FB900D52CFC /* .gitignore in Resources */,
 				E775F2831E93F99E00675133 /* JournauxAudio@3x.png in Resources */,
 				E775F2941E93F99E00675133 /* pause@2x.png in Resources */,
 				E775F2AA1E93F99E00675133 /* Video@3x.png in Resources */,
@@ -1675,6 +1715,7 @@
 				3E67238D1EE19F3700BC0A5B /* GalerieItemTableViewCell.m in Sources */,
 				E756DE101E89328800E1437E /* BottomLoadingView.m in Sources */,
 				E75006AC1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
+				718BE3781F163A6C00D52CFC /* SwipeView.m in Sources */,
 				E7AE20C01E9B98A900DA7953 /* ResourcesManager.m in Sources */,
 				3EE362971F0AD5D8003EC0A9 /* GalerieItemView.m in Sources */,
 				E760123B1E5DBDBC007D809A /* DataManager.m in Sources */,
@@ -1698,6 +1739,7 @@
 				E7311C881E6458EB001DB24A /* RadioManager.m in Sources */,
 				E78D64301E5B673300191453 /* NewsDetail+CoreDataProperties.m in Sources */,
 				E78D638E1E5B519400191453 /* main.m in Sources */,
+				718BE37C1F16540200D52CFC /* NSDateFormatterInstance.m in Sources */,
 				E78D639F1E5B535900191453 /* MainViewController.m in Sources */,
 				3E5AC7131EE4424E00250557 /* GalerieViewController.m in Sources */,
 				E78D64361E5B673300191453 /* MenuItem+CoreDataProperties.m in Sources */,

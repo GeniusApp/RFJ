@@ -20,5 +20,4 @@
 @property (strong, nonatomic) NSArray <NewsItem *> *newsItems;
 - (void) moveLeft;
 - (void) moveRight;
-- (void) display;
 @end

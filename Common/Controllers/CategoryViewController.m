@@ -63,7 +63,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // tableView
+    [self.menuTableView registerNib:[UINib nibWithNibName:@"MenuItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"MenuItemTableViewCell"];
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"WebViewTableViewCell" bundle:nil] forCellReuseIdentifier:@"WebViewTableViewCell"];
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"GalerieItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"GalerieItemTableViewCell"];
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"NewsItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"NewsItemTableViewCell"];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.backgroundColor = [UIColor whiteColor];
@@ -73,7 +77,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = refreshControl;
-
+    
     
     self.allMenuItems = [MenuItem sortedMenuItems];
     self.newsItems = [NewsItem MR_findAll];
@@ -101,11 +105,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     
     self.menuHeightConstraint.constant = 0;
     self.isLoading = NO;
-    
-    
-
-    
-
+#if !(TARGET_IPHONE_SIMULATOR)
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
@@ -117,7 +117,8 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     } failure:^(NSError *error) {
         // error handling here ...
     }];
-
+#endif
+    
 }
 -(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
 {
@@ -199,7 +200,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
     self.newsItems = @[];
-
+    
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
@@ -435,23 +436,23 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     NSMutableArray<MenuItem *> *menuItems = [[NSMutableArray<MenuItem *> alloc] init];
     
     for(MenuItem *item in self.allMenuItems)
-    {
-        if(item.parentId == 0)
         {
+        if(item.parentId == 0)
+            {
             [menuItems addObject:item];
             
             if([self.expandedMenuItems containsObject:@(item.id)])
-            {
-                for(MenuItem *childItem in self.allMenuItems)
                 {
-                    if(childItem.parentId == item.id)
+                for(MenuItem *childItem in self.allMenuItems)
                     {
+                    if(childItem.parentId == item.id)
+                        {
                         [menuItems addObject:item];
+                        }
                     }
                 }
             }
         }
-    }
     
     self.menuItems = menuItems;
     
@@ -615,201 +616,63 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = nil;
-    
-    if(tableView == self.menuTableView)
-    {
-        MenuItemTableViewCell *actualCell = (MenuItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"menuItemCell"];
-        
-        if(!VALID(actualCell, MenuItemTableViewCell))
-        {
-            NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"MenuItemTableViewCell" owner:self options:nil];
-            
-            if(VALID_NOTEMPTY(views, NSArray))
-            {
-                actualCell = [views objectAtIndex:0];
-            }
+    if(tableView == self.menuTableView) {
+        static NSString * cellId = @"MenuItemTableViewCell";
+        MenuItemTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+        MenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
+        cell.delegate = self;
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0099ff"];
+        cell.contentView.layer.borderWidth = 1;
+        cell.contentView.layer.borderColor = [[UIColor colorWithHexString:@"#2182c3"] CGColor];
+        // TODO AN Refactor. Create .json or .plist instead. DO NOT use isEqual. Use id comparision
+        if(
+           [item.name  isEqual: @"Région"]              ||
+           [item.name  isEqual: @"Suisse"]              ||
+           [item.name  isEqual: @"Monde"]               ||
+           [item.name  isEqual: @"Économie"]            ||
+           [item.name  isEqual: @"Culture"]             ||
+           [item.name  isEqual: @"Football"]            ||
+           [item.name  isEqual: @"Hockey"]              ||
+           [item.name  isEqual: @"Basketball"]          ||
+           [item.name  isEqual: @"Volleyball"]          ||
+           [item.name  isEqual: @"Cyclisme"]            ||
+           [item.name  isEqual: @"Ski"]                 ||
+           [item.name  isEqual: @"Hippisme"]            ||
+           [item.name  isEqual: @"Tennis"]              ||
+           [item.name  isEqual: @"Autres sports"]       ||
+           [item.name  isEqual: @"Sports motorisés"]    ||
+           [item.name  isEqual: @"Inline hockey"] ) {
+            cell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073c0"];
+            cell.contentView.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
         }
+        cell.theNameString = item.name;
+        BOOL shouldExpand = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            return obj.parentId == item.id;
+        }] != NSNotFound;
         
-        if(VALID(actualCell, MenuItemTableViewCell))
-        {
-            cell = actualCell;
-            
-            if(indexPath.row >= 0 && indexPath.row < [self.menuItems count])
-            {
-                MenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
-                actualCell.delegate = self;
-                
-                if ([item.name  isEqual: @"Région"]) {
-                    //item.name = @"   Région";
-                    
-                    //actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0073bf"] CGColor];
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                    // cell.layer.backgroundColor = [[UIColor colorWithHexString:@"#000000"] CGColor];
-                } else if ([item.name  isEqual: @"Suisse"]) {
-                    //item.name = @"   Suisse";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Monde"]) {
-                    //item.name = @"   Monde";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Économie"]) {
-                    //item.name = @"   Économie";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Culture"]) {
-                    //item.name = @"   Culture";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Football"]) {
-                    //item.name = @"   Football";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Hockey"]) {
-                    //item.name = @"   Hockey";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Basketball"]) {
-                    //item.name = @"   Basketball";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Volleyball"]) {
-                    //item.name = @"   Volleyball";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Cyclisme"]) {
-                    //item.name = @"   Cyclisme";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Ski"]) {
-                    // item.name = @"   Ski";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Hippisme"]) {
-                    // item.name = @"   Hippisme";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Tennis"]) {
-                    // item.name = @"   Tennis";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Autres sports"]) {
-                    //item.name = @"   Autres sports";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Sports motorisés"]) {
-                    // item.name = @"   Sports motorisés";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else if ([item.name  isEqual: @"Inline hockey"]) {
-                    // item.name = @"   Inline hockey";
-                    
-                    actualCell.contentView.backgroundColor = [UIColor colorWithHexString:@"#0073bf"];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#146195"] CGColor];
-                } else {
-                    
-                    actualCell.layer.backgroundColor = [[UIColor colorWithHexString:@"#0099ff"] CGColor];
-                    actualCell.layer.borderWidth = 1;
-                    actualCell.layer.borderColor = [[UIColor colorWithHexString:@"#2182c3"] CGColor];
-                }
-                actualCell.theNameString = item.name;
-                
-                BOOL shouldExpand = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if(obj.parentId == item.id)
-                    {
-                        return YES;
-                    }
-                    
-                    return NO;
-                }] != NSNotFound;
-                
-                UIImage *icon = nil;
-                BOOL theBoolIconInteractionEnabled = NO;
-                
-                if(shouldExpand && item.id != 0) {
-                    icon = [UIImage imageNamed:@"hamburger_menu"];
-                    theBoolIconInteractionEnabled = YES;
-                }
-                else if(VALID_NOTEMPTY(item.link, NSString)) {
-                    icon = [UIImage imageNamed:@"link"];
-                }
-                actualCell.theImage = icon;
-                actualCell.theBoolIconInteractionEnabled = theBoolIconInteractionEnabled;
-            }
+        if(shouldExpand && item.id != 0) {
+            cell.theImage = [UIImage imageNamed:@"hamburger_menu"];
+            cell.theBoolIconInteractionEnabled = YES;
+        } else if(VALID_NOTEMPTY(item.link, NSString)) {
+            cell.theImage = [UIImage imageNamed:@"link"];
+            cell.theBoolIconInteractionEnabled = NO;
+        } else {
+            cell.theImage = nil;
+            cell.theBoolIconInteractionEnabled = NO;
         }
-    }
-    else if(tableView == self.contentTableView) {
+        return cell;
+    } else if(tableView == self.contentTableView) {
         NSInteger arrayIndex = (indexPath.row / 14) - 1;
-        if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9589]]) {
+        if ([self.activeCategoryId isEqualToNumber:@9589]) {
             if (indexPath.row %14 == 0 && indexPath.row != 0) {
-                GalerieItemTableViewCell *actualCell = (GalerieItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"galerieItemCell"];
-                
-                if(!VALID(actualCell, GalerieItemTableViewCell)) {
-                    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"GalerieItemTableViewCell" owner:self options:nil];
-                    
-                    if(VALID_NOTEMPTY(views, NSArray)) {
-                        actualCell = [views objectAtIndex:0];
-                    }
-                }
-                
-                if(VALID(actualCell, GalerieItemTableViewCell)) {
-                    cell = actualCell;
-                    actualCell.delegate = self;
-                    if(indexPath.row >= 0 && indexPath.row < [self.galeriePhotos count])
-                    {
-                        
-                        NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
-                        NSArray *sortDescriptors = @[createDateDescriptor];
-                        self.galeriePhotos = [self.galeriePhotos sortedArrayUsingDescriptors:sortDescriptors];
-                        GalerieItem *item = [self.galeriePhotos objectAtIndex:arrayIndex];
-                        actualCell.item = item;
-                    }
-                    
-                    return cell;
-                }
+                static NSString * cellId = @"GalerieItemTableViewCell";
+                GalerieItemTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+                cell.delegate = self;
+                cell.item = self.galeriePhotos[arrayIndex];
+                return cell;
             } else if (indexPath.row %7 == 0 && indexPath.row != 14 && indexPath.row != 0) {
-                // Reuse and create cell
-                WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
-                
-                if(!VALID(cell, WebViewTableViewCell)) {
-                    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"WebViewTableViewCell" owner:self options:nil];
-                    
-                    if(VALID_NOTEMPTY(views, NSArray)) {
-                        cell = [views objectAtIndex:0];
-                    }
-                }
+                static NSString * cellId = @"WebViewTableViewCell";
+                WebViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
                 NSString *squareURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJPAVE";
                 [self getJsonResponse:squareURL success:^(NSDictionary *responseDict) {
                     NSString *str = responseDict[@"banner"];
@@ -821,62 +684,19 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                 } failure:^(NSError *error) {
                     // error handling here ...
                 }];
-                
                 return cell;
-            } else {
-                NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-                
-                if(!VALID(actualCell, NewsItemTableViewCell))
-                {
-                    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
-                    
-                    if(VALID_NOTEMPTY(views, NSArray))
-                    {
-                        actualCell = [views objectAtIndex:0];
-                    }
-                }
-                
-                if(VALID(actualCell, NewsItemTableViewCell))
-                {
-                    cell = actualCell;
-                    actualCell.delegate = self;
-                    if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
-                    {
-                        NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
-                        
-                        actualCell.item = item;
-                    }
-                }
-            }
-            return cell;
-        } else {
-            NewsItemTableViewCell *actualCell = (NewsItemTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newsItemCell"];
-            
-            if(!VALID(actualCell, NewsItemTableViewCell))
-            {
-                NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"NewsItemTableViewCell" owner:self options:nil];
-                
-                if(VALID_NOTEMPTY(views, NSArray))
-                {
-                    actualCell = [views objectAtIndex:0];
-                }
-            }
-            
-            if(VALID(actualCell, NewsItemTableViewCell))
-            {
-                cell = actualCell;
-                actualCell.delegate = self;
-                if(indexPath.row >= 0 && indexPath.row < [self.newsItems count])
-                {
-                    NewsItem *item = [self.newsItems objectAtIndex:indexPath.row];
-                    
-                    actualCell.item = item;
-                }
             }
         }
+        // else
+        static NSString * cellId = @"NewsItemTableViewCell";
+        NewsItemTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell setItem:self.newsItems[indexPath.row]];
+        return cell;
     }
-    return cell;
+    return nil;
 }
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
         UIApplication *application = [UIApplication sharedApplication];
@@ -963,15 +783,15 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                     NSMutableArray<NSIndexPath *> *insertedRows = [[NSMutableArray<NSIndexPath *> alloc] init];
                     
                     for(MenuItem *subItem in self.allMenuItems)
-                    {
-                        if(subItem.parentId == menuItem.id)
                         {
+                        if(subItem.parentId == menuItem.id)
+                            {
                             [self.menuItems insertObject:subItem atIndex:startIndex + currentIndex];
                             [insertedRows addObject:[NSIndexPath indexPathForRow:startIndex + currentIndex inSection:0]];
                             
                             currentIndex++;
+                            }
                         }
-                    }
                     
                     [self.menuTableView insertRowsAtIndexPaths:insertedRows withRowAnimation:UITableViewRowAnimationTop];
                     
@@ -991,7 +811,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
 
 -(void)menuItemDidTap:(MenuItemTableViewCell *)item {
     self.menuHeightConstraint.constant = 0;
-
+    
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
@@ -1000,7 +820,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         if(VALID(menuItem, MenuItem)) {
             [self.expandedMenuItems removeAllObjects];
             [self refreshMenuItems];
-
+            
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
@@ -1026,7 +846,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     NSIndexPath *index = [self.contentTableView indexPathForCell:item];
     if(index.row >= 0 && index.row < [self.newsItems count]) {
         NewsGroupViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"newsGroup"];
-
+        
         if(VALID(controller, NewsGroupViewController)) {
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext * _Nonnull localContext) {
                 NewsItem *localItem = [item.item MR_inContext:localContext];
@@ -1037,7 +857,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             }];
             
             [self.contentTableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
-
+            
             controller.newsToDisplay = self.newsItems;
             controller.startingIndex = @(index.row);
             
@@ -1084,14 +904,14 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     self.theFakeMenuHeightConstraintConstant = self.menuHeightConstraint.constant;
     double theProperHeightCount = 0;
     {
-        theProperHeightCount += self.menuTableView.superview.frame.size.height;
-        theProperHeightCount -= self.bottomBanner.frame.size.height;
-        theProperHeightCount -= self.menuTableView.frame.origin.y;
+    theProperHeightCount += self.menuTableView.superview.frame.size.height;
+    theProperHeightCount -= self.bottomBanner.frame.size.height;
+    theProperHeightCount -= self.menuTableView.frame.origin.y;
     }
     if (self.menuHeightConstraint.constant > theProperHeightCount)
-    {
+        {
         self.menuHeightConstraint.constant = theProperHeightCount;
-    }
+        }
 }
 
 @end

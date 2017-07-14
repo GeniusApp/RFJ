@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "UIImageView+WebCache.h"
 #import "MenuItem+CoreDataProperties.h"
+#import "NSDateFormatterInstance.h"
 
 @interface NewsItemTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
@@ -41,76 +42,59 @@
 }
 
 -(void)setItem:(NewsItem *)item {
-    if(VALID(item, NewsItem)) {
-        _item = item;
+    if(_item==item)
+        return;
+    _item = item;
+    if (item.type == 1) {
+        NSString *concat1 = self.titleLabel.text;
+        NSString *concat2 = @"     ";
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
+        [self.imageType setImage:[UIImage imageNamed:@"image"]];
+    } else if (item.type == 2) {
+        NSString *concat1 = self.titleLabel.text;
+        NSString *concat2 = @"     ";
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
+        [self.imageType setImage:[UIImage imageNamed:@"sound"]];
+    } else if (item.type == 3) {
+        NSString *concat1 = self.titleLabel.text;
+        NSString *concat2 = @"     ";
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
+        [self.imageType setImage:[UIImage imageNamed:@"play"]];
+    } else {
         self.titleLabel.text = item.title;
-        NSLog(@"TYPE: %hd", item.type);
-        if (item.type == 1) {
-            NSString *concat1 = self.titleLabel.text;
-            NSString *concat2 = @"     ";
-            self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
-            [self.imageType setImage:[UIImage imageNamed:@"image"]];
-        }
-        if (item.type == 2) {
-            NSString *concat1 = self.titleLabel.text;
-            NSString *concat2 = @"     ";
-            self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
-            [self.imageType setImage:[UIImage imageNamed:@"sound"]];
-        }
-        if (item.type == 3) {
-            NSString *concat1 = self.titleLabel.text;
-            NSString *concat2 = @"     ";
-            self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
-            [self.imageType setImage:[UIImage imageNamed:@"play"]];
-        }
+    }
 
-        if ([item.retina1 rangeOfString:@"jpg"].location == NSNotFound && [item.retina1 rangeOfString:@"JPG"].location == NSNotFound && [item.retina1 rangeOfString:@"png"].location == NSNotFound && [item.retina1 rangeOfString:@"PNG"].location == NSNotFound && [item.retina1 rangeOfString:@"jpeg"].location == NSNotFound) {
-            [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if(VALID(image, UIImage)) {
-                    UIImage *noImage = [UIImage imageNamed:@"no-image.png"];
-                    [self.coverImage setImage:noImage];
-                }
-            }];
-        } else {
-            [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if(VALID(image, UIImage)) {
-                    [self.coverImage setImage:image];
-                }
-            }];
+    [self.coverImage sd_setImageWithURL:[NSURL URLWithString:item.retina1] placeholderImage:[UIImage imageNamed:@"no-image.png"]];
+    
+    if (item.type == 4) {
+        self.dateLabel.text = @"";
+    } else {
+        self.dateLabel.text = [NSDateFormatterInstance formatFull:item.updateDate];
+    }
+    // TODO AN Do not call indexOfObjectPassingTest:. Move format to init
+    NSArray<MenuItem *> *allItems = [MenuItem MR_findAll];
+    
+    NSInteger categoryIndex = [allItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        return obj.id == item.navigationId;
+    }];
+    if (item.type == 4) {
+        self.sponsorLabel.hidden = NO;
+        self.categoryLabel.text = @"Publireportage";
+    } else {
+        if(categoryIndex != NSNotFound) {
+            self.categoryLabel.text = [allItems objectAtIndex:categoryIndex].name;
         }
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
-        [formatter setTimeZone:[NSTimeZone localTimeZone]];
-        if (item.type == 4) {
-            self.dateLabel.text = @"";
-        } else {
-            self.dateLabel.text = [formatter stringFromDate:item.updateDate];
-        }
-        
-        NSArray<MenuItem *> *allItems = [MenuItem MR_findAll];
-        
-        NSInteger categoryIndex = [allItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            return obj.id == item.navigationId;
-        }];
-        if (item.type == 4) {
-            self.sponsorLabel.hidden = NO;
-            self.categoryLabel.text = @"Publireportage";
-        } else {
-            if(categoryIndex != NSNotFound) {
-                self.categoryLabel.text = [allItems objectAtIndex:categoryIndex].name;
-            }
-            else {
-                self.categoryLabel.text = @"";
-            }
-        }
-        
-        if(item.read) {
-            self.dateLabel.textColor = kNewsReadColor;
-            self.titleLabel.textColor = kNewsReadColor;
-            self.categoryLabel.textColor = kNewsReadColor;
+        else {
+            self.categoryLabel.text = @"";
         }
     }
+    
+    if(item.read) {
+        self.dateLabel.textColor = kNewsReadColor;
+        self.titleLabel.textColor = kNewsReadColor;
+        self.categoryLabel.textColor = kNewsReadColor;
+    }
+    
 }
 
 -(void)handleTap:(UIGestureRecognizer *)gestureRecognizer {

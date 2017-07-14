@@ -11,8 +11,9 @@
 #import "Validation.h"
 #import "Constants.h"
 #import "CategoryViewController.h"
-#import "GalerieViewController.h"
+#import "GalerieViewController.h"   
 #import "MainViewController.h"
+#import "NSDateFormatterInstance.h"
 
 @interface NewsSeparatorViewWithBackButton()
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
@@ -67,11 +68,7 @@
 
 -(void)setDate:(NSDate *)date {
     if(VALID_NOTEMPTY(date, NSDate)) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
-        [formatter setTimeZone:[NSTimeZone localTimeZone]];
-        
-        self.dateLabel.text = [formatter stringFromDate:date];
+        self.dateLabel.text = [NSDateFormatterInstance formatFull:date];
     }
 }
 

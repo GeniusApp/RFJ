@@ -13,6 +13,8 @@
 #import "Constants.h"
 #import "UIImageView+WebCache.h"
 #import "MenuItem+CoreDataProperties.h"
+#import "NSDateFormatterInstance.h"
+
 @interface ImportantTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *coverImage;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
@@ -40,11 +42,8 @@
                 }
             }];
 
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"'Actualisé le' dd.MM.y - HH:mm"];
-        [formatter setTimeZone:[NSTimeZone localTimeZone]];
-        
-        self.dateLabel.text = [formatter stringFromDate:item.updateDate];
+
+        self.dateLabel.text = [NSDateFormatterInstance formatFull:item.updateDate];
         
         NSArray<MenuItem *> *allItems = [MenuItem MR_findAll];
         

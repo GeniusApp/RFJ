@@ -1,5 +1,5 @@
 //
-//  NewsGroupViewController.h
+//  GalerieGroupViewController.h
 //  rfj
 //
 //  Created by Nuno Silva on 31/03/2017.
