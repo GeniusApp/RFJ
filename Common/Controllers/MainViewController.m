@@ -152,22 +152,30 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
         // error handling here ...
     }];
     
-
-    NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
-    banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
+    
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN&horizontalSize=1080&verticalSize=1920";
     [self getJsonResponse:bannerURL success:^(NSDictionary *responseDict) {
-        NSString *str = responseDict[@"banner"];
-        NSString *fixBanner = @"<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" /><link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/app.css\" type=\"text/css\" media=\"all\" />";
-        fixBanner = [fixBanner stringByAppendingString:@"<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />"];
-        fixBanner = [fixBanner stringByAppendingString:@"<style>img{max-width: 100%; width:auto; height: auto;}</style>"];
-        if (VALID_NOTEMPTY(str, NSString)){
-            str = [fixBanner stringByAppendingString:str];
-            [self.bottomBanner loadHTMLString:str baseURL:nil];
-            self.bottomBanner.delegate = self;
-        } else {
+        if(!responseDict[@"banner"]) {
             self.bannerView.hidden = YES;
+            return;
         }
+        NSString *html = [NSString stringWithFormat:
+                          @"<!DOCTYPE html>"
+                          "<html>"
+                          "<head>"
+                          "<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />"
+                          "<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css\" type=\"text/css\" media=\"all\" />"
+                          "<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/app.css\" type=\"text/css\" media=\"all\" />"
+                          "<link rel=\"stylesheet\" href=\"https://www.rfj.ch/Htdocs/Styles/webview.css\" type=\"text/css\" media=\"all\" />"
+                          "</head>"
+                          "<body>"
+                          "<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"
+                          "%@"
+                          "</body>"
+                          "</html>"
+                          ,responseDict[@"banner"]];
+        self.bottomBanner.delegate = self;
+        [self.bottomBanner loadHTMLString:html baseURL:nil];
     } failure:^(NSError *error) {
         // error handling here ...
     }];
@@ -961,7 +969,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
 
 -(void)menuItemDidTap:(MenuItemTableViewCell *)item {
     self.menuHeightConstraint.constant = 0;
-
+    
     NSIndexPath *index = [self.menuTableView indexPathForCell:item];
     
     if(index.row >= 0 && index.row < [self.menuItems count]) {
