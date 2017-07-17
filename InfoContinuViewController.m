@@ -198,14 +198,20 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
     self.newsItems = @[];
-    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
-                                        ascending:NO];
+//    self.newsItems = [NewsItem MR_findAllSortedBy:@"createDate"
+//                                        ascending:NO];
     [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
     
     [self showLoading];
     
     [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
         self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+        self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NewsItem *a = obj1;
+            NewsItem *b = obj2;
+            
+            return [b.updateDate compare:a.updateDate];
+        }];
         
         [self.contentTableView reloadData];
         [self hideLoading];
@@ -382,6 +388,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                 self.newsItems = [self.newsItems arrayByAddingObject:item];
             }
         }
+        self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NewsItem *a = obj1;
+            NewsItem *b = obj2;
+            
+            return [b.updateDate compare:a.updateDate];
+        }];
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                                    ascending:NO];
         [self sortGalerieItems];
@@ -604,7 +616,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     if(scrollView == self.contentTableView) {
         if(scrollView.contentOffset.y + scrollView.frame.size.height >= scrollView.contentSize.height && !self.isLoading) {
             //We probably don't want this
-            //[self loadNextPage];
+            [self loadNextPage];
         }
     }
 }

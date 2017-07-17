@@ -561,6 +561,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                                    ascending:NO];
+        
         [self sortGalerieItems];
         [self.contentTableView reloadData];
     } failure:^(NSError *error) {
