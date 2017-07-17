@@ -207,6 +207,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9589]]) {
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9611 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -220,6 +226,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9612 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -233,6 +245,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9613 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -246,6 +264,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9614 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -259,6 +283,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9615 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -273,6 +303,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     } else if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9618]]) {
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9643 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -286,6 +322,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9644 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -299,6 +341,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9645 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -312,6 +360,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9646 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -325,6 +379,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9647 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -338,6 +398,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9648 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -351,6 +417,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9649 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -364,6 +436,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9650 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -377,6 +455,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:9829 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -390,6 +474,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
         }];
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:10215 withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -417,6 +507,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     } else {
         [[NewsManager singleton] fetchNewsAtPage:self.currentPage objectType:0 categoryId:categoryId withSuccessBlock:^(NSArray<NewsItem *> *items) {
             self.newsItems = [self.newsItems arrayByAddingObjectsFromArray:items];
+            self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NewsItem *a = obj1;
+                NewsItem *b = obj2;
+                
+                return [b.updateDate compare:a.updateDate];
+            }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
             NSArray *sortDescriptors = @[createDateDescriptor];
             self.newsItems = [self.newsItems sortedArrayUsingDescriptors:sortDescriptors];
@@ -559,6 +655,12 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                 self.newsItems = [self.newsItems arrayByAddingObject:item];
             }
         }
+        self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NewsItem *a = obj1;
+            NewsItem *b = obj2;
+            
+            return [b.updateDate compare:a.updateDate];
+        }];
         self.galeriePhotos = [GalerieItem MR_findAllSortedBy:@"createDate"
                                                    ascending:NO];
         
