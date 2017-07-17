@@ -46,21 +46,16 @@
         return;
     _item = item;
     if (item.type == 1) {
-        NSString *concat1 = self.titleLabel.text;
-        NSString *concat2 = @"     ";
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
         [self.imageType setImage:[UIImage imageNamed:@"image"]];
+        self.titleLabel.text = [NSString stringWithFormat:@"      %@",item.title];
     } else if (item.type == 2) {
-        NSString *concat1 = self.titleLabel.text;
-        NSString *concat2 = @"     ";
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
         [self.imageType setImage:[UIImage imageNamed:@"sound"]];
+        self.titleLabel.text = [NSString stringWithFormat:@"      %@",item.title];
     } else if (item.type == 3) {
-        NSString *concat1 = self.titleLabel.text;
-        NSString *concat2 = @"     ";
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@", concat2, concat1];
         [self.imageType setImage:[UIImage imageNamed:@"play"]];
+        self.titleLabel.text = [NSString stringWithFormat:@"      %@",item.title];
     } else {
+        self.imageType.image = nil;
         self.titleLabel.text = item.title;
     }
 
