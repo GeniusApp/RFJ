@@ -203,9 +203,44 @@
                 "       window.location.href='x-app://'+document.body.offsetHeight;\n"
                 "   });"
                 "</script>"
+                "<script src='http://code.jquery.com/jquery-1.11.1.min.js'></script>"
+                "<script type='text/javascript'>"
+                "jQuery( document ).ready(function() {"
+            
+                "var playing = false;"
+                "var audioElement = document.createElement('audio');"
+                "audioElement.setAttribute('id','audioPlayer');"
+            
+                "jQuery('.sound-link').click(function(event){"
+                "event.preventDefault();"
+                "event.stopPropagation();"
+                
+                "var trackURL = jQuery(this).attr('href');"
+                "var trackTitle = jQuery(this).attr('title');"
+                "var trackCover = jQuery(this).attr('rel');"
+                
+                "audioElement.setAttribute('src', trackURL);"
+                
+                "audioElement.addEventListener('ended', function() {"
+                    "this.play();"
+                "}, false);"
+                
+                "if (playing == false) {"
+                "    playing = true;"
+                "    jQuery(this).find('.fa-volume-up').removeClass('fa-volume-up').addClass('fa-pause');"
+                "    audioElement.play();"
+                "} else {"
+                "    playing = false;"
+                "jQuery(this).find('.fa-pause').removeClass('fa-pause').addClass('fa-volume-up');"
+                "    audioElement.pause();"
+                "}"
+                "});"
+                "});"
+                "</script>"
                 "%@"
                 "</body>"
                 "</html>",header,html,footer];
+        NSLog(@"HTMLTOPEDRO: %@", html);
         [self.newsContent loadHTMLString:html baseURL:[[NSBundle mainBundle] bundleURL]];
         [self.separatorView setDate:self.newsDetail.updateDate];
     } else {
