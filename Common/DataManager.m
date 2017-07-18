@@ -28,7 +28,6 @@
     if (self = [super init]) {
         self.backendURLs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BackendURLs" ofType:@"plist"]];
         self.soapConfig = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SoapConfig" ofType:@"plist"]];
-        self.awsSnsConfig = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"AWSSNSConfig" ofType:@"plist"]];
         self.adsAndStatisticConfig = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"AdsAndStatisticConfig" ofType:@"plist"]];
     }
     return self;

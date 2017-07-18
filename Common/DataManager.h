@@ -14,7 +14,6 @@
 @property (nonatomic, strong) NSDictionary *backendURLs;
 @property (nonatomic, strong) NSDictionary *soapConfig;
 @property (nonatomic, strong) NSDictionary *adsAndStatisticConfig;
-@property (nonatomic, strong) NSDictionary *awsSnsConfig;
 
 - (BOOL)isRFJ;
 - (BOOL)isRJB;

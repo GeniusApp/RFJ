@@ -8,12 +8,8 @@
 
 #import <MagicalRecord/MagicalRecord.h>
 #import <AFSoundManager/AFSoundManager.h>
-#import <AWSCognito/AWSCognito.h>
 #import <NSObject+Singleton.h>
 #import "AppDelegate.h"
-#import "AWSCore.h"
-#import "AWSCognito.h"
-#import "AWSSNS.h"
 #import "DataManager.h"
 #import "MainViewController.h"
 #import "Validation.h"
@@ -38,7 +34,7 @@
     
     if (!appInitialized) {
         [userDefaults setBool:YES forKey:@"appInitialized"];
-        // [userDefaults setBool:YES forKey:@"playJingleAtStartup"]; 
+        // [userDefaults setBool:YES forKey:@"playJingleAtStartup"];
         [userDefaults synchronize];
     }
     
@@ -54,14 +50,6 @@
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
-    
-    //Aamazon SNS
-    //Register for Push notifications
-    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType: AWSRegionEUWest1 identityPoolId:[[DataManager singleton].awsSnsConfig objectForKey:@"identityPoolId"] unauthRoleArn:[[DataManager singleton].awsSnsConfig objectForKey:@"unauthRoleArn"] authRoleArn:[[DataManager singleton].awsSnsConfig objectForKey:@"authRoleArn"] identityProviderManager:nil];
-    
-    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionEUWest1 credentialsProvider:credentialsProvider];
-    
-    [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
     
     application.applicationIconBadgeNumber = 0;
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
@@ -112,52 +100,23 @@
     [MagicalRecord cleanUp];
 }
 
-//- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
-//    NSLog(@"deviceToken: %@", deviceToken);
-//    
-//    const char* data = [deviceToken bytes];
-//    NSMutableString* token = [NSMutableString string];
-//    
-//    for (int i = 0; i < [deviceToken length]; i++) {
-//        [token appendFormat:@"%02.2hhX", data[i]];
-//    }
-//    
-//    AWSSNSCreatePlatformEndpointInput *endPointInput = [[AWSSNSCreatePlatformEndpointInput alloc] init];
-//    endPointInput.platformApplicationArn = [[DataManager singleton].awsSnsConfig objectForKey:@"platformApplicationArn"];
-//    endPointInput.token = token;
-//    
-//    AWSSNS *sns = [AWSSNS defaultSNS];
-//    [[sns createPlatformEndpoint:endPointInput] continueWithBlock:^id _Nullable(AWSTask<AWSSNSCreateEndpointResponse *> * _Nonnull task) {
-//        if(task.error != nil) {
-//            //NSLog(@"%@", task.error);
-//        } else {
-//            NSLog(@"success created SNS Endpoint token!");
-//        }
-//        return nil;
-//    }];
+
+//- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
+//    NSLog(@"Failed to register with error : %@", error);
 //}
 
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
-    //NSLog(@"Failed to register with error : %@", error);
-}
-
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-//    application.applicationIconBadgeNumber = 0;
-//    NSString *msg = [NSString stringWithFormat:@"%@", userInfo];
-//    //NSLog(@"%@",msg);
-//}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *) deviceToken {
     SBNotificationHub* hub = [[SBNotificationHub alloc] initWithConnectionString:HUBLISTENACCESS
                                                              notificationHubPath:HUBNAME];
-    
-    [hub registerNativeWithDeviceToken:deviceToken tags:nil completion:^(NSError* error) {
+    [hub registerNativeWithDeviceToken:deviceToken tags:[NSSet setWithObject:@"All"] completion:^(NSError* error) {
         if (error != nil) {
             NSLog(@"Error registering for notifications: %@", error);
         }
-        else {
-            [self MessageBox:@"Registration Status" message:@"Registered"];
-        }
     }];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
+    [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
 }
 
 -(void)MessageBox:(NSString *)title message:(NSString *)messageText
@@ -166,8 +125,5 @@
                                           cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
-    NSLog(@"%@", userInfo);
-    [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
-}
+
 @end

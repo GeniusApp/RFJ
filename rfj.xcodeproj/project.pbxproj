@@ -177,7 +177,6 @@
 		E7311C8E1E6485A6001DB24A /* MenuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C8C1E6485A6001DB24A /* MenuManager.m */; };
 		E7311C8F1E6485A6001DB24A /* MenuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C8C1E6485A6001DB24A /* MenuManager.m */; };
 		E74859D51E5DB4D80030D696 /* AdsAndStatisticConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859CB1E5DB4D80030D696 /* AdsAndStatisticConfig.plist */; };
-		E74859D61E5DB4D80030D696 /* AWSSNSConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859CC1E5DB4D80030D696 /* AWSSNSConfig.plist */; };
 		E74859D71E5DB4D80030D696 /* BackendURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859CD1E5DB4D80030D696 /* BackendURLs.plist */; };
 		E74859D81E5DB4D80030D696 /* jingle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E74859CE1E5DB4D80030D696 /* jingle.mp3 */; };
 		E74859D91E5DB4D80030D696 /* navigation_bar_logo_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74859CF1E5DB4D80030D696 /* navigation_bar_logo_small@2x.png */; };
@@ -187,7 +186,6 @@
 		E74859DD1E5DB4D80030D696 /* SoapConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859D31E5DB4D80030D696 /* SoapConfig.plist */; };
 		E74859DE1E5DB4D80030D696 /* SportCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859D41E5DB4D80030D696 /* SportCategories.plist */; };
 		E74859E91E5DB4EC0030D696 /* AdsAndStatisticConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859DF1E5DB4EC0030D696 /* AdsAndStatisticConfig.plist */; };
-		E74859EA1E5DB4EC0030D696 /* AWSSNSConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859E01E5DB4EC0030D696 /* AWSSNSConfig.plist */; };
 		E74859EB1E5DB4EC0030D696 /* BackendURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859E11E5DB4EC0030D696 /* BackendURLs.plist */; };
 		E74859EC1E5DB4EC0030D696 /* jingle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E74859E21E5DB4EC0030D696 /* jingle.mp3 */; };
 		E74859ED1E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74859E31E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png */; };
@@ -197,7 +195,6 @@
 		E74859F11E5DB4EC0030D696 /* SoapConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859E71E5DB4EC0030D696 /* SoapConfig.plist */; };
 		E74859F21E5DB4EC0030D696 /* SportCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859E81E5DB4EC0030D696 /* SportCategories.plist */; };
 		E74859FD1E5DB5090030D696 /* AdsAndStatisticConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859F31E5DB5090030D696 /* AdsAndStatisticConfig.plist */; };
-		E74859FE1E5DB5090030D696 /* AWSSNSConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859F41E5DB5090030D696 /* AWSSNSConfig.plist */; };
 		E74859FF1E5DB5090030D696 /* BackendURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74859F51E5DB5090030D696 /* BackendURLs.plist */; };
 		E7485A001E5DB5090030D696 /* jingle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E74859F61E5DB5090030D696 /* jingle.mp3 */; };
 		E7485A011E5DB5090030D696 /* navigation_bar_logo_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74859F71E5DB5090030D696 /* navigation_bar_logo_small@2x.png */; };
@@ -497,7 +494,6 @@
 		E7311C8B1E6485A6001DB24A /* MenuManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuManager.h; path = Common/Model/MenuManager.h; sourceTree = "<group>"; };
 		E7311C8C1E6485A6001DB24A /* MenuManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuManager.m; path = Common/Model/MenuManager.m; sourceTree = "<group>"; };
 		E74859CB1E5DB4D80030D696 /* AdsAndStatisticConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdsAndStatisticConfig.plist; path = Resources/AdsAndStatisticConfig.plist; sourceTree = "<group>"; };
-		E74859CC1E5DB4D80030D696 /* AWSSNSConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AWSSNSConfig.plist; path = Resources/AWSSNSConfig.plist; sourceTree = "<group>"; };
 		E74859CD1E5DB4D80030D696 /* BackendURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BackendURLs.plist; path = Resources/BackendURLs.plist; sourceTree = "<group>"; };
 		E74859CE1E5DB4D80030D696 /* jingle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = jingle.mp3; path = Resources/jingle.mp3; sourceTree = "<group>"; };
 		E74859CF1E5DB4D80030D696 /* navigation_bar_logo_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigation_bar_logo_small@2x.png"; path = "Resources/navigation_bar_logo_small@2x.png"; sourceTree = "<group>"; };
@@ -507,7 +503,6 @@
 		E74859D31E5DB4D80030D696 /* SoapConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SoapConfig.plist; path = Resources/SoapConfig.plist; sourceTree = "<group>"; };
 		E74859D41E5DB4D80030D696 /* SportCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SportCategories.plist; path = Resources/SportCategories.plist; sourceTree = "<group>"; };
 		E74859DF1E5DB4EC0030D696 /* AdsAndStatisticConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdsAndStatisticConfig.plist; path = Resources/AdsAndStatisticConfig.plist; sourceTree = "<group>"; };
-		E74859E01E5DB4EC0030D696 /* AWSSNSConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AWSSNSConfig.plist; path = Resources/AWSSNSConfig.plist; sourceTree = "<group>"; };
 		E74859E11E5DB4EC0030D696 /* BackendURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BackendURLs.plist; path = Resources/BackendURLs.plist; sourceTree = "<group>"; };
 		E74859E21E5DB4EC0030D696 /* jingle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = jingle.mp3; path = Resources/jingle.mp3; sourceTree = "<group>"; };
 		E74859E31E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigation_bar_logo_small@2x.png"; path = "Resources/navigation_bar_logo_small@2x.png"; sourceTree = "<group>"; };
@@ -517,7 +512,6 @@
 		E74859E71E5DB4EC0030D696 /* SoapConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SoapConfig.plist; path = Resources/SoapConfig.plist; sourceTree = "<group>"; };
 		E74859E81E5DB4EC0030D696 /* SportCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SportCategories.plist; path = Resources/SportCategories.plist; sourceTree = "<group>"; };
 		E74859F31E5DB5090030D696 /* AdsAndStatisticConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdsAndStatisticConfig.plist; path = Resources/AdsAndStatisticConfig.plist; sourceTree = "<group>"; };
-		E74859F41E5DB5090030D696 /* AWSSNSConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AWSSNSConfig.plist; path = Resources/AWSSNSConfig.plist; sourceTree = "<group>"; };
 		E74859F51E5DB5090030D696 /* BackendURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BackendURLs.plist; path = Resources/BackendURLs.plist; sourceTree = "<group>"; };
 		E74859F61E5DB5090030D696 /* jingle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = jingle.mp3; path = Resources/jingle.mp3; sourceTree = "<group>"; };
 		E74859F71E5DB5090030D696 /* navigation_bar_logo_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigation_bar_logo_small@2x.png"; path = "Resources/navigation_bar_logo_small@2x.png"; sourceTree = "<group>"; };
@@ -799,7 +793,6 @@
 			isa = PBXGroup;
 			children = (
 				E74859CB1E5DB4D80030D696 /* AdsAndStatisticConfig.plist */,
-				E74859CC1E5DB4D80030D696 /* AWSSNSConfig.plist */,
 				E74859CD1E5DB4D80030D696 /* BackendURLs.plist */,
 				E74859CE1E5DB4D80030D696 /* jingle.mp3 */,
 				E74859CF1E5DB4D80030D696 /* navigation_bar_logo_small@2x.png */,
@@ -816,7 +809,6 @@
 			isa = PBXGroup;
 			children = (
 				E74859DF1E5DB4EC0030D696 /* AdsAndStatisticConfig.plist */,
-				E74859E01E5DB4EC0030D696 /* AWSSNSConfig.plist */,
 				E74859E11E5DB4EC0030D696 /* BackendURLs.plist */,
 				E74859E21E5DB4EC0030D696 /* jingle.mp3 */,
 				E74859E31E5DB4EC0030D696 /* navigation_bar_logo_small@2x.png */,
@@ -833,7 +825,6 @@
 			isa = PBXGroup;
 			children = (
 				E74859F31E5DB5090030D696 /* AdsAndStatisticConfig.plist */,
-				E74859F41E5DB5090030D696 /* AWSSNSConfig.plist */,
 				E74859F51E5DB5090030D696 /* BackendURLs.plist */,
 				E74859F61E5DB5090030D696 /* jingle.mp3 */,
 				E74859F71E5DB5090030D696 /* navigation_bar_logo_small@2x.png */,
@@ -1264,9 +1255,9 @@
 				TargetAttributes = {
 					E78D631D1E5B4C8000191453 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = YHPSV8SJ47;
+						DevelopmentTeam = 7W383TR6AE;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1362,7 +1353,6 @@
 				E775F2711E93F99E00675133 /* Equitation@2x.png in Resources */,
 				E775F28E1E93F99E00675133 /* NewsNatio@3x.png in Resources */,
 				E775F27F1E93F99E00675133 /* icon_settings.png in Resources */,
-				E74859D61E5DB4D80030D696 /* AWSSNSConfig.plist in Resources */,
 				E775F2891E93F99E00675133 /* NeonCarrot@3x.png in Resources */,
 				3E1E8EAB1EC5B61E00B76215 /* left_@2x.png in Resources */,
 				E775F2A71E93F99E00675133 /* Traffic@2x.png in Resources */,
@@ -1481,7 +1471,6 @@
 				3EE362931F0AD2CF003EC0A9 /* GalerieItemSwipeTableViewCell.xib in Resources */,
 				3E30922F1EDF0B81002240A4 /* NewsItemSwipeTableViewCell.xib in Resources */,
 				3EECB97E1F0E52E8004D72C9 /* right3.png in Resources */,
-				E74859EA1E5DB4EC0030D696 /* AWSSNSConfig.plist in Resources */,
 				E74859F21E5DB4EC0030D696 /* SportCategories.plist in Resources */,
 				3EECB97B1F0E52E8004D72C9 /* right2.png in Resources */,
 				E7D6DEE71E66DC3100E7CC46 /* NewsSeparatorViewWithBackButton.xib in Resources */,
@@ -1540,7 +1529,6 @@
 				3E4115B51ECBBEF500959D8A /* ImportantTableViewCell.xib in Resources */,
 				3E1E8EB01EC5B61E00B76215 /* left_@3x.png in Resources */,
 				E7485A051E5DB5090030D696 /* SoapConfig.plist in Resources */,
-				E74859FE1E5DB5090030D696 /* AWSSNSConfig.plist in Resources */,
 				E78D63921E5B51AA00191453 /* RTN-Images.xcassets in Resources */,
 				E75CE7891E5CA06B00D8E232 /* Assets.xcassets in Resources */,
 				3E1E8EB91EC5B61E00B76215 /* right_@3x.png in Resources */,
@@ -1973,7 +1961,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = YHPSV8SJ47;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 7W383TR6AE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1987,8 +1976,10 @@
 					"$(PROJECT_DIR)/AA_SDK",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.artionet2.rfj;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rfj;
 				PRODUCT_NAME = RFJ;
+				PROVISIONING_PROFILE = "4bbd5600-910a-4044-8546-0f8c9aff2752";
+				PROVISIONING_PROFILE_SPECIFIER = Notification_RFJ_prod;
 				SWIFT_OBJC_BRIDGING_HEADER = "rfj-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2004,8 +1995,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				DEVELOPMENT_TEAM = YHPSV8SJ47;
-				ENABLE_BITCODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 7W383TR6AE;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2019,8 +2011,10 @@
 					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.artionet2.rfj;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rfj;
 				PRODUCT_NAME = RFJ;
+				PROVISIONING_PROFILE = "4bbd5600-910a-4044-8546-0f8c9aff2752";
+				PROVISIONING_PROFILE_SPECIFIER = Notification_RFJ_prod;
 				SWIFT_OBJC_BRIDGING_HEADER = "rfj-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
