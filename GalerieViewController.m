@@ -57,6 +57,7 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Galerie";
     // tableView
     [self.menuTableView registerNib:[UINib nibWithNibName:@"MenuItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"MenuItemTableViewCell"];
     [self.contentTableView registerNib:[UINib nibWithNibName:@"GalerieItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"GalerieItemTableViewCell"];
@@ -530,6 +531,7 @@ GalerieItemTableViewCellDelegate, MenuItemTableViewCellDelegate>
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
+                [BaseViewController gaiTrackEventMenu:menuItem.name];
                 WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
                 
                 if(VALID(controller, WebViewController)) {

@@ -367,6 +367,7 @@
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
+                [BaseViewController gaiTrackEventMenu:menuItem.name];
                 WebViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"webViewController"];
                 
                 if(VALID(controller, WebViewController)) {

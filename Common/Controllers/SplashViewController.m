@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Splash";
     self.splashWebView.delegate = self;
     NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
     [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
@@ -67,6 +68,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [BaseViewController gaiTrackEventAd:@"Splash"];
         UIApplication *application = [UIApplication sharedApplication];
         [application openURL:[request URL] options:@{} completionHandler:nil];
         return NO;

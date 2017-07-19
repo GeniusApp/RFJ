@@ -55,7 +55,9 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
 
 @end
 
-@implementation GalerieDetailViewController
+@implementation GalerieDetailViewController {
+    BOOL viewDidAppearAlready;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -98,6 +100,15 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
     [self.contentTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if(self.newsDetail && self.newsDetail.title) {
+        self.screenNameForce = [NSString stringWithFormat:@"GalerieDetail: %@",self.newsDetail.title];
+    }
+    viewDidAppearAlready = YES;
+}
+
 -(void)getJsonResponse:(NSString *)urlStr success:(void (^)(NSDictionary *responseDict))success failure:(void(^)(NSError* error))failure
 {
     NSURLSession *session = [NSURLSession sharedSession];
@@ -230,6 +241,9 @@ GalerieDetailTableViewCellDelegate, GalerieDetailTableViewCellDelegate, UIViewCo
         GalerieDetailTopTableViewCell *cell = (id)[tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     
         NSString *titleGalerie = self.newsDetail.title;
+        if(titleGalerie && viewDidAppearAlready && self.screenNameForce == nil) {
+            self.screenNameForce = [NSString stringWithFormat:@"GalerieDetail: %@",titleGalerie];
+        }
         NSString *linkGalerie = self.newsDetail.link;
         
         NSString *authorHTML = @"";

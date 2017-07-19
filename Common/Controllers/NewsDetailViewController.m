@@ -37,11 +37,12 @@
 
 @end
 
-@implementation NewsDetailViewController
+@implementation NewsDetailViewController {
+    BOOL viewDidAppearAlready;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.allMenuItems = [MenuItem MR_findAll];
     
     self.newsContent.scrollView.scrollEnabled = NO;
@@ -65,6 +66,14 @@
     
     [self.separatorView setUserInteractionEnabled:YES];
     [self.separatorView addGestureRecognizer:gestureRecognizer];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(self.newsDetail && self.newsDetail.title) {
+        self.screenNameForce = [NSString stringWithFormat:@"NewsDetail: %@",self.newsDetail.title];
+    }
+    viewDidAppearAlready = YES;
 }
 
 -(void)loadNews:(NSNumber *)newsToDisplay {
@@ -100,6 +109,9 @@
 
 -(void)refreshNews {
     if(VALID(self.newsDetail, NewsDetail)) {
+        if(viewDidAppearAlready && self.screenNameForce == nil) {
+            self.screenNameForce = [NSString stringWithFormat:@"NewsDetail: %@",self.newsDetail.title];
+        }
         // load Splash
         
         if (![[NSUserDefaults standardUserDefaults] integerForKey:@"splashTimes"]) {
@@ -354,6 +366,7 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *url = [request URL];
     if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [BaseViewController gaiTrackEventAd:@"NewsDetail"];
         UIApplication *application = [UIApplication sharedApplication];
         [application openURL:url options:@{} completionHandler:nil];
         return NO;

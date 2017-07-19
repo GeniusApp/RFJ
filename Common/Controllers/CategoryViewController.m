@@ -105,7 +105,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     
     self.menuHeightConstraint.constant = 0;
     self.isLoading = NO;
-#if !(TARGET_IPHONE_SIMULATOR)
+#ifdef SHOW_ADS
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
@@ -200,8 +200,9 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     self.activeCategoryId = @(categoryId);
     self.currentPage = 1;
     self.newsItems = @[];
-    
-    [self.separatorView setCategoryName:[self.allMenuItems objectAtIndex:menuIndex].name];
+    NSString * catName = [self.allMenuItems objectAtIndex:menuIndex].name;
+    [self.separatorView setCategoryName:catName];
+    self.screenNameForce = [NSString stringWithFormat:@"NewsCategory: %@",catName];
     
     [self showLoading];
     if ([self.activeCategoryId isEqualToNumber:[NSNumber numberWithInt:9589]]) {
@@ -815,6 +816,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [BaseViewController gaiTrackEventAd:@"NewsCategory"];
         UIApplication *application = [UIApplication sharedApplication];
         [application openURL:[request URL] options:@{} completionHandler:nil];
         return NO;
@@ -934,6 +936,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
+                [BaseViewController gaiTrackEventMenu:menuItem.name];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
                 

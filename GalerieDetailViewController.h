@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface GalerieDetailViewController : UIViewController
+@interface GalerieDetailViewController : BaseViewController
 @property (strong, nonatomic) NSNumber *newsID;
 @property (strong, nonatomic) NSNumber *currentGalerie;
 

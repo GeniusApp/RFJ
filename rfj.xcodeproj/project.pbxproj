@@ -166,6 +166,9 @@
 		718BE3781F163A6C00D52CFC /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 718BE3771F163A6C00D52CFC /* SwipeView.m */; };
 		718BE37C1F16540200D52CFC /* NSDateFormatterInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 718BE37B1F16540200D52CFC /* NSDateFormatterInstance.m */; };
 		718BE37E1F166FB900D52CFC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 718BE37D1F166FB900D52CFC /* .gitignore */; };
+		719AF4C41F1F6A1C00123BCD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 719AF4C31F1F6A1C00123BCD /* BaseViewController.m */; };
+		719AF4C51F1F6A1C00123BCD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 719AF4C31F1F6A1C00123BCD /* BaseViewController.m */; };
+		719AF4C61F1F6A1C00123BCD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 719AF4C31F1F6A1C00123BCD /* BaseViewController.m */; };
 		767322774528C8C9396AD38C /* libPods-rfj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA098EEC82E3BC1D3F45C07 /* libPods-rfj.a */; };
 		E7311C831E64556C001DB24A /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C821E64556C001DB24A /* NewsDetailViewController.m */; };
 		E7311C841E64556C001DB24A /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7311C821E64556C001DB24A /* NewsDetailViewController.m */; };
@@ -319,9 +322,6 @@
 		E77938571E9297650065483E /* InfoReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77938561E9297650065483E /* InfoReportViewController.m */; };
 		E77938581E9297650065483E /* InfoReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77938561E9297650065483E /* InfoReportViewController.m */; };
 		E77938591E9297650065483E /* InfoReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77938561E9297650065483E /* InfoReportViewController.m */; };
-		E779385C1E92A3A70065483E /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = E779385B1E92A3A70065483E /* Analytics.m */; };
-		E779385D1E92A3A70065483E /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = E779385B1E92A3A70065483E /* Analytics.m */; };
-		E779385E1E92A3A70065483E /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = E779385B1E92A3A70065483E /* Analytics.m */; };
 		E78B61D61E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B61D51E8196E500E0DA25 /* NewsCategorySeparatorView.m */; };
 		E78B61D71E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B61D51E8196E500E0DA25 /* NewsCategorySeparatorView.m */; };
 		E78B61D81E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78B61D51E8196E500E0DA25 /* NewsCategorySeparatorView.m */; };
@@ -482,6 +482,8 @@
 		718BE37A1F16540200D52CFC /* NSDateFormatterInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateFormatterInstance.h; sourceTree = "<group>"; };
 		718BE37B1F16540200D52CFC /* NSDateFormatterInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateFormatterInstance.m; sourceTree = "<group>"; };
 		718BE37D1F166FB900D52CFC /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		719AF4C21F1F6A1C00123BCD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		719AF4C31F1F6A1C00123BCD /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		8CD2D19590CDF75CE647AA47 /* libPods-rtn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rtn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9DA7B4282B326F1908E6C14 /* Pods-rjb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rjb.release.xcconfig"; path = "Pods/Target Support Files/Pods-rjb/Pods-rjb.release.xcconfig"; sourceTree = "<group>"; };
 		D4C720200EF37CA738799116 /* Pods-rfj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rfj.release.xcconfig"; path = "Pods/Target Support Files/Pods-rfj/Pods-rfj.release.xcconfig"; sourceTree = "<group>"; };
@@ -623,8 +625,6 @@
 		E775F2611E93F99D00675133 /* Whisteria@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Whisteria@3x.png"; sourceTree = "<group>"; };
 		E77938551E9297650065483E /* InfoReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoReportViewController.h; path = Common/Controllers/InfoReportViewController.h; sourceTree = "<group>"; };
 		E77938561E9297650065483E /* InfoReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoReportViewController.m; path = Common/Controllers/InfoReportViewController.m; sourceTree = "<group>"; };
-		E779385A1E92A3A70065483E /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Analytics.h; path = Common/Model/Analytics.h; sourceTree = "<group>"; };
-		E779385B1E92A3A70065483E /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Analytics.m; path = Common/Model/Analytics.m; sourceTree = "<group>"; };
 		E78B61D41E8196E500E0DA25 /* NewsCategorySeparatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsCategorySeparatorView.h; path = Common/View/NewsCategorySeparatorView.h; sourceTree = "<group>"; };
 		E78B61D51E8196E500E0DA25 /* NewsCategorySeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsCategorySeparatorView.m; path = Common/View/NewsCategorySeparatorView.m; sourceTree = "<group>"; };
 		E78B61D91E8196F700E0DA25 /* NewsCategorySeparatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsCategorySeparatorView.xib; path = Common/View/NewsCategorySeparatorView.xib; sourceTree = "<group>"; };
@@ -1126,6 +1126,8 @@
 				3E3092241EDF04CA002240A4 /* NewsItemSwipeViewController.m */,
 				3EE362721F0A5EFC003EC0A9 /* SplashViewController.h */,
 				3EE362731F0A5EFC003EC0A9 /* SplashViewController.m */,
+				719AF4C21F1F6A1C00123BCD /* BaseViewController.h */,
+				719AF4C31F1F6A1C00123BCD /* BaseViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1137,8 +1139,6 @@
 				E7311C8C1E6485A6001DB24A /* MenuManager.m */,
 				E7E6FDE91E65CD6D0027B719 /* NewsManager.h */,
 				E7E6FDEA1E65CD6D0027B719 /* NewsManager.m */,
-				E779385A1E92A3A70065483E /* Analytics.h */,
-				E779385B1E92A3A70065483E /* Analytics.m */,
 				E7AE20BE1E9B98A900DA7953 /* ResourcesManager.h */,
 				E7AE20BF1E9B98A900DA7953 /* ResourcesManager.m */,
 			);
@@ -1701,6 +1701,7 @@
 				3E30922A1EDF0B3E002240A4 /* NewsItemSwipeTableViewCell.m in Sources */,
 				3E3853921EE8878C00F7FAC1 /* GalerieDetailTableViewCell.m in Sources */,
 				3E67238D1EE19F3700BC0A5B /* GalerieItemTableViewCell.m in Sources */,
+				719AF4C41F1F6A1C00123BCD /* BaseViewController.m in Sources */,
 				E756DE101E89328800E1437E /* BottomLoadingView.m in Sources */,
 				E75006AC1E68446300B153A7 /* NewsPhoto+CoreDataProperties.m in Sources */,
 				718BE3781F163A6C00D52CFC /* SwipeView.m in Sources */,
@@ -1710,7 +1711,6 @@
 				3E9CB3E01EE8014500F0A048 /* GalerieDetailViewController.m in Sources */,
 				E77938571E9297650065483E /* InfoReportViewController.m in Sources */,
 				3EE3628E1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */,
-				E779385C1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D61E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
 				E7D6DEE21E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
 				3E4115B01ECBBEF500959D8A /* ImportantTableViewCell.m in Sources */,
@@ -1768,7 +1768,6 @@
 				E760123C1E5DBDBC007D809A /* DataManager.m in Sources */,
 				3EE3628F1F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */,
 				E77938581E9297650065483E /* InfoReportViewController.m in Sources */,
-				E779385D1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D71E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
 				E7D6DEE31E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
 				3E9B10781EEEDB96007AFD9D /* GalerieGroupViewController.m in Sources */,
@@ -1800,6 +1799,7 @@
 				E7E6FDEC1E65CD6D0027B719 /* NewsManager.m in Sources */,
 				3E3092261EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */,
 				E78D64341E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
+				719AF4C51F1F6A1C00123BCD /* BaseViewController.m in Sources */,
 				E75006B21E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1824,7 +1824,6 @@
 				E760123D1E5DBDBC007D809A /* DataManager.m in Sources */,
 				3EE362901F0AD24C003EC0A9 /* GalerieItemSwipeTableViewCell.m in Sources */,
 				E77938591E9297650065483E /* InfoReportViewController.m in Sources */,
-				E779385E1E92A3A70065483E /* Analytics.m in Sources */,
 				E78B61D81E8196E500E0DA25 /* NewsCategorySeparatorView.m in Sources */,
 				E7D6DEE41E66DC1400E7CC46 /* NewsSeparatorViewWithBackButton.m in Sources */,
 				3E9B10791EEEDB96007AFD9D /* GalerieGroupViewController.m in Sources */,
@@ -1856,6 +1855,7 @@
 				E7E6FDED1E65CD6D0027B719 /* NewsManager.m in Sources */,
 				3E3092271EDF04CA002240A4 /* NewsItemSwipeViewController.m in Sources */,
 				E78D64351E5B673300191453 /* MenuItem+CoreDataClass.m in Sources */,
+				719AF4C61F1F6A1C00123BCD /* BaseViewController.m in Sources */,
 				E75006B31E6844AB00B153A7 /* NewsItem+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

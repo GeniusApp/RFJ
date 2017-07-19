@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[Analytics singleton] trackScreenName:@"Reporter une info"];
+    self.screenName = @"InfoReport";
     UIPickerView *picker = [[UIPickerView alloc] init];
     picker.dataSource = self;
     picker.delegate = self;
