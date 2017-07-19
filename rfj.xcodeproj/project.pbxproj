@@ -1255,9 +1255,9 @@
 				TargetAttributes = {
 					E78D631D1E5B4C8000191453 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7W383TR6AE;
+						DevelopmentTeam = YHPSV8SJ47;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1961,8 +1961,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7W383TR6AE;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1976,10 +1976,10 @@
 					"$(PROJECT_DIR)/AA_SDK",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rfj;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artionet2.rfj;
 				PRODUCT_NAME = RFJ;
-				PROVISIONING_PROFILE = "4bbd5600-910a-4044-8546-0f8c9aff2752";
-				PROVISIONING_PROFILE_SPECIFIER = Notification_RFJ_prod;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "rfj-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1995,8 +1995,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = rfj/rfj.entitlements;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 7W383TR6AE;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YHPSV8SJ47;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2011,10 +2011,10 @@
 					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.artionet.rfj;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artionet2.rfj;
 				PRODUCT_NAME = RFJ;
-				PROVISIONING_PROFILE = "4bbd5600-910a-4044-8546-0f8c9aff2752";
-				PROVISIONING_PROFILE_SPECIFIER = Notification_RFJ_prod;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "rfj-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

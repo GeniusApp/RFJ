@@ -11,7 +11,8 @@
 #import "Validation.h"
 #import "Constants.h"
 #import "CategoryViewController.h"
-#import "GalerieViewController.h"   
+#import "GalerieViewController.h" 
+#import "InfoContinuViewController.h"
 #import "MainViewController.h"
 #import "NSDateFormatterInstance.h"
 
@@ -88,7 +89,7 @@
             UIViewController *controller = [controllers objectAtIndex:i];
             NSLog(@"CONTROLLER: %@", controller);
             NSLog(@"NAVIGATION CONTROLLER: %@", navigationController);
-            if((!wantsMainController && VALID(controller, CategoryViewController)) || VALID(controller, MainViewController) || VALID(controller, GalerieViewController)) {
+            if((!wantsMainController && VALID(controller, CategoryViewController)) || VALID(controller, MainViewController) || VALID(controller, GalerieViewController) || VALID(controller, InfoContinuViewController)) {
                 [navigationController popToViewController:controller animated:YES];
                 
                 break;

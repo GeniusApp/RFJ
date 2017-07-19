@@ -16,7 +16,7 @@
 #import "RadioManager.h"
 #import "MBProgressHUD.h"
 #import "Validation.h"
-
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface InfoReportViewController () <UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -165,6 +165,7 @@
 }
 
 - (IBAction)UploadPhoto:(id)sender {
+    NSLog(@"PHOTO: %@", sender);
     UIImagePickerController *imagePickController=[[UIImagePickerController alloc]init];
     
     if ([UIImagePickerController  isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {//Check PhotoLibrary  available or not
@@ -181,10 +182,27 @@
     [self presentModalViewController:imagePickController animated:YES];
 }
 
+- (IBAction)UploadVideo:(id)sender {
+    NSLog(@"VIDEO: %@", sender);
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,      nil];
+    
+    [self presentModalViewController:imagePicker animated:YES];
+}
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker  didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    if (CFStringCompare ((__bridge CFStringRef) mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
+        NSURL *videoUrl=(NSURL*)[info objectForKey:UIImagePickerControllerMediaURL];
+        NSString *moviePath = [videoUrl path];
+        
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum (moviePath)) {
+            UISaveVideoAtPathToSavedPhotosAlbum (moviePath, nil, nil, nil);
+        }
+    }
     UIImage *originalImage=[info objectForKey:UIImagePickerControllerOriginalImage];
     self.image.image=originalImage;
     //Do whatever with your image
@@ -391,6 +409,13 @@
         imagePickController.allowsEditing=NO;
         
         [self presentModalViewController:imagePickController animated:YES];
+    } else if (indexPath.row==2) {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,      nil];
+        
+        [self presentModalViewController:imagePicker animated:YES];
     }
     
     [self.titleTextField becomeFirstResponder];
