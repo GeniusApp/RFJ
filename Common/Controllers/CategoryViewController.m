@@ -189,6 +189,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
 
 -(void)refreshCategory:(NSInteger)categoryId
 {
+    NSLog(@"CATEGORYID: %ld", (long)categoryId);
     NSInteger menuIndex = [self.allMenuItems indexOfObjectPassingTest:^BOOL(MenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         return obj.id == categoryId;
     }];
@@ -210,7 +211,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 NewsItem *a = obj1;
                 NewsItem *b = obj2;
-                
                 return [b.updateDate compare:a.updateDate];
             }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
@@ -229,7 +229,6 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
             self.newsItems = [self.newsItems sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 NewsItem *a = obj1;
                 NewsItem *b = obj2;
-                
                 return [b.updateDate compare:a.updateDate];
             }];
             NSSortDescriptor *createDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:NO];
@@ -594,7 +593,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                     failure:(void(^)(NSError *error))failureBlock {
     self.isLoading = YES;
     
-    [[NewsManager singleton] fetchNewsAtPage:page objectType:0 withSuccessBlock:^(NSArray<NewsItem *> *items) {
+    [[NewsManager singleton] fetchNewsAtPage:page objectType:0 categoryId:[self.activeCategoryId intValue] withSuccessBlock:^(NSArray<NewsItem *> *items) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.isLoading = NO;
             
@@ -616,7 +615,7 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
                  success:(void(^)(NSArray<GalerieItem *> *photos))successBlock
                  failure:(void(^)(NSError *error))failureBlock {
     self.isLoading = YES;
-    [[NewsManager singleton] fetchImagesAtPage:page objectType:1 categoryId:-1 withSuccessBlock:^(NSArray<GalerieItem *> *photos) {
+    [[NewsManager singleton] fetchImagesAtPage:page objectType:1 categoryId:[self.activeCategoryId intValue] withSuccessBlock:^(NSArray<GalerieItem *> *photos) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.isLoading = NO;
             
@@ -635,10 +634,11 @@ NewsItemTableViewCellDelegate, MenuItemTableViewCellDelegate, GalerieItemTableVi
     }];
 }
 -(void)loadNextPage {
+    
     if(self.isLoading) {
         return;
     }
-    
+    NSLog(@"CATEGORYID3: %ld", (long)[self.activeCategoryId intValue]);
     [self showLoading];
     
     self.currentPage++;
