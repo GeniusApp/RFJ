@@ -1,6 +1,8 @@
 #ifndef Validation_h
 #define Validation_h
 
+#define SHOW_ADS 1
+
 #ifndef ISEMPTY
 #define ISEMPTY(__OBJECT) ( (nil == __OBJECT) ? YES : ( (nil != __OBJECT && [__OBJECT respondsToSelector:@selector(count)]) ? ([__OBJECT performSelector:@selector(count)] <= 0) : ( (nil != __OBJECT && [__OBJECT respondsToSelector:@selector(length)]) ? ([__OBJECT performSelector:@selector(length)] <= 0) : NO ) ) )
 #endif

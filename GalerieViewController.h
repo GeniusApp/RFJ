@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface GalerieViewController : UIViewController
+@interface GalerieViewController : BaseViewController
 
 @end

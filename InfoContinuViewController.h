@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface InfoContinuViewController : UIViewController
+@interface InfoContinuViewController : BaseViewController
 
 @end

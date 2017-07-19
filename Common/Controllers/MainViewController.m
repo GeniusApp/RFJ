@@ -77,6 +77,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Home";
     // tableView
     [self.menuTableView registerNib:[UINib nibWithNibName:@"MenuItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"MenuItemTableViewCell"];
     [self.contentTableView registerNib:[UINib nibWithNibName:@"WebViewTableViewCell" bundle:nil] forCellReuseIdentifier:@"WebViewTableViewCell"];
@@ -138,7 +139,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
     self.contentTableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0); // pull up to
     
     // Splash && Banner
-#if !(TARGET_IPHONE_SIMULATOR)
+#ifdef SHOW_ADS
     NSString *interstitialURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJSPLASH&horizontalSize=1080&verticalSize=1920";
     [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SplashViewController"] animated:YES completion:nil];
     [self getJsonResponse:interstitialURL success:^(NSDictionary *responseDict) {
@@ -651,6 +652,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [BaseViewController gaiTrackEventAd:@"Main"];
         UIApplication *application = [UIApplication sharedApplication];
         [application openURL:[request URL] options:@{} completionHandler:nil];
         return NO;
@@ -978,6 +980,7 @@ NewsCategorySeparatorViewDelegate, UIWebViewDelegate>
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
+                [BaseViewController gaiTrackEventMenu:menuItem.name];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             }
             else {

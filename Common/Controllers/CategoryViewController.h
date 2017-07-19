@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface CategoryViewController : UIViewController
+@interface CategoryViewController : BaseViewController
 @property (strong, nonatomic) NSNumber *navigationId;
 
 @end

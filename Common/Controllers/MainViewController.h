@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : BaseViewController
 @property (assign, nonatomic) BOOL needsToLoadInterstitial;
 
 

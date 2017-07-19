@@ -108,7 +108,7 @@
     [self.view bringSubviewToFront:self.bottomBanner];
     [self.view bringSubviewToFront:self.loadingView];
     [self.menuTableView.superview bringSubviewToFront:self.menuTableView];
-#if !(TARGET_IPHONE_SIMULATOR)
+#ifdef SHOW_ADS
     NSString *banner = @"<link rel=\"stylesheet\" href=\"http://geniusapp.com/webview.css\" type=\"text/css\" media=\"all\" />";
     banner = [banner stringByAppendingString:@"<div class=\"pub\"><img src='https://ww2.lapublicite.ch/pubserver/www/delivery/avw.php?zoneid=20049&amp;cb=101&amp;n=a77eccf9' border='0' alt='' /></div>"];
     NSString *bannerURL = @"https://ww2.lapublicite.ch/webservices/WSBanner.php?type=RFJAPPBAN";
@@ -372,6 +372,7 @@
             [self refreshMenuItems];
             
             if(VALID_NOTEMPTY(menuItem.link, NSString)) {
+                [BaseViewController gaiTrackEventMenu:menuItem.name];
                  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:menuItem.link]];
             } else if ([@(menuItem.id) isEqualToNumber:[NSNumber numberWithInt:9622]]) {
                 

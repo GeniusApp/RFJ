@@ -14,6 +14,7 @@
 #import "MainViewController.h"
 #import "Validation.h"
 #import "AppOwiz.h"
+#import <Google/Analytics.h>
 
 @interface AppDelegate ()
 @property (strong, nonatomic) AFSoundPlayback *player;
@@ -56,6 +57,15 @@
     [application registerForRemoteNotifications];
     
     [self.window makeKeyAndVisible];
+    
+    // Google Analytics
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;
+#if TARGET_IPHONE_SIMULATOR
+    gai.dryRun = YES;
+    [gai.logger setLogLevel:kGAILogLevelVerbose];
+#endif
+    [gai trackerWithTrackingId:[DataManager singleton].adsAndStatisticConfig[@"GoogleAnalyticsApiKey"]];
     
     return YES;
 }

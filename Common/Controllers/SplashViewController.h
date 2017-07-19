@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SplashViewController : UIViewController
+@interface SplashViewController : BaseViewController
 
 @end

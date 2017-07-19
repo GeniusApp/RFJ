@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class InfoViewController;
 
-@interface InfoReportViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface InfoReportViewController : BaseViewController <UITextViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) InfoViewController *controller;
 //@property (nonatomic) InfoTypeEnum selectedType;

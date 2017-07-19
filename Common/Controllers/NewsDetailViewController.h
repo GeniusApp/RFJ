@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsItem+CoreDataProperties.h"
+#import "BaseViewController.h"
 
-@interface NewsDetailViewController : UIViewController
+@interface NewsDetailViewController : BaseViewController
 @property (strong, nonatomic) NSNumber *currentNews;
 @property (strong, nonatomic) NSNumber *newsIndex;
 
