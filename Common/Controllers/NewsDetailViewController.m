@@ -249,6 +249,12 @@
                 "});"
                 "});"
                 "</script>"
+                "<style>"
+                ".BlocSound a .left i{"
+                "top: -7px !important;"
+                "position: relative !important;"
+                "}"
+                "</style>"
                 "%@"
                 "</body>"
                 "</html>",header,html,footer];
